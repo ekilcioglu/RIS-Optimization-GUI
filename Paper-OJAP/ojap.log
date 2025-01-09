@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.9) (preloaded format=pdflatex 2023.9.21)  8 JAN 2025 23:58
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.5) (preloaded format=pdflatex 2023.9.12)  9 JAN 2025 02:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -315,100 +315,41 @@ fg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
 LaTeX Font Info:    Trying to load font information for OT1+phv on input line 2
-7.
+6.
  (C:\Users\emrek\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1phv.fd
 File: ot1phv.fd 2020/03/25 scalable font definitions for OT1/phv.
 )
-LaTeX Font Info:    Calculating math sizes for size <6.6> on input line 37.
+LaTeX Font Info:    Trying to load font information for TS1+phv on input line 3
+6.
 
+(C:\Users\emrek\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ts1phv.fd
+File: ts1phv.fd 2020/03/25 scalable font definitions for TS1/phv.
+)
 
-LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <3.3> not available
-(Font)              size <5> substituted on input line 37.
+LaTeX Warning: Citation `sionna' on page 1 undefined on input line 42.
 
-
-LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <3.3> not available
-(Font)              size <5> substituted on input line 37.
-
-
-LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <3.3> not available
-(Font)              size <5> substituted on input line 37.
-
-LaTeX Font Info:    Trying to load font information for U+msa on input line 37.
+LaTeX Font Info:    Calculating math sizes for size <10.03749> on input line 44
+.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 44.
 
 (C:\Users\emrek\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 37.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 44.
 
 
 (C:\Users\emrek\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Calculating math sizes for size <10.03749> on input line 40
-.
-
-Underfull \hbox (badness 10000) in paragraph at lines 40--46
-[]\OT1/ptm/m/n/10.03749 HIS doc-u-ment is a tem-plate for L[]T[]X. If
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 40--46
-\OT1/ptm/m/n/10.03749 you are read-ing a pa-per or PDF ver-sion
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 40--46
-\OT1/ptm/m/n/10.03749 of this doc-u-ment, please down-load the elec-tronic
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 40--46
-\OT1/ptm/m/n/10.03749 file, trans[]jour.tex, from the IEEE Web site at
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 40--46
-[]$
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 40--46
-[]$
- []
-
-
-Underfull \hbox (badness 4242) in paragraph at lines 40--46
-\OT1/ptm/m/n/10.03749 You can also ex-plore us-ing the Over-leaf ed-i-tor at
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 40--46
-\OT1/ptm/m/n/10.03749 https://www.overleaf.com/blog/278-how-to-use-overleaf-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 40--46
-\OT1/ptm/m/n/10.03749 with-ieee-collabratec-your-quick-guide-to-getting-started
-
- []
-
-LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <9> not available
-(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 54.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 7
-0.
-
-(C:\Users\emrek\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ts1ptm.fd
-File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
-)
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-<OJAP.png, id=1, 475.7775pt x 64.24pt>
+<RIS_Modeling.png, id=1, 825.83531pt x 902.6222pt>
+File: RIS_Modeling.png Graphic file (type png)
+<use RIS_Modeling.png>
+Package pdftex.def Info: RIS_Modeling.png  used on input line 60.
+(pdftex.def)             Requested size: 152.5188pt x 166.69325pt.
+<OJAP.png, id=3, 475.7775pt x 64.24pt>
 File: OJAP.png Graphic file (type png)
 <use OJAP.png>
-Package pdftex.def Info: OJAP.png  used on input line 93.
+Package pdftex.def Info: OJAP.png  used on input line 64.
 (pdftex.def)             Requested size: 148.12836pt x 20.0pt.
 
 Overfull \hbox (22.12836pt too wide) has occurred while \output is active
@@ -429,43 +370,67 @@ mrek/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}
 
 
  <./OJAP.png (PNG copy)>]
-LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <6> not available
-(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 109.
-LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 1
-11.
-(C:\Users\emrek\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1pcr.fd
-File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
-)
-Underfull \vbox (badness 2799) has occurred while \output is active []
 
+LaTeX Warning: Citation `phase_grad_paper' on page 2 undefined on input line 69
+.
+
+
+LaTeX Warning: Citation `Tang' on page 2 undefined on input line 69.
+
+
+LaTeX Warning: Reference `ref_coef_exp' on page 2 undefined on input line 77.
+
+LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <9> not available
+(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 79.
+
+LaTeX Warning: Reference `grad_phi_i' on page 2 undefined on input line 96.
+
+
+LaTeX Warning: Reference `grad_phi_r' on page 2 undefined on input line 96.
+
+
+LaTeX Warning: Reference `grad_exp' on page 2 undefined on input line 106.
+
+<RIS_Phase_Gradient.png, id=21, 1156.32pt x 925.056pt>
+File: RIS_Phase_Gradient.png Graphic file (type png)
+<use RIS_Phase_Gradient.png>
+Package pdftex.def Info: RIS_Phase_Gradient.png  used on input line 109.
+(pdftex.def)             Requested size: 214.0188pt x 171.20325pt.
 LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <7> not available
-(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 208.
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 117.
 
-Overfull \vbox (12.83797pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (12.65947pt too high) has occurred while \output is active []
+Overfull \vbox (12.859pt too high) has occurred while \output is active []
 
 
-[2]
-Underfull \hbox (badness 2591) in paragraph at lines 249--250
-[]|\OT1/ptm/m/n/8 1 erg/(G$\OMS/cmsy/m/n/8 ^^A$\OT1/ptm/m/n/8 g) $\OT1/cmr/m/n/
-8 =$ \OT1/ptm/m/n/8 1 emu/g $\OMS/cmsy/m/n/8 !$ \OT1/ptm/m/n/8 1
+Overfull \vbox (12.75748pt too high) has occurred while \output is active []
+
+
+[2 <./RIS_Modeling.png>]
+Overfull \hbox (117.36154pt too wide) detected at line 141
+\OML/cmm/m/it/10 P[] \OT1/cmr/m/n/10 = []\OML/cmm/m/it/10 A[] \OT1/cmr/m/n/10 =
+ [][] \OML/cmm/m/it/10 :
  []
 
-
-Overfull \hbox (11.0pt too wide) in paragraph at lines 223--283
-[][]
- []
-
-<fig1.png, id=22, 249.3315pt x 189.22694pt>
-File: fig1.png Graphic file (type png)
-<use fig1.png>
-Package pdftex.def Info: fig1.png  used on input line 286.
-(pdftex.def)             Requested size: 252.94499pt x 191.96947pt.
+<Emre_Picture.jpg, id=28, 803.0pt x 803.0pt>
+File: Emre_Picture.jpg Graphic file (type jpg)
+<use Emre_Picture.jpg>
+Package pdftex.def Info: Emre_Picture.jpg  used on input line 150.
+(pdftex.def)             Requested size: 72.26688pt x 72.26688pt.
+File: Emre_Picture.jpg Graphic file (type jpg)
+<use Emre_Picture.jpg>
+Package pdftex.def Info: Emre_Picture.jpg  used on input line 150.
+(pdftex.def)             Requested size: 72.26688pt x 72.26688pt.
+File: Emre_Picture.jpg Graphic file (type jpg)
+<use Emre_Picture.jpg>
+Package pdftex.def Info: Emre_Picture.jpg  used on input line 155.
+(pdftex.def)             Requested size: 72.26688pt x 72.26688pt.
+File: Emre_Picture.jpg Graphic file (type jpg)
+<use Emre_Picture.jpg>
+Package pdftex.def Info: Emre_Picture.jpg  used on input line 155.
+(pdftex.def)             Requested size: 72.26688pt x 72.26688pt.
 File: OJAP.png Graphic file (type png)
 <use OJAP.png>
-Package pdftex.def Info: OJAP.png  used on input line 326.
+Package pdftex.def Info: OJAP.png  used on input line 158.
 (pdftex.def)             Requested size: 148.12836pt x 20.0pt.
 
 Overfull \hbox (25.32835pt too wide) has occurred while \output is active
@@ -478,231 +443,46 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 Overfull \vbox (8.45pt too high) has occurred while \output is active []
 
- [3 <./fig1.png (PNG copy)>]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-Underfull \vbox (badness 7759) has occurred while \output is active []
-
-
-Overfull \vbox (12.83797pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (12.65947pt too high) has occurred while \output is active []
-
-
-[4]
-LaTeX Font Info:    Trying to load font information for OMS+ptm on input line 5
-05.
- (C:\Users\emrek\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\omsptm.fd
-File: omsptm.fd 
-)
-LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10.03749> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 505.
-
-Underfull \hbox (badness 10000) in paragraph at lines 505--512
-\OT1/ptm/m/n/10.03749 Number foot-notes sep-a-rately in su-per-scripts
- []
-
-File: OJAP.png Graphic file (type png)
-<use OJAP.png>
-Package pdftex.def Info: OJAP.png  used on input line 521.
-(pdftex.def)             Requested size: 148.12836pt x 20.0pt.
-
-Overfull \hbox (25.32835pt too wide) has occurred while \output is active
-[][] 
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-Overfull \vbox (8.45pt too high) has occurred while \output is active []
-
- [5]
-LaTeX Font Info:    Trying to load font information for TS1+phv on input line 5
-30.
-
-(C:\Users\emrek\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ts1phv.fd
-File: ts1phv.fd 2020/03/25 scalable font definitions for TS1/phv.
-)
-LaTeX Font Info:    Font shape `TS1/phv/b/it' in size <9> not available
-(Font)              Font shape `TS1/phv/b/sl' tried instead on input line 530.
-
-Underfull \hbox (badness 10000) in paragraph at lines 531--540
-\OT1/ptm/m/n/10.03749 sub-mis-sion and peer-review sys-tem, Schol-arOne\TS1/ptm
-/m/n/10.03749 ®
- []
-
-
-Underfull \hbox (badness 4266) in paragraph at lines 531--540
-\OT1/ptm/m/n/10.03749 that par-tic-i-pate in Schol-arOne at http://www.ieee.org
-/
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 531--540
-\OT1/ptm/m/n/10.03749 publications[]standards/publications/authors/authors[]
- []
-
-
-Underfull \hbox (badness 2951) in paragraph at lines 531--540
-\OT1/ptm/m/n/10.03749 submission.html First check if you have an ex-ist-ing
- []
-
-
-Underfull \vbox (badness 1701) has occurred while \output is active []
-
-
-Overfull \vbox (12.83797pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (12.65947pt too high) has occurred while \output is active []
-
-
-[6]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-Underfull \hbox (badness 1472) in paragraph at lines 687--688
-[]\OT1/ptm/m/it/8 Motorola Semi-con-duc-tor Data Man-ual\OT1/ptm/m/n/8 , Mo-tor
-ola Semi-con-duc-tor
- []
-
-File: OJAP.png Graphic file (type png)
-<use OJAP.png>
-Package pdftex.def Info: OJAP.png  used on input line 718.
-(pdftex.def)             Requested size: 148.12836pt x 20.0pt.
-
-Overfull \hbox (25.32835pt too wide) has occurred while \output is active
-[][] 
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-Overfull \vbox (8.45pt too high) has occurred while \output is active []
-
- [7]
-Underfull \hbox (badness 2142) in paragraph at lines 737--738
-\OT1/ptm/m/n/8 nolo-gies de-ployed be-hind the fire-wall for cor-po-rate pro-du
-c-tiv-
- []
-
-
-Underfull \hbox (badness 1603) in paragraph at lines 737--738
-\OT1/ptm/m/n/8 ity. Pre-sented at INET96 An-nual Meet-ing. [On-line]. Avail-abl
-e:
- []
-
-
-Underfull \hbox (badness 2126) in paragraph at lines 753--754
-[]\OT1/ptm/m/n/8 Teralyzer. Lytera UG, Kirch-hain, Ger-many [On-line]. Avail-ab
-le:
- []
-
-
-Underfull \hbox (badness 1867) in paragraph at lines 753--754
-\OT1/ptm/m/it/8 http://www.lytera.de/Terahertz[]THz[]Spectroscopy.php?id=home\O
-T1/ptm/m/n/8 , Ac-
- []
-
-
-Overfull \vbox (12.83797pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (12.65947pt too high) has occurred while \output is active []
-
-
-[8]
-<a1.png, id=50, 72.27pt x 90.3375pt>
-File: a1.png Graphic file (type png)
-<use a1.png>
-Package pdftex.def Info: a1.png  used on input line 865.
-(pdftex.def)             Requested size: 72.2709pt x 90.33864pt.
-File: a1.png Graphic file (type png)
-<use a1.png>
-Package pdftex.def Info: a1.png  used on input line 865.
-(pdftex.def)             Requested size: 72.2709pt x 90.33864pt.
-<a2.png, id=53, 72.27pt x 90.3375pt>
-File: a2.png Graphic file (type png)
-<use a2.png>
-Package pdftex.def Info: a2.png  used on input line 892.
-(pdftex.def)             Requested size: 72.2709pt x 90.33864pt.
-File: a2.png Graphic file (type png)
-<use a2.png>
-Package pdftex.def Info: a2.png  used on input line 892.
-(pdftex.def)             Requested size: 72.2709pt x 90.33864pt.
-<a3.png, id=56, 72.27pt x 90.3375pt>
-File: a3.png Graphic file (type png)
-<use a3.png>
-Package pdftex.def Info: a3.png  used on input line 913.
-(pdftex.def)             Requested size: 72.2709pt x 90.33864pt.
-File: a3.png Graphic file (type png)
-<use a3.png>
-Package pdftex.def Info: a3.png  used on input line 913.
-(pdftex.def)             Requested size: 72.2709pt x 90.33864pt.
-File: OJAP.png Graphic file (type png)
-<use OJAP.png>
-Package pdftex.def Info: OJAP.png  used on input line 932.
-(pdftex.def)             Requested size: 148.12836pt x 20.0pt.
-
-Overfull \hbox (25.32835pt too wide) has occurred while \output is active
-[][] 
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-Overfull \vbox (8.45pt too high) has occurred while \output is active []
-
- [9 <./a1.png> <./a2.png> <./a3.png>] (ojap.aux)
+ [3 <./RIS_Phase_Gradient.png> <./Emre_Picture.jpg>] (ojap.aux)
  ***********
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-08-29>
  ***********
 
 
-LaTeX Font Warning: Size substitutions with differences
-(Font)              up to 1.7pt have occurred.
+LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 4321 strings out of 475247
- 66963 string characters out of 5757792
- 1942801 words of memory out of 5000000
- 25757 multiletter control sequences out of 15000+600000
- 628693 words of font info for 163 fonts, out of 8000000 for 9000
+ 4111 strings out of 475248
+ 64618 string characters out of 5757813
+ 1936801 words of memory out of 5000000
+ 25576 multiletter control sequences out of 15000+600000
+ 611516 words of font info for 124 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 57i,14n,65p,638b,405s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 57i,14n,65p,809b,329s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/emrek/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
-cmmi10.pfb><C:/Users/emrek/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
-fonts/cm/cmmi6.pfb><C:/Users/emrek/AppData/Local/Programs/MiKTeX/fonts/type1/pu
-blic/amsfonts/cm/cmmi7.pfb><C:/Users/emrek/AppData/Local/Programs/MiKTeX/fonts/
-type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/emrek/AppData/Local/Programs/MiKTe
-X/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/emrek/AppData/Local/Progra
-ms/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/emrek/AppData/Local
-/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/emrek/AppDat
-a/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/emrek
-/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Us
-ers/emrek/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pf
-b><C:/Users/emrek/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
-cmsy7.pfb><C:/Users/emrek/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsf
-onts/cm/cmsy8.pfb><C:/Users/emrek/AppData/Local/Programs/MiKTeX/fonts/type1/urw
-/courier/ucrr8a.pfb><C:/Users/emrek/AppData/Local/Programs/MiKTeX/fonts/type1/u
-rw/helvetic/uhvb8a.pfb><C:/Users/emrek/AppData/Local/Programs/MiKTeX/fonts/type
-1/urw/helvetic/uhvbo8a.pfb><C:/Users/emrek/AppData/Local/Programs/MiKTeX/fonts/
-type1/urw/helvetic/uhvr8a.pfb><C:/Users/emrek/AppData/Local/Programs/MiKTeX/fon
-ts/type1/urw/helvetic/uhvro8a.pfb><C:/Users/emrek/AppData/Local/Programs/MiKTeX
-/fonts/type1/urw/times/utmb8a.pfb><C:/Users/emrek/AppData/Local/Programs/MiKTeX
-/fonts/type1/urw/times/utmbi8a.pfb><C:/Users/emrek/AppData/Local/Programs/MiKTe
-X/fonts/type1/urw/times/utmr8a.pfb><C:/Users/emrek/AppData/Local/Programs/MiKTe
-X/fonts/type1/urw/times/utmri8a.pfb>
-Output written on ojap.pdf (9 pages, 546655 bytes).
+cmbx10.pfb><C:/Users/emrek/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
+fonts/cm/cmex10.pfb><C:/Users/emrek/AppData/Local/Programs/MiKTeX/fonts/type1/p
+ublic/amsfonts/cm/cmmi10.pfb><C:/Users/emrek/AppData/Local/Programs/MiKTeX/font
+s/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/emrek/AppData/Local/Programs/MiK
+TeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/emrek/AppData/Local/Prog
+rams/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/emrek/AppData/Lo
+cal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/emrek/App
+Data/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/em
+rek/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:
+/Users/emrek/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7
+.pfb><C:/Users/emrek/AppData/Local/Programs/MiKTeX/fonts/type1/urw/helvetic/uhv
+b8a.pfb><C:/Users/emrek/AppData/Local/Programs/MiKTeX/fonts/type1/urw/helvetic/
+uhvbo8a.pfb><C:/Users/emrek/AppData/Local/Programs/MiKTeX/fonts/type1/urw/helve
+tic/uhvr8a.pfb><C:/Users/emrek/AppData/Local/Programs/MiKTeX/fonts/type1/urw/he
+lvetic/uhvro8a.pfb><C:/Users/emrek/AppData/Local/Programs/MiKTeX/fonts/type1/ur
+w/times/utmb8a.pfb><C:/Users/emrek/AppData/Local/Programs/MiKTeX/fonts/type1/ur
+w/times/utmr8a.pfb><C:/Users/emrek/AppData/Local/Programs/MiKTeX/fonts/type1/ur
+w/times/utmri8a.pfb>
+Output written on ojap.pdf (3 pages, 543731 bytes).
 PDF statistics:
- 152 PDF objects out of 1000 (max. 8388607)
+ 111 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 62 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 45 words of extra memory for PDF output out of 10000 (max. 10000000)
 
