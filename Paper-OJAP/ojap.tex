@@ -215,6 +215,12 @@ To overcome this limitation, we propose a novel algorithm in this study that joi
 
 
 \section{SIMULATION SCENARIOS}
+In this paper, two scenarios are simulated to evaluate different performance of RIS-assisted propagation environments. For the materials used in the walls, floors and ceilings, we selected appropriate options from a predefined list in Sionna RT based on their typical usage in indoor environments and their electromagnetic properties. Sionna RT provides the models of all of the materials defined in the ITU-R P.2040-2 recommendation \cite{ITU}. Specifically,
+\begin{itemize}
+	\item \textbf{Walls:} Plasterboard (itu\_plasterboard) is used for its common application in building interiors and suitability for the $5.8$ GHz frequency range.
+	\item \textbf{Floors:} Chipboard (itu\_chipboard) is selected for its suitability of our frequency range and viability as an indoor flooring material.
+	\item \textbf{Ceilings:} Ceiling board (itu\_ceiling\_board) is chosen for its specific design for ceilings and support for the required frequency range.
+\end{itemize}
 
 \section{SIMULATION RESULTS}
 
@@ -224,7 +230,8 @@ To overcome this limitation, we propose a novel algorithm in this study that joi
 	\bibitem{sionna} J. Hoydis, S. Cammerer, Fayçal {A. A.}, A. Vem, N. Binder, G. Marcus, and A. Keller, “Sionna: An Open-Source Library for Next-Generation Physical Layer Research", \textit{arXiv}, March 2022, https://arxiv.org/abs/2203.11854.
 	\bibitem{phase_grad_paper} E. M. Vitucci, M. Albani, S. Kodra, M. Barbiroli and V. Degli-Esposti, “An Efficient Ray-Based Modeling Approach for Scattering From Reconfigurable Intelligent Surfaces," \textit{IEEE Trans. on Antennas and Prop.}, vol. 72, no. 3, pp. 2673-2685, March 2024.
 	\bibitem{Tang} W. Tang \textit{et al.}, “Wireless Communications With Reconfigurable Intelligent Surface: Path Loss Modeling and Experimental Measurement," \textit{IEEE Trans. on Wireless Commun.}, vol. 20, no. 1, pp. 421-439, Jan. 2021.
-	\bibitem{emre_claude_eucap_paper} E. Kilcioglu and C. Oestges, “Ray-Tracing Based Algorithms for Indoor RIS Optimization and Coverage Enhancement," \textit{to appear in 2025 19th European Conference on Antennas and Propagation (EuCAP)}, 2025, pp. 1-5. 
+	\bibitem{emre_claude_eucap_paper} E. Kilcioglu and C. Oestges, “Ray-Tracing Based Algorithms for Indoor RIS Optimization and Coverage Enhancement," \textit{to appear in 2025 19th European Conference on Antennas and Propagation (EuCAP)}, 2025, pp. 1-5.
+	\bibitem{ITU} ITU-R, “Effects of building materials and structures on radiowave propagation above about 100 MHz“, \textit{Recommendation ITU-R P.2040-2}. 
 \end{thebibliography}
 
 
