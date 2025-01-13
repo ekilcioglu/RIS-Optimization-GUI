@@ -1,0 +1,64 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb}
+
+\begin{document}
+	
+\section*{Ray-tracing Based RIS Size, Position and Target Points Optimization for Coverage Enhancement}
+
+\noindent \textbf{Inputs:}
+\begin{itemize}
+	\item \textbf{The scene geometry:} A 3D representation of the area where coverage is to be enhanced, including obstacles, walls, etc.
+	\item \textbf{Transmitter (TX) position:} Coordinates of the transmitter in the scene.
+	\item \textbf{Minimum power threshold} $P_{\text{th}}$: The threshold for acceptable signal power, below which cells are considered low-power.
+	\item \textbf{Range of possible target points} $\mathcal{N}$: The set of possible cluster counts to be used in K-means algorithm, e.g., $\mathcal{N} = \{1, 2, \dots, 5\}$.
+	\item \textbf{Set of possible RIS widths} $\mathcal{W}$: The set of candidate RIS widths, e.g., $\mathcal{W} = \{0.2, 0.4, \dots, 3.0\}$ m.
+	\item \textbf{Minimum performance improvement threshold} $\Delta \mathcal{M}_{\text{min}}$: The minimum performance improvement required to justify increasing the RIS width.
+\end{itemize}
+
+\noindent \textbf{Optimization Parameters:}
+\begin{itemize}
+	\item \textbf{Optimal number of target points} $N^{\text{opt}}$.
+	\item \textbf{Optimal RIS width} $W_{\text{RIS}}^{\text{opt}}$.
+	\item \textbf{Optimal RIS position} $\mathbf{r}_{\text{RIS}}^{\text{opt}}$.
+\end{itemize}
+
+\noindent \textbf{Steps:}
+\begin{enumerate}
+	\item Compute the transmitter-only coverage map $\mathbf{P}_{\text{TX}}(x, y)$.
+	\item Set a minimum power threshold $P_{\text{th}}$ for acceptable signal quality.
+	\item Identify low-power cells in $\mathbf{P}_{\text{TX}}(x, y)$ where the power level is below the minimum power threshold $P_{\text{th}}$, denoted as $\mathcal{C}_{\text{low}}$:
+	\[
+	\mathcal{C}_{\text{low}} = \{(x, y) \ | \ \mathbf{P}_{\text{TX}}(x, y) < P_{\text{th}}\}
+	\]	
+	\item \textbf{For each} number of target points $N \in \mathcal{N}$:
+	\begin{enumerate}
+		\item Apply K-means algorithm to $\mathcal{C}_{\text{low}}$ to group the low-power cells into $N$ clusters and obtain $N$ centroids:
+		\[
+		\text{K-means}(N, \mathcal{C}_{\text{low}}) \rightarrow \text{Centroids } \{ \mathbf{c}_1, \mathbf{c}_2, \dots, \mathbf{c}_N \}
+		\]
+		where each centroid $\mathbf{c}_i$ represents a target point where coverage enhancement is needed.
+		\item Identify the set of feasible RIS positions $\mathcal{R}_N$ that provide line-of-sight (LoS) to both the transmitter and all $N$ target points:
+		\[
+		\mathcal{R}_N = \{ \mathbf{r}_{\text{RIS}} \mid \text{LoS}(\mathbf{r}_{\text{RIS}}, \mathbf{TX}) \land \text{LoS}(\mathbf{r}_{\text{RIS}}, \mathbf{c}_i) \ \forall \mathbf{c}_i \}
+		\]
+		\item \textbf{For each} RIS width $W_{\text{RIS}} \in \mathcal{W}$:
+		\begin{enumerate}
+			\item Compute the combined coverage $\textbf{P}_{\text{comb}}(x,y)$ at each low-power cell, considering both TX and RIS contributions, for each RIS position $\mathbf{r}_{\text{RIS}} \in \mathcal{R}_N$.
+			\item Calculate the performance metric $\mathcal{M}(\mathbf{r}_{\text{RIS}}, N, W_{\text{RIS}})$ for all parameter combinations as the average power of low-power cells after placing the RIS at $\mathbf{r}_{\text{RIS}}$:
+			\[
+			\mathcal{M}(\mathbf{r}_{\text{RIS}}, N, W_{\text{RIS}}) = \frac{1}{|\mathcal{C}_{\text{low}}|} \sum_{(x, y) \in \mathcal{C}_{\text{low}}} \mathbf{P}_{\text{comb}}(x, y)
+			\]
+		\end{enumerate}
+	\end{enumerate}
+	\item \textbf{Determine the optimal RIS configuration:}
+	\begin{enumerate}
+		\item Identify the RIS configuration $(\mathbf{r}_{\text{RIS}}^{W_{\text{RIS}}}, N^{W_{\text{RIS}}}, W_{\text{RIS}})$ that maximizes the performance metric $\mathcal{M}$ for each $W_{\text{RIS}}$:
+		\[
+		(\mathbf{r}_{\text{RIS}}^{W_{\text{RIS}}}, N^{W_{\text{RIS}}}) = \arg\max_{\mathbf{r}_{\text{RIS}} \in \mathcal{R}_N, N \in \mathcal{N}} \mathcal{M}(\mathbf{r}_{\text{RIS}}, N, W_{\text{RIS}})
+		\]
+		\item Select the smallest RIS width $W_{\text{RIS}}^{\text{opt}}$ for which increasing the RIS width further does not yield a performance improvement exceeding $\Delta \mathcal{M}_{\text{min}}$. Assign corresponding parameters $\mathbf{r}_{\text{RIS}}^{\text{opt}} = \mathbf{r}_{\text{RIS}}^{W_{\text{RIS}}^{\text{opt}}}$ and $N^{\text{opt}} = N^{W_{\text{RIS}}^{\text{opt}}}$.
+	\end{enumerate}
+	\item For multi-RIS deployment extension, each RIS is assigned to a subset of target points and the algorithm optimizes the size and position of each RIS independently.
+\end{enumerate}
+	
+\end{document}

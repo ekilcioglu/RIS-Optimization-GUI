@@ -1,9 +1,9 @@
 \documentclass{IEEEoj}
 \usepackage{cite}
 \usepackage{amsmath,amssymb,amsfonts}
-\usepackage{algorithmic}
 \usepackage{graphicx,color}
 \usepackage{textcomp}
+\usepackage[ruled,vlined]{algorithm2e}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \def\OJlogo{\vspace{-10pt}\includegraphics[height=20pt]{OJAP.png}}
@@ -15,13 +15,13 @@
 \currentdate{XX Month, XXXX}
 \doiinfo{OJAP.2020.1234567}
 
-\title{Ray-tracing Based RIS Size, Position and Target Points Optimization for Indoor Coverage Enhancement}
+\title{Ray-tracing Based RIS Size, Position and Target Point Optimization for Indoor Coverage Enhancement}
 
 \author{EMRE KILCIOGLU, AND CLAUDE OESTGES}
 \corresp{ICTEAM/ELEN, Universit\'e catholique de Louvain, Louvain-la-Neuve, Belgium\\\\
 	CORRESPONDING AUTHOR: E. KILCIOGLU (e-mail: emre.kilcioglu@uclouvain.be)}
 \authornote{This study was conducted as part of the project Win2Wal2023/1 - N°2310026 - RAFINE, funded by Région Wallonne.}
-\markboth{Ray-tracing Based RIS Size, Position and Target Points Optimization for Indoor Coverage Enhancement}{Kilcioglu \textit{et al.}}
+\markboth{Ray-tracing Based RIS Size, Position and Target Point Optimization for Indoor Coverage Enhancement}{Kilcioglu \textit{et al.}}
 
 \begin{abstract}
 ....
@@ -38,118 +38,197 @@
 \section{INTRODUCTION}
 \IEEEPARstart{T}{his} .....
 
-\section{RIS MODELING}
-This section describes how the RIS is represented and incorporated within the ray-tracing simulation tool, specifically NVIDIA's Sionna RT \cite{sionna}. The RIS is strategically positioned to ensure line-of-sight (LoS) connectivity with both the transmitter and the designated target positions. These target positions typically correspond to blind zones in the transmitter-only coverage, where direct signal reception is either weak or entirely obstructed. By utilizing the RIS, reflected signals can be directed into these blind zones, enhancing overall system coverage and performance.
+\section{RIS INTEGRATION INTO THE RAY-TRACING TOOL}
+This section outlines the integration of a RIS into the ray-tracing simulation tool. We choose to work with NVIDIA's open-source Sionna ray-tracing tool \cite{sionna} due to its user-friendly structure and the ability to change internal parameters of the tool according to our use.
 
-The RIS surface is discretized into a grid of \(N \times M\) tiles, each defined by the discretization sizes \(d_y\) and \(d_z\), as illustrated in Fig. \ref{RIS_Modeling}. Each tile, denoted as \(T_{n,m}\) for the \(n^{\text{th}}\) row and \(m^{\text{th}}\) column, is characterized by a complex reflection coefficient. These coefficients govern the phase and amplitude adjustments applied to incident electromagnetic waves. By choosing sufficiently small discretization sizes, the RIS surface can effectively approximate a continuous surface, enabling a high degree of control over the reflected wavefronts. Without loss of generality, the RIS is assumed to be aligned within the y-z plane of the 3D simulation environment.
+In an indoor environment, transmitter-only coverage maps reveal blind spots which are the areas with inadequate signal quality caused by obstacles such as walls or large furniture that block line-of-sight (LoS) paths between the transmitter and these regions. To address this, a RIS can be strategically positioned to create virtual LoS paths, reflecting signals from the transmitter to these blind spots. By configuring the RIS to direct reflected signals into these areas, the average signal power in blind spots and the overall coverage ratio can be improved through the combined contributions of the transmitter and RIS. In this paper, the considered performance metric is the average power of these blind spots in the scene and the aim is to maximize this performance metric by optimizing the position, size and target points selection of the RIS being deployed.
 
-The functionality of the RIS is governed by the combined contributions of all tiles, which collectively direct the reflected signals toward \(K \geq 1\) predefined target positions. For simplicity, Fig. \ref{RIS_Modeling} depicts only one target position. The complex reflection coefficient of a single tile is mathematically expressed as:
-\[
-\Gamma_{n,m} = \sum \limits_{k=1}^K \sqrt{c_k} A_{n,m}^k e^{j \varphi_{n,m}^k},
-\]
-where \(A_{n,m}^k\) and \(\varphi_{n,m}^k\) represent the amplitude and phase adjustments, respectively, for the \(k^{\text{th}}\) target position. These coefficients form the 2D profiles of reflection amplitude \(\mathbf{A}^k\), phase \(\mathbf{\Phi}^k\), and the overall reflection coefficient \(\mathbf{\Gamma}\) for the RIS. The power intensity coefficient \(c_k\), which determines the proportion of the RIS's reflection energy allocated to the \(k^{\text{th}}\) target position, satisfies the normalization constraint:
-\[
-\sum_{k=1}^K c_k = 1.
-\]
+To incorporate the RIS into the ray-tracing tool, the surface is discretized into a grid of $N \times M$ tiles, each with dimensions $d_y$ and $d_z$, as shown in Fig. \ref{RIS_Modeling}. Each tile, denoted as $T_{n,m}$ for the $n^{\text{th}}$ row and $m^{\text{th}}$ column, is characterized by a complex reflection coefficient that controls the amplitude and phase of incoming electromagnetic waves to reflect the signal to the desired target points. The discretization approach approximates a continuous surface when $d_y$ and $d_z$ are sufficiently small, which provides precise control over the reflected wavefronts. Without loss of generality, in this paper, the RIS is assumed to be placed in the y-z plane of the 3D simulation scenario.
 
-The proposed RIS modeling approach is highly versatile and allows for simulating various RIS configurations under diverse environmental conditions. For instance, in complex indoor environments with significant obstructions, such as walls or large furniture, the RIS can mitigate coverage gaps by intelligently reflecting incident signals into otherwise unreachable areas. By carefully designing the amplitude and phase profiles of the RIS, signals can be steered around obstacles, overcoming shadowing effects and enhancing the received signal power in designated regions.
+The RIS's reflection behavior is determined by the collective contribution of its tiles, which are configured to reflect signals toward $K \geq 1$ target points. For simplicity, Fig. \ref{RIS_Modeling} illustrates a single target point, although we consider multiple target points in this paper since in practice, there may be multiple target points depending on the number of distinct blind zones in the scenario. The complex reflection coefficient for a single tile is expressed as
+\begin{equation} \label{ref_coef_exp}
+	\Gamma_{n,m} = \sum \limits_{k=1}^K \sqrt{c_k} A_{n,m}^k e^{j \varphi_{n,m}^k}
+\end{equation}
+where $A_{n,m}^k$ and $\varphi_{n,m}^k$ represent the amplitude and phase assigned for the $k^{\text{th}}$ target point, respectively. These assignments collectively form the 2D amplitude profile $\mathbf{A}^k$ and the phase profile $\mathbf{\Phi}^k$ for the RIS to reflect the signal into the $k^{\text{th}}$ target point. The power intensity coefficient $c_k$, which determines the power allocated to each target point, satisfies the following:
+\begin{equation}
+	\sum_{k=1}^K c_k = 1
+\end{equation}
+The overall reflection coefficient $\mathbf{\Gamma}$ of the RIS is computed as the weighted sum of the individual amplitude and phase profiles for all target points, with weights given by the power intensity coefficients $c_k$.
 
-Moreover, the granularity of the RIS discretization provides flexibility in achieving different reflection patterns. For example, smaller discretization sizes yield finer control over the reflected wavefronts, enabling higher precision in focusing or beam-steering tasks. These capabilities make the RIS a powerful tool for addressing a wide range of propagation challenges, including non-line-of-sight (NLoS) scenarios and dynamic coverage enhancement requirements.
+The considered RIS modeling enables the simulation of various RIS configurations in different environments. For instance, in complex indoor scenarios with significant obstructions, the RIS can mitigate blind spots by steering reflected signals around obstacles into otherwise unreachable areas. Through careful design of amplitude and phase profiles, the RIS enhances received signal power in these areas and addresses shadowing effects.
 
 \begin{figure}
-	\centering \includegraphics[width=.62\linewidth]{RIS_Modeling.png}
-	\caption{Illustration of RIS modeling: The RIS surface is discretized into tiles, each with tunable reflection characteristics, to direct signals toward target positions.}
+	\centering \includegraphics[width=.8\linewidth]{RIS_Modeling.png}
+	\caption{Illustration of RIS modeling: The RIS surface is discretized into tiles, each with tunable reflection characteristics, to direct signals toward the target points.}
 	\label{RIS_Modeling}
-	\vspace{-0.5cm}
 \end{figure}
 
-This detailed modeling framework, implemented in Sionna RT, provides a robust foundation for exploring the potential of RIS in improving wireless communication performance. By leveraging this model, we can systematically evaluate the impact of different RIS configurations and optimization strategies, including those introduced in this study, to address coverage challenges in both static and dynamic environments.
+\section{RIS PHASE PROFILE CONFIGURATION METHODS}
+In RIS modeling, the primary focus is on the phase change introduced to the incoming signal, as the amplitude is typically assumed to remain constant, generally between $0.8$ and $1$. Therefore, the design and optimization of RIS are centered on assigning appropriate phase profiles to control the direction and behavior of reflected waves.
 
-\section{PHASE PROFILE ASSIGNMENT APPROACHES}
-In this section, we discuss two primary approaches for assigning the phase profiles to the RIS to achieve anomalous reflections for each target position \( k \). These methods are the \textbf{gradient-based} \cite{phase_grad_paper} and \textbf{distance-based} \cite{Tang} approaches. Both approaches offer distinct advantages, making them suitable for different scenarios and environmental conditions.
+In this section, we consider two primary methods for configuring the phase profiles $\mathbf{\Phi}^k$ of the RIS to achieve anomalous reflections for each target point $k$: the gradient-based phase profile \cite{phase_grad_paper} and the distance-based phase profile \cite{Tang}. These methods offer distinct advantages, making them suitable for different environmental scenarios and system requirements.
 
 \begin{enumerate}
-	\item \textbf{Gradient-Based Approach}: This method considers the incidence and desired reflection wave directions, and it aims to achieve the desired reflection direction by introducing a phase gradient across the RIS surface. The phase gradient is computed to align the reflected signal with the desired reflection direction, thereby optimizing the coverage at the target positions.
+	\item \textbf{Gradient-based Phase Profile}: This method considers the incidence and desired reflection wave directions, and it aims to achieve the desired reflection direction by introducing a phase gradient across the RIS. The phase gradient is computed to align the reflected signal with the desired reflection direction, thereby optimizing the coverage at the target points.
 	
-	\item \textbf{Distance-Based Approach}: In contrast to the gradient-based method, the distance-based approach focuses on the total distance traveled by the incident and reflected signals. By adjusting the phase shifts to match the distances from the transmitter to each tile and from each tile to the target positions, the method ensures that the reflected signals constructively interfere at the target positions.
+	\item \textbf{Distance-based Phase Profile}: In contrast to the gradient-based method, the distance-based method focuses on the total distance traveled by the incident and reflected signals. By adjusting the phase shifts to match the distances from the transmitter to each tile and from each tile to a specific target point, the method ensures that the reflected signals constructively interfere at this target point location.
 \end{enumerate}
 
-The phase profile for these approaches is calculated for each target position \( k \), and the individual phase profiles are combined through the summation in (\ref{ref_coef_exp}) to derive the final reflection coefficient profile \( \mathbf{\Gamma} \). To simplify the notation, the parameters related to target positions are expressed without the index \( k \) during the intermediate calculations, although the profiles inherently depend on \( k \).
+The phase profile for these methods is computed for each target point $k$, and the individual phase profiles are combined through the summation in (\ref{ref_coef_exp}) to derive the overall reflection coefficient profile $\mathbf{\Gamma}$.
 
 \subsection{GRADIENT-BASED PHASE PROFILE}
-The gradient-based approach, as illustrated in Fig. \ref{RIS_Phase_Gradient}, treats the RIS as an ideal phase gradient reflector. The phase gradient is calculated based on the incident wave direction and the desired reflection direction for each target position. In this method, the RIS introduces a phase gradient that modifies the direction of the reflected waves, aiming to direct the reflected signal toward the target position.
+The gradient-based method, as illustrated in Fig. \ref{RIS_Phase_Gradient}, treats the RIS as an ideal phase gradient reflector. The phase gradient is calculated based on the incident wave direction and the desired reflection direction for each target point. In this method, the RIS introduces a phase gradient that modifies the direction of the reflected waves, aiming to direct the reflected signal toward a desired target point.
 
-Let us consider an incident wave with wave vector \( \mathbf{\hat{k}}_i \) arriving at the center of the RIS at an incidence angle \( \theta_i \) with respect to the RIS normal vector \( \mathbf{\hat{n}} \). The desired reflection for the target position \( k \) is represented by the reflection wave vector \( \mathbf{\hat{k}}_r \), with reflection angle \( \theta_r \). The incident phase gradient due to the inclined wavefront is given by:
-\[
-\nabla \varphi_i = - k_0 \sin\theta_i \, \mathbf{\hat{k}}_i^p = - k_0 \, \textbf{P} \mathbf{\hat{k}}_i,
-\]
-where \( k_0 = 2 \pi / \lambda \) is the wavenumber and \( \lambda \) is the wavelength. Here, \( \mathbf{\hat{k}}_i^p \) represents the unit projection vector of the incident wave vector onto the RIS, and \( \textbf{P} \) is the projection operator, where \( \textbf{P} \mathbf{\hat{k}}_i = \sin\theta_i \, \mathbf{\hat{k}}_i^p \).
+Let us consider an incident wave with wave vector $\mathbf{\hat{k}}_i$ arriving at the center of the RIS at an incidence angle $\theta_i$ with respect to the RIS normal vector $\mathbf{\hat{n}}$. The desired reflection direction for the target point $k$ is represented by the reflection wave vector $\mathbf{\hat{k}}_r$ with a reflection angle $\theta_r$. The incident phase gradient due to the inclined wavefront is given by
+\begin{equation} \label{grad_phi_i}
+	\nabla \varphi_i = - k_0 \sin\theta_i \, \mathbf{\hat{k}}_i^p = - k_0 \, \textbf{P} \mathbf{\hat{k}}_i
+\end{equation}
+where $k_0 = 2 \pi / \lambda$ is the wavenumber and $\lambda$ is the wavelength. Here, $\mathbf{\hat{k}}_i^p$ represents the unit projection of the incident wave vector $\mathbf{\hat{k}}_i$ onto the plane of the RIS, and $\textbf{P}$ is the projection operator, where $\textbf{P} \mathbf{\hat{k}}_i = \sin\theta_i \, \mathbf{\hat{k}}_i^p$.
 
-The RIS applies an additional phase gradient \( \nabla \varphi_{RIS} \), such that the total reflection phase gradient \( \nabla \varphi_r \) is:
-\[
-\nabla \varphi_r = \nabla \varphi_i + \nabla \varphi_{RIS}.
-\]
-Similarly to the incident wave, the reflection phase gradient \( \nabla \varphi_r \) is expressed as:
-\[
-\nabla \varphi_r = - k_0 \sin\theta_r \, \mathbf{\hat{k}}_r^p = - k_0 \, \textbf{P} \mathbf{\hat{k}}_r,
-\]
-where \( \mathbf{\hat{k}}_r^p \) is the unit projection vector of the reflection wave vector \( \mathbf{\hat{k}}_r \) onto the RIS. By substituting (\ref{grad_phi_i}) and (\ref{grad_phi_r}) into the expression for the total phase gradient, we find the desired phase gradient on the RIS:
-\[
-\nabla \varphi_{RIS} = k_0 \, \textbf{P} (\mathbf{\hat{k}}_i - \mathbf{\hat{k}}_r) = k_0 \, (\sin\theta_i \, \mathbf{\hat{k}}_i^p - \sin\theta_r \, \mathbf{\hat{k}}_r^p).
-\]
-This phase gradient drives the reflection of signals toward the target position. For simpler cases, such as when the RIS, transmitter, and target positions are at the same height, the gradient becomes one-dimensional along the y-axis:
-\[
-\nabla \varphi_{RIS} = k_0 \, (\sin\theta_i - \sin\theta_r) \, \hat{y}.
-\]
+The RIS applies an additional phase gradient $\nabla \varphi_{RIS}$, which adjusts the reflection direction to achieve the desired angle $\theta_r$. Then, the reflection phase gradient $\nabla \varphi_r$ becomes
+\begin{equation} \label{grad_phi}
+	\nabla \varphi_r = \nabla \varphi_i + \nabla \varphi_{RIS}
+\end{equation}
+Similar to (\ref{grad_phi_i}), the reflection phase gradient $\nabla \varphi_r$ is expressed as
+\begin{equation} \label{grad_phi_r}
+	\nabla \varphi_r = - k_0 \ \sin\theta_r \ \mathbf{\hat{k}}_r^p = - k_0 \ \textbf{P} \mathbf{\hat{k}}_r
+\end{equation}
+where $\mathbf{\hat{k}}_r^p$ is the unit projection vector of the reflection wave vector \( \mathbf{\hat{k}}_r \) onto the RIS. By substituting (\ref{grad_phi_i}) and (\ref{grad_phi_r}) into (\ref{grad_phi}), we find the desired phase gradient onto the RIS to reflect the incoming wave with direction $\mathbf{\hat{k}}_i$ to the reflection wave with direction $\mathbf{\hat{k}}_r$
+\begin{equation} \label{grad_exp}
+	\nabla \varphi_{RIS} = k_0 \ \textbf{P} (\mathbf{\hat{k}}_i - \mathbf{\hat{k}}_r) = k_0 \ (\sin\theta_i \ \mathbf{\hat{k}}_i^p - \sin\theta_r \ \mathbf{\hat{k}}_r^p)
+\end{equation}
+For simpler cases, such as when the RIS, transmitter, and target positions are assumed to be at the same height, the phase gradient onto the RIS becomes one-dimensional along the y-axis, which can be shown as follows:
+\begin{equation} \label{grad_exp_simpler}
+	\nabla \varphi_{RIS} = k_0 \, (\sin\theta_i - \sin\theta_r) \, \hat{y}
+\end{equation}
 This simplification results in a one-dimensional phase gradient and a more straightforward implementation of the RIS design.
 
-The phase profile \( \mathbf{\Phi}^k \) for each target position \( k \) is then generated by setting the first RIS tile phase to zero and applying a linear variation of the phase across the tiles, following the gradient calculated in (\ref{grad_exp}).
+The phase profile $\mathbf{\Phi}^k$ for each target point $k$ is then generated by setting the first RIS tile phase to zero and applying a linear variation of the phase across the surface, following the gradient calculated in (\ref{grad_exp}) or (\ref{grad_exp_simpler}). 
 
 \begin{figure}
-	\centering \includegraphics[width=.87\linewidth]{RIS_Phase_Gradient.png}
-	\caption{Illustration of the gradient-based RIS approach, where the RIS applies a phase gradient to control the reflection direction.}
+	\centering \includegraphics[width=\linewidth]{RIS_Phase_Gradient.png}
+	\caption{The gradient-based method for configuring the RIS phase profile to reflect signals toward the target point}
 	\label{RIS_Phase_Gradient}
 \end{figure}
 
 \subsection{DISTANCE-BASED PHASE PROFILE}
-The distance-based approach models the RIS as a focusing lens that ensures the reflected signals from all tiles combine coherently at the target position. In this method, the phase shift for each tile is determined by the total distance traveled by the signal from the transmitter to the tile and from the tile to the target position.
+The distance-based method models the RIS as a focusing lens that ensures the reflected signals combine constructively at the target point. By calculating the phase shift required at each tile, this method ensures that the signals from all tiles travel the same total distance, ensuring constructive interference at the target point.
 
-The position of each tile \( T_{n,m} \) relative to the RIS center is given by:
-\[
-(0, (m-\frac{1}{2})d_y, (n-\frac{1}{2})d_z),
-\]
-where \( m \in \left[ 1 - \frac{M}{2}, \frac{M}{2} \right] \) and \( n \in \left[ 1 - \frac{N}{2}, \frac{N}{2} \right] \) represent the row and column indices of the tile.
+The position of each tile $T_{n,m}$ relative to the RIS center is given by $(0, (m-\frac{1}{2})d_y, (n-\frac{1}{2})d_z)$, where $m \in \left[ 1 - \frac{M}{2}, \frac{M}{2} \right]$ and $n \in \left[ 1 - \frac{N}{2}, \frac{N}{2} \right]$ represent the row and column indices of the tile, assuming that the center of the coordinate system is taken as the center of the RIS without loss of generality.
 
-The electric field arriving at each tile \( T_{n,m} \) is expressed as:
-\[
-E_{n,m}^{\text{in}} = \sqrt{\frac{2 Z_0 P_{n,m}^{\text{TX-RIS}}}{d_y d_z}} e^{-j \frac{2 \pi r_{n,m}^{tx}}{\lambda}},
-\]
-where \( Z_0 \) is the characteristic impedance of free space, \( r_{n,m}^{tx} \) is the distance between the transmitter and \( T_{n,m} \), and \( P_{n,m}^{\text{TX-RIS}} \) is the received power at each tile. After reflection, the total electric field at the target position \( k \) is:
-\[
-E^{rx} = \sum_{n=-\frac{N}{2}}^{\frac{N}{2}} \sum_{m=-\frac{M}{2}}^{\frac{M}{2}} E_{n,m}^{rx}.
-\]
+The electric field arriving at each tile $T_{n,m}$ is expressed as
+\begin{equation}
+	E_{n,m}^{\text{in}} = \sqrt{\frac{2 Z_0 P_{n,m}^{\text{TX-RIS}}}{d_y d_z}} e^{-j \frac{2 \pi r_{n,m}^{tx}}{\lambda}}
+\end{equation}
+where $Z_0$ is the characteristic impedance of free space, $r_{n,m}^{tx}$ is the distance between the transmitter and $T_{n,m}$, and $P_{n,m}^{\text{TX-RIS}}$ is the received power of the incident wave at each tile. After reflection, the total electric field at the desired target point is
+\begin{equation}
+	E^{rx} = \sum_{n=1-\frac{N}{2}}^{\frac{N}{2}} \sum_{m=1-\frac{M}{2}}^{\frac{M}{2}} E_{n,m}^{rx}
+\end{equation}
+where each reflected field, contributed by $T_{n,m}$ is:
+\begin{equation} \label{E_n_m_r}
+	E_{n,m}^{rx} = \sqrt{\frac{2 Z_0 P^{rx}_{n,m}}{A_{rx}}} e^{-j \left(\frac{2 \pi}{\lambda} (r_{n,m}^{tx} + r_{n,m}^{rx}) - \varphi_{n,m}^k\right)}
+\end{equation}
+where $r_{n,m}^{rx}$ is the distance from $T_{n,m}$ to the receiver, $A_{rx}$ is the receiving antenna aperture, and $P_{n,m}^{rx}$ is the power of the reflected signal of $T_{n,m}$ at the desired target point and can be expressed as
+\begin{equation}
+	P_{n,m}^{rx} = P_{n,m}^{\text{RIS-RX}} (A_{n,m}^k)^2 P_{n,m}^{\text{TX-RIS}}
+\end{equation}
+where $P_{n,m}^{\text{RIS-RX}}$ is the multiplicative factor to the received power of the path from $T_{n,m}$ to the desired target point. The combined received power of all tiles at target point $k$ is then given by
+\begin{equation} \label{combined_rx_power}
+	\begin{aligned}
+		P^{rx} &= \frac{\left|E^{rx}\right|^2}{2 Z_0} A_{rx} \\
+		&= \left| \sum_{n=1-\frac{N}{2}}^{\frac{N}{2}} \sum_{m=1-\frac{M}{2}}^{\frac{M}{2}} A_{n,m}^k \sqrt{P_{n,m}^{\text{TX-RIS}} P_{n,m}^{\text{RIS-RX}}} \right. \\
+		&\quad \left. \times e^{-j \left(\frac{2 \pi}{\lambda} (r_{n,m}^{tx} + r_{n,m}^{rx}) - \varphi_{n,m}^k\right)} \right|^2
+	\end{aligned}
+\end{equation}
+In the distance-based phase profile method, the aim is to maximize the combined received power $P^{rx}$ in (\ref{combined_rx_power}), which is maximized when the imaginary part of each term in the summation is tuned in. Then, the following phase assignment for each tile holds:
+\begin{equation}
+	\varphi_{n,m}^k = \frac{2 \pi}{\lambda} (r_{n,m}^{tx} + r_{n,m}^{rx})
+\end{equation}
+where the phase profile $\mathbf{\Phi}^k$ is created by assigning this expression to each tile to achieve constructive interference at the desired target point.
 
-Each reflected field at tile \( T_{n,m} \) is:
-\[
-E_{n,m}^{rx} = \sqrt{\frac{2 Z_0 P^{rx}_{n,m}}{A_{rx}}} e^{-j \left( \frac{2 \pi}{\lambda} \left( r_{n,m}^{tx} + r_{n,m}^{rx} \right) - \varphi_{n,m}^k \right)},
-\]
-where \( r_{n,m}^{rx} \) is the distance from tile \( T_{n,m} \) to the receiver, \( A_{rx} \) is the receiving antenna aperture, and \( P_{n,m}^{rx} \) is the power of the reflected signal at target position \( k \).
+\section{JOINT RIS SIZE, POSITION AND TARGET POINT OPTIMIZATION ALGORITHM} \label{algo_section}
+In a typical indoor scenario, the transmitter's position is assumed to be fixed in this paper. Then, we can easily simulate the transmitter-only coverage map in the ray-tracing tool and reveal the scenario's blind spots with insufficient signal power that require coverage enhancement. The objective of this study is to utilize RIS deployment to improve the signal power in these blind spots, ensuring acceptable signal quality throughout all the areas in the scene.
 
-The received power at target position \( k \) is then given by:
-\[
-P^{rx} = \frac{\left| E^{rx} \right|^2}{2 Z_0} A_{rx} = \left| \sum_{n=-\frac{N}{2}}^{\frac{N}{2}} \sum_{m=-\frac{M}{2}}^{\frac{M}{2}} A_{n,m}^k \sqrt{P_{n,m}^{\text{TX-RIS}} P_{n,m}^{\text{RIS-RX}}} e^{-j \left( \frac{2 \pi}{\lambda} \left( r_{n,m}^{tx} + r_{n,m}^{rx} \right) - \varphi_{n,m}^k \right)} \right|^2.
-\]
+In our previous work \cite{emre_claude_eucap_paper}, we addressed this issue by introducing a method to identify blind spots based on the transmitter-only coverage map. By defining a minimum power threshold for acceptable signal quality, regions with power levels below this threshold were classified as low-power cells which require coverage enhancement. The coordinates of these low-power cells were then grouped into a fixed number of clusters using the K-means algorithm, and the centroids of these clusters were selected as the target points for the RIS. However, the position of the RIS in \cite{emre_claude_eucap_paper} was assumed to be fixed, which limited the flexibility of the solution.
 
-Maximizing the received power leads to the condition:
-\[
-\varphi_{n,m}^k = \frac{2 \pi}{\lambda} \left( r_{n,m}^{tx} + r_{n,m}^{rx} \right),
-\]
-which is the phase profile that must be assigned to each tile to achieve constructive interference at the target position \( k \).
+To overcome this limitation, we propose a novel algorithm in this study that jointly optimizes the RIS size, position, and number of target points. The algorithm first identifies low-power cells based on the transmitter-only coverage map. For each possible number of target points, it searches for feasible RIS positions within the scene that maintain a line-of-sight (LoS) connection with both the transmitter and all target points. Each feasible configuration of RIS position and number of target points is evaluated for each searched RIS size. The best configuration defined by the RIS position and number of target points is selected for each RIS size. Subsequently, the RIS size is varied iteratively, and the performance improvement is assessed. When the performance improvement falls below the defined threshold, the corresponding RIS size is selected as the sub-optimal size. This approach not only seeks to improve coverage but also balances performance gains with hardware cost by determining a sub-optimal RIS size. Increasing the RIS size enhances coverage, but after a certain point, the performance improvement becomes marginal compared to the added cost. Hence, the proposed algorithm identifies the trade-off point between performance and cost by defining a performance improvement threshold. This threshold manages the decision to continue increasing the RIS size. Without loss of generality, this study varies the RIS size by adjusting its width while keeping its height fixed, allowing for a clear analysis of one-dimensional size variations. However, the approach can be extended to two-dimensional size adjustments, where both height and width are increased proportionally. Detailed steps of the proposed algorithm are presented in Algorithm \ref{algo1}-\ref{algo2}.
 
+\begin{algorithm}
+	\caption{Ray-tracing Based RIS Size, Position and Target Points Optimization (Part 1)}
+	\label{algo1}
+	\SetAlgoLined
+	\KwIn{
+		\begin{itemize}
+			\item \textbf{The scene geometry:} A 3D representation of the area where coverage is to be enhanced, including obstacles, walls, etc.
+			\item \textbf{Transmitter (TX) position:} Coordinates of the transmitter in the scene.
+			\item \textbf{Minimum power threshold} $P_{\text{th}}$: The threshold for acceptable signal power, below which cells are considered low-power.
+			\item \textbf{Range of possible target points} $\mathcal{N}$: The set of possible cluster counts to be used in K-means algorithm, e.g., $\mathcal{N} = \{1, 2, \dots, 5\}$.
+			\item \textbf{Set of possible RIS widths} $\mathcal{W}$: The set of candidate RIS widths, e.g., $\mathcal{W} = \{0.2, 0.4, \dots, 3.0\}$ m.
+			\item \textbf{Minimum performance improvement threshold} $\Delta \mathcal{M}_{\text{min}}$: The minimum performance improvement required to justify increasing the RIS width.
+		\end{itemize}
+	}
+	\KwOut{
+		\begin{itemize}
+			\item \textbf{Optimal number of target points} $N^{\text{opt}}$.
+			\item \textbf{Optimal RIS width} $W_{\text{RIS}}^{\text{opt}}$.
+			\item \textbf{Optimal RIS position} $\mathbf{r}_{\text{RIS}}^{\text{opt}}$.
+		\end{itemize}
+	}
+	Compute the transmitter-only coverage map $\mathbf{P}_{\text{TX}}(x, y)$.\\
+	Set a minimum power threshold $P_{\text{th}}$ for acceptable signal quality.\\
+	Identify low-power cells in $\mathbf{P}_{\text{TX}}(x, y)$ where the power level is below the minimum power threshold $P_{\text{th}}$, denoted as $\mathcal{C}_{\text{low}}$:
+	\begin{equation}
+		\mathcal{C}_{\text{low}} = \{(x, y) \ | \ \mathbf{P}_{\text{TX}}(x, y) < P_{\text{th}}\}
+	\end{equation}
+\end{algorithm}
 
-\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{Emre_Picture.jpg}}]{EMRE KILCIOGLU } received his B.Sc. and M.Sc. degrees in Electrical and Electronics Engineering from Middle East Technical University, Ankara, Turkey, in 2016 and 2019, respectively. He completed his Ph.D. in 2024 at the Institute of Information and Communication Technologies, Electronics and Applied Mathematics (ICTEAM), Université catholique de Louvain (UCLouvain), Louvain-la-Neuve, Belgium, where he is currently a postdoctoral researcher.
+\begin{algorithm}
+	\caption{Ray-tracing Based RIS Size, Position and Target Points Optimization (Part 2)}
+	\label{algo2}
+	\SetAlgoLined
+	\ForEach{number of target points $N \in \mathcal{N}$}{
+		Apply K-means algorithm to $\mathcal{C}_{\text{low}}$ to group the low-power cells into $N$ clusters and obtain $N$ centroids:
+		\begin{equation}
+			\text{K-means}(N, \mathcal{C}_{\text{low}}) \rightarrow \text{Centroids} \{ \mathbf{c}_1, \mathbf{c}_2, \dots, \mathbf{c}_N \}
+		\end{equation}
+		where each centroid $\mathbf{c}_i$ represents a target point where coverage enhancement is needed.\\
+		Identify the set of feasible RIS positions $\mathcal{R}_N$ that provide line-of-sight (LoS) to both the transmitter and all $N$ target points:
+		\begin{equation}
+			\mathcal{R}_N = \{ \mathbf{r}_{\text{RIS}} \mid \text{LoS}(\mathbf{r}_{\text{RIS}}, \mathbf{TX}) \land \text{LoS}(\mathbf{r}_{\text{RIS}}, \mathbf{c}_i) \ \forall \mathbf{c}_i \}
+		\end{equation}
+		\ForEach{RIS width $W_{\text{RIS}} \in \mathcal{W}$}{
+			Compute the combined coverage $\textbf{P}_{\text{comb}}(x,y)$ at each low-power cell, considering both TX and RIS contributions, for each RIS position $\mathbf{r}_{\text{RIS}} \in \mathcal{R}_N$.\\
+			Calculate the performance metric $\mathcal{M}(\mathbf{r}_{\text{RIS}}, N, W_{\text{RIS}})$ for all parameter combinations as the average power of low-power cells after placing the RIS at $\mathbf{r}_{\text{RIS}}$:
+			\begin{equation}
+				\mathcal{M}(\mathbf{r}_{\text{RIS}}, N, W_{\text{RIS}}) = \frac{1}{|\mathcal{C}_{\text{low}}|} \sum_{(x, y) \in \mathcal{C}_{\text{low}}} \mathbf{P}_{\text{comb}}(x, y)
+			\end{equation}
+		}
+	}
 	
-From July 2016 to January 2020, he worked as a system design engineer at Aselsan Inc., Ankara, Turkey. His research interests include massive MIMO, cooperative communication, deep learning applications in wireless communications, and ray-tracing-based optimization of reconfigurable intelligent surfaces (RISs).
+	Identify the RIS configuration $(\mathbf{r}_{\text{RIS}}^{W_{\text{RIS}}}, N^{W_{\text{RIS}}}, W_{\text{RIS}})$ that maximizes the performance metric $\mathcal{M}$ for each $W_{\text{RIS}}$:
+	\begin{equation}
+		(\mathbf{r}_{\text{RIS}}^{W_{\text{RIS}}}, N^{W_{\text{RIS}}}) = \arg\max_{\mathbf{r}_{\text{RIS}} \in \mathcal{R}_N, N \in \mathcal{N}} \mathcal{M}(\mathbf{r}_{\text{RIS}}, N, W_{\text{RIS}})
+	\end{equation}\\
+	Select the smallest RIS width $W_{\text{RIS}}^{\text{opt}}$ for which increasing the RIS width further does not yield a performance improvement exceeding $\Delta \mathcal{M}_{\text{min}}$. Assign corresponding parameters $\mathbf{r}_{\text{RIS}}^{\text{opt}} = \mathbf{r}_{\text{RIS}}^{W_{\text{RIS}}^{\text{opt}}}$ and $N^{\text{opt}} = N^{W_{\text{RIS}}^{\text{opt}}}$.
+\end{algorithm}
+
+
+
+\section{SIMULATION SCENARIOS}
+
+\section{SIMULATION RESULTS}
+
+\section{CONCLUSION}
+
+\begin{thebibliography}{00}
+	\bibitem{sionna} J. Hoydis, S. Cammerer, Fayçal {A. A.}, A. Vem, N. Binder, G. Marcus, and A. Keller, “Sionna: An Open-Source Library for Next-Generation Physical Layer Research", \textit{arXiv}, March 2022, https://arxiv.org/abs/2203.11854.
+	\bibitem{phase_grad_paper} E. M. Vitucci, M. Albani, S. Kodra, M. Barbiroli and V. Degli-Esposti, “An Efficient Ray-Based Modeling Approach for Scattering From Reconfigurable Intelligent Surfaces," \textit{IEEE Trans. on Antennas and Prop.}, vol. 72, no. 3, pp. 2673-2685, March 2024.
+	\bibitem{Tang} W. Tang \textit{et al.}, “Wireless Communications With Reconfigurable Intelligent Surface: Path Loss Modeling and Experimental Measurement," \textit{IEEE Trans. on Wireless Commun.}, vol. 20, no. 1, pp. 421-439, Jan. 2021.
+	\bibitem{emre_claude_eucap_paper} E. Kilcioglu and C. Oestges, “Ray-Tracing Based Algorithms for Indoor RIS Optimization and Coverage Enhancement," \textit{to appear in 2025 19th European Conference on Antennas and Propagation (EuCAP)}, 2025, pp. 1-5. 
+\end{thebibliography}
+
+
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{Emre_Picture.jpg}}]{EMRE KILCIOGLU } received his B.Sc. and M.Sc. degrees in Electrical and Electronics Engineering from Middle East Technical University, Ankara, Turkey, in 2016 and 2019, respectively. He completed his Ph.D. in 2024 at the Institute of Information and Communication Technologies, Electronics and Applied Mathematics (ICTEAM), Université catholique de Louvain (UCLouvain), Louvain-la-Neuve, Belgium, where he is currently a postdoctoral researcher. From July 2016 to January 2020, he worked as a system design engineer at Aselsan Inc., Ankara, Turkey. His research interests include massive MIMO, cooperative communication, deep learning applications in wireless communications, and ray-tracing-based optimization of reconfigurable intelligent surfaces (RISs).
 \end{IEEEbiography}
 
 \begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{Emre_Picture.jpg}}]{CLAUDE OESTGES } ...
