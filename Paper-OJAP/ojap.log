@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.5) (preloaded format=pdflatex 2023.9.12)  21 JAN 2025 03:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.9) (preloaded format=pdflatex 2023.9.21)  23 JAN 2025 16:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -469,27 +469,62 @@ Overfull \hbox (1.01141pt too wide) detected at line 211
  ; N; W[]\OT1/cmr/m/n/10 )
  []
 
-<Sim_Results/Scenario_Illustration.png, id=34, 388.8126pt x 285.4665pt>
+<Sim_Results/GUI.png, id=34, 614.295pt x 565.36218pt>
+File: Sim_Results/GUI.png Graphic file (type png)
+<use Sim_Results/GUI.png>
+Package pdftex.def Info: Sim_Results/GUI.png  used on input line 226.
+(pdftex.def)             Requested size: 246.0pt x 226.4083pt.
+<Sim_Results/Scenario_Illustration.png, id=35, 341.8371pt x 309.3156pt>
 File: Sim_Results/Scenario_Illustration.png Graphic file (type png)
 <use Sim_Results/Scenario_Illustration.png>
 Package pdftex.def Info: Sim_Results/Scenario_Illustration.png  used on input l
-ine 226.
-(pdftex.def)             Requested size: 172.19925pt x 126.43326pt.
-<Sim_Results/multiple_curves_perf_metric_vs_RIS_width.png, id=35, 1141.866pt x 
+ine 232.
+(pdftex.def)             Requested size: 221.3985pt x 200.33534pt.
+<Sim_Results/TX_coverage_map.png, id=36, 395.3169pt x 308.5929pt>
+File: Sim_Results/TX_coverage_map.png Graphic file (type png)
+<use Sim_Results/TX_coverage_map.png>
+Package pdftex.def Info: Sim_Results/TX_coverage_map.png  used on input line 23
+8.
+(pdftex.def)             Requested size: 246.0pt x 192.03192pt.
+<Sim_Results/Binary_Cov_Map_N_2_-100dB.png, id=37, 462.528pt x 346.896pt>
+File: Sim_Results/Binary_Cov_Map_N_2_-100dB.png Graphic file (type png)
+<use Sim_Results/Binary_Cov_Map_N_2_-100dB.png>
+Package pdftex.def Info: Sim_Results/Binary_Cov_Map_N_2_-100dB.png  used on inp
+ut line 246.
+(pdftex.def)             Requested size: 115.6203pt x 86.7132pt.
+<Sim_Results/Binary_Cov_Map_N_3_-100dB.png, id=38, 462.528pt x 346.896pt>
+File: Sim_Results/Binary_Cov_Map_N_3_-100dB.png Graphic file (type png)
+<use Sim_Results/Binary_Cov_Map_N_3_-100dB.png>
+Package pdftex.def Info: Sim_Results/Binary_Cov_Map_N_3_-100dB.png  used on inp
+ut line 252.
+(pdftex.def)             Requested size: 115.6203pt x 86.7132pt.
+<Sim_Results/Binary_Cov_Map_N_4_-100dB.png, id=39, 462.528pt x 346.896pt>
+File: Sim_Results/Binary_Cov_Map_N_4_-100dB.png Graphic file (type png)
+<use Sim_Results/Binary_Cov_Map_N_4_-100dB.png>
+Package pdftex.def Info: Sim_Results/Binary_Cov_Map_N_4_-100dB.png  used on inp
+ut line 257.
+(pdftex.def)             Requested size: 115.6203pt x 86.7132pt.
+<Sim_Results/Binary_Cov_Map_N_5_-100dB.png, id=40, 462.528pt x 346.896pt>
+File: Sim_Results/Binary_Cov_Map_N_5_-100dB.png Graphic file (type png)
+<use Sim_Results/Binary_Cov_Map_N_5_-100dB.png>
+Package pdftex.def Info: Sim_Results/Binary_Cov_Map_N_5_-100dB.png  used on inp
+ut line 263.
+(pdftex.def)             Requested size: 115.6203pt x 86.7132pt.
+<Sim_Results/multiple_curves_perf_metric_vs_RIS_width.png, id=41, 1141.866pt x 
 570.2103pt>
 File: Sim_Results/multiple_curves_perf_metric_vs_RIS_width.png Graphic file (ty
 pe png)
 <use Sim_Results/multiple_curves_perf_metric_vs_RIS_width.png>
 Package pdftex.def Info: Sim_Results/multiple_curves_perf_metric_vs_RIS_width.p
-ng  used on input line 232.
+ng  used on input line 271.
 (pdftex.def)             Requested size: 352.79846pt x 176.1717pt.
 
-Underfull \hbox (badness 1796) in paragraph at lines 242--243
+Underfull \hbox (badness 1796) in paragraph at lines 281--282
 \OT1/ptm/m/n/8 Mar-cus, and A. Keller, \Sionna: An Open-Source Li-brary for
  []
 
 
-Underfull \hbox (badness 1552) in paragraph at lines 242--243
+Underfull \hbox (badness 1552) in paragraph at lines 281--282
 \OT1/ptm/m/n/8 Next-Generation Phys-i-cal Layer Re-search", \OT1/ptm/m/it/8 arX
 iv\OT1/ptm/m/n/8 , March 2022,
  []
@@ -501,27 +536,19 @@ Overfull \vbox (12.859pt too high) has occurred while \output is active []
 Overfull \vbox (12.75748pt too high) has occurred while \output is active []
 
 
-[4 <./Sim_Results/Scenario_Illustration.png>]
-<Emre_Picture.jpg, id=40, 803.0pt x 803.0pt>
+[4 <./Sim_Results/GUI.png>]
+<Emre_Picture.jpg, id=45, 803.0pt x 803.0pt>
 File: Emre_Picture.jpg Graphic file (type jpg)
 <use Emre_Picture.jpg>
-Package pdftex.def Info: Emre_Picture.jpg  used on input line 250.
+Package pdftex.def Info: Emre_Picture.jpg  used on input line 289.
 (pdftex.def)             Requested size: 72.26688pt x 72.26688pt.
 File: Emre_Picture.jpg Graphic file (type jpg)
 <use Emre_Picture.jpg>
-Package pdftex.def Info: Emre_Picture.jpg  used on input line 250.
-(pdftex.def)             Requested size: 72.26688pt x 72.26688pt.
-File: Emre_Picture.jpg Graphic file (type jpg)
-<use Emre_Picture.jpg>
-Package pdftex.def Info: Emre_Picture.jpg  used on input line 253.
-(pdftex.def)             Requested size: 72.26688pt x 72.26688pt.
-File: Emre_Picture.jpg Graphic file (type jpg)
-<use Emre_Picture.jpg>
-Package pdftex.def Info: Emre_Picture.jpg  used on input line 253.
+Package pdftex.def Info: Emre_Picture.jpg  used on input line 289.
 (pdftex.def)             Requested size: 72.26688pt x 72.26688pt.
 File: OJAP.png Graphic file (type png)
 <use OJAP.png>
-Package pdftex.def Info: OJAP.png  used on input line 256.
+Package pdftex.def Info: OJAP.png  used on input line 292.
 (pdftex.def)             Requested size: 148.12836pt x 20.0pt.
 
 Overfull \hbox (25.32835pt too wide) has occurred while \output is active
@@ -534,10 +561,17 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 Overfull \vbox (8.45pt too high) has occurred while \output is active []
 
- [5
+ [5 <./Sim_Results/Scenario_Illustration.png> <./Sim_Results/TX_coverage_map.pn
+g> <./Emre_Picture.jpg>]
+File: Emre_Picture.jpg Graphic file (type jpg)
+<use Emre_Picture.jpg>
+Package pdftex.def Info: Emre_Picture.jpg  used on input line 292.
+(pdftex.def)             Requested size: 72.26688pt x 72.26688pt.
+File: Emre_Picture.jpg Graphic file (type jpg)
+<use Emre_Picture.jpg>
+Package pdftex.def Info: Emre_Picture.jpg  used on input line 292.
+(pdftex.def)             Requested size: 72.26688pt x 72.26688pt.
 
- <./Sim_Results/multiple_curves_perf_metric_vs_RIS_width.png> <./Emre_Picture.j
-pg>]
 Overfull \vbox (12.859pt too high) has occurred while \output is active []
 
 
@@ -546,17 +580,35 @@ Overfull \vbox (12.75748pt too high) has occurred while \output is active []
 
 [6
 
-] (ojap.aux)
+ <./Sim_Results/Binary_Cov_Map_N_2_-100dB.png> <./Sim_Results/Binary_Cov_Map_N_
+3_-100dB.png> <./Sim_Results/Binary_Cov_Map_N_4_-100dB.png> <./Sim_Results/Bina
+ry_Cov_Map_N_5_-100dB.png>]
+File: OJAP.png Graphic file (type png)
+<use OJAP.png>
+Package pdftex.def Info: OJAP.png  used on input line 295.
+(pdftex.def)             Requested size: 148.12836pt x 20.0pt.
+
+Overfull \hbox (25.32835pt too wide) has occurred while \output is active
+[][] 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \vbox (8.45pt too high) has occurred while \output is active []
+
+ [7 <./Sim_Results/multiple_curves_perf_metric_vs_RIS_width.png>] (ojap.aux)
  ***********
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-08-29>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 5037 strings out of 475248
- 81282 string characters out of 5757813
+ 5085 strings out of 475247
+ 83136 string characters out of 5757792
  1942801 words of memory out of 5000000
- 26488 multiletter control sequences out of 15000+600000
+ 26537 multiletter control sequences out of 15000+600000
  617098 words of font info for 130 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  57i,17n,65p,1819b,425s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -580,9 +632,9 @@ rw/helvetic/uhvr8a.pfb><C:/Users/emrek/AppData/Local/Programs/MiKTeX/fonts/type
 type1/urw/times/utmb8a.pfb><C:/Users/emrek/AppData/Local/Programs/MiKTeX/fonts/
 type1/urw/times/utmr8a.pfb><C:/Users/emrek/AppData/Local/Programs/MiKTeX/fonts/
 type1/urw/times/utmri8a.pfb>
-Output written on ojap.pdf (6 pages, 811809 bytes).
+Output written on ojap.pdf (7 pages, 947269 bytes).
 PDF statistics:
- 129 PDF objects out of 1000 (max. 8388607)
+ 145 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 55 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 85 words of extra memory for PDF output out of 10000 (max. 10000000)
 
