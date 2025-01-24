@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.9) (preloaded format=pdflatex 2023.9.21)  23 JAN 2025 16:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.5) (preloaded format=pdflatex 2023.9.12)  24 JAN 2025 16:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -469,62 +469,83 @@ Overfull \hbox (1.01141pt too wide) detected at line 211
  ; N; W[]\OT1/cmr/m/n/10 )
  []
 
-<Sim_Results/GUI.png, id=34, 614.295pt x 565.36218pt>
+<Sim_Results/GUI.png, id=34, 817.0525pt x 721.69624pt>
 File: Sim_Results/GUI.png Graphic file (type png)
 <use Sim_Results/GUI.png>
 Package pdftex.def Info: Sim_Results/GUI.png  used on input line 226.
-(pdftex.def)             Requested size: 246.0pt x 226.4083pt.
-<Sim_Results/Scenario_Illustration.png, id=35, 341.8371pt x 309.3156pt>
+(pdftex.def)             Requested size: 246.0pt x 217.28139pt.
+<Sim_Results/Scenario_Illustration.png, id=35, 333.8874pt x 301.3659pt>
 File: Sim_Results/Scenario_Illustration.png Graphic file (type png)
 <use Sim_Results/Scenario_Illustration.png>
 Package pdftex.def Info: Sim_Results/Scenario_Illustration.png  used on input l
 ine 232.
-(pdftex.def)             Requested size: 221.3985pt x 200.33534pt.
-<Sim_Results/TX_coverage_map.png, id=36, 395.3169pt x 308.5929pt>
+(pdftex.def)             Requested size: 196.80075pt x 177.63419pt.
+<Sim_Results/TX_coverage_map.png, id=36, 393.1488pt x 302.8113pt>
 File: Sim_Results/TX_coverage_map.png Graphic file (type png)
 <use Sim_Results/TX_coverage_map.png>
 Package pdftex.def Info: Sim_Results/TX_coverage_map.png  used on input line 23
 8.
-(pdftex.def)             Requested size: 246.0pt x 192.03192pt.
-<Sim_Results/Binary_Cov_Map_N_2_-100dB.png, id=37, 462.528pt x 346.896pt>
+(pdftex.def)             Requested size: 221.3985pt x 170.525pt.
+<Sim_Results/Binary_Cov_Map_N_2_-100dB.png, id=37, 360.6273pt x 300.6432pt>
 File: Sim_Results/Binary_Cov_Map_N_2_-100dB.png Graphic file (type png)
 <use Sim_Results/Binary_Cov_Map_N_2_-100dB.png>
 Package pdftex.def Info: Sim_Results/Binary_Cov_Map_N_2_-100dB.png  used on inp
-ut line 246.
-(pdftex.def)             Requested size: 115.6203pt x 86.7132pt.
-<Sim_Results/Binary_Cov_Map_N_3_-100dB.png, id=38, 462.528pt x 346.896pt>
+ut line 245.
+(pdftex.def)             Requested size: 120.54135pt x 100.48785pt.
+<Sim_Results/Binary_Cov_Map_N_3_-100dB.png, id=38, 360.6273pt x 300.6432pt>
 File: Sim_Results/Binary_Cov_Map_N_3_-100dB.png Graphic file (type png)
 <use Sim_Results/Binary_Cov_Map_N_3_-100dB.png>
 Package pdftex.def Info: Sim_Results/Binary_Cov_Map_N_3_-100dB.png  used on inp
-ut line 252.
-(pdftex.def)             Requested size: 115.6203pt x 86.7132pt.
-<Sim_Results/Binary_Cov_Map_N_4_-100dB.png, id=39, 462.528pt x 346.896pt>
+ut line 247.
+(pdftex.def)             Requested size: 120.54135pt x 100.48785pt.
+<Sim_Results/Binary_Cov_Map_N_4_-100dB.png, id=39, 361.35pt x 301.3659pt>
 File: Sim_Results/Binary_Cov_Map_N_4_-100dB.png Graphic file (type png)
 <use Sim_Results/Binary_Cov_Map_N_4_-100dB.png>
 Package pdftex.def Info: Sim_Results/Binary_Cov_Map_N_4_-100dB.png  used on inp
-ut line 257.
-(pdftex.def)             Requested size: 115.6203pt x 86.7132pt.
-<Sim_Results/Binary_Cov_Map_N_5_-100dB.png, id=40, 462.528pt x 346.896pt>
+ut line 251.
+(pdftex.def)             Requested size: 120.54135pt x 100.5317pt.
+<Sim_Results/Binary_Cov_Map_N_5_-100dB.png, id=40, 361.35pt x 299.9205pt>
 File: Sim_Results/Binary_Cov_Map_N_5_-100dB.png Graphic file (type png)
 <use Sim_Results/Binary_Cov_Map_N_5_-100dB.png>
 Package pdftex.def Info: Sim_Results/Binary_Cov_Map_N_5_-100dB.png  used on inp
-ut line 263.
-(pdftex.def)             Requested size: 115.6203pt x 86.7132pt.
-<Sim_Results/multiple_curves_perf_metric_vs_RIS_width.png, id=41, 1141.866pt x 
-570.2103pt>
-File: Sim_Results/multiple_curves_perf_metric_vs_RIS_width.png Graphic file (ty
-pe png)
-<use Sim_Results/multiple_curves_perf_metric_vs_RIS_width.png>
-Package pdftex.def Info: Sim_Results/multiple_curves_perf_metric_vs_RIS_width.p
-ng  used on input line 271.
-(pdftex.def)             Requested size: 352.79846pt x 176.1717pt.
+ut line 253.
+(pdftex.def)             Requested size: 120.54135pt x 100.04951pt.
+<Sim_Results/perf_metric_RIS_width_multiple_curves_-100dB.png, id=41, 557.2017p
+t x 411.2163pt>
+File: Sim_Results/perf_metric_RIS_width_multiple_curves_-100dB.png Graphic file
+ (type png)
+<use Sim_Results/perf_metric_RIS_width_multiple_curves_-100dB.png>
+Package pdftex.def Info: Sim_Results/perf_metric_RIS_width_multiple_curves_-100
+dB.png  used on input line 261.
+(pdftex.def)             Requested size: 196.80075pt x 145.23926pt.
+<Sim_Results/perf_metric_RIS_width_-100dB_gradient_height_1m.png, id=42, 989.37
+63pt x 565.8741pt>
+File: Sim_Results/perf_metric_RIS_width_-100dB_gradient_height_1m.png Graphic f
+ile (type png)
+<use Sim_Results/perf_metric_RIS_width_-100dB_gradient_height_1m.png>
+Package pdftex.def Info: Sim_Results/perf_metric_RIS_width_-100dB_gradient_heig
+ht_1m.png  used on input line 267.
+(pdftex.def)             Requested size: 246.0pt x 140.69969pt.
+<Sim_Results/perf_metric_RIS_width_-100dB_distance_height_1m.png, id=43, 989.37
+63pt x 558.6471pt>
+File: Sim_Results/perf_metric_RIS_width_-100dB_distance_height_1m.png Graphic f
+ile (type png)
+<use Sim_Results/perf_metric_RIS_width_-100dB_distance_height_1m.png>
+Package pdftex.def Info: Sim_Results/perf_metric_RIS_width_-100dB_distance_heig
+ht_1m.png  used on input line 273.
+(pdftex.def)             Requested size: 246.0pt x 138.90277pt.
+<Sim_Results/CDF_-100dB.png, id=44, 462.528pt x 346.896pt>
+File: Sim_Results/CDF_-100dB.png Graphic file (type png)
+<use Sim_Results/CDF_-100dB.png>
+Package pdftex.def Info: Sim_Results/CDF_-100dB.png  used on input line 279.
+(pdftex.def)             Requested size: 246.0pt x 184.49977pt.
 
-Underfull \hbox (badness 1796) in paragraph at lines 281--282
+Underfull \hbox (badness 1796) in paragraph at lines 289--290
 \OT1/ptm/m/n/8 Mar-cus, and A. Keller, \Sionna: An Open-Source Li-brary for
  []
 
 
-Underfull \hbox (badness 1552) in paragraph at lines 281--282
+Underfull \hbox (badness 1552) in paragraph at lines 289--290
 \OT1/ptm/m/n/8 Next-Generation Phys-i-cal Layer Re-search", \OT1/ptm/m/it/8 arX
 iv\OT1/ptm/m/n/8 , March 2022,
  []
@@ -536,16 +557,7 @@ Overfull \vbox (12.859pt too high) has occurred while \output is active []
 Overfull \vbox (12.75748pt too high) has occurred while \output is active []
 
 
-[4 <./Sim_Results/GUI.png>]
-<Emre_Picture.jpg, id=45, 803.0pt x 803.0pt>
-File: Emre_Picture.jpg Graphic file (type jpg)
-<use Emre_Picture.jpg>
-Package pdftex.def Info: Emre_Picture.jpg  used on input line 289.
-(pdftex.def)             Requested size: 72.26688pt x 72.26688pt.
-File: Emre_Picture.jpg Graphic file (type jpg)
-<use Emre_Picture.jpg>
-Package pdftex.def Info: Emre_Picture.jpg  used on input line 289.
-(pdftex.def)             Requested size: 72.26688pt x 72.26688pt.
+[4 <./Sim_Results/GUI.png (PNG copy)>]
 File: OJAP.png Graphic file (type png)
 <use OJAP.png>
 Package pdftex.def Info: OJAP.png  used on input line 292.
@@ -556,20 +568,30 @@ Overfull \hbox (25.32835pt too wide) has occurred while \output is active
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
 Overfull \vbox (8.45pt too high) has occurred while \output is active []
 
  [5 <./Sim_Results/Scenario_Illustration.png> <./Sim_Results/TX_coverage_map.pn
-g> <./Emre_Picture.jpg>]
+g> <./Sim_Results/Binary_Cov_Map_N_2_-100dB.png> <./Sim_Results/Binary_Cov_Map_
+N_3_-100dB.png> <./Sim_Results/Binary_Cov_Map_N_4_-100dB.png> <./Sim_Results/Bi
+nary_Cov_Map_N_5_-100dB.png> <./Sim_Results/perf_metric_RIS_width_multiple_curv
+es_-100dB.png> <./Sim_Results/perf_metric_RIS_width_-100dB_gradient_height_1m.p
+ng> <./Sim_Results/perf_metric_RIS_width_-100dB_distance_height_1m.png>]
+<Emre_Picture.jpg, id=60, 803.0pt x 803.0pt>
 File: Emre_Picture.jpg Graphic file (type jpg)
 <use Emre_Picture.jpg>
-Package pdftex.def Info: Emre_Picture.jpg  used on input line 292.
+Package pdftex.def Info: Emre_Picture.jpg  used on input line 297.
 (pdftex.def)             Requested size: 72.26688pt x 72.26688pt.
 File: Emre_Picture.jpg Graphic file (type jpg)
 <use Emre_Picture.jpg>
-Package pdftex.def Info: Emre_Picture.jpg  used on input line 292.
+Package pdftex.def Info: Emre_Picture.jpg  used on input line 297.
+(pdftex.def)             Requested size: 72.26688pt x 72.26688pt.
+File: Emre_Picture.jpg Graphic file (type jpg)
+<use Emre_Picture.jpg>
+Package pdftex.def Info: Emre_Picture.jpg  used on input line 300.
+(pdftex.def)             Requested size: 72.26688pt x 72.26688pt.
+File: Emre_Picture.jpg Graphic file (type jpg)
+<use Emre_Picture.jpg>
+Package pdftex.def Info: Emre_Picture.jpg  used on input line 300.
 (pdftex.def)             Requested size: 72.26688pt x 72.26688pt.
 
 Overfull \vbox (12.859pt too high) has occurred while \output is active []
@@ -578,38 +600,18 @@ Overfull \vbox (12.859pt too high) has occurred while \output is active []
 Overfull \vbox (12.75748pt too high) has occurred while \output is active []
 
 
-[6
-
- <./Sim_Results/Binary_Cov_Map_N_2_-100dB.png> <./Sim_Results/Binary_Cov_Map_N_
-3_-100dB.png> <./Sim_Results/Binary_Cov_Map_N_4_-100dB.png> <./Sim_Results/Bina
-ry_Cov_Map_N_5_-100dB.png>]
-File: OJAP.png Graphic file (type png)
-<use OJAP.png>
-Package pdftex.def Info: OJAP.png  used on input line 295.
-(pdftex.def)             Requested size: 148.12836pt x 20.0pt.
-
-Overfull \hbox (25.32835pt too wide) has occurred while \output is active
-[][] 
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-Overfull \vbox (8.45pt too high) has occurred while \output is active []
-
- [7 <./Sim_Results/multiple_curves_perf_metric_vs_RIS_width.png>] (ojap.aux)
+[6 <./Sim_Results/CDF_-100dB.png> <./Emre_Picture.jpg>] (ojap.aux)
  ***********
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-08-29>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 5085 strings out of 475247
- 83136 string characters out of 5757792
- 1942801 words of memory out of 5000000
- 26537 multiletter control sequences out of 15000+600000
- 617098 words of font info for 130 fonts, out of 8000000 for 9000
+ 5135 strings out of 475248
+ 84753 string characters out of 5757813
+ 1943801 words of memory out of 5000000
+ 26576 multiletter control sequences out of 15000+600000
+ 623743 words of font info for 152 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  57i,17n,65p,1819b,425s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/emrek/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
@@ -632,9 +634,9 @@ rw/helvetic/uhvr8a.pfb><C:/Users/emrek/AppData/Local/Programs/MiKTeX/fonts/type
 type1/urw/times/utmb8a.pfb><C:/Users/emrek/AppData/Local/Programs/MiKTeX/fonts/
 type1/urw/times/utmr8a.pfb><C:/Users/emrek/AppData/Local/Programs/MiKTeX/fonts/
 type1/urw/times/utmri8a.pfb>
-Output written on ojap.pdf (7 pages, 947269 bytes).
+Output written on ojap.pdf (6 pages, 1179461 bytes).
 PDF statistics:
- 145 PDF objects out of 1000 (max. 8388607)
+ 146 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 85 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 100 words of extra memory for PDF output out of 10000 (max. 10000000)
 
