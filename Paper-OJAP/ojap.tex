@@ -37,7 +37,59 @@
 \maketitle
 
 \section{INTRODUCTION}
-\IEEEPARstart{T}{his} .....
+
+\IEEEPARstart{R}{econfigurable} Intelligent Surfaces (RISs) have emerged as a transformative technology for future wireless networks, offering the capability to shape the propagation environment by controlling the phase and amplitude of incident electromagnetic waves \cite{renzo2020smart, wu2021intelligent}. By replacing or augmenting conventional active components with nearly passive, low-cost metasurfaces, RISs provide a promising pathway to enhance coverage, spectral efficiency, and energy efficiency, especially in indoor environments where propagation challenges such as multipath fading, shadowing, and severe non-line-of-sight (NLOS) conditions are prevalent.
+
+\subsection{Motivation and Background}
+
+Indoor wireless networks face unique challenges due to complex geometries, dense obstacles, and dynamic interference environments. Traditional methods—such as active relays or dense small-cell deployments—often lead to increased cost and energy consumption. In contrast, RISs can be deployed on walls, ceilings, or other surfaces to reconfigure the radio environment in a cost-effective and energy-efficient manner \cite{yuan2021reconfigurable, liu2021reconfigurable}. Early work in this field has established the physical foundations of RISs, demonstrating that by engineering the reflection coefficients of a large number of subwavelength elements, one can create a “smart radio environment” where the wireless channel becomes programmable \cite{pan2021reconfigurable}.
+
+In indoor scenarios, the design and deployment of RISs are critical for maximizing their benefits. In particular, the size of the RIS (i.e., the number of reflecting elements), its physical location within the environment, and the selection of target points for beam steering must be jointly considered to overcome coverage gaps. While initial studies focused on fixed RIS deployments and target point identification via clustering algorithms based on transmitter-only coverage maps \cite{emre_claude_eucap_paper}, recent research has moved toward joint optimization frameworks that adaptively tune the RIS parameters in response to the spatial distribution of low-power regions.
+
+\subsection{Literature Review on RIS Parameter Optimization}
+
+A considerable body of work has addressed RIS optimization from various angles. Seminal studies \cite{renzo2020smart, wu2021intelligent} have laid the groundwork by demonstrating that RISs can enhance signal quality and coverage through intelligent passive beamforming. In these studies, optimization techniques—ranging from alternating optimization methods to heuristic and machine learning approaches—have been proposed to maximize performance metrics such as achievable rate, energy efficiency, and coverage probability.
+
+Several works have concentrated on optimizing the RIS reflection phase shifts to boost passive beamforming gains \cite{zhang2021joint, liu2021reconfigurable}. For example, algorithms based on alternating optimization have been successfully applied to determine the optimal phase configurations that maximize the received signal-to-noise ratio (SNR) at target locations. However, most of these approaches assume a fixed RIS position and size, which may not fully exploit the potential of RISs in indoor environments where spatial variations are significant.
+
+More recent studies have begun to address the need for joint optimization of RIS parameters. In particular, the trade-off between increasing the RIS size (to capture more aperture gain) and the associated hardware costs and diminishing returns has received growing attention \cite{turn0academia10}. Likewise, the optimal placement of the RIS relative to the transmitter and users is critical; for example, positioning the RIS too far from either party can lead to rapid signal attenuation, while suboptimal locations may fail to adequately illuminate the coverage holes identified in the environment \cite{turn0academia9}.
+
+In the context of indoor propagation, the joint optimization problem involves three key parameters:
+\begin{itemize}
+	\item \textbf{RIS Size:} Increasing the number of reflecting elements generally enhances the passive beamforming gain, yet it also incurs higher cost and complexity. Studies have shown that beyond a certain size, additional elements yield marginal performance improvements \cite{liu2021reconfigurable}.
+	\item \textbf{RIS Position:} The physical location of the RIS directly influences the line-of-sight (LoS) conditions between the transmitter, RIS, and intended target points. Several works have demonstrated that optimizing RIS location can significantly improve coverage, particularly in indoor settings with irregular layouts \cite{pan2021reconfigurable}.
+	\item \textbf{Target Points for Beam Steering:} Identifying and clustering regions with insufficient signal power (or so-called blind spots) is a common strategy to define target points toward which the RIS should beamform. While clustering techniques have been applied effectively in previous work \cite{emre_claude_eucap_paper}, adapting these target points in tandem with RIS placement and size remains an open challenge.
+\end{itemize}
+
+The literature indicates that a unified framework capable of jointly optimizing these parameters is necessary to fully harness the potential of RISs. In indoor environments, where propagation conditions can change rapidly with user movement and environmental dynamics, such an integrated approach not only enhances coverage but also balances performance gains with practical constraints such as hardware cost and deployment complexity.
+
+\subsection{Challenges and Research Gaps}
+
+Despite the progress made in RIS optimization, several challenges remain:
+\begin{enumerate}
+	\item \textbf{Joint Optimization Complexity:} The simultaneous tuning of RIS size, position, and target beamforming directions leads to a highly non-convex optimization problem. Many existing solutions decouple these parameters or assume fixed positions, which may result in suboptimal performance.
+	\item \textbf{Indoor Propagation Modeling:} High-fidelity propagation models such as ray-tracing are essential to capture the complex multipath effects in indoor environments. However, incorporating detailed ray-tracing simulations into real-time optimization frameworks remains computationally intensive.
+	\item \textbf{Trade-off Between Performance and Cost:} While increasing the RIS size can improve performance, the associated hardware cost and installation complexity often impose practical limits. Therefore, identifying a sub-optimal RIS size that achieves most of the potential gain with minimal additional expense is critical.
+	\item \textbf{Dynamic Environments:} Indoor environments are inherently dynamic. User mobility and temporal changes in the environment require that RIS configurations be adaptive. Current literature predominantly addresses static scenarios, leaving room for research on dynamic optimization techniques.
+\end{enumerate}
+
+These challenges motivate the need for a comprehensive, joint optimization framework that leverages advanced simulation tools and optimization algorithms. Recent works have started to address parts of this challenge using machine learning and heuristic approaches \cite{turn0academia10}, but a unified solution specifically targeting indoor coverage enhancement with RIS in the 5.8 GHz band is still lacking.
+
+\subsection{Contributions and Paper Organization}
+
+In this paper, we propose a novel ray-tracing based optimization framework that jointly determines the optimal RIS size, position, and target beam steering points for enhancing indoor coverage in 5.8 GHz WiFi applications. The main contributions of our work are summarized as follows:
+\begin{itemize}
+	\item We develop a comprehensive optimization algorithm that integrates high-fidelity ray-tracing simulations to first identify low-power regions and then determine candidate target points through clustering methods.
+	\item The proposed framework explores feasible RIS placements that maintain line-of-sight connections with both the transmitter and the target points, thereby addressing the challenge of optimal RIS positioning.
+	\item An iterative procedure is employed to adjust the RIS size, balancing the trade-off between performance gains and hardware cost, and to select a sub-optimal size where further increases yield negligible improvements.
+	\item Extensive simulation results demonstrate that our joint optimization approach significantly enhances indoor coverage compared to conventional fixed RIS deployments.
+\end{itemize}
+
+The remainder of this paper is organized as follows. Section~\ref{sec:background} reviews the fundamentals of RIS technology and its potential in indoor scenarios. Section~\ref{sec:litreview} provides a detailed literature review on RIS parameter optimization and highlights existing challenges. Section~\ref{sec:proposed} describes our proposed joint optimization framework, including the underlying ray-tracing methodology and the optimization algorithm. Simulation results and performance comparisons are presented in Section~\ref{sec:results}. Finally, Section~\ref{sec:conclusion} concludes the paper and outlines future research directions.
+
+In summary, by rethinking the RIS deployment and configuration process for indoor environments, our work aims to bridge the gap between theoretical advances and practical implementation, paving the way for more efficient and adaptable indoor wireless networks.
+
+
 
 \section{RIS INTEGRATION INTO THE RAY-TRACING TOOL}
 This section outlines the integration of an RIS into the ray-tracing simulation tool. We choose to work with NVIDIA's open-source Sionna ray-tracing tool \cite{sionna} due to its user-friendly structure and the ability to change internal parameters of the tool according to our use.
