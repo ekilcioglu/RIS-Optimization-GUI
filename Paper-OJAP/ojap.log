@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.9) (preloaded format=pdflatex 2023.9.21)  17 FEB 2025 15:06
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.5) (preloaded format=pdflatex 2023.9.12)  17 FEB 2025 23:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -824,12 +824,12 @@ Package pdftex.def Info: Sim_Results/New_Binary_Cov_Map_1x2_Distance_-110dB.png
   used on input line 500.
 (pdftex.def)             Requested size: 118.07895pt x 98.00386pt.
 
-Underfull \hbox (badness 1796) in paragraph at lines 510--511
+Underfull \hbox (badness 1796) in paragraph at lines 513--514
 \OT1/ptm/m/n/8 Mar-cus, and A. Keller, \Sionna: An Open-Source Li-brary for
  []
 
 
-Underfull \hbox (badness 1552) in paragraph at lines 510--511
+Underfull \hbox (badness 1552) in paragraph at lines 513--514
 \OT1/ptm/m/n/8 Next-Generation Phys-i-cal Layer Re-search", \OT1/ptm/m/it/8 arX
 iv\OT1/ptm/m/n/8 , March 2022,
  []
@@ -837,23 +837,15 @@ iv\OT1/ptm/m/n/8 , March 2022,
 <Emre_Picture.jpg, id=116, 803.0pt x 803.0pt>
 File: Emre_Picture.jpg Graphic file (type jpg)
 <use Emre_Picture.jpg>
-Package pdftex.def Info: Emre_Picture.jpg  used on input line 518.
+Package pdftex.def Info: Emre_Picture.jpg  used on input line 520.
 (pdftex.def)             Requested size: 72.26688pt x 72.26688pt.
 File: Emre_Picture.jpg Graphic file (type jpg)
 <use Emre_Picture.jpg>
-Package pdftex.def Info: Emre_Picture.jpg  used on input line 518.
-(pdftex.def)             Requested size: 72.26688pt x 72.26688pt.
-File: Emre_Picture.jpg Graphic file (type jpg)
-<use Emre_Picture.jpg>
-Package pdftex.def Info: Emre_Picture.jpg  used on input line 521.
-(pdftex.def)             Requested size: 72.26688pt x 72.26688pt.
-File: Emre_Picture.jpg Graphic file (type jpg)
-<use Emre_Picture.jpg>
-Package pdftex.def Info: Emre_Picture.jpg  used on input line 521.
+Package pdftex.def Info: Emre_Picture.jpg  used on input line 520.
 (pdftex.def)             Requested size: 72.26688pt x 72.26688pt.
 File: OJAP.png Graphic file (type png)
 <use OJAP.png>
-Package pdftex.def Info: OJAP.png  used on input line 524.
+Package pdftex.def Info: OJAP.png  used on input line 523.
 (pdftex.def)             Requested size: 148.12836pt x 20.0pt.
 
 Overfull \hbox (25.32835pt too wide) has occurred while \output is active
@@ -870,7 +862,25 @@ Overfull \vbox (8.45pt too high) has occurred while \output is active []
 in_1x2_Gradient_-110dB.png> <./Sim_Results/New_Binary_Cov_Map_1x2_Gradient_-110
 dB.png> <./Sim_Results/Comb_cov_1x2_Distance_-110dB.png> <./Sim_Results/RIS_cov
 _gain_1x2_Distance_-110dB.png> <./Sim_Results/New_Binary_Cov_Map_1x2_Distance_-
-110dB.png> <./Emre_Picture.jpg>] (ojap.aux)
+110dB.png> <./Emre_Picture.jpg>]
+File: Emre_Picture.jpg Graphic file (type jpg)
+<use Emre_Picture.jpg>
+Package pdftex.def Info: Emre_Picture.jpg  used on input line 523.
+(pdftex.def)             Requested size: 72.26688pt x 72.26688pt.
+File: Emre_Picture.jpg Graphic file (type jpg)
+<use Emre_Picture.jpg>
+Package pdftex.def Info: Emre_Picture.jpg  used on input line 523.
+(pdftex.def)             Requested size: 72.26688pt x 72.26688pt.
+
+Overfull \vbox (12.859pt too high) has occurred while \output is active []
+
+
+Overfull \vbox (12.75748pt too high) has occurred while \output is active []
+
+
+[14
+
+] (ojap.aux)
  ***********
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-08-29>
@@ -881,10 +891,10 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 5387 strings out of 475247
- 93159 string characters out of 5757792
+ 5391 strings out of 475248
+ 93199 string characters out of 5757813
  1942801 words of memory out of 5000000
- 26815 multiletter control sequences out of 15000+600000
+ 26818 multiletter control sequences out of 15000+600000
  627064 words of font info for 161 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  57i,17n,65p,1819b,425s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -910,9 +920,9 @@ KTeX/fonts/type1/urw/helvetic/uhvro8a.pfb><C:/Users/emrek/AppData/Local/Program
 s/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/emrek/AppData/Local/Program
 s/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/emrek/AppData/Local/Program
 s/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on ojap.pdf (13 pages, 1742355 bytes).
+Output written on ojap.pdf (14 pages, 1744271 bytes).
 PDF statistics:
- 216 PDF objects out of 1000 (max. 8388607)
+ 219 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  190 words of extra memory for PDF output out of 10000 (max. 10000000)
 
