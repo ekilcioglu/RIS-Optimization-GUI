@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.9) (preloaded format=pdflatex 2023.9.21)  26 FEB 2025 14:31
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.5) (preloaded format=pdflatex 2023.9.12)  27 FEB 2025 16:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -451,11 +451,11 @@ Overfull \vbox (12.75748pt too high) has occurred while \output is active []
 
 
 [2]
-Underfull \vbox (badness 6808) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 File: OJAP.png Graphic file (type png)
 <use OJAP.png>
-Package pdftex.def Info: OJAP.png  used on input line 169.
+Package pdftex.def Info: OJAP.png  used on input line 167.
 (pdftex.def)             Requested size: 148.12836pt x 20.0pt.
 
 Overfull \hbox (25.32835pt too wide) has occurred while \output is active
@@ -491,7 +491,7 @@ Package pdftex.def Info: RIS_Phase_Gradient.png  used on input line 225.
 (pdftex.def)             Requested size: 172.19925pt x 158.18774pt.
 File: OJAP.png Graphic file (type png)
 <use OJAP.png>
-Package pdftex.def Info: OJAP.png  used on input line 271.
+Package pdftex.def Info: OJAP.png  used on input line 269.
 (pdftex.def)             Requested size: 148.12836pt x 20.0pt.
 
 Overfull \hbox (25.32835pt too wide) has occurred while \output is active
@@ -533,7 +533,7 @@ Overfull \hbox (1.01141pt too wide) detected at line 327
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 2990) has occurred while \output is active []
 
 
 Overfull \vbox (12.859pt too high) has occurred while \output is active []
@@ -556,7 +556,7 @@ Package pdftex.def Info: Sim_Results/GUI.png  used on input line 362.
 (pdftex.def)             Requested size: 246.0pt x 217.28139pt.
 File: OJAP.png Graphic file (type png)
 <use OJAP.png>
-Package pdftex.def Info: OJAP.png  used on input line 370.
+Package pdftex.def Info: OJAP.png  used on input line 369.
 (pdftex.def)             Requested size: 148.12836pt x 20.0pt.
 
 Overfull \hbox (25.32835pt too wide) has occurred while \output is active
@@ -608,9 +608,6 @@ File: Sim_Results/Binary_Cov_Map_N_5_-100dB.png Graphic file (type png)
 Package pdftex.def Info: Sim_Results/Binary_Cov_Map_N_5_-100dB.png  used on inp
 ut line 416.
 (pdftex.def)             Requested size: 120.54135pt x 100.04951pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
 <Sim_Results/perf_metric_RIS_width_multiple_curves_-100dB.png, id=63, 557.2017p
 t x 411.2163pt>
 File: Sim_Results/perf_metric_RIS_width_multiple_curves_-100dB.png Graphic file
@@ -618,13 +615,10 @@ File: Sim_Results/perf_metric_RIS_width_multiple_curves_-100dB.png Graphic file
 <use Sim_Results/perf_metric_RIS_width_multiple_curves_-100dB.png>
 Package pdftex.def Info: Sim_Results/perf_metric_RIS_width_multiple_curves_-100
 dB.png  used on input line 434.
-(pdftex.def)             Requested size: 172.19925pt x 127.08043pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
+(pdftex.def)             Requested size: 196.80075pt x 145.23926pt.
 File: OJAP.png Graphic file (type png)
 <use OJAP.png>
-Package pdftex.def Info: OJAP.png  used on input line 441.
+Package pdftex.def Info: OJAP.png  used on input line 440.
 (pdftex.def)             Requested size: 148.12836pt x 20.0pt.
 
 Overfull \hbox (25.32835pt too wide) has occurred while \output is active
@@ -832,7 +826,7 @@ Package pdftex.def Info: Sim_Results/New_Binary_Cov_Map_1x2_Distance_-110dB.png
 (pdftex.def)             Requested size: 118.07895pt x 98.00386pt.
 File: OJAP.png Graphic file (type png)
 <use OJAP.png>
-Package pdftex.def Info: OJAP.png  used on input line 595.
+Package pdftex.def Info: OJAP.png  used on input line 593.
 (pdftex.def)             Requested size: 148.12836pt x 20.0pt.
 
 Overfull \hbox (25.32835pt too wide) has occurred while \output is active
@@ -857,36 +851,26 @@ Overfull \vbox (12.75748pt too high) has occurred while \output is active []
 
 
 [14]
-Underfull \hbox (badness 1796) in paragraph at lines 649--650
-\OT1/ptm/m/n/8 Mar-cus, and A. Keller, \Sionna: An Open-Source Li-brary for
- []
-
-
-Underfull \hbox (badness 1552) in paragraph at lines 649--650
-\OT1/ptm/m/n/8 Next-Generation Phys-i-cal Layer Re-search", \OT1/ptm/m/it/8 arX
-iv\OT1/ptm/m/n/8 , March 2022,
- []
-
 <Emre_Picture.jpg, id=130, 803.0pt x 803.0pt>
 File: Emre_Picture.jpg Graphic file (type jpg)
 <use Emre_Picture.jpg>
-Package pdftex.def Info: Emre_Picture.jpg  used on input line 654.
+Package pdftex.def Info: Emre_Picture.jpg  used on input line 653.
 (pdftex.def)             Requested size: 72.26688pt x 72.26688pt.
 File: Emre_Picture.jpg Graphic file (type jpg)
 <use Emre_Picture.jpg>
-Package pdftex.def Info: Emre_Picture.jpg  used on input line 654.
+Package pdftex.def Info: Emre_Picture.jpg  used on input line 653.
 (pdftex.def)             Requested size: 72.26688pt x 72.26688pt.
 File: Emre_Picture.jpg Graphic file (type jpg)
 <use Emre_Picture.jpg>
-Package pdftex.def Info: Emre_Picture.jpg  used on input line 657.
+Package pdftex.def Info: Emre_Picture.jpg  used on input line 656.
 (pdftex.def)             Requested size: 72.26688pt x 72.26688pt.
 File: Emre_Picture.jpg Graphic file (type jpg)
 <use Emre_Picture.jpg>
-Package pdftex.def Info: Emre_Picture.jpg  used on input line 657.
+Package pdftex.def Info: Emre_Picture.jpg  used on input line 656.
 (pdftex.def)             Requested size: 72.26688pt x 72.26688pt.
 File: OJAP.png Graphic file (type png)
 <use OJAP.png>
-Package pdftex.def Info: OJAP.png  used on input line 660.
+Package pdftex.def Info: OJAP.png  used on input line 659.
 (pdftex.def)             Requested size: 148.12836pt x 20.0pt.
 
 Overfull \hbox (25.32835pt too wide) has occurred while \output is active
@@ -906,10 +890,10 @@ L3 programming layer <2023-08-29>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 5682 strings out of 475247
- 97088 string characters out of 5757792
- 1947801 words of memory out of 5000000
- 27101 multiletter control sequences out of 15000+600000
+ 5682 strings out of 475248
+ 97091 string characters out of 5757813
+ 1949801 words of memory out of 5000000
+ 27100 multiletter control sequences out of 15000+600000
  628171 words of font info for 162 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  57i,17n,65p,1830b,425s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -936,7 +920,7 @@ al/Programs/MiKTeX/fonts/type1/urw/helvetic/uhvro8a.pfb><C:/Users/emrek/AppData
 /Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/emrek/AppData
 /Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/emrek/AppData
 /Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on ojap.pdf (15 pages, 1794995 bytes).
+Output written on ojap.pdf (15 pages, 1795649 bytes).
 PDF statistics:
  227 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
