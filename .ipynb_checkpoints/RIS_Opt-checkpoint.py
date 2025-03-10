@@ -8,7 +8,6 @@ from tkinter import ttk, filedialog
 #import pyautogui
 
 # Plotting and Visualization
-# %matplotlib inline
 import matplotlib
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
@@ -188,10 +187,10 @@ def selection(coords, k):
 #                 GUI
 # ====================================
 
-class RIS_GUI:
+class RISGUI:
     def __init__(self, master):
         """
-        Initialize the RIS_GUI interface and create the GUI layout.
+        Initialize the RISGUI interface and create the GUI layout.
 
         This method sets up the main window for the RIS Propagation Optimization GUI.
         It initializes and arranges all widgets including labels, entry fields, buttons,
@@ -257,7 +256,7 @@ class RIS_GUI:
         self.frequency_labelframe.grid(row=0, column=1, padx=5)
 
         # TX position input
-        self.tx_pos_labelframe = tk.LabelFrame(self.entry_frame, text="TX position (m) (x, y, z)", padx=11, pady=11)
+        self.tx_pos_labelframe = tk.LabelFrame(self.entry_frame, text="TX position (x, y, z)", padx=11, pady=11)
         self.entry_tx_x = tk.Entry(self.tx_pos_labelframe, width=5)
         self.entry_tx_x.grid(row=0, column=0, padx=5)
         self.entry_tx_y = tk.Entry(self.tx_pos_labelframe, width=5)
@@ -352,7 +351,7 @@ class RIS_GUI:
         self.button_coverage.pack(pady=5)
 
         # RIS position input
-        self.RIS_position_labelframe = tk.LabelFrame(self.manual_trials_labelframe, text="Enter RIS center position (m)\n(x, y, z)", padx=6, pady=6)
+        self.RIS_position_labelframe = tk.LabelFrame(self.manual_trials_labelframe, text="Enter RIS center position\n(x, y, z)", padx=6, pady=6)
         self.entry_ris_x = tk.Entry(self.RIS_position_labelframe, width=5)
         self.entry_ris_y = tk.Entry(self.RIS_position_labelframe, width=5)
         self.entry_ris_z = tk.Entry(self.RIS_position_labelframe, width=5)
@@ -374,10 +373,12 @@ class RIS_GUI:
 
         self.ris_size_frame.pack(pady=5)
 
-        # Show phase profiles button
-        self.button_show_phase_profile = tk.Button(self.manual_trials_labelframe, text="Show phase profile figures",
-                                                  command=self.show_phase_profiles)
-        self.button_show_phase_profile.pack(pady=5)
+        # Variable to store the checkbox state (1 for checked, 0 for unchecked)
+        self.checkbox_phase_profile_var = tk.IntVar()
+        # Create the checkbox
+        self.checkbox_phase_profile = tk.Checkbutton(self.manual_trials_labelframe, text="Show phase profile figures",
+                                                     variable=self.checkbox_phase_profile_var)
+        self.checkbox_phase_profile.pack(pady=5)
 
         # Compute combined coverage map button
         self.button_combined_coverage = tk.Button(self.manual_trials_labelframe, text="Compute combined coverage map (TX + RIS)",
@@ -409,7 +410,7 @@ class RIS_GUI:
 
         # RIS width interval
         self.ris_width_interval_labelframe = tk.LabelFrame(self.optimization_labelframe,
-                                                            text="RIS width interval (m)\n (W_RIS_lower, W_RIS_upper, W_RIS_step)", padx=6, pady=6)
+                                                            text="RIS width interval \n (W_RIS_lower, W_RIS_upper, W_RIS_step)", padx=6, pady=6)
         self.ris_width_interval_labelframe.grid_columnconfigure((0, 1, 2), weight=1)
         self.w_ris_lower = tk.Entry(self.ris_width_interval_labelframe, width=5)
         self.w_ris_upper = tk.Entry(self.ris_width_interval_labelframe, width=5)
@@ -442,7 +443,7 @@ class RIS_GUI:
 
         # Performance improvement threshold
         self.perf_impr_thre_labelframe = tk.LabelFrame(self.optimization_labelframe,
-                                                           text="Performance improvement threshold (dB)", padx=6, pady=6)
+                                                           text="Performance improvement threshold", padx=6, pady=6)
         self.perf_impr_thre = tk.Entry(self.perf_impr_thre_labelframe, width=5)
         self.perf_impr_thre.pack()
         self.perf_impr_thre_labelframe.pack(pady=5)        
@@ -485,7 +486,6 @@ class RIS_GUI:
         self.outer_wall_thickness = 0.4 # outer_wall_thickness of indoor office scenario is 0.4 m
         self.zero_indices = []
         self.RIS_search_positions = []
-        self.cdf_no_ris = None
     
     # Functions and Methods
     def load_scenario(self):
@@ -617,7 +617,6 @@ class RIS_GUI:
         self.entry_tx_x.delete(0, tk.END)
         self.entry_tx_y.delete(0, tk.END)
         self.entry_tx_z.delete(0, tk.END)
-        self.cov_map_cell_size.delete(0, tk.END)
 
     def preview_scenario(self):
         """
@@ -997,8 +996,8 @@ class RIS_GUI:
     
         # Plot the TX-only coverage map
         self.cm_no_ris.show(show_tx=False, show_rx=False, show_ris=False, vmin=-130, vmax=-40)
-        plt.title("TX-only Coverage Map")
-        # plt.title("")
+        #plt.title("TX-only Coverage Map")
+        plt.title("")
         self.customize_axes(self.cm_no_ris.path_gain[0], plt.gca())
         plt.gcf().axes[0].get_images()[0].colorbar.set_label('Power level (dB)')
 
@@ -1008,8 +1007,7 @@ class RIS_GUI:
                     marker='P', c='red', label="Transmitter")
         plt.legend(loc='upper right', handletextpad=0.5, borderpad=0.3)
         # Compute and store the CDF
-        self.cdf_no_ris = calculate_cdf(self.cm_no_ris.path_gain[0])
-        self.cdfs.append(self.cdf_no_ris)
+        self.cdfs.append(calculate_cdf(self.cm_no_ris.path_gain[0]))
         self.cdf_labels.append("No RIS")
     
         # Get the minimum power threshold from the GUI
@@ -1084,18 +1082,7 @@ class RIS_GUI:
         
                     # Store the entries in a list for later retrieval
                     self.position_entries.append((entry_x, entry_y, entry_z))
-                self.target_positions_frame.pack(pady=5)
-
-    def get_num_positions(self):
-        """Retrieve and validate the number of target points."""
-        try:
-            num_positions = int(self.entry_num_target.get())
-            if num_positions <= 0:
-                raise ValueError("Number of target points must be positive.")
-            return num_positions
-        except ValueError:
-            self.info_label.config(text=self.info_label.cget("text") + "\nInvalid number of target points entered!")
-            return None     
+                self.target_positions_frame.pack(pady=5) 
 
     def clustering_algo(self):
         """
@@ -1116,7 +1103,13 @@ class RIS_GUI:
         :raises ValueError: If an invalid number of target points is entered.
         :returns: None
         """
-        if (num_positions := self.get_num_positions()) is None:
+        try:
+            # Number of positions to select
+            num_positions = int(self.entry_num_target.get())
+            if num_positions <= 0:
+                raise ValueError("Number of target points must be positive.")
+        except ValueError:
+            self.info_label.config(text=self.info_label.cget("text") + "\nInvalid number of target points entered!")
             return
     
         if not self.low_power_cell_coords:
@@ -1176,7 +1169,13 @@ class RIS_GUI:
         :raises ValueError: If invalid number of target points is entered
         :returns: None
         """
-        if (num_positions := self.get_num_positions()) is None:
+        try:
+            # Validate number of target points
+            num_positions = int(self.entry_num_target.get())
+            if num_positions <= 0:
+                raise ValueError("Number of target points must be positive.")
+        except ValueError:
+            self.info_label.config(text=self.info_label.cget("text") + "\nInvalid number of target points entered!")
             return
     
         # Set target point coordinates based on manual selection
@@ -1304,36 +1303,7 @@ class RIS_GUI:
         self.tx = Transmitter(name="tx", position=self.tx_position)
         self.scene.add(self.tx)
 
-    def set_target_points(self):
-        """Determine target points manually or using K-means."""
-        num_positions = int(self.entry_num_target.get())
-        if self.target_point_manual_optimized.get() == "manual": # Use the manually entered positions for target points
-            # Get the values of x, y, z from the entries for each steering position
-            self.RX_coord_set = [[float(self.position_entries[i][j].get()) for j in range(3)] for i in range(num_positions)]
-        else: # Use K-means algorithm to decide on target points
-            self.RX_coord_set = selection(self.low_power_cell_coords, k=num_positions)
-            self.info_label.config(text=self.info_label.cget("text") + f"\nThe selected target point(s): {self.RX_coord_set}")
-
-    def create_ris(self):
-        """Initialize the RIS with specified dimensions and position."""
-        num_positions = int(self.entry_num_target.get())
-        self.scene.remove("ris")
-        ris_height, ris_width = float(self.entry_ris_height.get()), float(self.entry_ris_width.get())
-        num_rows, num_cols = int(ris_height / (0.5 * self.scene.wavelength)), int(ris_width / (0.5 * self.scene.wavelength))
-        self.ris_position = [float(self.entry_ris_x.get()), float(self.entry_ris_y.get()), float(self.entry_ris_z.get())]
-        self.ris = RIS(name="ris", position=self.ris_position, num_rows=num_rows, num_cols=num_cols, num_modes=num_positions)
-        self.scene.add(self.ris)
-
-    def configure_ris(self):
-        """Configure the RIS based on the selected phase profile approach."""
-        num_positions = int(self.entry_num_target.get())
-        source, target = [self.tx_position] * num_positions, self.RX_coord_set[:num_positions]
-        if self.pp_var.get() == "Gradient-based":
-            self.ris.phase_gradient_reflector(source, target)
-        elif self.pp_var.get() == "Distance-based":
-            self.ris.focusing_lens(source, target)        
-
-    def hsv_plot_phase_profile(self, overall_phase_profile):
+    def plot_phase_profile(self, overall_phase_profile):
         """
         Visualize RIS phase profile using HSV color mapping.
 
@@ -1363,50 +1333,6 @@ class RIS_GUI:
                     fontsize=8,  # Font size
                 )'''
         plt.show()  # Display the plot with labels
-    
-    def show_phase_profiles(self):
-        """
-        Show RIS phase profiles for each target point separately as well as overall reflection coefficient phase profile.
-        
-        :raises ValueError: For invalid target point configurations
-        :returns: None
-        """
-        if (num_positions := self.get_num_positions()) is None:
-            return
-
-        # self.RX_coord_set entry
-        self.set_target_points()
-
-        # Creating the RIS
-        self.create_ris()
-        
-        # Configuring the RIS for the specified target points and selected phase profile approach
-        self.configure_ris()
-
-        # Plot the phase profile figures
-        for i in range(num_positions):
-            self.ris.phase_profile.show(mode=i)
-            plt.title(f"Phase Profile for RX-{i+1}")
-            self.hsv_plot_phase_profile(self.ris.phase_profile.values[i])
-            plt.title(f"Phase Profile for RX-{i+1}")
-
-        # Convert to complex type
-        phase_profiles_complex = tf.cast(self.ris.phase_profile.values, dtype=tf.complex64)
-
-        # Convert phase profiles to complex exponentials
-        complex_exponentials = tf.exp(1j * phase_profiles_complex)
-
-        # Sum over all target points (axis=0)
-        reflection_coefficient = tf.reduce_sum(complex_exponentials, axis=0)
-
-        # Multiply by sqrt(1/num_positions)
-        scaling_factor = tf.sqrt(tf.constant(1.0 / num_positions, dtype=tf.complex64))
-        reflection_coefficient = reflection_coefficient * scaling_factor
-
-        # Extract the overall phase profile
-        overall_phase_profile = tf.math.angle(reflection_coefficient)
-        self.hsv_plot_phase_profile(overall_phase_profile)
-        plt.title(f"Overall RIS Phase Profile")        
 
     def compute_combined_coverage(self):
         """
@@ -1422,18 +1348,74 @@ class RIS_GUI:
         :raises ValueError: For invalid target point configurations
         :returns: None
         """
-        if (num_positions := self.get_num_positions()) is None:
+        # num_positions entry
+        try:
+            # Validate number of target points
+            num_positions = int(self.entry_num_target.get())
+            if num_positions <= 0:
+                raise ValueError("Number of target points must be positive.")
+        except ValueError:
+            self.info_label.config(text=self.info_label.cget("text") + "\nInvalid number of target points entered!")
             return
 
         # self.RX_coord_set entry
-        self.set_target_points()
+        if self.RX_coord_set.size == 0:  # Check if the list is empty
+            if self.target_point_manual_optimized.get() == "manual": # Use the entered positions for target points
+                for i in range(num_positions):
+                    # Get the values of x, y, z from the entries for each steering position
+                    x = float(self.position_entries[i][0].get())
+                    y = float(self.position_entries[i][1].get())
+                    z = float(self.position_entries[i][2].get())
+                    self.RX_coord_set.append([x, y, z])
+            else: # Use K-means algorithm to decide on target points
+                self.RX_coord_set = selection(self.low_power_cell_coords, k=num_positions)
+                self.info_label.config(text= self.info_label.cget("text") + f"\nThe selected target point(s): {self.RX_coord_set}")
 
         # Creating the RIS
-        self.create_ris()
+        self.scene.remove("ris")
+        ris_height = float(self.entry_ris_height.get())
+        ris_width = float(self.entry_ris_width.get())
+        num_rows = int(ris_height / (0.5 * self.scene.wavelength))
+        num_cols = int(ris_width / (0.5 * self.scene.wavelength))
+        self.ris_position = [float(self.entry_ris_x.get()), float(self.entry_ris_y.get()), float(self.entry_ris_z.get())]
+        self.ris = RIS(name="ris", position=self.ris_position, num_rows=num_rows, num_cols=num_cols, num_modes = num_positions)
+        self.scene.add(self.ris)
         
-        # Configuring the RIS for the specified target points and selected phase profile approach
-        self.configure_ris()
+        # Configuring the RIS for the specified target points from self.RX_coord_set
+        source = [self.tx_position] * num_positions
+        target = self.RX_coord_set[:num_positions]         
+        if self.pp_var.get() == "Gradient-based":
+            self.ris.phase_gradient_reflector(source, target)
+        elif self.pp_var.get() == "Distance-based":
+            self.ris.focusing_lens(source, target)
+
+        # Plot the phase profile figures if it is checked in the GUI
+        if self.checkbox_phase_profile_var.get() == 1:
+            for i in range(num_positions):
+                self.ris.phase_profile.show(mode=i)
+                plt.title(f"Phase Profile for RX-{i+1}")
+                self.plot_phase_profile(self.ris.phase_profile.values[i])
+                plt.title(f"Phase Profile for RX-{i+1}")
+
+            # Convert to complex type
+            phase_profiles_complex = tf.cast(self.ris.phase_profile.values, dtype=tf.complex64)
+
+            # Convert phase profiles to complex exponentials
+            complex_exponentials = tf.exp(1j * phase_profiles_complex)
+
+            # Sum over all target points (axis=0)
+            reflection_coefficient = tf.reduce_sum(complex_exponentials, axis=0)
+
+            # Multiply by sqrt(1/num_positions)
+            scaling_factor = tf.sqrt(tf.constant(1.0 / num_positions, dtype=tf.complex64))
+            reflection_coefficient = reflection_coefficient * scaling_factor
+
+            # Extract the overall phase profile
+            overall_phase_profile = tf.math.angle(reflection_coefficient)
+            self.plot_phase_profile(overall_phase_profile)
+            plt.title(f"Overall RIS Phase Profile")
             
+
         # Compute coverage map with RIS
         cm_ris = self.scene.coverage_map(cm_cell_size=[float(self.cov_map_cell_size.get()),float(self.cov_map_cell_size.get())],
                                        num_samples=int(2e7),
@@ -1495,8 +1477,8 @@ class RIS_GUI:
         
         # Calculate CDF of "with RIS" case
         self.cdfs.append(calculate_cdf(cm_ris.path_gain[0]))
-        self.cdf_labels.append(f"{self.pp_var.get()} (RIS: {float(self.entry_ris_height.get())} x {float(self.entry_ris_width.get())} m$^2$)")
-        
+        self.cdf_labels.append(f"{self.pp_var.get()} (RIS: {ris_height} x {ris_width} m$^2$)")
+    
         # Plot the combined CDFs
         plot_multiple_cdfs(self.cdfs, self.cdf_labels)
       
@@ -2008,5 +1990,5 @@ class RIS_GUI:
 
 if __name__ == "__main__":
     root = tk.Tk()
-    gui = RIS_GUI(root)
+    gui = RISGUI(root)
     root.mainloop()

@@ -1,8 +1,5 @@
-API Documentation
-#############
-
 RIS Optimization Module
-=======================
+#############
 
 .. automodule:: RIS_Opt
    :members:

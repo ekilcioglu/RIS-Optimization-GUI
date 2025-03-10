@@ -18,13 +18,13 @@
 \currentdate{XX Month, XXXX}
 \doiinfo{OJAP.2020.1234567}
 
-\title{Ray-Tracing Based RIS Design and Optimization for Indoor Coverage Enhancement}
+\title{Ray-Tracing Based RIS Deployment Optimization for Indoor Coverage Enhancement}
 
 \author{EMRE KILCIOGLU AND CLAUDE OESTGES}
 \corresp{ICTEAM/ELEN, Universit\'e catholique de Louvain, Louvain-la-Neuve, Belgium\\\\
 	CORRESPONDING AUTHOR: E. KILCIOGLU (e-mail: emre.kilcioglu@uclouvain.be)}
 \authornote{This study was conducted as part of the project Win2Wal2023/1 - N°2310026 - RAFINE, funded by Région Wallonne, Belgium}
-\markboth{Ray-tracing Based RIS Size, Placement and Target Point Optimization for Indoor Coverage Enhancement}{Kilcioglu \textit{\textit{et al.}}}
+\markboth{Ray-Tracing Based RIS Deployment Optimization for Indoor Coverage Enhancement}{Kilcioglu and Oestges}
 
 \begin{abstract}
 Reconfigurable Intelligent Surfaces (RISs) have emerged as a promising technology for enhancing wireless communication performance in complex indoor environments. However, the effectiveness of RIS deployment depends on several key factors, including position, size, and beam-steering target points. Existing research often optimizes RIS phase profiles assuming fixed positions and sizes, limiting the degrees of freedom for performance improvement. To address this issue, this paper proposes a novel ray-tracing based joint optimization framework that simultaneously determines the RIS position, size, and target points to enhance indoor coverage, particularly in blind spots. The method first identifies low-power cells in the environment by setting a minimum power threshold for satisfactory signal quality. It then uses the K-means algorithm to cluster these cells into groups and assigns the centroids as the RIS beam-steering target points. Next, feasible RIS positions are selected to maintain line-of-sight (LoS) connections with both the transmitter and target points. The RIS size is iteratively adjusted to balance performance gains and hardware costs, selecting a near-optimal size based on a predefined performance improvement threshold. The proposed approach leverages ray-tracing simulations to provide physically consistent optimization based on realistic environments. Extensive simulations in an indoor office environment demonstrate that the proposed framework significantly improves coverage and signal quality in blind spots by systematically optimizing RIS deployment parameters. These findings highlight the potential of ray-tracing based optimization for practical RIS-aided wireless communication.
@@ -51,7 +51,7 @@ A substantial amount of research has focused on various aspects of RIS optimizat
 \begin{itemize}
 	\item Many studies focus on optimizing transmit beamforming and the RIS phase profile, but fail to optimize the number of tunable elements in the RIS.
 	\item Research that does not consider position optimization assumes the RIS is deployed at a fixed location, which constrains optimization to the phase domain and limits the degrees of freedom available for performance enhancement.
-	\item Many papers use simplified channel models with certain assumptions, overlooking the realistic characterization of an environment and failing to account for both LoS and non-LoS (NLoS) paths. Most studies assume only LoS path consideration, disregarding strong NLoS paths.
+	\item Many papers use simplified channel models with certain assumptions, overlooking the realistic characterization of an environment and failing to account for both LoS and non-LoS (NLoS) paths. Most studies consider only LoS path contribution to the coverage, disregarding strong NLoS paths.
 \end{itemize}
 
 \begin{table}

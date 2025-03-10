@@ -9,7 +9,7 @@ import os
 import sys
 sys.path.insert(0, os.path.abspath('../..'))
 
-project = 'Ray-tracing Based RIS Size, Position and Target Points Optimization for Coverage Enhancement'
+project = 'Ray-Tracing Based RIS Deployment Optimization for Coverage Enhancement'
 copyright = '2025, Emre Kilcioglu'
 author = 'Emre Kilcioglu'
 

@@ -1,4 +1,4 @@
-Ray-tracing Based RIS Size, Position and Target Points Optimization for Coverage Enhancement Documentation
+Ray-Tracing Based RIS Deployment Optimization for Coverage Enhancement Documentation
 ==========================================================================================================
 
 Welcome to the optimization tool's documentation! This guide covers both practical tutorials and technical API details.
