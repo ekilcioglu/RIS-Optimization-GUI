@@ -305,12 +305,20 @@ class RIS_GUI:
         self.phase_profile_selection_frame = tk.Frame(master)
         self.label_pp = tk.Label(self.phase_profile_selection_frame, text="Choose phase profile approach:")
         self.pp_var = tk.StringVar(value="Gradient-based")
-        self.pp_options = ["Gradient-based", "Distance-based"]
-        self.pp_menu = tk.OptionMenu(self.phase_profile_selection_frame, self.pp_var, *self.pp_options)
+        self.pp_options = ["Gradient-based", "Distance-based", "Manual entry"]
+        self.pp_menu = tk.OptionMenu(self.phase_profile_selection_frame, self.pp_var, *self.pp_options, command=self.toggle_manual_pp_entry)
         
         self.label_pp.grid(row=0, column=0, padx=5)
         self.pp_menu.grid(row=0, column=1, padx=5)
         self.phase_profile_selection_frame.pack(pady=5)
+
+        # Manual phase profile file selection (Initially hidden)
+        self.manual_pp_file_selection_labelframe = tk.LabelFrame(master, text="Select manual phase profile file (.json)", padx=6, pady=6)
+        self.manual_pp_file_selection_entry = tk.Entry(self.manual_pp_file_selection_labelframe, width=50)
+        self.manual_pp_file_selection_entry.grid(row=0, column=0, padx=5)
+        self.manual_pp_file_selection_button = tk.Button(self.manual_pp_file_selection_labelframe, text="Browse", command=self.manual_pp_file_selection)
+        self.manual_pp_file_selection_button.grid(row=0, column=1, padx=5)
+        self.manual_pp_file_selection_labelframe.pack_forget()  # Initially hidden
 
         # Manual and optimization frame
         self.manual_and_optimization_frame = tk.Frame(master)
@@ -488,6 +496,49 @@ class RIS_GUI:
         self.cdf_no_ris = None
     
     # Functions and Methods
+    def manual_pp_file_selection(self):
+        """Open file dialog to select a manual phase profile JSON file."""
+        filename = filedialog.askopenfilename(filetypes=[("JSON Files", "*.json")])
+        if filename:
+            self.manual_pp_file_selection_entry.delete(0, tk.END)
+            self.manual_pp_file_selection_entry.insert(0, filename)
+
+    def toggle_manual_pp_entry(self, selected_option):
+        """Show the manual phase profile file selection when 'Manual entry' is chosen."""
+        if selected_option == "Manual entry":
+            self.manual_pp_file_selection_labelframe.pack(pady=5)
+        else:
+            self.manual_pp_file_selection_labelframe.pack_forget()
+
+    def manual_pp_config(self):
+        """Load a manually provided phase profile from a JSON file and apply it to the RIS."""
+        try:
+            # Get the file path from the entry field
+            file_path = self.manual_pp_file_selection_entry.get()
+            if not file_path:
+                self.info_label.config(text=self.info_label.cget("text") + "\nNo manual phase profile file selected!")
+                return
+    
+            # Load JSON data
+            with open(file_path, 'r') as file:
+                phase_data = json.load(file)
+    
+            # Convert JSON data (list of lists) into a TensorFlow tensor
+            phase_tensor = tf.convert_to_tensor(phase_data, dtype=tf.float32)
+    
+            # Check dimensions and update RIS phase profile
+            if len(phase_tensor.shape) != 3:
+                self.info_label.config(text=self.info_label.cget("text") + "\nInvalid phase profile format! Expected a 3D list.")
+                return
+    
+            # Assign the loaded phase profile to the RIS object
+            self.ris.phase_profile.values = phase_tensor
+    
+            self.info_label.config(text=self.info_label.cget("text") + "\nManual phase profile successfully loaded and applied! ✅")
+    
+        except Exception as e:
+            self.info_label.config(text=self.info_label.cget("text") + f"\nError loading manual phase profile: {str(e)}")
+        
     def load_scenario(self):
         """
         Load the simulation scene based on the selected scenario and initialize scene parameters.
@@ -1332,7 +1383,9 @@ class RIS_GUI:
             self.ris.phase_gradient_reflector(source, target)
         elif self.pp_var.get() == "Distance-based":
             self.ris.focusing_lens(source, target)        
-
+        elif self.pp_var.get() == "Manual entry":
+            self.manual_pp_config()
+            
     def hsv_plot_phase_profile(self, overall_phase_profile):
         """
         Visualize RIS phase profile using HSV color mapping.
@@ -1705,7 +1758,9 @@ class RIS_GUI:
                         self.ris.phase_gradient_reflector(source, target)
                     elif self.pp_var.get() == "Distance-based":
                         self.ris.focusing_lens(source, target)
-
+                    elif self.pp_var.get() == "Manual entry":
+                        self.manual_pp_config()
+                        
                     if self.metric_comp_tech.get() == "Using individual path computation":
                         # Compute the path-loss at each low-power cell with the contribution of RIS
                         paths = self.scene.compute_paths(max_depth=6, num_samples=int(2e7), los=True, reflection=True,
