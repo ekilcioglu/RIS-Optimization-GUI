@@ -68,12 +68,15 @@
 <li class="toctree-l3"><a class="reference internal" href="#RIS_Opt.RIS_GUI.customize_axes"><code class="docutils literal notranslate"><span class="pre">RIS_GUI.customize_axes()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#RIS_Opt.RIS_GUI.data_file_selection"><code class="docutils literal notranslate"><span class="pre">RIS_GUI.data_file_selection()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#RIS_Opt.RIS_GUI.draw_binary_poor_coverage_map"><code class="docutils literal notranslate"><span class="pre">RIS_GUI.draw_binary_poor_coverage_map()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#RIS_Opt.RIS_GUI.export_phase_profile"><code class="docutils literal notranslate"><span class="pre">RIS_GUI.export_phase_profile()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#RIS_Opt.RIS_GUI.find_RIS_positions_on_wall"><code class="docutils literal notranslate"><span class="pre">RIS_GUI.find_RIS_positions_on_wall()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#RIS_Opt.RIS_GUI.find_best_configs_per_width"><code class="docutils literal notranslate"><span class="pre">RIS_GUI.find_best_configs_per_width()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#RIS_Opt.RIS_GUI.find_optimal_configuration"><code class="docutils literal notranslate"><span class="pre">RIS_GUI.find_optimal_configuration()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#RIS_Opt.RIS_GUI.get_num_positions"><code class="docutils literal notranslate"><span class="pre">RIS_GUI.get_num_positions()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#RIS_Opt.RIS_GUI.hsv_plot_phase_profile"><code class="docutils literal notranslate"><span class="pre">RIS_GUI.hsv_plot_phase_profile()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#RIS_Opt.RIS_GUI.load_scenario"><code class="docutils literal notranslate"><span class="pre">RIS_GUI.load_scenario()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#RIS_Opt.RIS_GUI.manual_pp_config"><code class="docutils literal notranslate"><span class="pre">RIS_GUI.manual_pp_config()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#RIS_Opt.RIS_GUI.manual_pp_file_selection"><code class="docutils literal notranslate"><span class="pre">RIS_GUI.manual_pp_file_selection()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#RIS_Opt.RIS_GUI.parse_config"><code class="docutils literal notranslate"><span class="pre">RIS_GUI.parse_config()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#RIS_Opt.RIS_GUI.plot_RIS_positions"><code class="docutils literal notranslate"><span class="pre">RIS_GUI.plot_RIS_positions()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#RIS_Opt.RIS_GUI.plot_selected_targets"><code class="docutils literal notranslate"><span class="pre">RIS_GUI.plot_selected_targets()</span></code></a></li>
@@ -84,6 +87,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#RIS_Opt.RIS_GUI.set_preset_values"><code class="docutils literal notranslate"><span class="pre">RIS_GUI.set_preset_values()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#RIS_Opt.RIS_GUI.set_target_points"><code class="docutils literal notranslate"><span class="pre">RIS_GUI.set_target_points()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#RIS_Opt.RIS_GUI.show_phase_profiles"><code class="docutils literal notranslate"><span class="pre">RIS_GUI.show_phase_profiles()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#RIS_Opt.RIS_GUI.toggle_manual_pp_entry"><code class="docutils literal notranslate"><span class="pre">RIS_GUI.toggle_manual_pp_entry()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#RIS_Opt.RIS_GUI.toggle_target_point_input"><code class="docutils literal notranslate"><span class="pre">RIS_GUI.toggle_target_point_input()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#RIS_Opt.RIS_GUI.visualize_performance_vs_width"><code class="docutils literal notranslate"><span class="pre">RIS_GUI.visualize_performance_vs_width()</span></code></a></li>
 </ul>
@@ -407,6 +411,29 @@ the selected power threshold, the average power of low-power cells, and the cove
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.export_phase_profile">
+<span class="sig-name descname"><span class="pre">export_phase_profile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ris_pp_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#RIS_Opt.RIS_GUI.export_phase_profile" title="Link to this definition"></a></dt>
+<dd><p>Export a given RIS phase profile to a JSON file with a specified filename.</p>
+<p>This function takes a TensorFlow tensor representing the RIS phase profile, 
+converts it into a standard Python list format, and saves the data as a JSON file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ris_pp_values</strong> (<em>tf.Tensor</em>) – The RIS phase profile values to be exported.</p></li>
+<li><p><strong>filename</strong> (<em>str</em>) – The name (or path) of the JSON file where the phase profile will be saved.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Exception</strong> – If an error occurs while saving the file, the error message is displayed in the GUI’s info label.</p>
+</dd>
+</dl>
+<p><strong>Example Usage</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">export_phase_profile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ris</span><span class="o">.</span><span class="n">phase_profile</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="s2">&quot;phase_profiles.json&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.find_RIS_positions_on_wall">
 <span class="sig-name descname"><span class="pre">find_RIS_positions_on_wall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wall</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_size</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#RIS_Opt.RIS_GUI.find_RIS_positions_on_wall" title="Link to this definition"></a></dt>
 <dd><p>Identify valid RIS positions along a specified wall segment.</p>
@@ -504,6 +531,18 @@ After loading the scene, it configures the TX and RX arrays with a planar array 
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.manual_pp_config">
+<span class="sig-name descname"><span class="pre">manual_pp_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#RIS_Opt.RIS_GUI.manual_pp_config" title="Link to this definition"></a></dt>
+<dd><p>Load a manually provided phase profile from a JSON file and apply it to the RIS.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.manual_pp_file_selection">
+<span class="sig-name descname"><span class="pre">manual_pp_file_selection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#RIS_Opt.RIS_GUI.manual_pp_file_selection" title="Link to this definition"></a></dt>
+<dd><p>Open file dialog to select a manual phase profile JSON file.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -664,6 +703,12 @@ coordinates based on the currently selected scenario.</p>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.toggle_manual_pp_entry">
+<span class="sig-name descname"><span class="pre">toggle_manual_pp_entry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">selected_option</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#RIS_Opt.RIS_GUI.toggle_manual_pp_entry" title="Link to this definition"></a></dt>
+<dd><p>Show the manual phase profile file selection when ‘Manual entry’ is chosen.</p>
 </dd></dl>
 
 <dl class="py method">

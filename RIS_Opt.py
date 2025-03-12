@@ -1377,8 +1377,9 @@ class RIS_GUI:
 
     def configure_ris(self):
         """Configure the RIS based on the selected phase profile approach."""
-        num_positions = int(self.entry_num_target.get())
-        source, target = [self.tx_position] * num_positions, self.RX_coord_set[:num_positions]
+        if not self.pp_var.get() == "Manual entry":
+            num_positions = int(self.entry_num_target.get())
+            source, target = [self.tx_position] * num_positions, self.RX_coord_set[:num_positions]
         if self.pp_var.get() == "Gradient-based":
             self.ris.phase_gradient_reflector(source, target)
         elif self.pp_var.get() == "Distance-based":
@@ -1417,6 +1418,36 @@ class RIS_GUI:
                 )'''
         plt.show()  # Display the plot with labels
     
+    def export_phase_profile(self, ris_pp_values, filename):
+        """
+        Export a given RIS phase profile to a JSON file with a specified filename.
+    
+        This function takes a TensorFlow tensor representing the RIS phase profile, 
+        converts it into a standard Python list format, and saves the data as a JSON file.
+    
+        :param ris_pp_values: The RIS phase profile values to be exported.
+        :type ris_pp_values: tf.Tensor
+        :param filename: The name (or path) of the JSON file where the phase profile will be saved.
+        :type filename: str
+    
+        :raises Exception: If an error occurs while saving the file, the error message is displayed in the GUI's info label.
+    
+        **Example Usage**::
+    
+            self.export_phase_profile(self.ris.phase_profile.values, "phase_profiles.json")
+        """
+        try:
+            # Convert TensorFlow tensor to a Python list
+            phase_data = ris_pp_values.numpy().tolist()
+            # Save to JSON file
+            with open(filename, "w") as file: 
+                json.dump(phase_data, file, indent=4)
+    
+            self.info_label.config(text=self.info_label.cget("text") + "\nPhase profile exported successfully!")
+    
+        except Exception as e:
+            self.info_label.config(text=self.info_label.cget("text") + f"\nError exporting phase profile: {str(e)}")    
+    
     def show_phase_profiles(self):
         """
         Show RIS phase profiles for each target point separately as well as overall reflection coefficient phase profile.
@@ -1428,7 +1459,9 @@ class RIS_GUI:
             return
 
         # self.RX_coord_set entry
-        self.set_target_points()
+        if not self.pp_var.get() == "Manual entry":
+            print("a")
+            self.set_target_points()
 
         # Creating the RIS
         self.create_ris()
@@ -1459,8 +1492,10 @@ class RIS_GUI:
         # Extract the overall phase profile
         overall_phase_profile = tf.math.angle(reflection_coefficient)
         self.hsv_plot_phase_profile(overall_phase_profile)
-        plt.title(f"Overall RIS Phase Profile")        
-
+        plt.title(f"Overall RIS Phase Profile")
+        self.export_phase_profile(self.ris.phase_profile.values, "phase_profiles.json")
+        #self.export_phase_profile(reflection_coefficient, "overall_reflection_coefficient.json")
+        
     def compute_combined_coverage(self):
         """
         Compute and visualize combined TX+RIS coverage map with performance metrics.
@@ -1479,7 +1514,9 @@ class RIS_GUI:
             return
 
         # self.RX_coord_set entry
-        self.set_target_points()
+        if not self.pp_var.get() == "Manual entry":
+            print("a")
+            self.set_target_points()
 
         # Creating the RIS
         self.create_ris()
@@ -1511,9 +1548,10 @@ class RIS_GUI:
                     marker='P', c='red', label="Transmitter")
 
         # Add target points to the plot
-        plt.gca().scatter([(pos[0]+self.outer_wall_thickness)/float(self.cov_map_cell_size.get()) - 0.5 for pos in self.RX_coord_set],
-                    [(pos[1]+self.outer_wall_thickness)/float(self.cov_map_cell_size.get()) - 0.5 for pos in self.RX_coord_set],
-                    color='red', marker='x', s=60, label="Target points")
+        if not self.pp_var.get() == "Manual entry":
+            plt.gca().scatter([(pos[0]+self.outer_wall_thickness)/float(self.cov_map_cell_size.get()) - 0.5 for pos in self.RX_coord_set],
+                        [(pos[1]+self.outer_wall_thickness)/float(self.cov_map_cell_size.get()) - 0.5 for pos in self.RX_coord_set],
+                        color='red', marker='x', s=60, label="Target points")
         
         # Visualize the RIS
         plt.gca().scatter((self.ris_position[0]+self.outer_wall_thickness)/float(self.cov_map_cell_size.get()) - 0.5,
@@ -1536,9 +1574,10 @@ class RIS_GUI:
                     marker='P', c='red', label="Transmitter")
 
         # Add target points to the plot
-        plt.gca().scatter([(pos[0]+self.outer_wall_thickness)/float(self.cov_map_cell_size.get()) - 0.5 for pos in self.RX_coord_set],
-                    [(pos[1]+self.outer_wall_thickness)/float(self.cov_map_cell_size.get()) - 0.5 for pos in self.RX_coord_set],
-                    color='red', marker='x', s=60, label="Target points")
+        if not self.pp_var.get() == "Manual entry":
+            plt.gca().scatter([(pos[0]+self.outer_wall_thickness)/float(self.cov_map_cell_size.get()) - 0.5 for pos in self.RX_coord_set],
+                        [(pos[1]+self.outer_wall_thickness)/float(self.cov_map_cell_size.get()) - 0.5 for pos in self.RX_coord_set],
+                        color='red', marker='x', s=60, label="Target points")
         
         # Visualize the RIS
         plt.gca().scatter((self.ris_position[0]+self.outer_wall_thickness)/float(self.cov_map_cell_size.get()) - 0.5,
