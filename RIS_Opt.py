@@ -46,30 +46,26 @@ gpu_num = 0  # Specify the GPU to use; leave as "" to use the CPU
 
 def to_db(x):
     """
-    Convert a power value from a linear scale to decibels (dB).
+    Converts a power value from a linear scale to decibels (dB).
 
-    This function computes 10 * log10(x) using TensorFlow operations.
+    :Input:
+        - **x** (*float* or *tf.Tensor*): A numeric value or a TensorFlow tensor representing power in linear scale.
 
-    :param x: A numeric value or a TensorFlow tensor representing power in linear scale.
-    :type x: float or tf.Tensor
-    :returns: The power level in decibels.
-    :rtype: tf.Tensor
+    :Output:
+        - **dB_power** (*tf.Tensor*): The power level in decibels.
     """
     return 10 * tf.math.log(x) / tf.math.log(10.)
 
 def calculate_cdf(tensor):
     """
-    Calculate the cumulative distribution function (CDF) of power levels in a tensor.
+    Calculates the cumulative distribution function (CDF) of power levels in a tensor.
 
-    The function flattens the input tensor, filters out non-positive values,
-    converts the remaining values to dB, sorts them, and then computes the CDF.
+    :Input:
+        - **tensor** (*tf.Tensor*): A 2D TensorFlow tensor representing a coverage map with power values.
 
-    :param tensor: A 2D TensorFlow tensor representing a coverage map with power values.
-    :type tensor: tf.Tensor
-    :returns: A tuple containing:
+    :Output:
         - **sorted_values_db** (*np.ndarray*): Sorted power values converted to dB.
         - **cdf** (*np.ndarray*): The cumulative distribution function values.
-    :rtype: tuple(np.ndarray, np.ndarray)
     """
     # Flatten the tensor and filter out zero or negative values
     tensor_flat = tf.reshape(tensor, [-1])
@@ -90,17 +86,14 @@ def calculate_cdf(tensor):
 
 def plot_multiple_cdfs(cdfs, labels):
     """
-    Plot multiple cumulative distribution functions (CDFs) on the same figure.
+    Plots multiple cumulative distribution functions (CDFs) on the same figure.
 
-    Each CDF is plotted with a distinct marker style. If a label contains the word 
-    "Distance", a dashed line style is applied.
+    :Input:
+        - **cdfs** (*list(tuple(np.ndarray, np.ndarray))*): A list of tuples, where each tuple contains (**sorted_values_db**, **cdf**) for a CDF curve.
+        - **labels** (*list(str)*): A list of strings representing the labels for each CDF.
 
-    :param cdfs: A list of tuples, where each tuple contains (sorted_values_db, cdf) for a CDF curve.
-    :type cdfs: list(tuple(np.ndarray, np.ndarray))
-    :param labels: A list of strings representing the labels for each CDF.
-    :type labels: list(str)
-    :raises ValueError: If the number of CDFs does not match the number of labels.
-    :returns: None
+    :Output:
+        - **figure** (*matplotlib.figure.Figure*): A figure with multiple CDFs plotted, each with distinct marker styles and dashed lines for the CDFs of the distance-based configured RIS-aided scenarios.
     """
     if len(cdfs) != len(labels):
         raise ValueError("The number of CDFs must match the number of labels.")
@@ -126,17 +119,14 @@ def plot_multiple_cdfs(cdfs, labels):
 
 def calculate_coverage_ratio(tensor, threshold_db):
     """
-    Calculate the coverage ratio from a coverage map tensor based on a power threshold.
+    Calculates the coverage ratio of the scenario from a coverage map tensor based on a minimum power threshold.
 
-    The function converts the given threshold from dB to linear scale, then computes the
-    percentage of non-zero cells in the tensor with values above this threshold.
+    :Input:
+        - **tensor** (*tf.Tensor*): A 2D TensorFlow tensor representing the coverage map with power values.
+        - **threshold_db** (*float*): The minimum power threshold in dB.
 
-    :param tensor: A 2D TensorFlow tensor representing the coverage map with power values.
-    :type tensor: tf.Tensor
-    :param threshold_db: The power threshold in decibels.
-    :type threshold_db: float
-    :returns: The coverage ratio as a percentage.
-    :rtype: float
+    :Output:
+        - **coverage_ratio** (*float*): The coverage ratio as a percentage.
     """
     # Convert threshold from dB to decimal
     threshold_decimal = 10 ** (threshold_db / 10)
@@ -157,17 +147,17 @@ def calculate_coverage_ratio(tensor, threshold_db):
 
 def selection(coords, k):
     """
-    Perform K-means clustering on a set of coordinates and return the centroids.
+    Performs K-means clustering on a set of coordinates and returns the centroids to be appointed as the target points of the RIS.
 
     This function clusters the provided 3D coordinates based on their x and y values using
     K-means, and assigns the z-value of the first coordinate to all centroids.
 
-    :param coords: A list or NumPy array of coordinates, each specified as [x, y, z].
-    :type coords: list or np.ndarray
-    :param k: The number of clusters (centroids) to extract.
-    :type k: int
-    :returns: An array of centroids as 3D points with the z-value inherited from the first input coordinate.
-    :rtype: np.ndarray
+    :Input:
+        - **coords** (*list* or *np.ndarray*): A list or NumPy array of coordinates, each specified as [x, y, z].
+        - **k** (*int*): The number of clusters (centroids) to extract.
+
+    :Output:
+        - **centroids** (*np.ndarray*): An array of centroids as 3D points with the z-value inherited from the first input coordinate.
     """
     # Convert coords to a NumPy array if it's not already
     coords = np.array(coords)
@@ -497,26 +487,26 @@ class RIS_GUI:
     
     # Functions and Methods
     def manual_pp_file_selection(self):
-        """Open file dialog to select a manual phase profile JSON file."""
+        """Opens file dialog to select a manual phase profile JSON file."""
         filename = filedialog.askopenfilename(filetypes=[("JSON Files", "*.json")])
         if filename:
             self.manual_pp_file_selection_entry.delete(0, tk.END)
             self.manual_pp_file_selection_entry.insert(0, filename)
 
     def toggle_manual_pp_entry(self, selected_option):
-        """Show the manual phase profile file selection when 'Manual entry' is chosen."""
+        """Shows the manual phase profile file selection when 'Manual entry' is chosen."""
         if selected_option == "Manual entry":
             self.manual_pp_file_selection_labelframe.pack(pady=5)
         else:
             self.manual_pp_file_selection_labelframe.pack_forget()
 
     def manual_pp_config(self):
-        """Load a manually provided phase profile from a JSON file and apply it to the RIS."""
+        """Loads a manually provided phase profile from a JSON file and applies it to the RIS."""
         try:
             # Get the file path from the entry field
             file_path = self.manual_pp_file_selection_entry.get()
             if not file_path:
-                self.info_label.config(text=self.info_label.cget("text") + "\nNo manual phase profile file selected!")
+                self.info_label.config(text=self.info_label.cget("text") + "\nNo manual phase profile file selected! ❌")
                 return
     
             # Load JSON data
@@ -528,7 +518,7 @@ class RIS_GUI:
     
             # Check dimensions and update RIS phase profile
             if len(phase_tensor.shape) != 3:
-                self.info_label.config(text=self.info_label.cget("text") + "\nInvalid phase profile format! Expected a 3D list.")
+                self.info_label.config(text=self.info_label.cget("text") + "\nInvalid phase profile format! Expected a 3D list. ❌")
                 return
     
             # Assign the loaded phase profile to the RIS object
@@ -537,19 +527,15 @@ class RIS_GUI:
             self.info_label.config(text=self.info_label.cget("text") + "\nManual phase profile successfully loaded and applied! ✅")
     
         except Exception as e:
-            self.info_label.config(text=self.info_label.cget("text") + f"\nError loading manual phase profile: {str(e)}")
+            self.info_label.config(text=self.info_label.cget("text") + f"\nError loading manual phase profile: {str(e)} ❌")
         
     def load_scenario(self):
         """
-        Load the simulation scene based on the selected scenario and initialize scene parameters.
+        Loads the simulation scene based on the selected scenario and initializes the scene parameters.
 
-        This method reads the currently selected scenario from the GUI (via `self.scenario_var`)
-        and loads the corresponding scene using the `load_scene` function. For some scenarios, it also sets
-        up wall indices (`self.zero_indices`) and defines potential RIS placement positions (`self.RIS_search_positions`).
-        After loading the scene, it configures the TX and RX arrays with a planar array configuration.
-
-        :raises ValueError: If the scene fails to load.
-        :returns: None
+        This method reads the currently selected scenario from the GUI (via `self.scenario_var`) and loads the corresponding scene using 
+        the `load_scene` function. For some scenarios, it also sets up wall indices (`self.zero_indices`) and defines potential RIS 
+        placement positions (`self.RIS_search_positions`).
         """        
         # Load the scene
         if self.scenario_var.get() == "Indoor Office Scenario for OJAP":
@@ -601,7 +587,7 @@ class RIS_GUI:
 
         # Check if the scene was loaded correctly
         if not self.scene:
-            raise ValueError("Failed to load the scene.")
+            raise ValueError("Failed to load the scene! ❌")
 
         # Set up TX and RX arrays
         self.scene.tx_array = PlanarArray(1, 1, 0.5, 0.5, "iso", "V")
@@ -609,17 +595,15 @@ class RIS_GUI:
         
         # Update the info label to show successful load
         self.info_label.pack(pady=5)
-        self.info_label.config(text=self.info_label.cget("text") + "\n Scene loaded successfully \u2713")
+        self.info_label.config(text=self.info_label.cget("text") + "\n Scene loaded successfully! ✅")
 
     def set_preset_values(self):
         """
-        Set preset parameter values for the GUI entries.
+        Sets preset parameter values for the GUI entries.
 
-        This method resets and assigns default values to the frequency, power threshold, 
+        This method resets and assigns default values to the frequency, minimum power threshold, 
         and coverage map cell size entry fields. Additionally, it sets the transmitter's 
         coordinates based on the currently selected scenario.
-        
-        :returns: None
         """
         # Set general preset values
         self.entry_frequency.delete(0, tk.END)
@@ -655,13 +639,7 @@ class RIS_GUI:
     
     def clear_values(self):
         """
-        Clear all input fields in the GUI form.
-
-        This method resets the entry fields for the frequency, power threshold,
-        and transmitter position (x, y, and z) to empty strings, effectively clearing
-        any user input. It is used to reset the form to its initial state.
-
-        :returns: None
+        Clears the entry fields for the frequency, minimum power threshold, transmitter position (x, y, and z) and coverage map cell size.
         """      
         self.entry_frequency.delete(0, tk.END)
         self.entry_threshold.delete(0, tk.END)
@@ -672,27 +650,19 @@ class RIS_GUI:
 
     def preview_scenario(self):
         """
-        Preview the current scenario by rendering the scene with the transmitter and RIS (if present).
+        Previews the current scenario by rendering the scene with the transmitter and RIS (if present).
 
-        This method reads input parameters from the GUI, sets up the transmitter at the specified
-        position, and optionally adds a RIS if dimensions are provided. It then configures 
-        camera positions based on the selected scenario and renders the scene from one or 
-        more viewpoints.
+        This method configures and displays the simulation setup based on the selected scenario. It reads
+        input parameters from the GUI, sets up the transmitter at the specified position, and optionally
+        adds a RIS if dimensions are provided. The scene is then rendered from one or more camera viewpoints.
 
-        **Workflow:**
-        1. Reads and sets the simulation frequency.
-        2. Places the transmitter at the specified position.
-        3. Removes any existing RIS and adds a new RIS if dimensions are provided.
-        4. Configures camera positions depending on the selected scenario.
-        5. Renders the scene from multiple camera viewpoints.
-
-        :raises ValueError: If the input frequency or RIS dimensions are invalid.
-        :returns: None
+        :Output:
+            - Rendered figures (*matplotlib.figure.Figure*): Figures rendered from different predefined camera viewpoints.
         """
         try:
             self.scene.frequency = float(self.entry_frequency.get())
         except ValueError:
-            self.info_label.config(text=self.info_label.cget("text") + "\n Invalid frequency value entered!")
+            self.info_label.config(text=self.info_label.cget("text") + "\n Invalid frequency value entered! ❌")
             return
     
         # Transmitter position
@@ -717,7 +687,7 @@ class RIS_GUI:
                 self.tx.look_at(self.ris)  # Transmitter points towards the RIS
                 
             except ValueError:
-                self.info_label.config(text=self.info_label.cget("text") + "\n Invalid RIS dimensions entered!")
+                self.info_label.config(text=self.info_label.cget("text") + "\n Invalid RIS dimensions entered! ❌")
                 return
     
         # Camera setup for different scenarios
@@ -772,17 +742,15 @@ class RIS_GUI:
 
     def customize_axes(self, tensor, ax):
         """
-        Customize the axes of a coverage map plot.
+        Customizes the axes of a coverage map plot.
 
         This method adjusts the tick labels of the x and y axes based on the coverage map's
         cell size and the outer wall thickness. The tick labels are rounded to one decimal 
         place for clarity.
 
-        :param tensor: A 2D tensor representing the coverage map (values in decimal).
-        :type tensor: tf.Tensor
-        :param ax: The Matplotlib axes object to customize.
-        :type ax: matplotlib.axes.Axes
-        :returns: None
+        :Input:
+            - **tensor** (*tf.Tensor*): A 2D tensor representing the coverage map.
+            - **ax** (*matplotlib.axes.Axes*): The Matplotlib axes object to customize.
         """
         # Generate tick labels based on cell size
         x_labels = np.arange(self.outer_wall_thickness/2, tensor.shape[1] * float(self.cov_map_cell_size.get()) + (self.outer_wall_thickness/2), 4)  # Adjust step size as needed
