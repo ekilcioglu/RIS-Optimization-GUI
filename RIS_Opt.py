@@ -49,10 +49,10 @@ def to_db(x):
     Converts a power value from a linear scale to decibels (dB).
 
     :Input:
-        - **x** (*float* or *tf.Tensor*): A numeric value or a TensorFlow tensor representing power in linear scale.
+        **x** (*float* or *tf.Tensor*): A numeric value or a TensorFlow tensor representing power in linear scale.
 
     :Output:
-        - **dB_power** (*tf.Tensor*): The power level in decibels.
+        **dB_power** (*tf.Tensor*): The power level in decibels.
     """
     return 10 * tf.math.log(x) / tf.math.log(10.)
 
@@ -93,7 +93,7 @@ def plot_multiple_cdfs(cdfs, labels):
         - **labels** (*list(str)*): A list of strings representing the labels for each CDF.
 
     :Output:
-        - **figure** (*matplotlib.figure.Figure*): A figure with multiple CDFs plotted, each with distinct marker styles and dashed lines for the CDFs of the distance-based configured RIS-aided scenarios.
+        **figure** (*matplotlib.figure.Figure*): A figure with multiple CDFs plotted, each with distinct marker styles and dashed lines for the CDFs of the distance-based configured RIS-aided scenarios.
     """
     if len(cdfs) != len(labels):
         raise ValueError("The number of CDFs must match the number of labels.")
@@ -126,7 +126,7 @@ def calculate_coverage_ratio(tensor, threshold_db):
         - **threshold_db** (*float*): The minimum power threshold in dB.
 
     :Output:
-        - **coverage_ratio** (*float*): The coverage ratio as a percentage.
+        **coverage_ratio** (*float*): The coverage ratio as a percentage.
     """
     # Convert threshold from dB to decimal
     threshold_decimal = 10 ** (threshold_db / 10)
@@ -157,7 +157,7 @@ def selection(coords, k):
         - **k** (*int*): The number of clusters (centroids) to extract.
 
     :Output:
-        - **centroids** (*np.ndarray*): An array of centroids as 3D points with the z-value inherited from the first input coordinate.
+        **centroids** (*np.ndarray*): An array of centroids as 3D points with the z-value inherited from the first input coordinate.
     """
     # Convert coords to a NumPy array if it's not already
     coords = np.array(coords)
@@ -657,7 +657,7 @@ class RIS_GUI:
         adds a RIS if dimensions are provided. The scene is then rendered from one or more camera viewpoints.
 
         :Output:
-            - Rendered figures (*matplotlib.figure.Figure*): Figures rendered from different predefined camera viewpoints.
+            Rendered figures (*matplotlib.figure.Figure*): Figures rendered from different predefined camera viewpoints.
         """
         try:
             self.scene.frequency = float(self.entry_frequency.get())
@@ -764,7 +764,7 @@ class RIS_GUI:
 
     def brush_cov_map(self, coverage_map, zero_indices):
         """
-        Modify a 3D coverage map by masking walls of the scene to zero for smoother visibility.
+        Modifies a 3D coverage map by masking walls of the scene to zero for smoother visibility.
 
         This method updates the `path_gain` tensor of the coverage map by applying a mask 
         that sets the values of specified wall indices (`zero_indices`) to zero, effectively 
@@ -782,21 +782,19 @@ class RIS_GUI:
                 \"\"\"
                 Sets a new value for the coverage map.
 
-                :param new_value: A tensor of shape [num_tx, num_cells_y, num_cells_x] representing the new coverage map values.
-                :type new_value: tf.Tensor
-                :raises ValueError: If the shape of new_value doesn't match the existing coverage map dimensions.
+                :Input:
+                    - new_value (tf.Tensor): A tensor of shape [num_tx, num_cells_y, num_cells_x] 
+                    representing the new coverage map values.
                 \"\"\"
                 if hasattr(self, '_value'):
                     if new_value.shape != self._value.shape:
                         raise ValueError(f"Shape mismatch. Expected shape {self._path_gain.shape}, but got {new_value.shape}")
-                
+
                 self._path_gain = tf.cast(new_value, self._rdtype)
 
-        :param coverage_map: The coverage map object containing the 3D tensor `path_gain`.
-        :type coverage_map: object
-        :param zero_indices: A list of indices representing the wall positions to be masked.
-        :type zero_indices: list[list[list[int]]]
-        :returns: None (The function directly updates the coverage map with the modified tensor.)
+        :Input:
+            - **coverage_map** (*object*): The coverage map object containing the 3D tensor `path_gain`.
+            - **zero_indices** (*list[list[list[int]]]*): A list of indices representing the wall positions to be masked.
         """
         tensor = coverage_map.path_gain
         # Initialize the mask with ones
@@ -812,34 +810,19 @@ class RIS_GUI:
 
     def draw_binary_poor_coverage_map(self, cm_no_ris_tensor, avg_power_low_power_cells, cov_ratio):
         """
-        Draw a binary poor coverage map highlighting low-power cells.
+        Generates a binary poor coverage map highlighting low-power cells.
 
         This method visualizes areas with poor coverage in red and acceptable coverage in blue.
         Walls (zero-power cells) are overlaid in white. The method also annotates the plot with
         the selected power threshold, the average power of low-power cells, and the coverage ratio.
+        
+        :Input:
+            - **cm_no_ris_tensor** (*tf.Tensor*): A 2D tensor representing the coverage map path gain for each transmitter.
+            - **avg_power_low_power_cells** (*float*): The average power of low-power cells (in dB).
+            - **cov_ratio** (*float*): The percentage of area covered above the power threshold.
 
-        **Workflow:**
-        1. Reads the power threshold from the GUI.
-        2. Converts the input coverage map tensor to a NumPy array.
-        3. Creates masks for zero-power cells (walls) and poor coverage areas.
-        4. Constructs a binary visualization where:
-        - **Red** represents poor coverage.
-        - **Blue** represents acceptable coverage.
-        - **White** overlays walls.
-        5. Customizes the axes and adds a legend.
-        6. Displays the transmitter location.
-        7. Returns the figure and axis of the generated plot.
-
-        :param cm_no_ris_tensor: A 2D tensor representing the coverage map path gain for each transmitter.
-        :type cm_no_ris_tensor: tf.Tensor
-        :param avg_power_low_power_cells: The average power of low-power cells (in dB).
-        :type avg_power_low_power_cells: float
-        :param cov_ratio: The percentage of area covered above the power threshold.
-        :type cov_ratio: float
-        :returns: A tuple containing:
-            - **fig2** (*matplotlib.figure.Figure*): The generated figure.
-            - **ax2** (*matplotlib.axes.Axes*): The axis object displaying the binary poor coverage map.
-        :rtype: tuple(matplotlib.figure.Figure, matplotlib.axes.Axes)
+        :Output:
+            **fig2** (*matplotlib.figure.Figure*): The generated figure.
         """
         # Get the threshold from the GUI
         threshold = 10 ** (float(self.entry_threshold.get()) / 10)  # dB threshold from the GUI
@@ -921,29 +904,16 @@ class RIS_GUI:
 
     def select_below_threshold(self, tensor, threshold_db):
         """
-        Select coordinates and values from a 2D coverage map tensor that fall below a given power threshold.
+        Selects coordinates and values from a 2D coverage map tensor that fall below a given minimum power threshold.
 
-        This method identifies locations in the coverage map where the power level is below 
-        the specified threshold (in dB) but nonzero. It then converts the indices to real-world 
-        coordinates (in meters) and returns the corresponding power values.
+        :Input:
+            - **tensor** (*tf.Tensor*): A 2D tensor representing the coverage map.
+            - **threshold_db** (*float*): The power threshold in dB to filter the tensor values.
 
-        **Workflow:**
-        1. Convert the threshold from dB to decimal scale.
-        2. Identify indices in the tensor where power values are below the threshold but nonzero.
-        3. Extract the corresponding power values.
-        4. Convert tensor indices to real-world coordinates using the coverage map cell size.
-        5. Return the selected coordinates, power values, and original indices.
-
-        :param tensor: A 2D tensor representing the coverage map (values in decimal scale).
-        :type tensor: tf.Tensor
-        :param threshold_db: The power threshold in dB to filter the tensor values.
-        :type threshold_db: float
-        :returns: A tuple containing:
-            - **coords_below_threshold** (*list[list[float]]*): Transformed coordinates (in meters) where 
-            power values are below the threshold.
+        :Output:
+            - **coords_below_threshold** (*list[list[float]]*): Transformed coordinates (in meters) where power values are below the threshold.
             - **value_list** (*list[float]*): The power values at those coordinates.
             - **indices** (*np.ndarray*): The indices of the selected values in the original tensor.
-        :rtype: tuple(list[list[float]], list[float], np.ndarray)
         """
         # Convert threshold from dB to decimal
         threshold = 10 ** (threshold_db / 10)
@@ -965,29 +935,19 @@ class RIS_GUI:
 
     def compute_tx_coverage(self):
         """
-        Compute and visualize the TX-only coverage map for the current scene.
+        Computes and visualizes the TX-only coverage map for the scene.
 
-        This method performs the following steps:
-        
-        1. Sets the simulation frequency from the GUI.
-        2. Configures the transmitter at the specified position.
-        3. Computes the coverage map without RIS, considering line-of-sight (LOS) and reflections.
-        4. Applies post-processing to mask walls in the coverage map.
-        5. Displays the TX-only coverage map with customized axes and color scaling.
-        6. Computes and stores the cumulative distribution function (CDF) of path gains.
-        7. Calculates the coverage ratio based on a user-defined power threshold.
-        8. Identifies low-power cells and computes their average power.
-        9. Generates and displays a binary poor coverage map highlighting areas below the threshold.
-        10. Updates the GUI with computed metrics.
-
-        :raises ValueError: If invalid input values are provided for frequency, transmitter position, or threshold.
-        :returns: None
+        :Output:
+            - **TX-only coverage map** (*visualization*): Displays the coverage map without RIS.
+            - **Coverage ratio** (*float*): Percentage of the area above the power threshold.
+            - **Low-power cell analysis** (*float*): Computes the average power of weak coverage areas.
+            - **Binary poor coverage map** (*visualization*): Highlights regions with insufficient power.
         """
         try:
             # Set the frequency from the GUI
             self.scene.frequency = float(self.entry_frequency.get())
         except ValueError:
-            self.info_label.config(text=self.info_label.cget("text") + "\nInvalid frequency value entered!")
+            self.info_label.config(text=self.info_label.cget("text") + "\nInvalid frequency value entered! ❌")
             return
     
         try:
@@ -997,7 +957,7 @@ class RIS_GUI:
             self.tx = Transmitter(name="tx", position=self.tx_position)
             self.scene.add(self.tx)
         except ValueError:
-            self.info_label.config(text=self.info_label.cget("text") + "\nInvalid transmitter position entered!")
+            self.info_label.config(text=self.info_label.cget("text") + "\nInvalid transmitter position entered! ❌")
             return
     
         # Compute the TX-only coverage map
@@ -1035,7 +995,7 @@ class RIS_GUI:
         try:
             threshold = float(self.entry_threshold.get())
         except ValueError:
-            self.info_label.config(text=self.info_label.cget("text") + "\nInvalid threshold value entered!")
+            self.info_label.config(text=self.info_label.cget("text") + "\nInvalid threshold value entered! ❌")
             return
     
         # Coverage ratio calculation
@@ -1055,30 +1015,26 @@ class RIS_GUI:
             )
         else:
             self.info_label.config(
-                text=self.info_label.cget("text") + "\nNo low-power cells found below the threshold."
+                text=self.info_label.cget("text") + "\nNo low-power cells found below the threshold!"
             )
 
         # Binary poor coverage map
         fig2 = self.draw_binary_poor_coverage_map(self.cm_no_ris.path_gain[0], self.avg_power_low_power_cells_no_ris, self.cov_ratio_no_ris)
         fig2.show()
-        self.info_label.config(text=self.info_label.cget("text") + "\nTX-only coverage map and binary poor coverage map plotted successfully \u2713")
+        self.info_label.config(text=self.info_label.cget("text") + "\nTX-only coverage map and binary poor coverage map plotted successfully ✅")
 
     def toggle_target_point_input(self):
         """
-        Toggle the target point input method between optimized and manual entry.
+        Toggles the target point input method between optimized and manual entry.
 
-        This method checks the current selection for target point input and updates 
-        the GUI accordingly:
-        
-        - If "optimized" is selected, the manual input fields are hidden.
-        - If "manual" is selected, the method:
-        1. Reads the number of target points from the GUI.
-        2. Clears any existing manual input fields.
-        3. Dynamically creates input fields for each target point (x, y, z).
-        4. Displays the input fields for user entry.
-
-        :returns: None
-        """        
+        :Workflow:
+            - If "optimized" is selected, the manual input fields are hidden.
+            - If "manual" is selected:
+                1. Reads the number of target points from the GUI.
+                2. Clears any existing manual input fields.
+                3. Dynamically creates input fields for each target point (x, y, z).
+                4. Displays the input fields for user entry.
+        """  
         if self.target_point_manual_optimized.get() == "optimized":
             self.target_positions_frame.pack_forget()
         elif self.target_point_manual_optimized.get() == "manual":
@@ -1106,40 +1062,33 @@ class RIS_GUI:
                 self.target_positions_frame.pack(pady=5)
 
     def get_num_positions(self):
-        """Retrieve and validate the number of target points."""
+        """Retrieves and validates the number of target points."""
         try:
             num_positions = int(self.entry_num_target.get())
             if num_positions <= 0:
-                raise ValueError("Number of target points must be positive.")
+                raise ValueError("Number of target points must be positive! ❌")
             return num_positions
         except ValueError:
-            self.info_label.config(text=self.info_label.cget("text") + "\nInvalid number of target points entered!")
+            self.info_label.config(text=self.info_label.cget("text") + "\nInvalid number of target points entered! ❌")
             return None     
 
     def clustering_algo(self):
         """
-        Perform clustering to select target points from low-power cell coordinates.
+        Performs clustering to select target points from low-power cell coordinates.
 
         This method applies K-means clustering to group low-power cell locations and 
         select the specified number of target points. The selected points are then 
         plotted on the binary poor coverage map.
 
-        **Workflow:**
-        1. Reads the number of target points from the GUI.
-        2. Validates the input to ensure a positive integer is entered.
-        3. Checks if low-power cell coordinates are available for clustering.
-        4. Uses K-means clustering to determine the optimal target points.
-        5. Updates the GUI with the selected target points.
-        6. Calls the `plot_selected_targets()` method to visualize the result.
-
-        :raises ValueError: If an invalid number of target points is entered.
-        :returns: None
+        :Output:
+            - **The selected targets** (*list[list[float]]*): Shows the selected target coordinates in the GUI.
+            - **Binary poor coverage map with target points marked** (*visualization*): Displays the plot with the binary poor coverage map and selected target points.            
         """
         if (num_positions := self.get_num_positions()) is None:
             return
     
         if not self.low_power_cell_coords:
-            self.info_label.config(text=self.info_label.cget("text") + "\nNo low-power cells available for clustering.")
+            self.info_label.config(text=self.info_label.cget("text") + "\nNo low-power cells available for clustering! ❌")
             return
         
         # Initialize target point list
@@ -1154,19 +1103,18 @@ class RIS_GUI:
     
     def plot_selected_targets(self):
         """
-        Plot the binary poor coverage map with selected target points.
+        Plots the binary poor coverage map with selected target points.
 
         This method visualizes the binary poor coverage map and overlays the selected 
         target points using distinct markers for easy identification.
 
-        **Workflow:**
-        1. Calls `draw_binary_poor_coverage_map()` to generate the base map.
-        2. Plots the selected target points with green ('#08ff00') 'x' markers.
-        3. Adds a legend to differentiate target points from other elements.
-        4. Labels the x-axis and y-axis appropriately.
-        5. Displays the final plot.
+        **Workflow:** \n
+        1. Calls `draw_binary_poor_coverage_map()` to generate the base map. \n
+        2. Plots the selected target points with green ('#08ff00') 'x' markers. \n
+        3. Displays the final plot.
 
-        :returns: None
+        :Output:
+            **Binary poor coverage map with target points marked** (*visualization*): Displays the plot with the binary poor coverage map and selected target points.
         """
         fig8 = self.draw_binary_poor_coverage_map(self.cm_no_ris.path_gain[0], self.avg_power_low_power_cells_no_ris, self.cov_ratio_no_ris)
         
@@ -1176,7 +1124,7 @@ class RIS_GUI:
                     color='#08ff00', marker='x', s=60, label="Target points")
 
         plt.legend(loc='upper right', handletextpad=0.5, borderpad=0.3)
-        #plt.gca().set_title("Binary Poor Coverage Map with Selected Targets")
+        plt.gca().set_title("Binary Poor Coverage Map with Selected Targets")
         plt.gca().set_xlabel("X-axis (m)")
         plt.gca().set_ylabel("Y-axis (m)")
         
@@ -1184,16 +1132,16 @@ class RIS_GUI:
 
     def compute_potential_RIS_positions(self):
         """
-        Compute potential RIS positions along walls that maintain Line-of-Sight (LoS) to all target points.
+        Computes potential RIS positions along walls that maintain Line-of-Sight (LoS) to all target points.
 
-        This method identifies candidate RIS positions by:
-        1. Validating the number of target points from GUI input
-        2. Checking manual/optimized target point selection
-        3. Scanning predefined walls with specified step size (0.4 m by default)
-        4. Verifying LoS between candidate positions and all targets
+        This method identifies candidate RIS positions by: \n
+        1. Validating the number of target points from GUI input \n
+        2. Checking manual/optimized target point selection \n
+        3. Scanning predefined walls with a specified step size (0.4 m by default) \n
+        4. Verifying LoS between candidate positions and all target points
 
-        :raises ValueError: If invalid number of target points is entered
-        :returns: None
+        :Output:
+            **Binary poor coverage map with target points and feasible RIS positions marked** (*visualization*): A plot with the binary poor coverage map, selected target points, and feasible RIS positions marked.
         """
         if (num_positions := self.get_num_positions()) is None:
             return
@@ -1224,19 +1172,19 @@ class RIS_GUI:
     
     def find_RIS_positions_on_wall(self, wall, step_size):
         """
-        Identify valid RIS positions along a specified wall segment.
+        Identifies valid RIS positions along a specified wall segment.
 
-        :param wall: Dictionary defining wall properties with keys:
-            - "fixed_coord": Fixed coordinate axis ('x' or 'y')
-            - "fixed_value": Fixed coordinate value
-            - "variable_coord": Variable coordinate axis
-            - "min": Minimum position along variable axis
-            - "max": Maximum position along variable axis
-        :type wall: dict
-        :param step_size: Increment step for position scanning (meters)
-        :type step_size: float
-        :returns: potential_RIS_pos: List of valid RIS positions in format [x, y, z]
-        :rtype: list[list[float]]
+        :Input:
+            - **wall** (*dict*): A dictionary defining wall properties with keys:
+                - **"fixed_coord"** (*str*): Fixed coordinate axis ('x' or 'y')
+                - **"fixed_value"** (*float*): Fixed coordinate value
+                - **"variable_coord"** (*str*): Variable coordinate axis
+                - **"min"** (*float*): Minimum position along the variable axis
+                - **"max"** (*float*): Maximum position along the variable axis
+            - **step_size** (*float*): Increment step for position scanning (meters).
+
+        :Output:
+            **potential_RIS_pos** (*list[list[float]]*): A list of valid RIS positions in format [x, y, z], rounded to 1 decimal point.
         """
         potential_RIS_pos = []
         for variable in np.arange(wall["min"], wall["max"] + step_size, step_size):
@@ -1253,14 +1201,14 @@ class RIS_GUI:
     
     def check_los(self, tx_position, rx_position):
         """
-        Verify Line-of-Sight (LoS) between two points in the scene.
+        Verifies Line-of-Sight (LoS) between two points in the scene.
 
-        :param tx_position: Transmitter position [x, y, z]
-        :type tx_position: list[float]
-        :param rx_position: Receiver position [x, y, z]
-        :type rx_position: list[float]
-        :returns: True if unobstructed path exists, False otherwise
-        :rtype: bool
+        :Input:
+            - **tx_position** (*list[float]*): Transmitter position [x, y, z].
+            - **rx_position** (*list[float]*): Receiver position [x, y, z].
+
+        :Output:
+            **output** (*bool*): True if an unobstructed path exists, False otherwise.
         """
         self.scene.remove("tx")
         tx = Transmitter(name="tx", position=tx_position)
@@ -1284,11 +1232,13 @@ class RIS_GUI:
     
     def plot_RIS_positions(self, potential_RIS_pos):
         """
-        Visualize feasible RIS positions on the binary coverage map.
+        Visualizes feasible RIS positions on the binary coverage map.
 
-        :param potential_RIS_pos: List of candidate RIS positions
-        :type potential_RIS_pos: list[list[float]]
-        :returns: None
+        :Input:
+            **potential_RIS_pos** (*list[list[float]]*): List of candidate RIS positions.
+
+        :Output:
+            **visualization** (*matplotlib.figure.Figure*): A plot with the binary poor coverage map, selected target points, and feasible RIS positions marked.
         """
         fig = self.draw_binary_poor_coverage_map(self.cm_no_ris.path_gain[0], self.avg_power_low_power_cells_no_ris, self.cov_ratio_no_ris)
     
@@ -1307,10 +1257,10 @@ class RIS_GUI:
     
     def reset_scene_after_RIS_computation(self):
         """
-        Restore original scene configuration after RIS position analysis.
+        Restores the original scene configuration after RIS feasible position analysis.
 
-        **Workflow:**
-        - Removes temporary transmitters/receivers
+        **Workflow:** \n
+        - Removes temporary transmitters/receivers \n
         - Re-adds main transmitter with original position
         """
         self.scene.remove("tx")
@@ -1324,7 +1274,7 @@ class RIS_GUI:
         self.scene.add(self.tx)
 
     def set_target_points(self):
-        """Determine target points manually or using K-means."""
+        """Determines target points manually or using K-means algorithm."""
         num_positions = int(self.entry_num_target.get())
         if self.target_point_manual_optimized.get() == "manual": # Use the manually entered positions for target points
             # Get the values of x, y, z from the entries for each steering position
@@ -1334,7 +1284,7 @@ class RIS_GUI:
             self.info_label.config(text=self.info_label.cget("text") + f"\nThe selected target point(s): {self.RX_coord_set}")
 
     def create_ris(self):
-        """Initialize the RIS with specified dimensions and position."""
+        """Initializes the RIS with specified dimensions and position."""
         num_positions = int(self.entry_num_target.get())
         self.scene.remove("ris")
         ris_height, ris_width = float(self.entry_ris_height.get()), float(self.entry_ris_width.get())
@@ -1344,7 +1294,7 @@ class RIS_GUI:
         self.scene.add(self.ris)
 
     def configure_ris(self):
-        """Configure the RIS based on the selected phase profile approach."""
+        """Configures the RIS based on the selected phase profile approach."""
         if not self.pp_var.get() == "Manual entry":
             num_positions = int(self.entry_num_target.get())
             source, target = [self.tx_position] * num_positions, self.RX_coord_set[:num_positions]
@@ -1357,12 +1307,14 @@ class RIS_GUI:
             
     def hsv_plot_phase_profile(self, overall_phase_profile):
         """
-        Visualize RIS phase profile using HSV color mapping.
+        Visualizes the RIS phase profile using HSV color mapping.
 
-        :param overall_phase_profile: 2D tensor of phase values in radians
-        :type overall_phase_profile: tf.Tensor
-        :returns: None
-        """        
+        :Input:
+            **overall_phase_profile** (*tf.Tensor*): A 2D tensor of phase values in radians.
+
+        :Output:
+            **HSV plot** (*matplotlib.figure.Figure*): A plot of the RIS phase profile with HSV color mapping.
+        """       
         # Get the dimensions of the 2D phase profile tensor
         N, M = overall_phase_profile.shape  # Assuming phase_profile is the 2D TensorFlow tensor
 
@@ -1371,38 +1323,18 @@ class RIS_GUI:
         plt.colorbar(label='Radians')
         plt.xlabel('Column index (m)')
         plt.ylabel('Row index (n)')
-
-        '''# Add text labels with phase values in radians
-        for i in range(N):
-            for j in range(M):
-                plt.text(
-                    j + 0.5,  # Column index
-                    i + 0.5,  # Row index
-                    f"{overall_phase_profile[i, j]:.2f}",  # Formatted phase value in radians
-                    ha="center",  # Horizontal alignment
-                    va="center",  # Vertical alignment
-                    color="black" if overall_phase_profile[i, j] < 3.14 else "white",  # Text color
-                    fontsize=8,  # Font size
-                )'''
         plt.show()  # Display the plot with labels
     
     def export_phase_profile(self, ris_pp_values, filename):
         """
-        Export a given RIS phase profile to a JSON file with a specified filename.
-    
+        Exports a given RIS phase profile to a JSON file with a specified filename.
+
         This function takes a TensorFlow tensor representing the RIS phase profile, 
         converts it into a standard Python list format, and saves the data as a JSON file.
-    
-        :param ris_pp_values: The RIS phase profile values to be exported.
-        :type ris_pp_values: tf.Tensor
-        :param filename: The name (or path) of the JSON file where the phase profile will be saved.
-        :type filename: str
-    
-        :raises Exception: If an error occurs while saving the file, the error message is displayed in the GUI's info label.
-    
-        **Example Usage**::
-    
-            self.export_phase_profile(self.ris.phase_profile.values, "phase_profiles.json")
+
+        :Input:
+            - **ris_pp_values** (*tf.Tensor*): The RIS phase profile values to be exported.
+            - **filename** (*str*): The name (or path) of the JSON file where the phase profile will be saved.
         """
         try:
             # Convert TensorFlow tensor to a Python list
@@ -1411,17 +1343,17 @@ class RIS_GUI:
             with open(filename, "w") as file: 
                 json.dump(phase_data, file, indent=4)
     
-            self.info_label.config(text=self.info_label.cget("text") + "\nPhase profile exported successfully!")
+            self.info_label.config(text=self.info_label.cget("text") + "\nPhase profile exported successfully! ✅")
     
         except Exception as e:
-            self.info_label.config(text=self.info_label.cget("text") + f"\nError exporting phase profile: {str(e)}")    
+            self.info_label.config(text=self.info_label.cget("text") + f"\nError exporting phase profile: {str(e)} ❌")    
     
     def show_phase_profiles(self):
         """
-        Show RIS phase profiles for each target point separately as well as overall reflection coefficient phase profile.
-        
-        :raises ValueError: For invalid target point configurations
-        :returns: None
+        Shows RIS phase profiles for each target point separately as well as the overall reflection coefficient phase profile.
+
+        :Output:
+            **figure** (*matplotlib.figure.Figure*): The phase profiles of the RIS configuration for each target point, as well as the overall reflection coefficient's phase profile.
         """
         if (num_positions := self.get_num_positions()) is None:
             return
@@ -1466,17 +1398,19 @@ class RIS_GUI:
         
     def compute_combined_coverage(self):
         """
-        Compute and visualize combined TX+RIS coverage map with performance metrics.
+        Computes and visualizes the combined TX+RIS coverage map, along with performance metrics.
 
-        **Workflow:**
-        1. Configures RIS based on GUI parameters (size/position/phase profile)
-        2. Computes combined coverage map
-        3. Generates coverage gain visualization
-        4. Updates CDF comparison plot
-        5. Calculates new coverage metrics
+        **Workflow:** \n
+        1. Configures RIS based on GUI parameters (size/position/phase profile). \n
+        2. Computes the combined coverage map. \n
+        3. Generates coverage gain visualization. \n
+        4. Updates CDF comparison plot. \n
+        5. Calculates new coverage metrics.
 
-        :raises ValueError: For invalid target point configurations
-        :returns: None
+        :Output:
+            - **Figure** (*matplotlib.figure.Figure*): A series of figures showing the combined coverage map, RIS coverage gain, and binary poor coverage map, along with the corresponding performance metrics and coverage ratios.
+            - **Text updates** (*str*): Updates the GUI info label with coverage ratio and average power of low-power cells in the combined coverage map.
+            - **CDF plot** (*matplotlib.figure.Figure*): Updates and displays the CDF of the coverage gain with and without RIS.
         """
         if (num_positions := self.get_num_positions()) is None:
             return
@@ -1560,13 +1494,13 @@ class RIS_GUI:
         # Plot the combined CDFs
         plot_multiple_cdfs(self.cdfs, self.cdf_labels)
       
-        self.info_label.config(text= self.info_label.cget("text") + "\nCombined coverage map and RIS coverage gain plotted successfully \u2713")
+        self.info_label.config(text= self.info_label.cget("text") + "\nCombined coverage map and RIS coverage gain plotted successfully! ✅")
 
         # Get the minimum power threshold from the GUI
         try:
             threshold = float(self.entry_threshold.get())
         except ValueError:
-            self.info_label.config(text=self.info_label.cget("text") + "\nInvalid threshold value entered!")
+            self.info_label.config(text=self.info_label.cget("text") + "\nInvalid threshold value entered! ❌")
             return
     
         # Coverage ratio calculation
@@ -1702,17 +1636,15 @@ class RIS_GUI:
 
     def compute_opt_par(self):
         """
-        Compute performance metrics (average power of low-power cells and coverage ratio) after placing the RIS for all RIS parameter combinations.
+        Computes performance metrics (average power of low-power cells and coverage ratio) after placing the RIS for all RIS parameter combinations.
 
-        **Workflow:**
-        - Iterates through number of targets and RIS width intervals
-        - Tests all valid RIS positions for each configuration
+        **Workflow:** \n
+        - Iterates through the number of targets and RIS width intervals \n
+        - Tests all valid RIS positions for each configuration \n
         - Stores results in JSON files with metrics:
             * Average low-power cell coverage
             * Coverage ratio
-
-        :returns: None
-        """        
+        """       
         num_targets_interval = np.arange(int(self.N_lower.get()), int(self.N_upper.get())+int(self.N_step.get()), int(self.N_step.get()))
         print(num_targets_interval)
         RIS_width_interval = np.arange(float(self.w_ris_lower.get()), float(self.w_ris_upper.get())+float(self.w_ris_step.get()),
@@ -1834,7 +1766,7 @@ class RIS_GUI:
             
     def data_file_selection(self):
         """
-        Open file dialog for JSON data selection.
+        Opens a file dialog for JSON data selection.
         """        
         file_path = filedialog.askopenfilename(filetypes=[("JSON Files", "*.json")])
         if file_path:
@@ -1843,11 +1775,11 @@ class RIS_GUI:
 
     def run_opt_algorithm(self):
         """
-        Execute optimization analysis using selected data file.
+        Executes optimization analysis using selected data file.
 
-        **Workflow:**
-        1. Loads precomputed metric data
-        2. Identifies optimal configuration
+        **Workflow:** \n
+        1. Loads precomputed metric data \n
+        2. Identifies optimal configuration \n
         3. Generates performance visualization
         """        
         file_path = self.data_file_selection_entry.get()
@@ -1855,25 +1787,27 @@ class RIS_GUI:
         
         results = self.analyze_and_visualize_ris_configurations(file_path, improvement_threshold)
 
-    def parse_config(self, config_str: str) -> Tuple[int, float, Tuple[float, float, float]]:
+    def parse_config(self, config_str):
         """
-        Convert configuration string to structured data.
+        Converts a configuration string to structured data.
 
-        :param config_str: String representation of configuration tuple
-        :type config_str: str
-        :returns: Parsed configuration (num_targets, width, position)
-        :rtype: tuple(int, float, tuple(float, float, float))
+        :Input:
+            **config_str** (*str*): A string representation of a configuration tuple.
+
+        :Output:
+            **parsed_config** (*tuple(int, float, tuple(float, float, float))*): Parsed configuration containing (num_targets, width, position).
         """
         return ast.literal_eval(config_str)
     
-    def find_best_configs_per_width(self, data: Dict[str, float]) -> Dict[float, Tuple[str, float]]:
+    def find_best_configs_per_width(self, data):
         """
-        Identify top-performing configuration for each RIS width.
+        Identifies the top-performing configuration for each RIS width.
 
-        :param data: Dictionary of configuration-performance pairs
-        :type data: dict
-        :returns: Best configuration per width with performance
-        :rtype: dict[float, tuple(str, float)]
+        :Input:
+            **data** (*dict*): Dictionary of configuration-performance pairs.
+
+        :Output:
+            **best_configs** (*dict[float, tuple(str, float)]*): Best configuration per width with performance.
         """
         width_groups = defaultdict(list)
         
@@ -1893,16 +1827,22 @@ class RIS_GUI:
         return best_configs
 
     
-    def find_optimal_configuration(self, best_configs_per_width: Dict[float, Tuple[str, float]], improvement_threshold: float) -> Dict:
+    def find_optimal_configuration(self, best_configs_per_width, improvement_threshold):
         """
-        Find the optimal RIS configuration based on the improvement threshold criterion.
-        
-        :param best_configs_per_width: Pre-filtered best configurations
-        :type best_configs_per_width: dict
-        :param improvement_threshold: Minimum dB improvement required
-        :type improvement_threshold: float
-        :returns: Analysis results with optimal config and progression data
-        :rtype: dict
+        Finds the optimal RIS configuration based on the improvement threshold criterion.
+
+        :Input:
+            - **best_configs_per_width** (*dict*): Pre-filtered best configurations, where keys represent the widths and values are tuples containing configurations and performance metrics.
+            - **improvement_threshold** (*float*): Minimum dB improvement required to consider a configuration as optimal.
+
+        :Output:
+            - **result** (*dict*): A dictionary containing the optimal configuration, performance metric, and progression analysis.
+                - **optimal_configuration** (*dict*): Contains optimal configuration details, including the number of target points, RIS width, and position.
+                    - **number_of_target_points** (*int*): The number of target points for the optimal configuration.
+                    - **ris_width** (*float*): The width of the RIS in the optimal configuration.
+                    - **position** (*dict*): The position of the RIS in 3D space with x, y, and z coordinates.
+                - **performance_metric** (*float*): The performance metric of the optimal configuration.
+                - **progression_analysis** (*list*): A list of dictionaries, each representing the progression of configurations with width, config, performance, and improvement (if applicable).
         """
         sorted_widths = sorted(best_configs_per_width.keys())
         current_width = sorted_widths[0]
@@ -1948,18 +1888,21 @@ class RIS_GUI:
             "progression_analysis": progression
         }
     
-    def visualize_performance_vs_width(self, best_configs_per_width: Dict[float, Tuple[str, float]], 
-                                       optimal_width: float = None, no_ris_performance: float = None):
+    def visualize_performance_vs_width(self, best_configs_per_width, optimal_width = None, no_ris_performance = None):
         """
-        Generate annotated performance plot with configuration details.
+        Generates an annotated performance plot with configuration details, showing the relationship 
+        between RIS width and performance. The plot includes the number of target points (N) and the 
+        RIS position (x, y, z) for each configuration. It also highlights the optimal RIS configuration 
+        if provided.
 
-        :param best_configs_per_width: Optimized configurations per width
-        :type best_configs_per_width: dict
-        :param optimal_width: Highlighted optimal width (optional)
-        :type optimal_width: float
-        :param no_ris_performance: Baseline performance without RIS
-        :type no_ris_performance: float
-        :returns: None
+        :Input:
+            - **best_configs_per_width** (*dict*): A dictionary where each key is a RIS width and each value is a tuple containing the configuration string and the corresponding performance (dB).
+            - **optimal_width** (*float*): The RIS width corresponding to the optimal configuration, which will be highlighted on the plot. Default is None.
+            - **no_ris_performance** (*float*): The baseline performance without RIS, which will be plotted at width 0.
+
+        :Output:
+            **plot** (*matplotlib.figure.Figure*): The function generates a plot showing RIS performance versus width, annotated with 
+            configuration details and optional optimal RIS configuration highlights.
         """
         # Start with RIS width 0 for no RIS contribution
         widths = [0.0]
@@ -2031,23 +1974,23 @@ class RIS_GUI:
         plt.ylabel('$\mathcal{M}$ (dB)', fontsize=12)
         if optimal_performance > 0.0:
             plt.ylabel(r'Coverage ratio \%', fontsize=12)
-        #plt.title('RIS Performance vs Width\nwith Number of Target Points (N) and Position (x, y, z)', fontsize=14, pad=20)
+        plt.title('RIS Performance vs Width\nwith Number of Target Points (N) and Position (x, y, z)', fontsize=14, pad=20)
         plt.grid(True, which='minor', alpha=0.1)
         plt.minorticks_on()
         plt.tight_layout()
         #plt.savefig("ris_performance_analysis.png", dpi=300, bbox_inches='tight')
         plt.show()
 
-    def analyze_and_visualize_ris_configurations(self, input_file: str, improvement_threshold: float) -> Dict:
+    def analyze_and_visualize_ris_configurations(self, input_file, improvement_threshold):
         """
-        Analyze RIS configurations and create visualization.
-        
-        :param input_file: Path to JSON metric data
-        :type input_file: str
-        :param improvement_threshold: Performance gain threshold for optimization
-        :type improvement_threshold: float
-        :returns: Full analysis results with visualizations
-        :rtype: dict
+        Analyzes RIS configurations and creates visualizations.
+
+        :Input:
+            - **input_file** (*str*): Path to JSON metric data.
+            - **improvement_threshold** (*float*): Performance gain threshold for optimization.
+
+        :Output:
+            **results** (*dict*): Full analysis results with visualizations.
         """
         # Load data
         with open(input_file, 'r') as f:
