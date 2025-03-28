@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.9) (preloaded format=pdflatex 2023.9.21)  10 MAR 2025 11:01
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.9) (preloaded format=pdflatex 2023.9.21)  28 MAR 2025 16:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -859,26 +859,9 @@ Overfull \vbox (12.75748pt too high) has occurred while \output is active []
 
 
 [14]
-<Emre_Picture.jpg, id=129, 803.0pt x 803.0pt>
-File: Emre_Picture.jpg Graphic file (type jpg)
-<use Emre_Picture.jpg>
-Package pdftex.def Info: Emre_Picture.jpg  used on input line 592.
-(pdftex.def)             Requested size: 72.26688pt x 72.26688pt.
-File: Emre_Picture.jpg Graphic file (type jpg)
-<use Emre_Picture.jpg>
-Package pdftex.def Info: Emre_Picture.jpg  used on input line 592.
-(pdftex.def)             Requested size: 72.26688pt x 72.26688pt.
-File: Emre_Picture.jpg Graphic file (type jpg)
-<use Emre_Picture.jpg>
-Package pdftex.def Info: Emre_Picture.jpg  used on input line 595.
-(pdftex.def)             Requested size: 72.26688pt x 72.26688pt.
-File: Emre_Picture.jpg Graphic file (type jpg)
-<use Emre_Picture.jpg>
-Package pdftex.def Info: Emre_Picture.jpg  used on input line 595.
-(pdftex.def)             Requested size: 72.26688pt x 72.26688pt.
 File: OJAP.png Graphic file (type png)
 <use OJAP.png>
-Package pdftex.def Info: OJAP.png  used on input line 598.
+Package pdftex.def Info: OJAP.png  used on input line 592.
 (pdftex.def)             Requested size: 148.12836pt x 20.0pt.
 
 Overfull \hbox (25.32835pt too wide) has occurred while \output is active
@@ -891,18 +874,19 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 Overfull \vbox (8.45pt too high) has occurred while \output is active []
 
- [15 <./Emre_Picture.jpg>] (ojap.aux)
+ [15]
+(ojap.aux)
  ***********
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-08-29>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 5677 strings out of 475247
- 97038 string characters out of 5757792
+ 5663 strings out of 475247
+ 96716 string characters out of 5757792
  1946801 words of memory out of 5000000
- 27098 multiletter control sequences out of 15000+600000
- 626285 words of font info for 160 fonts, out of 8000000 for 9000
+ 27085 multiletter control sequences out of 15000+600000
+ 624046 words of font info for 157 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  57i,17n,65p,1830b,425s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/emrek/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
@@ -927,9 +911,9 @@ Programs/MiKTeX/fonts/type1/urw/helvetic/uhvr8a.pfb><C:/Users/emrek/AppData/Loc
 al/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/emrek/AppData/Loc
 al/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/emrek/AppData/Loc
 al/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on ojap.pdf (15 pages, 1802793 bytes).
+Output written on ojap.pdf (15 pages, 1698572 bytes).
 PDF statistics:
- 222 PDF objects out of 1000 (max. 8388607)
+ 215 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 190 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 161 words of extra memory for PDF output out of 10000 (max. 10000000)
 
