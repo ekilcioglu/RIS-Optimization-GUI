@@ -19,7 +19,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Basic Scenario Configuration" href="tutorials/basic_scenario_setup.html" /> 
+    <link rel="prev" title="Running RIS joint optimization algorithm and drawing performance evaluation plots" href="tutorials/running_opt_algorithm.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -43,12 +43,20 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="tutorials/installation.html">Installation Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorials/quickstart.html">Quickstart Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation Guide</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="tutorials/basic_scenario_setup.html">Basic Scenario Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/new_scenario_creation_via_blender.html">New scenario creation via Blender</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/new_scenario_addition_to_the_code.html">New scenario addition to the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/modifying_element_spacing_from_sionna_source_code.html">Modifying RIS element spacing (in proportion to the wavelength lambda) from Sionna source code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/computing_tx_cov_map.html">Computing Transmitter-Only Coverage Map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/finding_target_points_via_clustering.html">Finding RIS Target Points via K-means Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/computing_feasible_RIS_positions.html">Computing Feasible RIS Positions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/showing_and_exporting_phase_profile.html">Computing combined coverage map with custom RIS parameter specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/computing_combined_coverage.html">Computing combined coverage map with custom RIS parameter specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/importing_manual_phase_profile.html">Computing combined coverage map with custom RIS parameter specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/running_opt_algorithm.html">Running RIS joint optimization algorithm and drawing performance evaluation plots</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
 <ul class="current">
@@ -127,13 +135,14 @@
              
   <section id="ris-optimization-module">
 <h1>RIS Optimization Module<a class="headerlink" href="#ris-optimization-module" title="Link to this heading"></a></h1>
+<p>This module provides functionalities for RIS-based deployment optimization and coverage enhancement.</p>
 <dl class="py class" id="module-RIS_Opt">
 <dt class="sig sig-object py" id="RIS_Opt.RIS_GUI">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">RIS_Opt.</span></span><span class="sig-name descname"><span class="pre">RIS_GUI</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">master</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#RIS_Opt.RIS_GUI" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">RIS_Opt.</span></span><span class="sig-name descname"><span class="pre">RIS_GUI</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">master</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.analyze_and_visualize_ris_configurations">
-<span class="sig-name descname"><span class="pre">analyze_and_visualize_ris_configurations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">improvement_threshold</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#RIS_Opt.RIS_GUI.analyze_and_visualize_ris_configurations" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">analyze_and_visualize_ris_configurations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">improvement_threshold</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.analyze_and_visualize_ris_configurations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.analyze_and_visualize_ris_configurations" title="Link to this definition"></a></dt>
 <dd><p>Analyzes RIS configurations and creates visualizations.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Input<span class="colon">:</span></dt>
@@ -150,13 +159,13 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.brush_cov_map">
-<span class="sig-name descname"><span class="pre">brush_cov_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coverage_map</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zero_indices</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#RIS_Opt.RIS_GUI.brush_cov_map" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">brush_cov_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coverage_map</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zero_indices</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.brush_cov_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.brush_cov_map" title="Link to this definition"></a></dt>
 <dd><p>Modifies a 3D coverage map by masking walls of the scene to zero for smoother visibility.</p>
-<p>This method updates the <cite>path_gain</cite> tensor of the coverage map by applying a mask 
-that sets the values of specified wall indices (<cite>zero_indices</cite>) to zero, effectively 
+<p>This method updates the <cite>path_gain</cite> tensor of the coverage map by applying a mask
+that sets the values of specified wall indices (<cite>zero_indices</cite>) to zero, effectively
 removing their influence on the coverage visualization.</p>
-<p><strong>Important:</strong>  
-This function requires an additional method <cite>set_value()</cite> to be added in 
+<p><strong>Important:</strong>
+This function requires an additional method <cite>set_value()</cite> to be added in
 <cite>sionna/rt/coverage_map.py</cite>, which allows updating the coverage map values.</p>
 <p><strong>Required Method in sionna/rt/coverage_map.py:</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">set_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_value</span><span class="p">):</span>
@@ -164,7 +173,7 @@ This function requires an additional method <cite>set_value()</cite> to be added
 <span class="sd">    Sets a new value for the coverage map.</span>
 
 <span class="sd">    :Input:</span>
-<span class="sd">        - new_value (tf.Tensor): A tensor of shape [num_tx, num_cells_y, num_cells_x] </span>
+<span class="sd">        - new_value (tf.Tensor): A tensor of shape [num_tx, num_cells_y, num_cells_x]</span>
 <span class="sd">        representing the new coverage map values.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_value&#39;</span><span class="p">):</span>
@@ -186,7 +195,7 @@ This function requires an additional method <cite>set_value()</cite> to be added
 
 <dl class="py method">
 <dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.check_los">
-<span class="sig-name descname"><span class="pre">check_los</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tx_position</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rx_position</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#RIS_Opt.RIS_GUI.check_los" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">check_los</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tx_position</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rx_position</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.check_los"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.check_los" title="Link to this definition"></a></dt>
 <dd><p>Verifies Line-of-Sight (LoS) between two points in the scene.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Input<span class="colon">:</span></dt>
@@ -203,16 +212,16 @@ This function requires an additional method <cite>set_value()</cite> to be added
 
 <dl class="py method">
 <dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.clear_values">
-<span class="sig-name descname"><span class="pre">clear_values</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#RIS_Opt.RIS_GUI.clear_values" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">clear_values</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.clear_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.clear_values" title="Link to this definition"></a></dt>
 <dd><p>Clears the entry fields for the frequency, minimum power threshold, transmitter position (x, y, and z) and coverage map cell size.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.clustering_algo">
-<span class="sig-name descname"><span class="pre">clustering_algo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#RIS_Opt.RIS_GUI.clustering_algo" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">clustering_algo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.clustering_algo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.clustering_algo" title="Link to this definition"></a></dt>
 <dd><p>Performs clustering to select target points from low-power cell coordinates.</p>
-<p>This method applies K-means clustering to group low-power cell locations and 
-select the specified number of target points. The selected points are then 
+<p>This method applies K-means clustering to group low-power cell locations and
+select the specified number of target points. The selected points are then
 plotted on the binary poor coverage map.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Output<span class="colon">:</span></dt>
@@ -226,7 +235,7 @@ plotted on the binary poor coverage map.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.compute_combined_coverage">
-<span class="sig-name descname"><span class="pre">compute_combined_coverage</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#RIS_Opt.RIS_GUI.compute_combined_coverage" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">compute_combined_coverage</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.compute_combined_coverage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.compute_combined_coverage" title="Link to this definition"></a></dt>
 <dd><p>Computes and visualizes the combined TX+RIS coverage map, along with performance metrics.</p>
 <p><strong>Workflow:</strong></p>
 <ol class="arabic simple">
@@ -249,7 +258,7 @@ plotted on the binary poor coverage map.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.compute_opt_par">
-<span class="sig-name descname"><span class="pre">compute_opt_par</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#RIS_Opt.RIS_GUI.compute_opt_par" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">compute_opt_par</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.compute_opt_par"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.compute_opt_par" title="Link to this definition"></a></dt>
 <dd><p>Computes performance metrics (average power of low-power cells and coverage ratio) after placing the RIS for all RIS parameter combinations.</p>
 <p><strong>Workflow:</strong></p>
 <ul class="simple">
@@ -268,7 +277,7 @@ plotted on the binary poor coverage map.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.compute_potential_RIS_positions">
-<span class="sig-name descname"><span class="pre">compute_potential_RIS_positions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#RIS_Opt.RIS_GUI.compute_potential_RIS_positions" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">compute_potential_RIS_positions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.compute_potential_RIS_positions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.compute_potential_RIS_positions" title="Link to this definition"></a></dt>
 <dd><p>Computes potential RIS positions along walls that maintain Line-of-Sight (LoS) to all target points.</p>
 <p>This method identifies candidate RIS positions by:</p>
 <ol class="arabic simple">
@@ -286,7 +295,7 @@ plotted on the binary poor coverage map.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.compute_tx_coverage">
-<span class="sig-name descname"><span class="pre">compute_tx_coverage</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#RIS_Opt.RIS_GUI.compute_tx_coverage" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">compute_tx_coverage</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.compute_tx_coverage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.compute_tx_coverage" title="Link to this definition"></a></dt>
 <dd><p>Computes and visualizes the TX-only coverage map for the scene.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Output<span class="colon">:</span></dt>
@@ -302,22 +311,22 @@ plotted on the binary poor coverage map.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.configure_ris">
-<span class="sig-name descname"><span class="pre">configure_ris</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#RIS_Opt.RIS_GUI.configure_ris" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">configure_ris</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.configure_ris"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.configure_ris" title="Link to this definition"></a></dt>
 <dd><p>Configures the RIS based on the selected phase profile approach.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.create_ris">
-<span class="sig-name descname"><span class="pre">create_ris</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#RIS_Opt.RIS_GUI.create_ris" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">create_ris</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.create_ris"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.create_ris" title="Link to this definition"></a></dt>
 <dd><p>Initializes the RIS with specified dimensions and position.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.customize_axes">
-<span class="sig-name descname"><span class="pre">customize_axes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#RIS_Opt.RIS_GUI.customize_axes" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">customize_axes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.customize_axes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.customize_axes" title="Link to this definition"></a></dt>
 <dd><p>Customizes the axes of a coverage map plot.</p>
 <p>This method adjusts the tick labels of the x and y axes based on the coverage map’s
-cell size and the outer wall thickness. The tick labels are rounded to one decimal 
+cell size and the outer wall thickness. The tick labels are rounded to one decimal
 place for clarity.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Input<span class="colon">:</span></dt>
@@ -331,13 +340,13 @@ place for clarity.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.data_file_selection">
-<span class="sig-name descname"><span class="pre">data_file_selection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#RIS_Opt.RIS_GUI.data_file_selection" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">data_file_selection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.data_file_selection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.data_file_selection" title="Link to this definition"></a></dt>
 <dd><p>Opens a file dialog for JSON data selection.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.draw_binary_poor_coverage_map">
-<span class="sig-name descname"><span class="pre">draw_binary_poor_coverage_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cm_no_ris_tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">avg_power_low_power_cells</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cov_ratio</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#RIS_Opt.RIS_GUI.draw_binary_poor_coverage_map" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">draw_binary_poor_coverage_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cm_no_ris_tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">avg_power_low_power_cells</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cov_ratio</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.draw_binary_poor_coverage_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.draw_binary_poor_coverage_map" title="Link to this definition"></a></dt>
 <dd><p>Generates a binary poor coverage map highlighting low-power cells.</p>
 <p>This method visualizes areas with poor coverage in red and acceptable coverage in blue.
 Walls (zero-power cells) are overlaid in white. The method also annotates the plot with
@@ -358,9 +367,9 @@ the selected power threshold, the average power of low-power cells, and the cove
 
 <dl class="py method">
 <dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.export_phase_profile">
-<span class="sig-name descname"><span class="pre">export_phase_profile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ris_pp_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#RIS_Opt.RIS_GUI.export_phase_profile" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">export_phase_profile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ris_pp_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.export_phase_profile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.export_phase_profile" title="Link to this definition"></a></dt>
 <dd><p>Exports a given RIS phase profile to a JSON file with a specified filename.</p>
-<p>This function takes a TensorFlow tensor representing the RIS phase profile, 
+<p>This function takes a TensorFlow tensor representing the RIS phase profile,
 converts it into a standard Python list format, and saves the data as a JSON file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Input<span class="colon">:</span></dt>
@@ -374,7 +383,7 @@ converts it into a standard Python list format, and saves the data as a JSON fil
 
 <dl class="py method">
 <dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.find_RIS_positions_on_wall">
-<span class="sig-name descname"><span class="pre">find_RIS_positions_on_wall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wall</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_size</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#RIS_Opt.RIS_GUI.find_RIS_positions_on_wall" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">find_RIS_positions_on_wall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wall</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_size</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.find_RIS_positions_on_wall"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.find_RIS_positions_on_wall" title="Link to this definition"></a></dt>
 <dd><p>Identifies valid RIS positions along a specified wall segment.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Input<span class="colon">:</span></dt>
@@ -401,7 +410,7 @@ converts it into a standard Python list format, and saves the data as a JSON fil
 
 <dl class="py method">
 <dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.find_best_configs_per_width">
-<span class="sig-name descname"><span class="pre">find_best_configs_per_width</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#RIS_Opt.RIS_GUI.find_best_configs_per_width" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">find_best_configs_per_width</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.find_best_configs_per_width"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.find_best_configs_per_width" title="Link to this definition"></a></dt>
 <dd><p>Identifies the top-performing configuration for each RIS width.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Input<span class="colon">:</span></dt>
@@ -415,7 +424,7 @@ converts it into a standard Python list format, and saves the data as a JSON fil
 
 <dl class="py method">
 <dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.find_optimal_configuration">
-<span class="sig-name descname"><span class="pre">find_optimal_configuration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">best_configs_per_width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">improvement_threshold</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#RIS_Opt.RIS_GUI.find_optimal_configuration" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">find_optimal_configuration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">best_configs_per_width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">improvement_threshold</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.find_optimal_configuration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.find_optimal_configuration" title="Link to this definition"></a></dt>
 <dd><p>Finds the optimal RIS configuration based on the improvement threshold criterion.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Input<span class="colon">:</span></dt>
@@ -450,13 +459,13 @@ converts it into a standard Python list format, and saves the data as a JSON fil
 
 <dl class="py method">
 <dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.get_num_positions">
-<span class="sig-name descname"><span class="pre">get_num_positions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#RIS_Opt.RIS_GUI.get_num_positions" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_num_positions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.get_num_positions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.get_num_positions" title="Link to this definition"></a></dt>
 <dd><p>Retrieves and validates the number of target points.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.hsv_plot_phase_profile">
-<span class="sig-name descname"><span class="pre">hsv_plot_phase_profile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">overall_phase_profile</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#RIS_Opt.RIS_GUI.hsv_plot_phase_profile" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">hsv_plot_phase_profile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">overall_phase_profile</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.hsv_plot_phase_profile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.hsv_plot_phase_profile" title="Link to this definition"></a></dt>
 <dd><p>Visualizes the RIS phase profile using HSV color mapping.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Input<span class="colon">:</span></dt>
@@ -470,28 +479,28 @@ converts it into a standard Python list format, and saves the data as a JSON fil
 
 <dl class="py method">
 <dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.load_scenario">
-<span class="sig-name descname"><span class="pre">load_scenario</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#RIS_Opt.RIS_GUI.load_scenario" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">load_scenario</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.load_scenario"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.load_scenario" title="Link to this definition"></a></dt>
 <dd><p>Loads the simulation scene based on the selected scenario and initializes the scene parameters.</p>
-<p>This method reads the currently selected scenario from the GUI (via <cite>self.scenario_var</cite>) and loads the corresponding scene using 
-the <cite>load_scene</cite> function. For some scenarios, it also sets up wall indices (<cite>self.zero_indices</cite>) and defines potential RIS 
+<p>This method reads the currently selected scenario from the GUI (via <cite>self.scenario_var</cite>) and loads the corresponding scene using
+the <cite>load_scene</cite> function. For some scenarios, it also sets up wall indices (<cite>self.zero_indices</cite>) and defines potential RIS
 placement positions (<cite>self.RIS_search_positions</cite>).</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.manual_pp_config">
-<span class="sig-name descname"><span class="pre">manual_pp_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#RIS_Opt.RIS_GUI.manual_pp_config" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">manual_pp_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.manual_pp_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.manual_pp_config" title="Link to this definition"></a></dt>
 <dd><p>Loads a manually provided phase profile from a JSON file and applies it to the RIS.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.manual_pp_file_selection">
-<span class="sig-name descname"><span class="pre">manual_pp_file_selection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#RIS_Opt.RIS_GUI.manual_pp_file_selection" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">manual_pp_file_selection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.manual_pp_file_selection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.manual_pp_file_selection" title="Link to this definition"></a></dt>
 <dd><p>Opens file dialog to select a manual phase profile JSON file.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.parse_config">
-<span class="sig-name descname"><span class="pre">parse_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#RIS_Opt.RIS_GUI.parse_config" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">parse_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.parse_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.parse_config" title="Link to this definition"></a></dt>
 <dd><p>Converts a configuration string to structured data.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Input<span class="colon">:</span></dt>
@@ -505,7 +514,7 @@ placement positions (<cite>self.RIS_search_positions</cite>).</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.plot_RIS_positions">
-<span class="sig-name descname"><span class="pre">plot_RIS_positions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">potential_RIS_pos</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#RIS_Opt.RIS_GUI.plot_RIS_positions" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">plot_RIS_positions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">potential_RIS_pos</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.plot_RIS_positions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.plot_RIS_positions" title="Link to this definition"></a></dt>
 <dd><p>Visualizes feasible RIS positions on the binary coverage map.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Input<span class="colon">:</span></dt>
@@ -519,9 +528,9 @@ placement positions (<cite>self.RIS_search_positions</cite>).</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.plot_selected_targets">
-<span class="sig-name descname"><span class="pre">plot_selected_targets</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#RIS_Opt.RIS_GUI.plot_selected_targets" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">plot_selected_targets</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.plot_selected_targets"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.plot_selected_targets" title="Link to this definition"></a></dt>
 <dd><p>Plots the binary poor coverage map with selected target points.</p>
-<p>This method visualizes the binary poor coverage map and overlays the selected 
+<p>This method visualizes the binary poor coverage map and overlays the selected
 target points using distinct markers for easy identification.</p>
 <p><strong>Workflow:</strong></p>
 <ol class="arabic simple">
@@ -538,7 +547,7 @@ target points using distinct markers for easy identification.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.preview_scenario">
-<span class="sig-name descname"><span class="pre">preview_scenario</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#RIS_Opt.RIS_GUI.preview_scenario" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">preview_scenario</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.preview_scenario"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.preview_scenario" title="Link to this definition"></a></dt>
 <dd><p>Previews the current scenario by rendering the scene with the transmitter and RIS (if present).</p>
 <p>This method configures and displays the simulation setup based on the selected scenario. It reads
 input parameters from the GUI, sets up the transmitter at the specified position, and optionally
@@ -552,7 +561,7 @@ adds a RIS if dimensions are provided. The scene is then rendered from one or mo
 
 <dl class="py method">
 <dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.reset_scene_after_RIS_computation">
-<span class="sig-name descname"><span class="pre">reset_scene_after_RIS_computation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#RIS_Opt.RIS_GUI.reset_scene_after_RIS_computation" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">reset_scene_after_RIS_computation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.reset_scene_after_RIS_computation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.reset_scene_after_RIS_computation" title="Link to this definition"></a></dt>
 <dd><p>Restores the original scene configuration after RIS feasible position analysis.</p>
 <p><strong>Workflow:</strong></p>
 <ul class="simple">
@@ -563,7 +572,7 @@ adds a RIS if dimensions are provided. The scene is then rendered from one or mo
 
 <dl class="py method">
 <dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.run_opt_algorithm">
-<span class="sig-name descname"><span class="pre">run_opt_algorithm</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#RIS_Opt.RIS_GUI.run_opt_algorithm" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">run_opt_algorithm</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.run_opt_algorithm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.run_opt_algorithm" title="Link to this definition"></a></dt>
 <dd><p>Executes optimization analysis using selected data file.</p>
 <p><strong>Workflow:</strong></p>
 <ol class="arabic simple">
@@ -575,7 +584,7 @@ adds a RIS if dimensions are provided. The scene is then rendered from one or mo
 
 <dl class="py method">
 <dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.select_below_threshold">
-<span class="sig-name descname"><span class="pre">select_below_threshold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_db</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#RIS_Opt.RIS_GUI.select_below_threshold" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">select_below_threshold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_db</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.select_below_threshold"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.select_below_threshold" title="Link to this definition"></a></dt>
 <dd><p>Selects coordinates and values from a 2D coverage map tensor that fall below a given minimum power threshold.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Input<span class="colon">:</span></dt>
@@ -596,22 +605,22 @@ adds a RIS if dimensions are provided. The scene is then rendered from one or mo
 
 <dl class="py method">
 <dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.set_preset_values">
-<span class="sig-name descname"><span class="pre">set_preset_values</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#RIS_Opt.RIS_GUI.set_preset_values" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">set_preset_values</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.set_preset_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.set_preset_values" title="Link to this definition"></a></dt>
 <dd><p>Sets preset parameter values for the GUI entries.</p>
-<p>This method resets and assigns default values to the frequency, minimum power threshold, 
-and coverage map cell size entry fields. Additionally, it sets the transmitter’s 
+<p>This method resets and assigns default values to the frequency, minimum power threshold,
+and coverage map cell size entry fields. Additionally, it sets the transmitter’s
 coordinates based on the currently selected scenario.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.set_target_points">
-<span class="sig-name descname"><span class="pre">set_target_points</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#RIS_Opt.RIS_GUI.set_target_points" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">set_target_points</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.set_target_points"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.set_target_points" title="Link to this definition"></a></dt>
 <dd><p>Determines target points manually or using K-means algorithm.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.show_phase_profiles">
-<span class="sig-name descname"><span class="pre">show_phase_profiles</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#RIS_Opt.RIS_GUI.show_phase_profiles" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">show_phase_profiles</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.show_phase_profiles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.show_phase_profiles" title="Link to this definition"></a></dt>
 <dd><p>Shows RIS phase profiles for each target point separately as well as the overall reflection coefficient phase profile.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Output<span class="colon">:</span></dt>
@@ -622,13 +631,13 @@ coordinates based on the currently selected scenario.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.toggle_manual_pp_entry">
-<span class="sig-name descname"><span class="pre">toggle_manual_pp_entry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">selected_option</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#RIS_Opt.RIS_GUI.toggle_manual_pp_entry" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">toggle_manual_pp_entry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">selected_option</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.toggle_manual_pp_entry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.toggle_manual_pp_entry" title="Link to this definition"></a></dt>
 <dd><p>Shows the manual phase profile file selection when ‘Manual entry’ is chosen.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.toggle_target_point_input">
-<span class="sig-name descname"><span class="pre">toggle_target_point_input</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#RIS_Opt.RIS_GUI.toggle_target_point_input" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">toggle_target_point_input</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.toggle_target_point_input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.toggle_target_point_input" title="Link to this definition"></a></dt>
 <dd><p>Toggles the target point input method between optimized and manual entry.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Workflow<span class="colon">:</span></dt>
@@ -651,10 +660,10 @@ coordinates based on the currently selected scenario.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.visualize_performance_vs_width">
-<span class="sig-name descname"><span class="pre">visualize_performance_vs_width</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">best_configs_per_width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimal_width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_ris_performance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#RIS_Opt.RIS_GUI.visualize_performance_vs_width" title="Link to this definition"></a></dt>
-<dd><p>Generates an annotated performance plot with configuration details, showing the relationship 
-between RIS width and performance. The plot includes the number of target points (N) and the 
-RIS position (x, y, z) for each configuration. It also highlights the optimal RIS configuration 
+<span class="sig-name descname"><span class="pre">visualize_performance_vs_width</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">best_configs_per_width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimal_width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_ris_performance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.visualize_performance_vs_width"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.visualize_performance_vs_width" title="Link to this definition"></a></dt>
+<dd><p>Generates an annotated performance plot with configuration details, showing the relationship
+between RIS width and performance. The plot includes the number of target points (N) and the
+RIS position (x, y, z) for each configuration. It also highlights the optimal RIS configuration
 if provided.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Input<span class="colon">:</span></dt>
@@ -665,7 +674,7 @@ if provided.</p>
 </ul>
 </dd>
 <dt class="field-even">Output<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>plot</strong> (<em>matplotlib.figure.Figure</em>): The function generates a plot showing RIS performance versus width, annotated with 
+<dd class="field-even"><p><strong>plot</strong> (<em>matplotlib.figure.Figure</em>): The function generates a plot showing RIS performance versus width, annotated with
 configuration details and optional optimal RIS configuration highlights.</p>
 </dd>
 </dl>
@@ -675,7 +684,7 @@ configuration details and optional optimal RIS configuration highlights.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="RIS_Opt.calculate_cdf">
-<span class="sig-prename descclassname"><span class="pre">RIS_Opt.</span></span><span class="sig-name descname"><span class="pre">calculate_cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tensor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#RIS_Opt.calculate_cdf" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">RIS_Opt.</span></span><span class="sig-name descname"><span class="pre">calculate_cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tensor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#calculate_cdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.calculate_cdf" title="Link to this definition"></a></dt>
 <dd><p>Calculates the cumulative distribution function (CDF) of power levels in a tensor.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Input<span class="colon">:</span></dt>
@@ -694,7 +703,7 @@ configuration details and optional optimal RIS configuration highlights.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="RIS_Opt.calculate_coverage_ratio">
-<span class="sig-prename descclassname"><span class="pre">RIS_Opt.</span></span><span class="sig-name descname"><span class="pre">calculate_coverage_ratio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_db</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#RIS_Opt.calculate_coverage_ratio" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">RIS_Opt.</span></span><span class="sig-name descname"><span class="pre">calculate_coverage_ratio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_db</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#calculate_coverage_ratio"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.calculate_coverage_ratio" title="Link to this definition"></a></dt>
 <dd><p>Calculates the coverage ratio of the scenario from a coverage map tensor based on a minimum power threshold.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Input<span class="colon">:</span></dt>
@@ -711,7 +720,7 @@ configuration details and optional optimal RIS configuration highlights.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="RIS_Opt.plot_multiple_cdfs">
-<span class="sig-prename descclassname"><span class="pre">RIS_Opt.</span></span><span class="sig-name descname"><span class="pre">plot_multiple_cdfs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cdfs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#RIS_Opt.plot_multiple_cdfs" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">RIS_Opt.</span></span><span class="sig-name descname"><span class="pre">plot_multiple_cdfs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cdfs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#plot_multiple_cdfs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.plot_multiple_cdfs" title="Link to this definition"></a></dt>
 <dd><p>Plots multiple cumulative distribution functions (CDFs) on the same figure.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Input<span class="colon">:</span></dt>
@@ -728,7 +737,7 @@ configuration details and optional optimal RIS configuration highlights.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="RIS_Opt.selection">
-<span class="sig-prename descclassname"><span class="pre">RIS_Opt.</span></span><span class="sig-name descname"><span class="pre">selection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coords</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#RIS_Opt.selection" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">RIS_Opt.</span></span><span class="sig-name descname"><span class="pre">selection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coords</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#selection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.selection" title="Link to this definition"></a></dt>
 <dd><p>Performs K-means clustering on a set of coordinates and returns the centroids to be appointed as the target points of the RIS.</p>
 <p>This function clusters the provided 3D coordinates based on their x and y values using
 K-means, and assigns the z-value of the first coordinate to all centroids.</p>
@@ -747,7 +756,7 @@ K-means, and assigns the z-value of the first coordinate to all centroids.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="RIS_Opt.to_db">
-<span class="sig-prename descclassname"><span class="pre">RIS_Opt.</span></span><span class="sig-name descname"><span class="pre">to_db</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#RIS_Opt.to_db" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">RIS_Opt.</span></span><span class="sig-name descname"><span class="pre">to_db</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#to_db"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.to_db" title="Link to this definition"></a></dt>
 <dd><p>Converts a power value from a linear scale to decibels (dB).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Input<span class="colon">:</span></dt>
@@ -765,13 +774,13 @@ K-means, and assigns the z-value of the first coordinate to all centroids.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="tutorials/basic_scenario_setup.html" class="btn btn-neutral float-left" title="Basic Scenario Configuration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tutorials/running_opt_algorithm.html" class="btn btn-neutral float-left" title="Running RIS joint optimization algorithm and drawing performance evaluation plots" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2025, Emre Kilcioglu.</p>
+    <p>&#169; Copyright 2025, Communication Systems (CoSy) Group/ICTEAM/UCLouvain by Emre Kilcioglu and Claude Oestges.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

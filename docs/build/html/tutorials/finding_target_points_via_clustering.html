@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Running RIS joint optimization algorithm and drawing performance evaluation plots &mdash; Ray-Tracing Based RIS Deployment Optimization for Coverage Enhancement  documentation</title>
+  <title>Finding RIS Target Points via K-means Clustering &mdash; Ray-Tracing Based RIS Deployment Optimization for Coverage Enhancement  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
@@ -19,8 +19,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="RIS Optimization Module" href="../api.html" />
-    <link rel="prev" title="Computing combined coverage map with custom RIS parameter specifications" href="importing_manual_phase_profile.html" /> 
+    <link rel="next" title="Computing Feasible RIS Positions" href="computing_feasible_RIS_positions.html" />
+    <link rel="prev" title="Computing Transmitter-Only Coverage Map" href="computing_tx_cov_map.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -52,12 +52,12 @@
 <li class="toctree-l1"><a class="reference internal" href="new_scenario_addition_to_the_code.html">New scenario addition to the code</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modifying_element_spacing_from_sionna_source_code.html">Modifying RIS element spacing (in proportion to the wavelength lambda) from Sionna source code</a></li>
 <li class="toctree-l1"><a class="reference internal" href="computing_tx_cov_map.html">Computing Transmitter-Only Coverage Map</a></li>
-<li class="toctree-l1"><a class="reference internal" href="finding_target_points_via_clustering.html">Finding RIS Target Points via K-means Clustering</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Finding RIS Target Points via K-means Clustering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="computing_feasible_RIS_positions.html">Computing Feasible RIS Positions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="showing_and_exporting_phase_profile.html">Computing combined coverage map with custom RIS parameter specifications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="computing_combined_coverage.html">Computing combined coverage map with custom RIS parameter specifications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="importing_manual_phase_profile.html">Computing combined coverage map with custom RIS parameter specifications</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Running RIS joint optimization algorithm and drawing performance evaluation plots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running_opt_algorithm.html">Running RIS joint optimization algorithm and drawing performance evaluation plots</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
 <ul>
@@ -78,9 +78,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Running RIS joint optimization algorithm and drawing performance evaluation plots</li>
+      <li class="breadcrumb-item active">Finding RIS Target Points via K-means Clustering</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/tutorials/running_opt_algorithm.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/tutorials/finding_target_points_via_clustering.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -88,22 +88,38 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="running-ris-joint-optimization-algorithm-and-drawing-performance-evaluation-plots">
-<h1>Running RIS joint optimization algorithm and drawing performance evaluation plots<a class="headerlink" href="#running-ris-joint-optimization-algorithm-and-drawing-performance-evaluation-plots" title="Link to this heading"></a></h1>
-<p>Step-by-step guide to:</p>
-<ul class="simple">
-<li><p>Loading prebuilt scenarios</p></li>
-<li><p>Setting transmitter parameters</p></li>
-<li><p>Computing baseline coverage maps</p></li>
-</ul>
+  <section id="finding-ris-target-points-via-k-means-clustering">
+<h1>Finding RIS Target Points via K-means Clustering<a class="headerlink" href="#finding-ris-target-points-via-k-means-clustering" title="Link to this heading"></a></h1>
+<p>This section explains how to find a specific number of RIS target points by applying <strong>K-means clustering</strong> to the low-power cells in the transmitter-only coverage map.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Before executing this step, make sure to first compute and visualize the <strong>transmitter-only coverage map</strong>. This is necessary to extract the coordinates of low-power cells.
+Please follow the <cite>Computing Transmitter-Only Coverage Map</cite> tutorial before proceeding.</p>
+</div>
+<p><strong>Steps to Perform K-means Clustering:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Set Number of Target Points</strong>:
+In the GUI, go to the labelframe <strong>“Manual trials”</strong> on the left side. Enter the desired number of RIS target points in the field labeled <strong>“Number of target points”</strong>.</p></li>
+<li><p><strong>Run Clustering Algorithm</strong>:
+Click the button <strong>“Find the target point(s) via clustering algorithm”</strong>. This will apply K-means clustering on the low-power cells and determine the optimal RIS target points.</p></li>
+<li><p><strong>View the Results</strong>:
+After execution, a <strong>binary poor coverage map</strong> is displayed. The selected RIS target points will be marked with <strong>green ‘X’ symbols</strong> on the map.
+An example output is shown below. Also, the coordinates of the selected target points are demonstrated under the labelframe <strong>“Messages”</strong>.</p></li>
+</ol>
+<figure class="align-center" id="finding-target-points-via-clustering-fig1" style="width: 80%">
+<img alt="../_images/finding_target_points_via_clustering_Fig1.png" src="../_images/finding_target_points_via_clustering_Fig1.png" />
+<figcaption>
+<p><span class="caption-text"><strong>Fig. 1</strong>: Binary poor coverage map with RIS target points marked as green ‘X’.</span><a class="headerlink" href="#finding-target-points-via-clustering-fig1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="importing_manual_phase_profile.html" class="btn btn-neutral float-left" title="Computing combined coverage map with custom RIS parameter specifications" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../api.html" class="btn btn-neutral float-right" title="RIS Optimization Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="computing_tx_cov_map.html" class="btn btn-neutral float-left" title="Computing Transmitter-Only Coverage Map" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="computing_feasible_RIS_positions.html" class="btn btn-neutral float-right" title="Computing Feasible RIS Positions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Running RIS joint optimization algorithm and drawing performance evaluation plots &mdash; Ray-Tracing Based RIS Deployment Optimization for Coverage Enhancement  documentation</title>
+  <title>Computing Feasible RIS Positions &mdash; Ray-Tracing Based RIS Deployment Optimization for Coverage Enhancement  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
@@ -19,8 +19,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="RIS Optimization Module" href="../api.html" />
-    <link rel="prev" title="Computing combined coverage map with custom RIS parameter specifications" href="importing_manual_phase_profile.html" /> 
+    <link rel="next" title="Computing combined coverage map with custom RIS parameter specifications" href="showing_and_exporting_phase_profile.html" />
+    <link rel="prev" title="Finding RIS Target Points via K-means Clustering" href="finding_target_points_via_clustering.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -53,11 +53,11 @@
 <li class="toctree-l1"><a class="reference internal" href="modifying_element_spacing_from_sionna_source_code.html">Modifying RIS element spacing (in proportion to the wavelength lambda) from Sionna source code</a></li>
 <li class="toctree-l1"><a class="reference internal" href="computing_tx_cov_map.html">Computing Transmitter-Only Coverage Map</a></li>
 <li class="toctree-l1"><a class="reference internal" href="finding_target_points_via_clustering.html">Finding RIS Target Points via K-means Clustering</a></li>
-<li class="toctree-l1"><a class="reference internal" href="computing_feasible_RIS_positions.html">Computing Feasible RIS Positions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Computing Feasible RIS Positions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="showing_and_exporting_phase_profile.html">Computing combined coverage map with custom RIS parameter specifications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="computing_combined_coverage.html">Computing combined coverage map with custom RIS parameter specifications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="importing_manual_phase_profile.html">Computing combined coverage map with custom RIS parameter specifications</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Running RIS joint optimization algorithm and drawing performance evaluation plots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running_opt_algorithm.html">Running RIS joint optimization algorithm and drawing performance evaluation plots</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
 <ul>
@@ -78,9 +78,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Running RIS joint optimization algorithm and drawing performance evaluation plots</li>
+      <li class="breadcrumb-item active">Computing Feasible RIS Positions</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/tutorials/running_opt_algorithm.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/tutorials/computing_feasible_RIS_positions.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -88,22 +88,60 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="running-ris-joint-optimization-algorithm-and-drawing-performance-evaluation-plots">
-<h1>Running RIS joint optimization algorithm and drawing performance evaluation plots<a class="headerlink" href="#running-ris-joint-optimization-algorithm-and-drawing-performance-evaluation-plots" title="Link to this heading"></a></h1>
-<p>Step-by-step guide to:</p>
+  <section id="computing-feasible-ris-positions">
+<h1>Computing Feasible RIS Positions<a class="headerlink" href="#computing-feasible-ris-positions" title="Link to this heading"></a></h1>
+<p>This section explains how to determine the feasible RIS positions based on the location of the transmitter and the RIS target point(s).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Before executing this step, you must first compute and visualize the <strong>transmitter-only coverage map</strong>.
+Please follow the <cite>Computing Transmitter-Only Coverage Map</cite> tutorial beforehand.</p>
+</div>
+<p>There are two ways to determine the feasible RIS positions:</p>
+<ol class="arabic simple">
+<li><p><strong>Using the Target Points from Clustering</strong></p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To use this option, you must first run the clustering algorithm to compute target points.
+Refer to the <cite>Finding RIS Target Points via K-means Clustering</cite> tutorial before proceeding.</p>
+</div>
+<p>In the GUI, select the radio button <strong>“Use the target point(s) found via clustering algorithm”</strong>. This will use the previously computed RIS target points to determine feasible RIS positions.</p>
+<ol class="arabic simple" start="2">
+<li><p><strong>Manually Entering Target Point Coordinates</strong></p></li>
+</ol>
 <ul class="simple">
-<li><p>Loading prebuilt scenarios</p></li>
-<li><p>Setting transmitter parameters</p></li>
-<li><p>Computing baseline coverage maps</p></li>
+<li><p>Go to the labelframe <strong>“Manual trials”</strong> on the left side of the GUI.</p></li>
+<li><p>In the field <strong>“Number of target points”</strong>, enter how many target points you want to specify.</p></li>
+<li><p>Select the checkbox <strong>“Enter the target point(s) manually”</strong>.</p></li>
+<li><p>A new input area will appear at the bottom of the same labelframe.</p></li>
+<li><p>Enter the <strong>x, y, z coordinates</strong> for each target point manually.</p></li>
 </ul>
+<p>Final Step: <strong>Compute Feasible RIS Positions</strong></p>
+<ul class="simple">
+<li><p>After selecting or entering the target points, press the button <strong>“Compute feasible RIS positions”</strong>.</p></li>
+<li><p>This will compute all feasible RIS positions that have <strong>line-of-sight (LoS)</strong> to both the transmitter and all RIS target points.</p></li>
+<li><p>After execution:</p>
+<ul>
+<li><p>A <strong>binary poor coverage map</strong> is displayed.</p></li>
+<li><p>Target points are shown as <strong>green ‘X’ symbols</strong>.</p></li>
+<li><p>Feasible RIS positions are marked with <strong>green star symbols</strong>.</p></li>
+</ul>
+</li>
+</ul>
+<figure class="align-center" id="computing-feasible-ris-positions-fig1" style="width: 80%">
+<img alt="../_images/computing_feasible_RIS_positions_Fig1.png" src="../_images/computing_feasible_RIS_positions_Fig1.png" />
+<figcaption>
+<p><span class="caption-text"><strong>Fig. 1</strong>: Binary poor coverage map showing RIS target points (green ‘X’) and feasible RIS positions (green stars).</span><a class="headerlink" href="#computing-feasible-ris-positions-fig1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="importing_manual_phase_profile.html" class="btn btn-neutral float-left" title="Computing combined coverage map with custom RIS parameter specifications" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../api.html" class="btn btn-neutral float-right" title="RIS Optimization Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="finding_target_points_via_clustering.html" class="btn btn-neutral float-left" title="Finding RIS Target Points via K-means Clustering" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="showing_and_exporting_phase_profile.html" class="btn btn-neutral float-right" title="Computing combined coverage map with custom RIS parameter specifications" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
