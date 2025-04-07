@@ -21,7 +21,6 @@ Welcome to the RAFINE project's RIS optimization tool documentation! This guide 
    tutorials/computing_feasible_RIS_positions
    tutorials/showing_and_exporting_phase_profile
    tutorials/computing_combined_coverage
-   tutorials/importing_manual_phase_profile
    tutorials/running_opt_algorithm
 
 .. toctree::

@@ -44,4 +44,4 @@ Final Step: **Compute Feasible RIS Positions**
    :figwidth: 80%
    :name: computing_feasible_RIS_positions_Fig1
 
-   **Fig. 1**: Binary poor coverage map showing RIS target points (green 'X') and feasible RIS positions (green stars).
+   **Fig. 1**: Binary poor coverage map showing RIS target points (green 'X') and feasible RIS positions (green stars)

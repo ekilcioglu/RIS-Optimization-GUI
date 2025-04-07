@@ -25,4 +25,4 @@ This section explains how to find a specific number of RIS target points by appl
    :figwidth: 80%
    :name: finding_target_points_via_clustering_Fig1
 
-   **Fig. 1**: Binary poor coverage map with RIS target points marked as green 'X'.
+   **Fig. 1**: Binary poor coverage map with RIS target points marked as green 'X'
