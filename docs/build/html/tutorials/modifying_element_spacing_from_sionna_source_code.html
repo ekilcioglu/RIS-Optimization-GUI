@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Modifying RIS element spacing (in proportion to the wavelength lambda) from Sionna source code &mdash; Ray-Tracing Based RIS Deployment Optimization for Coverage Enhancement  documentation</title>
+  <title>Modifying RIS Element Spacing (In Proportion to the Wavelength λ) from Sionna Source Code &mdash; Ray-Tracing Based RIS Deployment Optimization for Coverage Enhancement  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
@@ -48,15 +48,15 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="new_scenario_creation_via_blender.html">New scenario creation via Blender</a></li>
+<li class="toctree-l1"><a class="reference internal" href="new_scenario_creation_via_blender.html">New Scenario Creation via Blender</a></li>
 <li class="toctree-l1"><a class="reference internal" href="new_scenario_addition_to_the_code.html">New scenario addition to the code</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Modifying RIS element spacing (in proportion to the wavelength lambda) from Sionna source code</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Modifying RIS Element Spacing (In Proportion to the Wavelength λ) from Sionna Source Code</a></li>
 <li class="toctree-l1"><a class="reference internal" href="computing_tx_cov_map.html">Computing Transmitter-Only Coverage Map</a></li>
 <li class="toctree-l1"><a class="reference internal" href="finding_target_points_via_clustering.html">Finding RIS Target Points via K-means Clustering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="computing_feasible_RIS_positions.html">Computing Feasible RIS Positions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="showing_and_exporting_phase_profile.html">Showing and Exporting Phase Profiles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="computing_combined_coverage.html">Computing combined coverage map with custom RIS parameter specifications</a></li>
-<li class="toctree-l1"><a class="reference internal" href="running_opt_algorithm.html">Running RIS joint optimization algorithm and drawing performance evaluation plots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running_opt_algorithm.html">Running RIS Joint Optimization Algorithm and Drawing Performance Evaluation Plots</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
 <ul>
@@ -77,7 +77,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Modifying RIS element spacing (in proportion to the wavelength lambda) from Sionna source code</li>
+      <li class="breadcrumb-item active">Modifying RIS Element Spacing (In Proportion to the Wavelength λ) from Sionna Source Code</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/tutorials/modifying_element_spacing_from_sionna_source_code.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -87,13 +87,62 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="modifying-ris-element-spacing-in-proportion-to-the-wavelength-lambda-from-sionna-source-code">
-<h1>Modifying RIS element spacing (in proportion to the wavelength lambda) from Sionna source code<a class="headerlink" href="#modifying-ris-element-spacing-in-proportion-to-the-wavelength-lambda-from-sionna-source-code" title="Link to this heading"></a></h1>
-<p>Step-by-step guide to:</p>
+  <section id="modifying-ris-element-spacing-in-proportion-to-the-wavelength-from-sionna-source-code">
+<h1>Modifying RIS Element Spacing (In Proportion to the Wavelength λ) from Sionna Source Code<a class="headerlink" href="#modifying-ris-element-spacing-in-proportion-to-the-wavelength-from-sionna-source-code" title="Link to this heading"></a></h1>
+<p>This section explains how to modify the <strong>RIS element spacing</strong> from the default value of λ/2 to a custom value proportional to the wavelength λ by directly editing the Sionna source code.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The Sionna ray-tracing tool does not provide a direct way to modify the RIS element spacing via its standard interface.
+However, it can be changed by manually editing the source code.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Before making any changes, it’s important to create a backup of the original <cite>ris.py</cite> file.
+This allows you to easily restore it if needed.</p>
+</div>
+<ol class="arabic simple">
+<li><p><strong>Locate the `ris.py` File</strong></p></li>
+</ol>
+<ul>
+<li><p>Navigate to the following path where the Sionna ray-tracing source files are located:</p>
+<p><code class="docutils literal notranslate"><span class="pre">C:\Users\your_user_name\AppData\Local\Programs\Python\Python311\Lib\site-packages\sionna\rt</span></code></p>
+</li>
+<li><p>Open the file <strong>`ris.py`</strong> for editing.</p></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p><strong>Modify the RIS Element Spacing</strong></p></li>
+</ol>
+<p>Apply the following changes inside the <cite>ris.py</cite> file:</p>
+<ul>
+<li><p><strong>Search for</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">wavelength/tf.cast(2,</span></code></p>
+<p>(You should find three matches.)</p>
+<p><strong>Replace all occurrences with</strong>:</p>
+<p><code class="docutils literal notranslate"><span class="pre">wavelength/tf.cast(x,</span></code></p>
+<p>where <strong>x</strong> is the new denominator so that the element spacing becomes <strong>λ/x</strong> instead of <strong>λ/2</strong>.</p>
+</div></blockquote>
+</li>
+<li><p><strong>Search for</strong>:</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">tf.cast(0.5,</span> <span class="pre">self._rdtype)</span></code></p>
+<p>(You should find three matches.)</p>
+<p><strong>Replace all occurrences with</strong>:</p>
+<p><code class="docutils literal notranslate"><span class="pre">tf.cast(1/x,</span> <span class="pre">self._rdtype)</span></code></p>
+</div></blockquote>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Set <strong>x</strong> to your desired value.
+For example, to set the element spacing to λ/3, use <strong>x = 3</strong>.</p>
+</div>
+<ol class="arabic simple" start="3">
+<li><p><strong>Save and Restart</strong></p></li>
+</ol>
 <ul class="simple">
-<li><p>bla</p></li>
-<li><p>bla</p></li>
-<li><p>bla</p></li>
+<li><p>Save the modified <cite>ris.py</cite> file.</p></li>
+<li><p>Restart your Python environment to ensure that the changes take effect.</p></li>
 </ul>
 </section>
 
