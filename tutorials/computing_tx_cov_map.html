@@ -1,0 +1,168 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Computing Transmitter-Only Coverage Map &mdash; Ray-Tracing Based RIS Deployment Optimization for Coverage Enhancement  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Finding RIS Target Points via K-means Clustering" href="finding_target_points_via_clustering.html" />
+    <link rel="prev" title="Modifying RIS Element Spacing (In Proportion to the Wavelength λ) from Sionna Source Code" href="modifying_element_spacing_from_sionna_source_code.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Ray-Tracing Based RIS Deployment Optimization for Coverage Enhancement
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="new_scenario_creation_via_blender.html">New Scenario Creation via Blender</a></li>
+<li class="toctree-l1"><a class="reference internal" href="new_scenario_addition_to_the_code.html">New scenario addition to the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modifying_element_spacing_from_sionna_source_code.html">Modifying RIS Element Spacing (In Proportion to the Wavelength λ) from Sionna Source Code</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Computing Transmitter-Only Coverage Map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="finding_target_points_via_clustering.html">Finding RIS Target Points via K-means Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="computing_feasible_RIS_positions.html">Computing Feasible RIS Positions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="showing_and_exporting_phase_profile.html">Showing and Exporting Phase Profiles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="computing_combined_coverage.html">Computing combined coverage map with custom RIS parameter specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running_opt_algorithm.html">Running RIS Joint Optimization Algorithm and Drawing Performance Evaluation Plots</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">RIS Optimization Module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Ray-Tracing Based RIS Deployment Optimization for Coverage Enhancement</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Computing Transmitter-Only Coverage Map</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/tutorials/computing_tx_cov_map.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="computing-transmitter-only-coverage-map">
+<h1>Computing Transmitter-Only Coverage Map<a class="headerlink" href="#computing-transmitter-only-coverage-map" title="Link to this heading"></a></h1>
+<p>In this section, the transmitter-only coverage map is computed and visualized for the previously specified scenario and other chosen parameters. You can choose to preset parameters using the <strong>“Preset parameters”</strong> button to fill all related parameters, including:</p>
+<ul class="simple">
+<li><p><strong>Scene frequency</strong></p></li>
+<li><p><strong>TX position</strong></p></li>
+<li><p><strong>Minimum power threshold</strong></p></li>
+<li><p><strong>Coverage map cell size</strong></p></li>
+</ul>
+<p>However, before doing that, you need to load the predefined scenario under the labelframe <strong>“Scenario selection”</strong> by choosing the scenario from the list and pressing the <strong>“Load”</strong> button. If you wish to enter parameters manually, follow the instructions below:</p>
+<ol class="arabic simple">
+<li><p><strong>Scenario Selection</strong>:
+A pre-defined scenario is selected from the list. Press the <strong>“Load”</strong> button under the labelframe <strong>“Scenario selection”</strong> in the GUI.
+If the scenario is successfully loaded, the message <strong>“Scene loaded successfully!”</strong> will appear in the bottom right under the labelframe <strong>“Messages”</strong>.</p></li>
+<li><p><strong>Scene Frequency</strong>:
+The communication frequency of the scene is specified in Hz under the labelframe <strong>“Scene frequency (Hz)”</strong>. For example, you can specify <strong>5.8 GHz</strong> by typing <strong>“5.8e9”</strong>.</p></li>
+<li><p><strong>Transmitter (TX) Position</strong>:
+The transmitter coordinates (in meters) are entered under the labelframe <strong>“TX position (m) (x, y, z)”</strong>, starting with the x-coordinate as stated in the label.</p></li>
+<li><p><strong>Minimum Power Threshold</strong>:
+This threshold defines the acceptable signal power below which cells are considered low-power. You can type this value in dB under the labelframe <strong>“Minimum power threshold (dB)”</strong>.
+Please refer to our journal paper for more details.</p></li>
+<li><p><strong>Coverage Map Cell Size</strong>:
+The resolution of the coverage map can be defined by specifying the coverage map cell size (in meters) under the labelframe <strong>“Coverage map cell size (m)”</strong>.
+Be careful when defining this parameter since it depends on the predefined and loaded scenario. For example, if the scenario includes walls with a 0.4 m thickness, the coverage map cell size should be in ratio with that (e.g., 0.2 m or 0.4 m). A mismatch may result in incorrect interpretation of coverage map results due to the mixing of power levels inside the walls and non-wall areas.</p></li>
+</ol>
+<p>Before computing the transmitter-only coverage map, you can preview the scenario using the <strong>“Preview scenario”</strong> button.</p>
+<p>Once all the parameters are entered, press the <strong>“Compute TX-only coverage map”</strong> button. This may take some time depending on the resolution. After the computation, the following will be displayed:</p>
+<ul class="simple">
+<li><p><strong>Transmitter-only coverage map</strong> (Fig. 1)</p></li>
+<li><p><strong>Binary poor coverage map</strong> (Fig. 2), which shows the low-power cells in red (for further details, see the journal paper).</p></li>
+</ul>
+<p>Additionally, the values for the coverage ratio of the TX-only coverage map and the average power of the low-power cells will be displayed under the labelframe <strong>“Messages”</strong>.
+If the operation ends without errors, the message <strong>“TX-only coverage map and binary poor coverage map plotted successfully!”</strong> will appear.</p>
+<figure class="align-center" id="computing-tx-cov-map-fig1" style="width: 80%">
+<img alt="../_images/computing_tx_cov_map_Fig1.png" src="../_images/computing_tx_cov_map_Fig1.png" />
+<figcaption>
+<p><span class="caption-text"><strong>Fig. 1</strong>: Transmitter-only coverage map</span><a class="headerlink" href="#computing-tx-cov-map-fig1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="computing-tx-cov-map-fig2" style="width: 80%">
+<img alt="../_images/computing_tx_cov_map_Fig2.png" src="../_images/computing_tx_cov_map_Fig2.png" />
+<figcaption>
+<p><span class="caption-text"><strong>Fig. 2</strong>: Binary poor coverage map</span><a class="headerlink" href="#computing-tx-cov-map-fig2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="modifying_element_spacing_from_sionna_source_code.html" class="btn btn-neutral float-left" title="Modifying RIS Element Spacing (In Proportion to the Wavelength λ) from Sionna Source Code" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="finding_target_points_via_clustering.html" class="btn btn-neutral float-right" title="Finding RIS Target Points via K-means Clustering" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Communication Systems (CoSy) Group/ICTEAM/UCLouvain by Emre Kilcioglu and Claude Oestges.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

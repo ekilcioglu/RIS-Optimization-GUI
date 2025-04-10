@@ -1,0 +1,187 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Running RIS Joint Optimization Algorithm and Drawing Performance Evaluation Plots &mdash; Ray-Tracing Based RIS Deployment Optimization for Coverage Enhancement  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="RIS Optimization Module" href="../api.html" />
+    <link rel="prev" title="Computing combined coverage map with custom RIS parameter specifications" href="computing_combined_coverage.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Ray-Tracing Based RIS Deployment Optimization for Coverage Enhancement
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="new_scenario_creation_via_blender.html">New Scenario Creation via Blender</a></li>
+<li class="toctree-l1"><a class="reference internal" href="new_scenario_addition_to_the_code.html">New scenario addition to the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modifying_element_spacing_from_sionna_source_code.html">Modifying RIS Element Spacing (In Proportion to the Wavelength λ) from Sionna Source Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="computing_tx_cov_map.html">Computing Transmitter-Only Coverage Map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="finding_target_points_via_clustering.html">Finding RIS Target Points via K-means Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="computing_feasible_RIS_positions.html">Computing Feasible RIS Positions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="showing_and_exporting_phase_profile.html">Showing and Exporting Phase Profiles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="computing_combined_coverage.html">Computing combined coverage map with custom RIS parameter specifications</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Running RIS Joint Optimization Algorithm and Drawing Performance Evaluation Plots</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">RIS Optimization Module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Ray-Tracing Based RIS Deployment Optimization for Coverage Enhancement</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Running RIS Joint Optimization Algorithm and Drawing Performance Evaluation Plots</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/tutorials/running_opt_algorithm.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="running-ris-joint-optimization-algorithm-and-drawing-performance-evaluation-plots">
+<h1>Running RIS Joint Optimization Algorithm and Drawing Performance Evaluation Plots<a class="headerlink" href="#running-ris-joint-optimization-algorithm-and-drawing-performance-evaluation-plots" title="Link to this heading"></a></h1>
+<p>This tutorial explains how to run the RIS joint optimization algorithm and how to draw performance evaluation plots after obtaining all performance metric results of all possible configurations.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Before executing this step, you must first compute and visualize the <strong>transmitter-only coverage map</strong>.
+Please follow the <cite>Computing Transmitter-Only Coverage Map</cite> tutorial beforehand.</p>
+</div>
+<ol class="arabic simple">
+<li><p><strong>Choose Phase Profile Approach</strong></p></li>
+</ol>
+<ul class="simple">
+<li><p>Select the desired phase profile approach from the dropdown next to the textlabel <strong>“Choose phase profile approach”</strong>.</p></li>
+<li><dl class="simple">
+<dt>If <strong>“Manual entry”</strong> is selected:</dt><dd><ul>
+<li><p>A new menu  appears at the bottom of the GUI under the labelframe <strong>“Select manual phase profile file (.json)”</strong>.</p></li>
+<li><p>Click the <strong>“Browse”</strong> button to select the phase profile <cite>.json</cite> file.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p><strong>Enter the Parameter Boundaries</strong></p></li>
+</ol>
+<ul class="simple">
+<li><p>Enter the lowest and highest number of target points, along with the step size for the search, under the labelframe <strong>“Number of target point interval (N_lower, N_upper, N_step)”</strong>, which is located under <strong>“Optimization algorithm”</strong>.</p></li>
+<li><p>Enter the RIS height under <strong>“RIS height (m)”</strong>.</p></li>
+<li><p>Enter the lowest and highest RIS widths, along with the step size for the search, under <strong>“RIS width interval (m) (W_RIS_lower, W_RIS_upper, W_RIS_step)”</strong>.</p></li>
+<li><dl class="simple">
+<dt>Choose a metric computation technique under the labelframe <strong>“Metric computation technique”</strong>:</dt><dd><ul>
+<li><p>If <strong>“Using coverage map”</strong> is chosen, the algorithm computes the full coverage map for each RIS configuration (more accurate but slower).</p></li>
+<li><p>If <strong>“Using individual path computation”</strong> is chosen, the algorithm only computes the power levels at previously identified low-power cells (faster).</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<ol class="arabic simple" start="3">
+<li><p><strong>Compute performance metrics</strong></p></li>
+</ol>
+<p>Click the button <strong>“Compute performance metrics for all N, W_RIS, r_RIS”</strong> to compute all performance metrics across all RIS configurations, including variations in the number of target points, RIS widths, and feasible RIS positions.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>This operation can take a considerable amount of time.
+Please do not close the program until the operation finishes or you see an error in the Python interpreter or under the labelframe <strong>“Messages”</strong>!</p>
+</div>
+<ol class="arabic simple" start="4">
+<li><p><strong>Draw Performance Evaluation Plots</strong></p></li>
+</ol>
+<p>At the end of Step 3, all performance metric results along with the corresponding RIS configurations will be automatically exported as a <cite>.json</cite> file in the root directory of the RIS optimization framework’s source code.</p>
+<p>To visualize the best configuration considering a performance improvement threshold:</p>
+<ul class="simple">
+<li><p>Select the <cite>.json</cite> data file under the labelframe <strong>“Select data file (.json)”</strong> by clicking the <strong>“Browse”</strong> button.</p></li>
+<li><p>Enter a performance improvement threshold (dB) value under the labelframe <strong>“Performance improvement threshold (dB)”</strong>. This threshold defines the minimum performance gain required to justify increasing the RIS width.</p></li>
+<li><p>Click the button <strong>“Show sub-optimal optimization parameters (N^opt, W_RIS^opt, r^opt)”</strong> to visualize the results.</p></li>
+</ul>
+<p>An example of the resulting figure is shown below:</p>
+<figure class="align-center" id="running-opt-algorithm-fig1" style="width: 80%">
+<img alt="../_images/running_opt_algorithm_Fig1.png" src="../_images/running_opt_algorithm_Fig1.png" />
+<figcaption>
+<p><span class="caption-text"><strong>Fig. 1</strong>: Performance evaluation plot</span><a class="headerlink" href="#running-opt-algorithm-fig1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="computing_combined_coverage.html" class="btn btn-neutral float-left" title="Computing combined coverage map with custom RIS parameter specifications" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../api.html" class="btn btn-neutral float-right" title="RIS Optimization Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Communication Systems (CoSy) Group/ICTEAM/UCLouvain by Emre Kilcioglu and Claude Oestges.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
