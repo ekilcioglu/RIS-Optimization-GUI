@@ -373,14 +373,54 @@ class RIS_GUI:
         self.ris_size_frame.pack(pady=5)
 
         # Show phase profiles button
-        self.button_show_phase_profile = tk.Button(self.manual_trials_labelframe, text="Show phase profile figures",
+        self.button_show_phase_profile = tk.Button(self.manual_trials_labelframe, text="Show and export phase profiles",
                                                   command=self.show_phase_profiles)
         self.button_show_phase_profile.pack(pady=5)
 
         # Compute combined coverage map button
         self.button_combined_coverage = tk.Button(self.manual_trials_labelframe, text="Compute combined coverage map (TX + RIS)",
                                                   command=self.compute_combined_coverage)
-        self.button_combined_coverage.pack(pady=5)        
+        self.button_combined_coverage.pack(pady=5)
+
+        # Sensitivity analysis
+        self.sensitivity_labelframe = tk.LabelFrame(self.manual_trials_labelframe, text="Sensitivity analysis", padx=6, pady=6)
+
+        self.delta_labelframe = tk.LabelFrame(self.sensitivity_labelframe, text="Maximum magnitude of phase error (in degrees) \n (delta_lower, delta_upper, delta_step)", padx=6, pady=6)
+        self.delta_labelframe.grid_columnconfigure((0, 1, 2), weight=1)
+        self.delta_lower = tk.Entry(self.delta_labelframe, width=5)
+        self.delta_upper = tk.Entry(self.delta_labelframe, width=5)
+        self.delta_step = tk.Entry(self.delta_labelframe, width=5)
+        self.delta_lower.grid(row=0, column=0, padx=5)
+        self.delta_upper.grid(row=0, column=1, padx=5)
+        self.delta_step.grid(row=0, column=2, padx=5)        
+        self.delta_labelframe.pack(pady=5)
+
+        self.num_realization_frame = tk.Frame(self.sensitivity_labelframe)
+        self.label_num_realization = tk.Label(self.num_realization_frame, text="Number of realizations:")
+        self.entry_num_realization = tk.Entry(self.num_realization_frame, width=5)
+
+        self.label_num_realization.grid(row=0, column=0, padx=5)
+        self.entry_num_realization.grid(row=0, column=1, padx=5)
+
+        self.num_realization_frame.pack(pady=5)
+
+        self.sensitivity_checkbox_frame = tk.Frame(self.sensitivity_labelframe)
+        self.gradient_based_checkbox_var = tk.BooleanVar()
+        self.distance_based_checkbox_var = tk.BooleanVar()
+        self.manual_entry_checkbox_var = tk.BooleanVar()
+        self.gradient_based_checkbox = tk.Checkbutton(self.sensitivity_checkbox_frame, text="For gradient-based", variable=self.gradient_based_checkbox_var)
+        self.distance_based_checkbox = tk.Checkbutton(self.sensitivity_checkbox_frame, text="For distance-based", variable=self.distance_based_checkbox_var)
+        self.manual_entry_checkbox = tk.Checkbutton(self.sensitivity_checkbox_frame, text="For manual entry", variable=self.manual_entry_checkbox_var)
+        self.gradient_based_checkbox.grid(row=0, column=0, padx=5)
+        self.distance_based_checkbox.grid(row=0, column=1, padx=5)
+        self.manual_entry_checkbox.grid(row=1, column=0, columnspan=2, padx=5)
+
+        self.sensitivity_checkbox_frame.pack(pady=5)
+
+        self.button_sensitivity = tk.Button(self.sensitivity_labelframe, text="Start sensitivity analysis", command=self.sensitivity_analysis)
+        self.button_sensitivity.pack(pady=5)        
+
+        self.sensitivity_labelframe.pack(pady=5)
         
         self.manual_trials_labelframe.grid(row=0, column=0, padx=5)
 
@@ -859,7 +899,7 @@ class RIS_GUI:
                 interpolation='none', alpha=1.0)
         
         self.customize_axes(cm_no_ris_tensor, ax2)
-        #ax2.set_title(f"Binary Poor Coverage Map")
+        ax2.set_title(f"Binary Poor Coverage Map")
         
         # Add colorbar with labels for only "Acceptable" and "Poor"
         cbar = fig2.colorbar(cax2, ax=ax2, boundaries=bounds, ticks=[0, 1])
@@ -875,8 +915,8 @@ class RIS_GUI:
     
         # Add text to the bottom-right corner of the binary poor coverage map
         text_str = (
-            #f"Selected power threshold: {float(self.entry_threshold.get()) + 29.0} dBm\n"
-            f"Selected power threshold: -110 dB\n"
+            f"Selected power threshold: {float(self.entry_threshold.get()) - 1} dB\n"
+            #f"Selected power threshold: -110 dB\n"
             f"Av. power of low-power cells: {avg_power_low_power_cells:.2f} dB\n"
             f"Coverage ratio: {cov_ratio:.2f} %"
         )
@@ -1021,7 +1061,7 @@ class RIS_GUI:
         # Binary poor coverage map
         fig2 = self.draw_binary_poor_coverage_map(self.cm_no_ris.path_gain[0], self.avg_power_low_power_cells_no_ris, self.cov_ratio_no_ris)
         fig2.show()
-        self.info_label.config(text=self.info_label.cget("text") + "\nTX-only coverage map and binary poor coverage map plotted successfully ✅")
+        self.info_label.config(text=self.info_label.cget("text") + "\nTX-only coverage map and binary poor coverage map plotted successfully! ✅")
 
     def toggle_target_point_input(self):
         """
@@ -1417,7 +1457,6 @@ class RIS_GUI:
 
         # self.RX_coord_set entry
         if not self.pp_var.get() == "Manual entry":
-            print("a")
             self.set_target_points()
 
         # Creating the RIS
@@ -1440,8 +1479,8 @@ class RIS_GUI:
         
         # Plot the combined coverage map
         cm_ris.show(show_tx=False, show_rx=False, show_ris=False, vmin=-130, vmax=-40)
-        #plt.title("Coverage with RIS")
-        plt.title("")
+        plt.title("Coverage with RIS")
+        #plt.title("")
         self.customize_axes(cm_ris.path_gain[0], plt.gca())
 
         # Visualize the transmitter
@@ -1467,7 +1506,7 @@ class RIS_GUI:
         plt.figure()
         plt.imshow(RIS_coverage_gain, origin='lower', vmin=0, vmax=50)
         plt.colorbar(label='Gain (dB)')
-        #plt.title("RIS Coverage Gain")
+        plt.title("RIS Coverage Gain")
         self.customize_axes(RIS_coverage_gain, plt.gca())
 
         # Visualize the transmitter
@@ -1494,7 +1533,7 @@ class RIS_GUI:
         # Plot the combined CDFs
         plot_multiple_cdfs(self.cdfs, self.cdf_labels)
       
-        self.info_label.config(text= self.info_label.cget("text") + "\nCombined coverage map and RIS coverage gain plotted successfully! ✅")
+        self.info_label.config(text= self.info_label.cget("text") + "\nCombined coverage is analyzed successfully! ✅")
 
         # Get the minimum power threshold from the GUI
         try:
@@ -1633,6 +1672,134 @@ class RIS_GUI:
         plt.colorbar(label='Gain (dB)')
         plt.title("RIS Coverage Gain")
         self.customize_axes(RIS_coverage_gain, plt.gca())'''
+    
+    def sensitivity_analysis(self):
+        """
+        Performs sensitivity analysis on the RIS-assisted performance under phase noise.
+
+        Based on user selection, analyzes Gradient-based, Distance-based, and/or Manual Entry approaches.
+        Adds random uniform phase noise within a specified delta range and measures the average received power
+        over low-power zones across multiple realizations.
+
+        Plots the average performance versus phase error magnitude, including error bars for variability.
+        Also compares with the no-RIS baseline performance.
+        """        
+        def add_phase_error(phase_profile, delta):
+            """
+            Adds uniform random phase error in range [-delta, delta] to each element
+            of a given RIS phase profile.
+            """
+            error = tf.random.uniform(
+                shape=tf.shape(phase_profile),
+                minval=-delta,
+                maxval=delta,
+                dtype=phase_profile.dtype
+            )
+            return phase_profile + error
+
+        def configure_ris_custom(method_name):
+            """Internal helper to configure RIS according to a given method name."""
+            if not self.pp_var.get() == "Manual entry":
+                num_positions = int(self.entry_num_target.get())
+                source, target = [self.tx_position] * num_positions, self.RX_coord_set[:num_positions]
+
+            if method_name == "Gradient-based":
+                self.ris.phase_gradient_reflector(source, target)
+            elif method_name == "Distance-based":
+                self.ris.focusing_lens(source, target)
+            elif method_name == "Manual entry":
+                self.manual_pp_config()
+
+        # Check selected methods
+        methods = []
+        colors = []
+        if self.gradient_based_checkbox_var.get():
+            methods.append('Gradient-based')
+            colors.append('blue')
+        if self.distance_based_checkbox_var.get():
+            methods.append('Distance-based')
+            colors.append('green')
+        if self.manual_entry_checkbox_var.get():
+            methods.append('Manual entry')
+            colors.append('orange')
+
+        # self.RX_coord_set entry
+        if not self.pp_var.get() == "Manual entry":
+            self.set_target_points()
+
+        # Create RIS
+        self.create_ris()
+
+        # Visualization setup
+        plt.figure()
+
+        # Loop over selected methods
+        for idx, method in enumerate(methods):
+            deltas = []
+            avg_powers = []
+            std_powers = []
+
+            for delta in range(int(self.delta_lower.get()), int(self.delta_upper.get()), int(self.delta_step.get())):  # delta in degrees
+                delta_rad = np.deg2rad(delta)
+                realization_results = []
+
+                for _ in range(int(self.entry_num_realization.get())):
+                    configure_ris_custom(method)
+
+                    # Add phase error
+                    self.ris.phase_profile.values = add_phase_error(self.ris.phase_profile.values, delta_rad)
+
+                    # Compute coverage map
+                    cm_ris = self.scene.coverage_map(
+                        cm_cell_size=[float(self.cov_map_cell_size.get()), float(self.cov_map_cell_size.get())],
+                        num_samples=int(2e7),
+                        max_depth=6,
+                        los=True,
+                        reflection=True,
+                        diffraction=False,
+                        ris=True
+                    )
+
+                    # Optional post-processing
+                    self.brush_cov_map(cm_ris, self.zero_indices)
+
+                    # Average received power in low-power zones
+                    avg_power = tf.reduce_mean(to_db(tf.gather_nd(cm_ris.path_gain[0], self.low_power_cell_map_indices)))
+                    realization_results.append(avg_power.numpy())
+
+                # After all realizations
+                deltas.append(delta)
+                avg_powers.append(np.mean(realization_results))
+                std_powers.append(np.std(realization_results))
+
+            # Plot with error bars
+            plt.errorbar(
+                deltas,
+                avg_powers,
+                yerr=std_powers,
+                fmt='-o',
+                color=colors[idx],
+                capsize=5,
+                label=f'{method}'
+            )
+
+        # Add baseline line for no-RIS case
+        plt.axhline(
+            y=self.avg_power_low_power_cells_no_ris,
+            color='red',
+            linestyle='--',
+            linewidth=1.5,
+            label='No RIS baseline case'
+        )
+
+        # Final plot settings
+        plt.xlabel('Maximum magnitude of phase error (degrees)')
+        plt.ylabel(r'$\mathcal{M}$ (dB)')
+        plt.title('Sensitivity of Performance to RIS Phase Error')
+        plt.grid(True)
+        plt.legend()
+        plt.tight_layout()
+        plt.show()
 
     def compute_opt_par(self):
         """
