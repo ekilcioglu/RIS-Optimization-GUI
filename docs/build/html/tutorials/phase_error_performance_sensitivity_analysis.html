@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Showing and Exporting Phase Profiles &mdash; Ray-Tracing Based RIS Deployment Optimization for Coverage Enhancement  documentation</title>
+  <title>Phase Error Performance Sensitivity Analysis &mdash; Ray-Tracing Based RIS Deployment Optimization for Coverage Enhancement  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
@@ -16,11 +16,12 @@
       <script src="../_static/documentation_options.js?v=5929fcd5"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Computing combined coverage map with custom RIS parameter specifications" href="computing_combined_coverage.html" />
-    <link rel="prev" title="Computing Feasible RIS Positions" href="computing_feasible_RIS_positions.html" /> 
+    <link rel="next" title="Running RIS Joint Optimization Algorithm and Drawing Performance Evaluation Plots" href="running_opt_algorithm.html" />
+    <link rel="prev" title="Computing combined coverage map with custom RIS parameter specifications" href="computing_combined_coverage.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -54,9 +55,13 @@
 <li class="toctree-l1"><a class="reference internal" href="computing_tx_cov_map.html">Computing Transmitter-Only Coverage Map</a></li>
 <li class="toctree-l1"><a class="reference internal" href="finding_target_points_via_clustering.html">Finding RIS Target Points via K-means Clustering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="computing_feasible_RIS_positions.html">Computing Feasible RIS Positions</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Showing and Exporting Phase Profiles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="showing_and_exporting_phase_profile.html">Showing and Exporting Phase Profiles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="computing_combined_coverage.html">Computing combined coverage map with custom RIS parameter specifications</a></li>
-<li class="toctree-l1"><a class="reference internal" href="phase_error_performance_sensitivity_analysis.html">Phase Error Performance Sensitivity Analysis</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Phase Error Performance Sensitivity Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#simulation-procedure">Simulation Procedure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-perform-phase-error-sensitivity-analysis-in-the-gui">How to Perform Phase Error Sensitivity Analysis in the GUI</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="running_opt_algorithm.html">Running RIS Joint Optimization Algorithm and Drawing Performance Evaluation Plots</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
@@ -78,9 +83,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Showing and Exporting Phase Profiles</li>
+      <li class="breadcrumb-item active">Phase Error Performance Sensitivity Analysis</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/tutorials/showing_and_exporting_phase_profile.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/tutorials/phase_error_performance_sensitivity_analysis.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -88,19 +93,47 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="showing-and-exporting-phase-profiles">
-<h1>Showing and Exporting Phase Profiles<a class="headerlink" href="#showing-and-exporting-phase-profiles" title="Link to this heading"></a></h1>
-<p>This tutorial explains how to visualize the assigned RIS phase profiles for each RIS target point, display the overall reflection coefficient phase profile, and export them as <cite>.json</cite> files.</p>
+  <section id="phase-error-performance-sensitivity-analysis">
+<h1>Phase Error Performance Sensitivity Analysis<a class="headerlink" href="#phase-error-performance-sensitivity-analysis" title="Link to this heading"></a></h1>
+<p>This tutorial explains how to analyze the sensitivity of performance when phase errors are introduced to the RIS elements within a specified delta range.</p>
+<section id="simulation-procedure">
+<h2>Simulation Procedure<a class="headerlink" href="#simulation-procedure" title="Link to this heading"></a></h2>
+<p>In this analysis, the following steps are followed:</p>
+<ol class="arabic">
+<li><p><strong>Ideal Phase Profile Calculation</strong>:
+The ideal phase profile for the RIS is computed for a given target configuration using the selected phase profile approach (e.g., Gradient-based, distance-based, or manual entry).</p></li>
+<li><p><strong>Introduction of Phase Errors</strong>:
+A uniform random phase error is added independently to each RIS element. The error for each element is sampled from a uniform distribution within <span class="math notranslate nohighlight">\([-\Delta, +\Delta]\)</span> radians:</p>
+<div class="math notranslate nohighlight">
+\[\epsilon_{n,m} \sim \mathcal{U}(-\Delta, +\Delta)\]</div>
+<p>where <span class="math notranslate nohighlight">\(\epsilon_{n,m}\)</span> is the random phase error introduced to the <span class="math notranslate nohighlight">\((n,m)\)</span>-th RIS element, and <span class="math notranslate nohighlight">\(\Delta\)</span> is the maximum magnitude of the error (in radians, user-specified in degrees).</p>
+<p>The resulting phase profile after introducing phase errors becomes:</p>
+<div class="math notranslate nohighlight">
+\[\varphi_{n,m}^{\text{with error}} = \varphi_{n,m}^{\text{ideal}} + \epsilon_{n,m}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\varphi_{n,m}^{\text{ideal}}\)</span> denotes the original (ideal) phase value.</p>
+</li>
+<li><p><strong>Coverage Map Computation</strong>:
+Using the phase profile with errors, the coverage map is computed via a ray-tracing simulation.</p></li>
+<li><p><strong>Performance Metric Evaluation</strong>:
+The performance metric is evaluated as the average received power over the predefined low-power cells.</p></li>
+<li><p><strong>Monte Carlo Averaging</strong>:
+Multiple realizations (random draws of phase errors) are performed for each delta value, and the average and standard deviation of the performance metric are computed across these realizations to obtain a statistically meaningful performance degradation curve.</p></li>
+<li><p><strong>Visualization</strong>:
+The average performance metric is plotted against the maximum phase error <span class="math notranslate nohighlight">\(\Delta\)</span> (in degrees), with error bars showing the standard deviation across realizations.</p></li>
+</ol>
+</section>
+<section id="how-to-perform-phase-error-sensitivity-analysis-in-the-gui">
+<h2>How to Perform Phase Error Sensitivity Analysis in the GUI<a class="headerlink" href="#how-to-perform-phase-error-sensitivity-analysis-in-the-gui" title="Link to this heading"></a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Before executing this step, you must first compute and visualize the transmitter-only coverage map.
+<p>Before executing this step, you must first compute and visualize the <strong>transmitter-only coverage map</strong>.
 Please follow the <cite>Computing Transmitter-Only Coverage Map</cite> tutorial beforehand.</p>
 </div>
 <ol class="arabic">
 <li><p><strong>Define RIS Target Points</strong></p>
 <p>There are two ways to define the RIS target points:</p>
 <ul>
-<li><p><strong>Using the Target Points from Clustering</strong></p>
+<li><p><strong>Using the Target Points from Clustering</strong>:</p>
 <blockquote>
 <div><div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -110,7 +143,7 @@ Refer to the <cite>Finding RIS Target Points via K-means Clustering</cite> tutor
 <p>In the GUI, select the radio button <strong>“Use the target point(s) found via clustering algorithm”</strong>.</p>
 </div></blockquote>
 </li>
-<li><p><strong>Manually Entering Target Point Coordinates</strong></p>
+<li><p><strong>Manually Entering Target Point Coordinates</strong>:</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>Go to the labelframe <strong>“Manual trials”</strong> on the left side of the GUI.</p></li>
@@ -133,73 +166,31 @@ Refer to the <cite>Finding RIS Target Points via K-means Clustering</cite> tutor
 <p>To determine feasible RIS positions in the scene, refer to the <cite>Computing Feasible RIS Positions</cite> tutorial.</p>
 </div>
 </li>
-<li><p><strong>Choose Phase Profile Approach</strong></p>
-<ul>
-<li><p>Select the desired phase profile approach from the dropdown next to the textlabel <strong>“Choose phase profile approach”</strong>.</p></li>
-<li><p>If <strong>“Manual entry”</strong> is selected:,</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>A new menu  appears at the bottom of the GUI under the labelframe <strong>“Select manual phase profile file (.json)”</strong>.</p></li>
-<li><p>Click the <strong>“Browse”</strong> button to select the phase profile <cite>.json</cite> file.</p></li>
-</ul>
-</div></blockquote>
-</li>
-</ul>
-</li>
-<li><p><strong>Show and Export Phase Profiles</strong></p>
-<ul>
-<li><p>Press the button <strong>“Show and export phase profiles”</strong>.</p></li>
-<li><p>After execution:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>The phase profiles for each RIS target point are visualized in both 3D and 2D formats.</p></li>
-<li><p>The overall reflection coefficient phase profile is also displayed.</p></li>
-<li><p>The results are exported into two <cite>.json</cite> files: <em>phase_profiles.json</em> (individual target point phase profiles) and <em>overall_reflection_coefficient.json</em> (overall phase profile)</p></li>
-</ul>
-</div></blockquote>
-</li>
+<li><p><strong>Conduct Sensitivity Analysis</strong></p>
+<ul class="simple">
+<li><p>Under the labelframe <strong>“Sensitivity analysis”</strong>, enter the minimum, maximum, and step values of <span class="math notranslate nohighlight">\(\Delta\)</span> (in degrees) to define the maximum phase error.</p></li>
+<li><p>Specify the number of realizations to consider for each delta value. The final performance value is the average across all realizations.</p></li>
+<li><p>Select which phase profile approaches (Gradient-based, distance-based, or manual) will be analyzed.</p></li>
+<li><p>Press the button <strong>“Start sensitivity analysis”</strong> to initiate the procedure.</p></li>
+<li><p>After execution, a figure will be generated showing the average performance metric versus <span class="math notranslate nohighlight">\(\Delta\)</span> (in degrees) for each selected approach, including error bars indicating standard deviation across random realizations. An example figure is shown below.</p></li>
 </ul>
 </li>
 </ol>
-<p>An example scenario consisting of two RIS target points is shown below:</p>
-<figure class="align-center" id="showing-and-exporting-phase-profile-fig1" style="width: 80%">
-<img alt="../_images/showing_and_exporting_phase_profile_Fig1.png" src="../_images/showing_and_exporting_phase_profile_Fig1.png" />
+<figure class="align-center" id="phase-error-performance-sensitivity-analysis-fig1" style="width: 80%">
+<img alt="tutorials/phase_error_performance_sensitivity_analysis_Fig1.png" src="tutorials/phase_error_performance_sensitivity_analysis_Fig1.png" />
 <figcaption>
-<p><span class="caption-text"><strong>Fig. 1</strong>: Phase profile for RX-1 with 3D visualization</span><a class="headerlink" href="#showing-and-exporting-phase-profile-fig1" title="Link to this image"></a></p>
+<p><span class="caption-text"><strong>Fig. 1</strong>: Change in performance metric <span class="math notranslate nohighlight">\(\mathcal{M}\)</span> (dB) versus phase error magnitude <span class="math notranslate nohighlight">\(\Delta\)</span> (degrees) for different phase profile approaches</span><a class="headerlink" href="#phase-error-performance-sensitivity-analysis-fig1" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<figure class="align-center" id="showing-and-exporting-phase-profile-fig2" style="width: 80%">
-<img alt="../_images/showing_and_exporting_phase_profile_Fig2.png" src="../_images/showing_and_exporting_phase_profile_Fig2.png" />
-<figcaption>
-<p><span class="caption-text"><strong>Fig. 2</strong>: Phase profile for RX-1 with 2D visualization</span><a class="headerlink" href="#showing-and-exporting-phase-profile-fig2" title="Link to this image"></a></p>
-</figcaption>
-</figure>
-<figure class="align-center" id="showing-and-exporting-phase-profile-fig3" style="width: 80%">
-<img alt="../_images/showing_and_exporting_phase_profile_Fig3.png" src="../_images/showing_and_exporting_phase_profile_Fig3.png" />
-<figcaption>
-<p><span class="caption-text"><strong>Fig. 3</strong>: Phase profile for RX-2 with 3D visualization</span><a class="headerlink" href="#showing-and-exporting-phase-profile-fig3" title="Link to this image"></a></p>
-</figcaption>
-</figure>
-<figure class="align-center" id="showing-and-exporting-phase-profile-fig4" style="width: 80%">
-<img alt="../_images/showing_and_exporting_phase_profile_Fig4.png" src="../_images/showing_and_exporting_phase_profile_Fig4.png" />
-<figcaption>
-<p><span class="caption-text"><strong>Fig. 4</strong>: Phase profile for RX-2 with 2D visualization</span><a class="headerlink" href="#showing-and-exporting-phase-profile-fig4" title="Link to this image"></a></p>
-</figcaption>
-</figure>
-<figure class="align-center" id="showing-and-exporting-phase-profile-fig5" style="width: 80%">
-<img alt="../_images/showing_and_exporting_phase_profile_Fig5.png" src="../_images/showing_and_exporting_phase_profile_Fig5.png" />
-<figcaption>
-<p><span class="caption-text"><strong>Fig. 5</strong>: Overall phase profile with 2D visualization</span><a class="headerlink" href="#showing-and-exporting-phase-profile-fig5" title="Link to this image"></a></p>
-</figcaption>
-</figure>
+</section>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="computing_feasible_RIS_positions.html" class="btn btn-neutral float-left" title="Computing Feasible RIS Positions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="computing_combined_coverage.html" class="btn btn-neutral float-right" title="Computing combined coverage map with custom RIS parameter specifications" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="computing_combined_coverage.html" class="btn btn-neutral float-left" title="Computing combined coverage map with custom RIS parameter specifications" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="running_opt_algorithm.html" class="btn btn-neutral float-right" title="Running RIS Joint Optimization Algorithm and Drawing Performance Evaluation Plots" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
