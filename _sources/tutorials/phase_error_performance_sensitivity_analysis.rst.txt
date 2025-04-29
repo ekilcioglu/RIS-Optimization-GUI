@@ -84,7 +84,7 @@ How to Perform Phase Error Sensitivity Analysis in the GUI
    - Specify the number of realizations to consider for each delta value. The final performance value is the average across all realizations.
    - Select which phase profile approaches (Gradient-based, distance-based, or manual) will be analyzed.
    - Press the button **"Start sensitivity analysis"** to initiate the procedure.
-   - After execution, a figure will be generated showing the average performance metric versus :math:`\Delta` (in degrees) for each selected approach, including error bars indicating standard deviation across random realizations. An example figure is shown below.
+   - After execution, a figure will be generated showing the average performance metric versus :math:`\Delta` (in degrees) for each selected approach, including error bars indicating standard deviation across random realizations. Two example figures are shown below for two different minimum power threshold considerations.
    
 
 .. figure:: phase_error_performance_sensitivity_analysis_Fig1.png
@@ -92,4 +92,11 @@ How to Perform Phase Error Sensitivity Analysis in the GUI
    :figwidth: 80%
    :name: phase_error_performance_sensitivity_analysis_Fig1
 
-   **Fig. 1**: Change in performance metric :math:`\mathcal{M}` (dB) versus phase error magnitude :math:`\Delta` (degrees) for different phase profile approaches
+   **Fig. 1**: Changes in performance metric :math:`\mathcal{M}` (dB) versus phase error magnitude :math:`\Delta` (degrees) for different phase profile approaches with -100 dB minimum power threshold
+
+.. figure:: phase_error_performance_sensitivity_analysis_Fig2.png
+   :align: center
+   :figwidth: 80%
+   :name: phase_error_performance_sensitivity_analysis_Fig2
+
+   **Fig. 1**: Changes in performance metric :math:`\mathcal{M}` (dB) versus phase error magnitude :math:`\Delta` (degrees) for different phase profile approaches with -110 dB minimum power threshold
