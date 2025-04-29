@@ -33,7 +33,7 @@ Before computing the transmitter-only coverage map, you can preview the scenario
 Once all the parameters are entered, press the **"Compute TX-only coverage map"** button. This may take some time depending on the resolution. After the computation, the following will be displayed:
 
 - **Transmitter-only coverage map** (Fig. 1)
-- **Binary poor coverage map** (Fig. 2), which shows the low-power cells in red (for further details, see the journal paper).
+- **Binary poor coverage map** (Fig. 2), which shows the low-power cells in red (for further details, see our journal paper).
 
 Additionally, the values for the coverage ratio of the TX-only coverage map and the average power of the low-power cells will be displayed under the labelframe **"Messages"**.  
 If the operation ends without errors, the message **"TX-only coverage map and binary poor coverage map plotted successfully!"** will appear.

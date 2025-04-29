@@ -1,10 +1,10 @@
 Installation Guide
 ##################
 
-This guide explains how to set up the necessary dependencies to run our RIS optimization tool. Since the GUI source code is provided on GitHub, you only need to install the required Python packages.
+This guide explains how to set up the necessary dependencies to run our RIS optimization tool. Since the GUI source code is provided on GitHub publicly, only required Python packages need to be installed.
 
 Prerequisites
--------------
+=============
 
 Ensure you have **Python 3.8+** installed. You can check your Python version by running:
 
@@ -13,7 +13,7 @@ Ensure you have **Python 3.8+** installed. You can check your Python version by 
    python --version
 
 Installing Required Packages
-----------------------------
+============================
 
 To install all necessary dependencies, run the following command:
 
@@ -28,7 +28,7 @@ Since Sionna ray-tracing tool does not have the RIS support yet for their new v1
    pip install sionna==0.19.2
 
 Package Explanations
---------------------
+====================
 
 - **numpy**: Needed for numerical operations and data manipulation.
 
@@ -41,7 +41,7 @@ Package Explanations
 - **tensorflow**: Required for `sionna`, handles deep learning computations.
 
 Notes
------
+=====
 
 - `tkinter` is included with Python, so no separate installation is required.
 

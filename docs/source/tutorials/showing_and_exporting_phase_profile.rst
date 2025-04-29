@@ -12,7 +12,7 @@ This tutorial explains how to visualize the assigned RIS phase profiles for each
 
    There are two ways to define the RIS target points:
 
-   - **Using the Target Points from Clustering**
+   - **Using the Target Points from Clustering**:
 
       .. note::
 
@@ -21,7 +21,7 @@ This tutorial explains how to visualize the assigned RIS phase profiles for each
 
       In the GUI, select the radio button **"Use the target point(s) found via clustering algorithm"**.
 
-   - **Manually Entering Target Point Coordinates**
+   - **Manually Entering Target Point Coordinates**:
 
       - Go to the labelframe **"Manual trials"** on the left side of the GUI.
       - Enter the number of RIS target points in the field **"Number of target points"**
@@ -41,7 +41,7 @@ This tutorial explains how to visualize the assigned RIS phase profiles for each
 3. **Choose Phase Profile Approach**
 
    - Select the desired phase profile approach from the dropdown next to the textlabel **"Choose phase profile approach"**.
-   - If **"Manual entry"** is selected:,
+   - If **"Manual entry"** is selected:
 
       - A new menu  appears at the bottom of the GUI under the labelframe **"Select manual phase profile file (.json)"**.
       - Click the **"Browse"** button to select the phase profile `.json` file.

@@ -8,7 +8,7 @@ This tutorial explains how to determine the feasible RIS positions based on the 
    Before executing this step, you must first compute and visualize the transmitter-only coverage map.  
    Please follow the `Computing Transmitter-Only Coverage Map` tutorial beforehand.
 
-There are two ways to determine the feasible RIS positions:
+There are two ways to define the RIS target points:
 
 1. **Using the Target Points from Clustering:**
 

@@ -1,11 +1,11 @@
-Computing combined coverage map with custom RIS parameter specifications
+Computing Combined Coverage Map with Custom RIS Parameters
 ########################################################################
 
 This tutorial explains how to compute a combined coverage map, taking into account the contributions of both the transmitter and the placed RIS.
 
 .. note::
 
-   Before executing this step, you must first compute and visualize the **transmitter-only coverage map**.  
+   Before executing this step, you must first compute and visualize the transmitter-only coverage map.  
    Please follow the `Computing Transmitter-Only Coverage Map` tutorial beforehand.
 
 1. **Define RIS Target Points**

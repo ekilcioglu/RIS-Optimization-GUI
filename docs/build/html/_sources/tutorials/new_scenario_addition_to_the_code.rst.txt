@@ -49,4 +49,8 @@ This tutorial explains how to add a newly created scenario to the source code of
 - **zero_indices** must accurately reflect where the walls are in your new scenario.
 - **RIS_search_positions** should correctly define the candidate walls where the RIS can be placed.
 - Adjust the camera positions carefully in `preview_scenario()` for a better visual verification.
+- If there are some gaps in the coverage maps for the newly created scenario, you can increase the number of samples of the coverage map plots by following the procedure below:
+
+  - Search for **`self.scene.coverage_map(`** in the source code, where you will find 4 matches.
+  - You can increase **`num_samples`** value of each match to obtain better coverage maps.
 

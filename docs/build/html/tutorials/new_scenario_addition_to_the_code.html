@@ -55,7 +55,7 @@
 <li class="toctree-l1"><a class="reference internal" href="finding_target_points_via_clustering.html">Finding RIS Target Points via K-means Clustering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="computing_feasible_RIS_positions.html">Computing Feasible RIS Positions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="showing_and_exporting_phase_profile.html">Showing and Exporting Phase Profiles</a></li>
-<li class="toctree-l1"><a class="reference internal" href="computing_combined_coverage.html">Computing combined coverage map with custom RIS parameter specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="computing_combined_coverage.html">Computing Combined Coverage Map with Custom RIS Parameters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="phase_error_performance_sensitivity_analysis.html">Phase Error Performance Sensitivity Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="running_opt_algorithm.html">Running RIS Joint Optimization Algorithm and Drawing Performance Evaluation Plots</a></li>
 </ul>
@@ -138,6 +138,12 @@ This helps visually verify the placements of the transmitter and RIS.</p></li>
 <li><p><strong>zero_indices</strong> must accurately reflect where the walls are in your new scenario.</p></li>
 <li><p><strong>RIS_search_positions</strong> should correctly define the candidate walls where the RIS can be placed.</p></li>
 <li><p>Adjust the camera positions carefully in <cite>preview_scenario()</cite> for a better visual verification.</p></li>
+<li><p>If there are some gaps in the coverage maps for the newly created scenario, you can increase the number of samples of the coverage map plots by following the procedure below:</p>
+<ul>
+<li><p>Search for <strong>`self.scene.coverage_map(`</strong> in the source code, where you will find 4 matches.</p></li>
+<li><p>You can increase <strong>`num_samples`</strong> value of each match to obtain better coverage maps.</p></li>
+</ul>
+</li>
 </ul>
 </section>
 

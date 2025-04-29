@@ -31,12 +31,12 @@ This tutorial explains how to create a new 3D scenario in Blender and make it co
 
    .. note::
 
-      Refer to the list of compatible radio material names here:  
+      Refer to the list of Sionna-compatible radio material names here:  
       https://nvlabs.github.io/sionna/rt/api/radio_materials.html
 
    .. important::
 
-      If you are using **Sionna version 1.0.x** (which our RIS optimization tool uses),  
+      If you are using **Sionna version 0.19.2** (which our RIS optimization tool uses),  
       you must add the prefix **"itu_"** to the material name.
 
       For example:
