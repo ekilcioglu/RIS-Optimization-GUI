@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.5) (preloaded format=pdflatex 2023.9.12)  1 MAY 2025 23:48
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.5) (preloaded format=pdflatex 2023.9.12)  5 MAY 2025 02:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -583,12 +583,12 @@ Overfull \vbox (12.75748pt too high) has occurred while \output is active []
 
 
 [8 <./Sim_Results/GUI.png (PNG copy)> <./Sim_Results/TX_coverage_map.png>]
-<Sim_Results/Binary_Cov_Map_N_2_-100dB.png, id=56, 360.6273pt x 300.6432pt>
+<Sim_Results/Binary_Cov_Map_N_2_-100dB.png, id=56, 362.0727pt x 300.6432pt>
 File: Sim_Results/Binary_Cov_Map_N_2_-100dB.png Graphic file (type png)
 <use Sim_Results/Binary_Cov_Map_N_2_-100dB.png>
 Package pdftex.def Info: Sim_Results/Binary_Cov_Map_N_2_-100dB.png  used on inp
 ut line 347.
-(pdftex.def)             Requested size: 120.54135pt x 100.48785pt.
+(pdftex.def)             Requested size: 120.54135pt x 100.08876pt.
 <Sim_Results/Binary_Cov_Map_N_3_-100dB.png, id=57, 360.6273pt x 300.6432pt>
 File: Sim_Results/Binary_Cov_Map_N_3_-100dB.png Graphic file (type png)
 <use Sim_Results/Binary_Cov_Map_N_3_-100dB.png>
@@ -911,7 +911,7 @@ Programs/MiKTeX/fonts/type1/urw/helvetic/uhvr8a.pfb><C:/Users/emrek/AppData/Loc
 al/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/emrek/AppData/Loc
 al/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/emrek/AppData/Loc
 al/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on ojap.pdf (15 pages, 1698572 bytes).
+Output written on ojap.pdf (15 pages, 1696478 bytes).
 PDF statistics:
  215 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
