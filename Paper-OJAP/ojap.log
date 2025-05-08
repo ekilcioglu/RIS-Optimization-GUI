@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.5) (preloaded format=pdflatex 2023.9.12)  6 MAY 2025 14:10
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.5) (preloaded format=pdflatex 2023.9.12)  7 MAY 2025 01:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -743,32 +743,32 @@ on input line 447.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-<Sim_Results/Binary_Cov_Map_N_2_-110dB.png, id=93, 362.7954pt x 300.6432pt>
+<Sim_Results/Binary_Cov_Map_N_2_-110dB.png, id=93, 362.0727pt x 300.6432pt>
 File: Sim_Results/Binary_Cov_Map_N_2_-110dB.png Graphic file (type png)
 <use Sim_Results/Binary_Cov_Map_N_2_-110dB.png>
 Package pdftex.def Info: Sim_Results/Binary_Cov_Map_N_2_-110dB.png  used on inp
 ut line 461.
-(pdftex.def)             Requested size: 120.54135pt x 99.8915pt.
-<Sim_Results/Binary_Cov_Map_N_3_-110dB.png, id=94, 361.35pt x 300.6432pt>
+(pdftex.def)             Requested size: 120.54135pt x 100.08876pt.
+<Sim_Results/Binary_Cov_Map_N_3_-110dB.png, id=94, 362.0727pt x 302.0886pt>
 File: Sim_Results/Binary_Cov_Map_N_3_-110dB.png Graphic file (type png)
 <use Sim_Results/Binary_Cov_Map_N_3_-110dB.png>
 Package pdftex.def Info: Sim_Results/Binary_Cov_Map_N_3_-110dB.png  used on inp
 ut line 463.
-(pdftex.def)             Requested size: 120.54135pt x 100.2906pt.
-<Sim_Results/Binary_Cov_Map_N_4_-110dB.png, id=95, 362.0727pt x 300.6432pt>
+(pdftex.def)             Requested size: 120.54135pt x 100.56995pt.
+<Sim_Results/Binary_Cov_Map_N_4_-110dB.png, id=95, 362.0727pt x 302.0886pt>
 File: Sim_Results/Binary_Cov_Map_N_4_-110dB.png Graphic file (type png)
 <use Sim_Results/Binary_Cov_Map_N_4_-110dB.png>
 Package pdftex.def Info: Sim_Results/Binary_Cov_Map_N_4_-110dB.png  used on inp
 ut line 467.
-(pdftex.def)             Requested size: 120.54135pt x 100.08876pt.
-<Sim_Results/Binary_Cov_Map_N_5_-110dB.png, id=96, 362.0727pt x 302.0886pt>
+(pdftex.def)             Requested size: 120.54135pt x 100.56995pt.
+<Sim_Results/Binary_Cov_Map_N_5_-110dB.png, id=96, 362.0727pt x 301.3659pt>
 File: Sim_Results/Binary_Cov_Map_N_5_-110dB.png Graphic file (type png)
 <use Sim_Results/Binary_Cov_Map_N_5_-110dB.png>
 Package pdftex.def Info: Sim_Results/Binary_Cov_Map_N_5_-110dB.png  used on inp
 ut line 469.
-(pdftex.def)             Requested size: 120.54135pt x 100.56995pt.
+(pdftex.def)             Requested size: 120.54135pt x 100.32936pt.
 
-Underfull \vbox (badness 1924) has occurred while \output is active []
+Underfull \vbox (badness 1688) has occurred while \output is active []
 
 
 Overfull \vbox (12.859pt too high) has occurred while \output is active []
@@ -920,7 +920,7 @@ Programs/MiKTeX/fonts/type1/urw/helvetic/uhvr8a.pfb><C:/Users/emrek/AppData/Loc
 al/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/emrek/AppData/Loc
 al/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/emrek/AppData/Loc
 al/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on ojap.pdf (15 pages, 1762878 bytes).
+Output written on ojap.pdf (15 pages, 1763837 bytes).
 PDF statistics:
  216 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
