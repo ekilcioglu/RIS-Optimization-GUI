@@ -94,7 +94,7 @@ The main contributions of this paper can be summarized as follows:
 The remainder of this paper is organized as follows: Section~\ref{sec:ris_integration_into_RT} explains the integration of the RIS into the ray-tracing tool. Section~\ref{sec:phase_profile_section} provides a detailed mathematical modeling of two RIS phase profile configuration methods for steering beams towards desired target points. Section~\ref{algo_section} describes the proposed joint optimization framework, including the underlying ray-tracing methodology and the optimization algorithm. Extensive simulation results are presented in Section~\ref{sec:results}. Finally, Section~\ref{sec:conclusion} concludes the paper and outlines future research directions.
 
 \section{RIS INTEGRATION INTO THE RAY-TRACING TOOL} \label{sec:ris_integration_into_RT}
-This section outlines the integration of a RIS into the ray-tracing simulation tool. We choose to work with NVIDIA's open-source Sionna ray-tracing tool \cite{sionna} due to its user-friendly structure and the ability to change internal parameters of the tool according to our use.
+This section outlines the integration of a RIS into the ray-tracing simulation tool. While various commercial ray-tracing tools exist, we select NVIDIA’s open-source Sionna ray-tracing (RT) tool \cite{sionna} for its flexibility and computational efficiency. Commercial tools such as Wireless InSite \cite{wireless_insite} offer high-fidelity electromagnetic modeling but are typically closed-source, CPU-bound, and require per-seat licensing. In contrast, Sionna is Apache-licensed, open-source, and implemented using TensorFlow, enabling native GPU acceleration and seamless Python integration. This allows tens of thousands of rays to be processed in parallel, significantly reducing simulation runtime for large-scale indoor deployments. Furthermore, the open nature of Sionna allows us to modify internal ray-tracing parameters and extend the tool to suit RIS modeling requirements. These features make it particularly well suited for our RIS deployment optimization framework.
 
 In an indoor environment, transmitter-only coverage maps reveal blind spots which are the areas with inadequate signal quality caused by obstacles such as walls or large furniture that block LoS paths between the transmitter and these regions. To address this, a RIS can be strategically positioned to create virtual LoS paths, reflecting signals from the transmitter to these blind spots. By configuring the RIS to direct reflected signals into these areas, the average signal power in blind spots and the overall coverage ratio can be improved through the combined contributions of the transmitter and RIS. In this paper, the considered performance metric is the average power of these blind spots, and the aim is to maximize this metric by optimizing the position, size, and target point selection of the RIS.
 
@@ -438,7 +438,7 @@ As expected, high-power-level cells remain unaffected by the RIS placement since
 \subsubsection{COMBINED COVERAGE ANALYSIS WITH RIS}
 To further evaluate the impact of RIS placement, we analyze the combined coverage maps of the transmitter and the RIS for a specific configuration. Fig.s \ref{comb_cov_gradient} and \ref{comb_cov_distance} illustrate the results for the gradient-based and distance-based approaches, respectively.
 
-Fig. \ref{comb_cov_gradient} presents the results for the gradient-based approach, where the RIS is configured with a size of $1 \times 2$ m$^2$ and positioned at its sub-optimal location, as identified in Fig. \ref{perf_metric_RIS_width_-100dB_gradient_height_1m}. The RIS serves two target points, marked by red `$\times$' signs, while its placement is indicated by a star symbol. The combined coverage map in Fig. \ref{comb_cov_gradient}-a demonstrates that the RIS successfully enhances the power levels at the target points while also improving signal strength along the beam paths. To better quantify this enhancement, the RIS coverage gain in Fig. \ref{comb_cov_gradient}-b highlights significant power level improvements, particularly at the far edge of the lower hallway and within the internal room where the target points are located. Finally, Fig. \ref{comb_cov_gradient}-c shows the updated binary poor coverage map, demonstrating that nearly all cells achieve sufficient power coverage, with a coverage ratio of $99.58\%$ and an increased average power of low-power cells reaching $-76.05$ dB compared to a coverage ratio of $81.54\%$ and an average power of low-power cells of $-112.58$ dB in the transmitter-only coverage map.
+Fig. \ref{comb_cov_gradient} presents the results for the gradient-based approach, where the RIS is configured with a size of $1 \times 2$ m$^2$ and positioned at its sub-optimal location, as identified in Fig. \ref{perf_metric_RIS_width_-100dB_gradient_height_1m}. The RIS serves two target points, marked by red `$\times$' signs, while its placement is indicated by a star symbol. The combined coverage map in Fig. \ref{comb_cov_gradient}-a demonstrates that the RIS successfully enhances the power levels at the target points while also improving signal strength along the beam paths. To better quantify this enhancement, the RIS coverage gain in Fig. \ref{comb_cov_gradient}-b highlights significant power level improvements, particularly at the far edge of the lower hallway and within the internal room where the target points are located. Finally, Fig. \ref{comb_cov_gradient}-c shows the updated binary poor coverage map, demonstrating that nearly all cells achieve sufficient power coverage, with a coverage ratio of $99.58\%$ and an increased average power of low-power cells reaching $-76.05$ dB compared to a coverage ratio of $81.54\%$ and an average power of low-power cells of $-112.58$ dB in the transmitter-only coverage map. Figs. \ref{comb_cov_gradient}-d and \ref{comb_cov_gradient}-e illustrate the per-tile phase profiles generated by the gradient-based method for each target point in this RIS configuration. As seen, the method produces a linear phase ramp across the RIS surface to steer the reflected beams toward the assigned target directions. In this scenario, RX-1 refers to the receiver point inside the internal room, while RX-2 is located in the lower corridor region.
 
 \begin{figure}
 	\centering
@@ -450,12 +450,18 @@ Fig. \ref{comb_cov_gradient} presents the results for the gradient-based approac
 	\hfill
 	\includegraphics[width=0.48\linewidth]{Sim_Results/New_Binary_Cov_Map_1x2_Gradient.png}
 	
-	\hspace{10pt} b) RIS coverage gain \hspace{30pt} c) Updated binary poor \\ \hspace{140pt} coverage map
+	\hspace{10pt} b) RIS coverage gain \hspace{30pt} c) Updated binary poor \\ \hspace{140pt} coverage map \\[5pt]
+
+	\includegraphics[width=0.48\linewidth]{Sim_Results/pp_-100dB_gradient_RX1.png}
+	\hfill
+	\includegraphics[width=0.48\linewidth]{Sim_Results/pp_-100dB_gradient_RX2.png}
+	
+	\hspace{10pt} d) Phase profile for RX-1 \hspace{15pt} e) Phase profile for RX-2
 	\caption{Combined coverage analysis for a RIS of size $1 \times 2$ m$^2$ using the gradient-based approach, with a minimum power threshold of $-100$ dB}
 	\label{comb_cov_gradient}
 \end{figure}
 
-A similar analysis is conducted for the distance-based approach, as illustrated in Fig. \ref{comb_cov_distance}. The RIS configuration follows the sub-optimal parameters obtained from the optimization algorithm. As shown in Fig. \ref{comb_cov_distance}, the distance-based approach directs energy to narrow regions around the target points. Unlike the gradient-based approach, this method does not significantly enhance power levels outside the focused target point areas. Consequently, some low-power cells, particularly in the large blind spot of the lower hallway, remain uncovered despite the RIS placement. This outcome is specific to the given scenario, where a large blind spot region exists, however, in cases with smaller blind spot areas, the distance-based approach could also yield superior results. Nevertheless, the binary poor coverage map in Fig. \ref{comb_cov_distance}-c indicates that the average power of low-power cells increases to $-89.6$ dB, with a gain of nearly $23$ dB, while the coverage ratio of the scene reaches $96.31\%$.
+A similar analysis is conducted for the distance-based approach, as illustrated in Fig. \ref{comb_cov_distance}. The RIS configuration follows the sub-optimal parameters obtained from the optimization algorithm. As shown in Fig. \ref{comb_cov_distance}, the distance-based approach directs energy to narrow regions around the target points. Unlike the gradient-based approach, this method does not significantly enhance power levels outside the focused target point areas. Consequently, some low-power cells, particularly in the large blind spot of the lower hallway, remain uncovered despite the RIS placement. This outcome is specific to the given scenario, where a large blind spot region exists, however, in cases with smaller blind spot areas, the distance-based approach could also yield superior results. Nevertheless, the binary poor coverage map in Fig. \ref{comb_cov_distance}-c indicates that the average power of low-power cells increases to $-89.6$ dB, with a gain of nearly $23$ dB, while the coverage ratio of the scene reaches $96.31\%$. Figs. \ref{comb_cov_distance}-d, \ref{comb_cov_distance}-e, and \ref{comb_cov_distance}-f show the per-tile phase profiles generated by the distance-based method for each of the three optimally selected target points in this configuration. Unlike the gradient-based method, the distance-based method produces nonuniform and focused phase distributions that precisely align the total TX–RIS–target path lengths. This results in energy being concentrated narrowly around each target point, making the method particularly effective for small or well-isolated blind-spot regions.
 
 This highlights the trade-offs between the two approaches. While the gradient-based approach provides a more distributed power enhancement, the distance-based approach focuses energy more precisely on the assigned target points. The performance of these methods may also depend on the scenario, as we will explore in the next subsection by lowering the minimum power threshold to $-110$ dB to focus on the weakest signal regions.
 
@@ -470,6 +476,16 @@ This highlights the trade-offs between the two approaches. While the gradient-ba
 	\includegraphics[width=0.48\linewidth]{Sim_Results/New_Binary_Cov_Map_1x2_Distance.png}
 	
 	\hspace{10pt} b) RIS coverage gain \hspace{30pt} c) Updated binary poor \\ \hspace{140pt} coverage map
+	\includegraphics[width=0.48\linewidth]{Sim_Results/pp_-100dB_distance_RX1.png}
+	\hfill
+	\includegraphics[width=0.48\linewidth]{Sim_Results/pp_-100dB_distance_RX2.png}
+
+	\hspace{10pt} d) Phase profile for RX-1 \hspace{15pt} e) Phase profile for RX-2 \\[5pt]
+	
+	\includegraphics[width=0.49\linewidth]{Sim_Results/pp_-100dB_distance_RX3.png}
+	
+	f) Phase profile for RX-3
+	
 	\caption{Combined coverage analysis for a RIS of size $1 \times 2$ m$^2$ using the distance-based approach, with a minimum power threshold of $-100$ dB}
 	\label{comb_cov_distance}
 \end{figure}
@@ -609,6 +625,7 @@ This paper presents a novel ray-tracing based joint optimization framework for R
 	\bibitem{RT3} J. Huang, C. -X. Wang, Y. Sun, J. Huang, and F. -C. Zheng, “A novel ray tracing based 6G RIS wireless channel model and RIS deployment studies in indoor scenarios," \textit{IEEE 33rd Int. Symp. Pers., Indoor Mobile Radio Commun. (PIMRC)}, Kyoto, Japan, 2022, pp. 884-889.
 	\bibitem{emre_claude_eucap_paper} E. Kilcioglu and C. Oestges, “Ray-tracing based algorithms for indoor RIS optimization and coverage enhancement," \textit{to appear in 19th European Conf. on Antennas Propag. (EuCAP)}, Stockholm, Sweden, 2025 pp. 1-5.
 	\bibitem{sionna} J. Hoydis \textit{et al.}, “Sionna RT: Differentiable Ray Tracing for Radio Propagation Modeling," \textit{IEEE Globecom Workshops (GC Wkshps)}, Kuala Lumpur, Malaysia, 2023, pp. 317-321.
+	\bibitem{wireless_insite} Remcom, Inc., Wireless InSite [Computer software], State College, PA, USA. [Online]. Available: https://www.remcom.com/wireless-insite
 	\bibitem{ITU} ITU-R, “Recommendation ITU-R P.2040-2: Effects of building materials and structures on radiowave propagation above about 100 MHz," Sep. 2021. [Online]. Available: https://www.itu.int/rec/R-REC-P. 2040-2-202109-I
 \end{thebibliography}
 

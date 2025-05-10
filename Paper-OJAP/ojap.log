@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.9) (preloaded format=pdflatex 2023.9.21)  9 MAY 2025 16:06
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.5) (preloaded format=pdflatex 2023.9.12)  10 MAY 2025 03:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -451,7 +451,7 @@ Overfull \vbox (12.75748pt too high) has occurred while \output is active []
 [2]
 File: OJAP.png Graphic file (type png)
 <use OJAP.png>
-Package pdftex.def Info: OJAP.png  used on input line 104.
+Package pdftex.def Info: OJAP.png  used on input line 102.
 (pdftex.def)             Requested size: 148.12836pt x 20.0pt.
 
 Overfull \hbox (25.32835pt too wide) has occurred while \output is active
@@ -487,7 +487,7 @@ Package pdftex.def Info: RIS_Phase_Gradient.png  used on input line 162.
 (pdftex.def)             Requested size: 196.80075pt x 225.50807pt.
 File: OJAP.png Graphic file (type png)
 <use OJAP.png>
-Package pdftex.def Info: OJAP.png  used on input line 206.
+Package pdftex.def Info: OJAP.png  used on input line 204.
 (pdftex.def)             Requested size: 148.12836pt x 20.0pt.
 
 Overfull \hbox (25.32835pt too wide) has occurred while \output is active
@@ -529,7 +529,10 @@ Overfull \hbox (1.01141pt too wide) detected at line 264
  []
 
 
-Underfull \vbox (badness 2990) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Underfull \vbox (badness 3907) has occurred while \output is active []
 
 
 Overfull \vbox (12.859pt too high) has occurred while \output is active []
@@ -539,6 +542,8 @@ Overfull \vbox (12.75748pt too high) has occurred while \output is active []
 
 
 [6]
+Underfull \vbox (badness 1199) has occurred while \output is active []
+
 <Sim_Results/Scenario_Illustration.png, id=43, 333.8874pt x 301.3659pt>
 File: Sim_Results/Scenario_Illustration.png Graphic file (type png)
 <use Sim_Results/Scenario_Illustration.png>
@@ -547,7 +552,7 @@ ine 286.
 (pdftex.def)             Requested size: 196.80075pt x 177.63419pt.
 File: OJAP.png Graphic file (type png)
 <use OJAP.png>
-Package pdftex.def Info: OJAP.png  used on input line 297.
+Package pdftex.def Info: OJAP.png  used on input line 295.
 (pdftex.def)             Requested size: 148.12836pt x 20.0pt.
 
 Overfull \hbox (25.32835pt too wide) has occurred while \output is active
@@ -566,15 +571,15 @@ File: Sim_Results/GUI.png Graphic file (type png)
 <use Sim_Results/GUI.png>
 Package pdftex.def Info: Sim_Results/GUI.png  used on input line 299.
 (pdftex.def)             Requested size: 246.0pt x 268.44473pt.
-
-Underfull \vbox (badness 4181) has occurred while \output is active []
-
 <Sim_Results/TX_coverage_map.png, id=51, 393.8715pt x 305.7021pt>
 File: Sim_Results/TX_coverage_map.png Graphic file (type png)
 <use Sim_Results/TX_coverage_map.png>
 Package pdftex.def Info: Sim_Results/TX_coverage_map.png  used on input line 32
 9.
 (pdftex.def)             Requested size: 246.0pt x 190.93738pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
 
 Overfull \vbox (12.859pt too high) has occurred while \output is active []
 
@@ -583,39 +588,35 @@ Overfull \vbox (12.75748pt too high) has occurred while \output is active []
 
 
 [8 <./Sim_Results/GUI.png>]
-<Sim_Results/Binary_Cov_Map_N_2_-100dB.png, id=58, 362.7954pt x 302.0886pt>
+Underfull \vbox (badness 2626) has occurred while \output is active []
+
+<Sim_Results/Binary_Cov_Map_N_2_-100dB.png, id=56, 362.7954pt x 302.0886pt>
 File: Sim_Results/Binary_Cov_Map_N_2_-100dB.png Graphic file (type png)
 <use Sim_Results/Binary_Cov_Map_N_2_-100dB.png>
 Package pdftex.def Info: Sim_Results/Binary_Cov_Map_N_2_-100dB.png  used on inp
 ut line 347.
 (pdftex.def)             Requested size: 120.54135pt x 100.37173pt.
-<Sim_Results/Binary_Cov_Map_N_3_-100dB.png, id=59, 362.0727pt x 300.6432pt>
+<Sim_Results/Binary_Cov_Map_N_3_-100dB.png, id=57, 362.0727pt x 300.6432pt>
 File: Sim_Results/Binary_Cov_Map_N_3_-100dB.png Graphic file (type png)
 <use Sim_Results/Binary_Cov_Map_N_3_-100dB.png>
 Package pdftex.def Info: Sim_Results/Binary_Cov_Map_N_3_-100dB.png  used on inp
 ut line 349.
 (pdftex.def)             Requested size: 120.54135pt x 100.08876pt.
-<Sim_Results/Binary_Cov_Map_N_4_-100dB.png, id=60, 362.0727pt x 300.6432pt>
+<Sim_Results/Binary_Cov_Map_N_4_-100dB.png, id=58, 362.0727pt x 300.6432pt>
 File: Sim_Results/Binary_Cov_Map_N_4_-100dB.png Graphic file (type png)
 <use Sim_Results/Binary_Cov_Map_N_4_-100dB.png>
 Package pdftex.def Info: Sim_Results/Binary_Cov_Map_N_4_-100dB.png  used on inp
 ut line 353.
 (pdftex.def)             Requested size: 120.54135pt x 100.08876pt.
-<Sim_Results/Binary_Cov_Map_N_5_-100dB.png, id=61, 363.5181pt x 300.6432pt>
+<Sim_Results/Binary_Cov_Map_N_5_-100dB.png, id=59, 363.5181pt x 300.6432pt>
 File: Sim_Results/Binary_Cov_Map_N_5_-100dB.png Graphic file (type png)
 <use Sim_Results/Binary_Cov_Map_N_5_-100dB.png>
 Package pdftex.def Info: Sim_Results/Binary_Cov_Map_N_5_-100dB.png  used on inp
 ut line 355.
 (pdftex.def)             Requested size: 120.54135pt x 99.68965pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
 File: OJAP.png Graphic file (type png)
 <use OJAP.png>
-Package pdftex.def Info: OJAP.png  used on input line 369.
+Package pdftex.def Info: OJAP.png  used on input line 368.
 (pdftex.def)             Requested size: 148.12836pt x 20.0pt.
 
 Overfull \hbox (25.32835pt too wide) has occurred while \output is active
@@ -693,19 +694,18 @@ Overfull \vbox (12.75748pt too high) has occurred while \output is active []
 
 
 [10 <./Sim_Results/perf_metric_RIS_width_multiple_curves_-100dB.png> <./Sim_Res
-ults/perf_metric_RIS_width_-100dB_gradient_height_1m.png> <./Sim_Results/perf_m
-etric_RIS_width_-100dB_distance_height_1m.png>]
-<Sim_Results/CDF_-100dB.png, id=82, 403.2666pt x 303.534pt>
+ults/perf_metric_RIS_width_-100dB_gradient_height_1m.png>]
+<Sim_Results/CDF_-100dB.png, id=81, 403.2666pt x 303.534pt>
 File: Sim_Results/CDF_-100dB.png Graphic file (type png)
 <use Sim_Results/CDF_-100dB.png>
 Package pdftex.def Info: Sim_Results/CDF_-100dB.png  used on input line 433.
 (pdftex.def)             Requested size: 246.0pt x 185.16472pt.
 
-Underfull \vbox (badness 4765) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 File: OJAP.png Graphic file (type png)
 <use OJAP.png>
-Package pdftex.def Info: OJAP.png  used on input line 442.
+Package pdftex.def Info: OJAP.png  used on input line 440.
 (pdftex.def)             Requested size: 148.12836pt x 20.0pt.
 
 Overfull \hbox (25.32835pt too wide) has occurred while \output is active
@@ -718,9 +718,9 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 Overfull \vbox (8.45pt too high) has occurred while \output is active []
 
- [11 <./Sim_Results/Binary_Cov_Map_N_1_-100dB.png> <./Sim_Results/performance_a
-nd_coverage_vs_N_Gradient.png> <./Sim_Results/performance_and_coverage_vs_N_Dis
-tance.png>]
+ [11 <./Sim_Results/perf_metric_RIS_width_-100dB_distance_height_1m.png> <./Sim
+_Results/Binary_Cov_Map_N_1_-100dB.png> <./Sim_Results/performance_and_coverage
+_vs_N_Gradient.png> <./Sim_Results/performance_and_coverage_vs_N_Distance.png>]
 <Sim_Results/Comb_cov_1x2_Gradient.png, id=89, 393.8715pt x 305.7021pt>
 File: Sim_Results/Comb_cov_1x2_Gradient.png Graphic file (type png)
 <use Sim_Results/Comb_cov_1x2_Gradient.png>
@@ -740,27 +740,23 @@ File: Sim_Results/New_Binary_Cov_Map_1x2_Gradient.png Graphic file (type png)
 Package pdftex.def Info: Sim_Results/New_Binary_Cov_Map_1x2_Gradient.png  used 
 on input line 451.
 (pdftex.def)             Requested size: 118.07895pt x 98.51411pt.
-<Sim_Results/Comb_cov_1x2_Distance.png, id=92, 394.5942pt x 304.9794pt>
-File: Sim_Results/Comb_cov_1x2_Distance.png Graphic file (type png)
-<use Sim_Results/Comb_cov_1x2_Distance.png>
-Package pdftex.def Info: Sim_Results/Comb_cov_1x2_Distance.png  used on input l
-ine 464.
-(pdftex.def)             Requested size: 196.80075pt x 152.10773pt.
-<Sim_Results/RIS_cov_gain_1x2_Distance.png, id=93, 378.6948pt x 307.1475pt>
-File: Sim_Results/RIS_cov_gain_1x2_Distance.png Graphic file (type png)
-<use Sim_Results/RIS_cov_gain_1x2_Distance.png>
-Package pdftex.def Info: Sim_Results/RIS_cov_gain_1x2_Distance.png  used on inp
-ut line 468.
-(pdftex.def)             Requested size: 120.54135pt x 97.7643pt.
-<Sim_Results/New_Binary_Cov_Map_1x2_Distance.png, id=94, 361.35pt x 301.3659pt>
+<Sim_Results/pp_-100dB_gradient_RX1.png, id=92, 293.4162pt x 258.7266pt>
+File: Sim_Results/pp_-100dB_gradient_RX1.png Graphic file (type png)
+<use Sim_Results/pp_-100dB_gradient_RX1.png>
+Package pdftex.def Info: Sim_Results/pp_-100dB_gradient_RX1.png  used on input 
+line 455.
+(pdftex.def)             Requested size: 118.07895pt x 104.1165pt.
+<Sim_Results/pp_-100dB_gradient_RX2.png, id=93, 295.5843pt x 258.0039pt>
+File: Sim_Results/pp_-100dB_gradient_RX2.png Graphic file (type png)
+<use Sim_Results/pp_-100dB_gradient_RX2.png>
+Package pdftex.def Info: Sim_Results/pp_-100dB_gradient_RX2.png  used on input 
+line 457.
+(pdftex.def)             Requested size: 118.07895pt x 103.06587pt.
 
-File: Sim_Results/New_Binary_Cov_Map_1x2_Distance.png Graphic file (type png)
-<use Sim_Results/New_Binary_Cov_Map_1x2_Distance.png>
-Package pdftex.def Info: Sim_Results/New_Binary_Cov_Map_1x2_Distance.png  used 
-on input line 470.
-(pdftex.def)             Requested size: 118.07895pt x 98.47617pt.
+Underfull \vbox (badness 4441) has occurred while \output is active []
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Underfull \vbox (badness 1881) has occurred while \output is active []
 
 
 Overfull \vbox (12.859pt too high) has occurred while \output is active []
@@ -771,51 +767,83 @@ Overfull \vbox (12.75748pt too high) has occurred while \output is active []
 
 [12 <./Sim_Results/CDF_-100dB.png> <./Sim_Results/Comb_cov_1x2_Gradient.png> <.
 /Sim_Results/RIS_cov_gain_1x2_Gradient.png> <./Sim_Results/New_Binary_Cov_Map_1
-x2_Gradient.png> <./Sim_Results/Comb_cov_1x2_Distance.png> <./Sim_Results/RIS_c
-ov_gain_1x2_Distance.png> <./Sim_Results/New_Binary_Cov_Map_1x2_Distance.png>]
-<Sim_Results/Binary_Cov_Map_N_2_-110dB.png, id=105, 362.0727pt x 300.6432pt>
+x2_Gradient.png> <./Sim_Results/pp_-100dB_gradient_RX1.png> <./Sim_Results/pp_-
+100dB_gradient_RX2.png>]
+<Sim_Results/Comb_cov_1x2_Distance.png, id=103, 394.5942pt x 304.9794pt>
+File: Sim_Results/Comb_cov_1x2_Distance.png Graphic file (type png)
+<use Sim_Results/Comb_cov_1x2_Distance.png>
+Package pdftex.def Info: Sim_Results/Comb_cov_1x2_Distance.png  used on input l
+ine 470.
+(pdftex.def)             Requested size: 196.80075pt x 152.10773pt.
+<Sim_Results/RIS_cov_gain_1x2_Distance.png, id=104, 378.6948pt x 307.1475pt>
+File: Sim_Results/RIS_cov_gain_1x2_Distance.png Graphic file (type png)
+<use Sim_Results/RIS_cov_gain_1x2_Distance.png>
+Package pdftex.def Info: Sim_Results/RIS_cov_gain_1x2_Distance.png  used on inp
+ut line 474.
+(pdftex.def)             Requested size: 120.54135pt x 97.7643pt.
+<Sim_Results/New_Binary_Cov_Map_1x2_Distance.png, id=105, 361.35pt x 301.3659pt
+>
+File: Sim_Results/New_Binary_Cov_Map_1x2_Distance.png Graphic file (type png)
+<use Sim_Results/New_Binary_Cov_Map_1x2_Distance.png>
+Package pdftex.def Info: Sim_Results/New_Binary_Cov_Map_1x2_Distance.png  used 
+on input line 476.
+(pdftex.def)             Requested size: 118.07895pt x 98.47617pt.
+<Sim_Results/pp_-100dB_distance_RX1.png, id=106, 292.6935pt x 258.0039pt>
+File: Sim_Results/pp_-100dB_distance_RX1.png Graphic file (type png)
+<use Sim_Results/pp_-100dB_distance_RX1.png>
+Package pdftex.def Info: Sim_Results/pp_-100dB_distance_RX1.png  used on input 
+line 479.
+(pdftex.def)             Requested size: 118.07895pt x 104.08551pt.
+<Sim_Results/pp_-100dB_distance_RX2.png, id=107, 296.307pt x 259.4493pt>
+File: Sim_Results/pp_-100dB_distance_RX2.png Graphic file (type png)
+<use Sim_Results/pp_-100dB_distance_RX2.png>
+Package pdftex.def Info: Sim_Results/pp_-100dB_distance_RX2.png  used on input 
+line 481.
+(pdftex.def)             Requested size: 118.07895pt x 103.3899pt.
+<Sim_Results/pp_-100dB_distance_RX3.png, id=108, 292.6935pt x 258.0039pt>
+File: Sim_Results/pp_-100dB_distance_RX3.png Graphic file (type png)
+<use Sim_Results/pp_-100dB_distance_RX3.png>
+Package pdftex.def Info: Sim_Results/pp_-100dB_distance_RX3.png  used on input 
+line 485.
+(pdftex.def)             Requested size: 120.54135pt x 106.2547pt.
+<Sim_Results/Binary_Cov_Map_N_2_-110dB.png, id=109, 362.0727pt x 300.6432pt>
 File: Sim_Results/Binary_Cov_Map_N_2_-110dB.png Graphic file (type png)
 <use Sim_Results/Binary_Cov_Map_N_2_-110dB.png>
 Package pdftex.def Info: Sim_Results/Binary_Cov_Map_N_2_-110dB.png  used on inp
-ut line 484.
+ut line 500.
 (pdftex.def)             Requested size: 120.54135pt x 100.08876pt.
-<Sim_Results/Binary_Cov_Map_N_3_-110dB.png, id=106, 362.0727pt x 302.0886pt>
+<Sim_Results/Binary_Cov_Map_N_3_-110dB.png, id=110, 362.0727pt x 302.0886pt>
 File: Sim_Results/Binary_Cov_Map_N_3_-110dB.png Graphic file (type png)
 <use Sim_Results/Binary_Cov_Map_N_3_-110dB.png>
 Package pdftex.def Info: Sim_Results/Binary_Cov_Map_N_3_-110dB.png  used on inp
-ut line 486.
+ut line 502.
 (pdftex.def)             Requested size: 120.54135pt x 100.56995pt.
-<Sim_Results/Binary_Cov_Map_N_4_-110dB.png, id=107, 362.0727pt x 302.0886pt>
+<Sim_Results/Binary_Cov_Map_N_4_-110dB.png, id=111, 362.0727pt x 302.0886pt>
 File: Sim_Results/Binary_Cov_Map_N_4_-110dB.png Graphic file (type png)
 <use Sim_Results/Binary_Cov_Map_N_4_-110dB.png>
 Package pdftex.def Info: Sim_Results/Binary_Cov_Map_N_4_-110dB.png  used on inp
-ut line 490.
+ut line 506.
 (pdftex.def)             Requested size: 120.54135pt x 100.56995pt.
-<Sim_Results/Binary_Cov_Map_N_5_-110dB.png, id=108, 362.0727pt x 301.3659pt>
+<Sim_Results/Binary_Cov_Map_N_5_-110dB.png, id=112, 362.0727pt x 301.3659pt>
 File: Sim_Results/Binary_Cov_Map_N_5_-110dB.png Graphic file (type png)
 <use Sim_Results/Binary_Cov_Map_N_5_-110dB.png>
 Package pdftex.def Info: Sim_Results/Binary_Cov_Map_N_5_-110dB.png  used on inp
-ut line 492.
+ut line 508.
 (pdftex.def)             Requested size: 120.54135pt x 100.32936pt.
-
-Underfull \vbox (badness 1688) has occurred while \output is active []
-
-<Sim_Results/perf_metric_RIS_width_-110dB_multiple_curves_height_1m.png, id=109
+<Sim_Results/perf_metric_RIS_width_-110dB_multiple_curves_height_1m.png, id=113
 , 918.5517pt x 561.5379pt>
 File: Sim_Results/perf_metric_RIS_width_-110dB_multiple_curves_height_1m.png Gr
 aphic file (type png)
 <use Sim_Results/perf_metric_RIS_width_-110dB_multiple_curves_height_1m.png>
 Package pdftex.def Info: Sim_Results/perf_metric_RIS_width_-110dB_multiple_curv
-es_height_1m.png  used on input line 502.
+es_height_1m.png  used on input line 518.
 (pdftex.def)             Requested size: 246.0pt x 150.3834pt.
-<Sim_Results/CDF_-110dB.png, id=110, 415.5525pt x 313.17pt>
-File: Sim_Results/CDF_-110dB.png Graphic file (type png)
-<use Sim_Results/CDF_-110dB.png>
-Package pdftex.def Info: Sim_Results/CDF_-110dB.png  used on input line 510.
-(pdftex.def)             Requested size: 221.3985pt x 166.849pt.
+
+Underfull \vbox (badness 1810) has occurred while \output is active []
+
 File: OJAP.png Graphic file (type png)
 <use OJAP.png>
-Package pdftex.def Info: OJAP.png  used on input line 516.
+Package pdftex.def Info: OJAP.png  used on input line 524.
 (pdftex.def)             Requested size: 148.12836pt x 20.0pt.
 
 Overfull \hbox (25.32835pt too wide) has occurred while \output is active
@@ -823,60 +851,59 @@ Overfull \hbox (25.32835pt too wide) has occurred while \output is active
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
 Overfull \vbox (8.45pt too high) has occurred while \output is active []
 
- [13 <./Sim_Results/Binary_Cov_Map_N_2_-110dB.png> <./Sim_Results/Binary_Cov_Ma
-p_N_3_-110dB.png> <./Sim_Results/Binary_Cov_Map_N_4_-110dB.png> <./Sim_Results/
-Binary_Cov_Map_N_5_-110dB.png> <./Sim_Results/perf_metric_RIS_width_-110dB_mult
-iple_curves_height_1m.png> <./Sim_Results/CDF_-110dB.png>]
-<Sim_Results/Comb_cov_1x2_Gradient_-110dB.png, id=121, 393.1488pt x 303.534pt>
+ [13 <./Sim_Results/Comb_cov_1x2_Distance.png> <./Sim_Results/RIS_cov_gain_1x2_
+Distance.png> <./Sim_Results/New_Binary_Cov_Map_1x2_Distance.png> <./Sim_Result
+s/pp_-100dB_distance_RX1.png> <./Sim_Results/pp_-100dB_distance_RX2.png> <./Sim
+_Results/pp_-100dB_distance_RX3.png>]
+<Sim_Results/CDF_-110dB.png, id=124, 415.5525pt x 313.17pt>
+File: Sim_Results/CDF_-110dB.png Graphic file (type png)
+<use Sim_Results/CDF_-110dB.png>
+Package pdftex.def Info: Sim_Results/CDF_-110dB.png  used on input line 526.
+(pdftex.def)             Requested size: 221.3985pt x 166.849pt.
+<Sim_Results/Comb_cov_1x2_Gradient_-110dB.png, id=125, 393.1488pt x 303.534pt>
 File: Sim_Results/Comb_cov_1x2_Gradient_-110dB.png Graphic file (type png)
 <use Sim_Results/Comb_cov_1x2_Gradient_-110dB.png>
 Package pdftex.def Info: Sim_Results/Comb_cov_1x2_Gradient_-110dB.png  used on 
-input line 519.
+input line 535.
 (pdftex.def)             Requested size: 196.80075pt x 151.94261pt.
-<Sim_Results/RIS_cov_gain_1x2_Gradient_-110dB.png, id=122, 377.9721pt x 302.811
+<Sim_Results/RIS_cov_gain_1x2_Gradient_-110dB.png, id=126, 377.9721pt x 302.811
 3pt>
 File: Sim_Results/RIS_cov_gain_1x2_Gradient_-110dB.png Graphic file (type png)
 <use Sim_Results/RIS_cov_gain_1x2_Gradient_-110dB.png>
 Package pdftex.def Info: Sim_Results/RIS_cov_gain_1x2_Gradient_-110dB.png  used
- on input line 523.
+ on input line 539.
 (pdftex.def)             Requested size: 120.54135pt x 96.56891pt.
-<Sim_Results/New_Binary_Cov_Map_1x2_Gradient_-110dB.png, id=123, 361.35pt x 299
+<Sim_Results/New_Binary_Cov_Map_1x2_Gradient_-110dB.png, id=127, 361.35pt x 299
 .9205pt>
 File: Sim_Results/New_Binary_Cov_Map_1x2_Gradient_-110dB.png Graphic file (type
  png)
 <use Sim_Results/New_Binary_Cov_Map_1x2_Gradient_-110dB.png>
 Package pdftex.def Info: Sim_Results/New_Binary_Cov_Map_1x2_Gradient_-110dB.png
-  used on input line 525.
+  used on input line 541.
 (pdftex.def)             Requested size: 118.07895pt x 98.00386pt.
-<Sim_Results/Comb_cov_1x2_Distance_-110dB.png, id=124, 393.1488pt x 303.534pt>
+<Sim_Results/Comb_cov_1x2_Distance_-110dB.png, id=128, 393.1488pt x 303.534pt>
 File: Sim_Results/Comb_cov_1x2_Distance_-110dB.png Graphic file (type png)
 <use Sim_Results/Comb_cov_1x2_Distance_-110dB.png>
 Package pdftex.def Info: Sim_Results/Comb_cov_1x2_Distance_-110dB.png  used on 
-input line 534.
+input line 550.
 (pdftex.def)             Requested size: 196.80075pt x 151.94261pt.
-<Sim_Results/RIS_cov_gain_1x2_Distance_-110dB.png, id=125, 379.4175pt x 302.811
+<Sim_Results/RIS_cov_gain_1x2_Distance_-110dB.png, id=129, 379.4175pt x 302.811
 3pt>
 File: Sim_Results/RIS_cov_gain_1x2_Distance_-110dB.png Graphic file (type png)
 <use Sim_Results/RIS_cov_gain_1x2_Distance_-110dB.png>
 Package pdftex.def Info: Sim_Results/RIS_cov_gain_1x2_Distance_-110dB.png  used
- on input line 538.
+ on input line 554.
 (pdftex.def)             Requested size: 120.54135pt x 96.20389pt.
-<Sim_Results/New_Binary_Cov_Map_1x2_Distance_-110dB.png, id=126, 361.35pt x 299
+<Sim_Results/New_Binary_Cov_Map_1x2_Distance_-110dB.png, id=130, 361.35pt x 299
 .9205pt>
 File: Sim_Results/New_Binary_Cov_Map_1x2_Distance_-110dB.png Graphic file (type
  png)
 <use Sim_Results/New_Binary_Cov_Map_1x2_Distance_-110dB.png>
 Package pdftex.def Info: Sim_Results/New_Binary_Cov_Map_1x2_Distance_-110dB.png
-  used on input line 540.
+  used on input line 556.
 (pdftex.def)             Requested size: 118.07895pt x 98.00386pt.
-
-Underfull \vbox (badness 1062) has occurred while \output is active []
-
 
 Overfull \vbox (12.859pt too high) has occurred while \output is active []
 
@@ -884,14 +911,15 @@ Overfull \vbox (12.859pt too high) has occurred while \output is active []
 Overfull \vbox (12.75748pt too high) has occurred while \output is active []
 
 
-[14 <./Sim_Results/Comb_cov_1x2_Gradient_-110dB.png> <./Sim_Results/RIS_cov_gai
-n_1x2_Gradient_-110dB.png> <./Sim_Results/New_Binary_Cov_Map_1x2_Gradient_-110d
-B.png> <./Sim_Results/Comb_cov_1x2_Distance_-110dB.png> <./Sim_Results/RIS_cov_
-gain_1x2_Distance_-110dB.png> <./Sim_Results/New_Binary_Cov_Map_1x2_Distance_-1
-10dB.png>]
+[14 <./Sim_Results/Binary_Cov_Map_N_2_-110dB.png> <./Sim_Results/Binary_Cov_Map
+_N_3_-110dB.png> <./Sim_Results/Binary_Cov_Map_N_4_-110dB.png> <./Sim_Results/B
+inary_Cov_Map_N_5_-110dB.png> <./Sim_Results/perf_metric_RIS_width_-110dB_multi
+ple_curves_height_1m.png> <./Sim_Results/CDF_-110dB.png> <./Sim_Results/Comb_co
+v_1x2_Gradient_-110dB.png> <./Sim_Results/RIS_cov_gain_1x2_Gradient_-110dB.png>
+ <./Sim_Results/New_Binary_Cov_Map_1x2_Gradient_-110dB.png>]
 File: OJAP.png Graphic file (type png)
 <use OJAP.png>
-Package pdftex.def Info: OJAP.png  used on input line 600.
+Package pdftex.def Info: OJAP.png  used on input line 591.
 (pdftex.def)             Requested size: 148.12836pt x 20.0pt.
 
 Overfull \hbox (25.32835pt too wide) has occurred while \output is active
@@ -904,26 +932,26 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 Overfull \vbox (8.45pt too high) has occurred while \output is active []
 
- [15]
+ [15 <./Sim_Results/Comb_cov_1x2_Distance_-110dB.png> <./Sim_Results/RIS_cov_ga
+in_1x2_Distance_-110dB.png> <./Sim_Results/New_Binary_Cov_Map_1x2_Distance_-110
+dB.png>]
 Overfull \vbox (12.859pt too high) has occurred while \output is active []
 
 
 Overfull \vbox (12.75748pt too high) has occurred while \output is active []
 
 
-[16
-
-] (ojap.aux)
+[16] (ojap.aux)
  ***********
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-08-29>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 5687 strings out of 475247
- 98008 string characters out of 5757792
- 1948801 words of memory out of 5000000
- 27109 multiletter control sequences out of 15000+600000
+ 5723 strings out of 475248
+ 99595 string characters out of 5757813
+ 1947801 words of memory out of 5000000
+ 27144 multiletter control sequences out of 15000+600000
  624046 words of font info for 157 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  57i,17n,65p,1830b,425s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -949,9 +977,9 @@ Programs/MiKTeX/fonts/type1/urw/helvetic/uhvr8a.pfb><C:/Users/emrek/AppData/Loc
 al/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/emrek/AppData/Loc
 al/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/emrek/AppData/Loc
 al/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on ojap.pdf (16 pages, 1936794 bytes).
+Output written on ojap.pdf (16 pages, 2385478 bytes).
 PDF statistics:
- 225 PDF objects out of 1000 (max. 8388607)
+ 235 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 176 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 201 words of extra memory for PDF output out of 10000 (max. 10000000)
 
