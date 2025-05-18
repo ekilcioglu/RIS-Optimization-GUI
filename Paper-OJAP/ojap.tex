@@ -317,7 +317,7 @@ Furthermore, the GUI allows users to define the boundaries for optimization para
 \end{figure}
 
 \subsection{SIMULATION PARAMETERS}
-The simulation parameters are carefully chosen to evaluate the performance of the proposed algorithm under realistic conditions. The key simulation parameters used throughout this study are summarized in Table \ref{tab:sim_params}. The amplitude profile of the reflection coefficients for each target point is set to unity to isolate and analyze the pure effect of the phase profiles. The power intensity coefficients, $c_k$, which determine how power is distributed among the target points, are set to equal values, ensuring identical importance is assigned to each blind spot in the scenario.
+The simulation parameters are carefully chosen to evaluate the performance of the proposed algorithm under realistic conditions. The key simulation parameters used throughout this study are summarized in Table \ref{tab:sim_params}. Unless otherwise specified, the amplitude profile of the reflection coefficients for each target point is set to unity in all simulations to isolate and analyze the pure effect of the phase profiles. This assumption simplifies the RIS design and is widely adopted in RIS literature. To further assess its validity, we also include an evaluation of random amplitude fluctuations in Figures \ref{amp_change_comb_cov_gradient} and \ref{amp_change_comb_cov_distance}, where the amplitude of each tile is randomly drawn from a uniform distribution between $0.7$ and $1$. The results confirm that such fluctuations have a negligible effect on performance in the considered scenarios. The power intensity coefficients, $c_k$, which determine how power is distributed among the target points, are set to equal values, ensuring identical importance is assigned to each blind spot in the scenario.
 
 The system operates at a communication frequency of $5.8$ GHz, corresponding to a wavelength of $\lambda = c/f = 5.17$ cm, where $c$ is the speed of light. The RIS grid sizes, $d_y$ and $d_z$, are defined as $\lambda / 2 = 2.585$ cm, which is a commonly adopted configuration in ray-tracing simulations and RIS literature. This choice ensures that the array operates within the subwavelength regime, preventing grating lobes while maintaining effective wavefront manipulation and high beamforming efficiency.
 
@@ -542,6 +542,41 @@ This highlights the trade-offs between the two approaches. While the gradient-ba
 	
 	\caption{Combined coverage analysis for a RIS of size $1 \times 2$ m$^2$ using the distance-based approach, with a minimum power threshold of $-100$ dB}
 	\label{comb_cov_distance}
+\end{figure}
+
+\subsubsection{EFFECT OF AMPLITUDE FLUCTUATIONS ON RIS PERFORMANCE}
+In this subsection, we analyze the impact of random amplitude fluctuations across RIS tiles on the coverage and system performance. To this end, we conducted a simulation by introducing random fluctuations in the amplitude profile of the RIS tiles. In this case only, each element’s amplitude for a given target point was independently assigned from a uniform distribution between $0.7$ and $1$. This setup approximates practical fluctuations observed in passive RIS implementations due to angular-dependent attenuation or fabrication variability.
+
+Figures \ref{amp_change_comb_cov_gradient} and \ref{amp_change_comb_cov_distance} present the resulting coverage maps and performance metrics using the gradient-based and distance-based approaches, respectively. These results are generated using the same RIS configurations as in Figures \ref{comb_cov_gradient} and \ref{comb_cov_distance}. The results reveal that both approaches are largely robust to moderate amplitude variations. Specifically, the average path gain of the low-power cells drops by only $1$–$1.5$ dB compared to the fixed-unit amplitude case. The coverage patterns also remain largely unchanged, with no significant degradation observed in the combined coverage or binary poor coverage maps. This indicates that the system performance is predominantly determined by the phase configuration rather than fine-grained amplitude tuning. As such, fixed amplitude assumptions are sufficient for capturing the dominant effects of RIS behavior in phase-driven optimization frameworks, particularly when the RIS operates passively and angular-dependent attenuation is weak. Nonetheless, future work could further explore this aspect by incorporating angle-dependent amplitude profiles, particularly in scenarios involving hardware-calibrated RIS models or where amplitude distortions are non-negligible.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\linewidth]{Sim_Results/amp_change_Comb_cov_1x2_Gradient.png}
+	
+	a) Combined coverage map \\[5pt]
+	
+	\includegraphics[width=0.49\linewidth]{Sim_Results/amp_change_RIS_cov_gain_1x2_Gradient.png}
+	\hfill
+	\includegraphics[width=0.48\linewidth]{Sim_Results/amp_change_New_Binary_Cov_Map_1x2_Gradient.png}
+	
+	\hspace{10pt} b) RIS coverage gain \hspace{30pt} c) Updated binary poor \\ \hspace{140pt} coverage map
+	\caption{Combined coverage analysis for a RIS of size $1 \times 2$ m$^2$ using the gradient-based approach with random amplitude fluctuations (uniformly distributed in [$0.7$, $1$]), under a minimum path gain threshold of $-100$ dB.}
+	\label{amp_change_comb_cov_gradient}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\linewidth]{Sim_Results/amp_change_Comb_cov_1x2_Distance.png}
+	
+	a) Combined coverage map \\[5pt]
+	
+	\includegraphics[width=0.49\linewidth]{Sim_Results/amp_change_RIS_cov_gain_1x2_Distance.png}
+	\hfill
+	\includegraphics[width=0.48\linewidth]{Sim_Results/amp_change_New_Binary_Cov_Map_1x2_Distance.png}
+	
+	\hspace{10pt} b) RIS coverage gain \hspace{30pt} c) Updated binary poor \\ \hspace{140pt} coverage map
+	\caption{Combined coverage analysis for a RIS of size $1 \times 2$ m$^2$ using the distance-based approach with random amplitude fluctuations (uniformly distributed in [$0.7$, $1$]), under a minimum path gain threshold of $-100$ dB.}
+	\label{amp_change_comb_cov_distance}
 \end{figure}
 
 \subsection{RESULTS FOR MINIMUM POWER THRESHOLD OF $-110$ dB}
