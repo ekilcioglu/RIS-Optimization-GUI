@@ -111,7 +111,7 @@ The overall reflection coefficient $\mathbf{\Gamma}$ of the RIS is computed as t
 The considered RIS modeling enables the simulation of various RIS configurations in different environments. Through careful design of amplitude and phase profiles, the RIS placement enhances path gain in the blind spots and addresses shadowing effects.
 
 \begin{figure}
-	\centering \includegraphics[width=.8\linewidth]{RIS_Modeling.png}
+	\centering \includegraphics[width=.7\linewidth]{RIS_Modeling.png}
 	\caption{Illustration of RIS modeling: The RIS surface is discretized into tiles, each with tunable reflection characteristics, to direct signals toward the desired target points.}
 	\label{RIS_Modeling}
 \end{figure}
@@ -163,7 +163,7 @@ To implement this gradient physically across the RIS, we initialize the phase to
 where $d_y$ and $d_z$ are the RIS grid sizes along the $y$ and $z$ axes. This expression creates a structured linear phase variation over the RIS, effectively steering the reflected beam in the desired direction. This procedure is repeated for each target point $k$, and the resulting phase profile $\mathbf{\Phi}^k$ is then used to construct the RIS reflection coefficient via (\ref{ref_coef_exp}).
  
 \begin{figure}
-	\centering \includegraphics[width=.8\linewidth]{RIS_Phase_Gradient.png}
+	\centering \includegraphics[width=.7\linewidth]{RIS_Phase_Gradient.png}
 	\caption{The gradient-based method for configuring the RIS phase profile to reflect signals toward the target point}
 	\label{RIS_Phase_Gradient}
 \end{figure}
@@ -377,10 +377,10 @@ Fig. \ref{TX_coverage_map} serves as the baseline coverage map, against which th
 	\label{TX_coverage_map}
 \end{figure}
 
-\subsection{RESULTS FOR MINIMUM POWER THRESHOLD OF $-100$ dB}
+\subsection{RESULTS FOR MINIMUM PATH GAIN THRESHOLD OF $-100$ dB}
 
 \subsubsection{BINARY POOR COVERAGE MAPS FOR DIFFERENT NUMBER OF TARGETS}
-We begin by assigning a minimum path gain threshold of $-100$ dB. As explained earlier, cells in the coverage map that fall below this threshold are categorized as low-power cells, which require a path gain boost for reliable communication. The distribution of these low-power cells is depicted in Fig. \ref{binary_maps} for different numbers of target points $N$. These plots, referred to as binary poor coverage maps, visually represent the areas where the path gain is below the threshold (red areas) and areas where the path gain is acceptable (blue areas).
+We begin by assigning the minimum path gain threshold of $-100$ dB. As explained earlier, cells in the coverage map that fall below this threshold are categorized as low-power cells, which require a path gain boost for reliable communication. The distribution of these low-power cells is depicted in Fig. \ref{binary_maps} for different numbers of target points $N$. These plots, referred to as binary poor coverage maps, visually represent the areas where the path gain is below the threshold (red areas) and areas where the path gain is acceptable (blue areas).
 
 The positions of the low-power cells are clustered using the K-means algorithm, and the centroids of these clusters are marked as green `$\times$' symbols in Fig. \ref{binary_maps}. These centroids represent the target points where the RIS will steer its beams to improve signal coverage. Feasible RIS positions are then determined based on LoS visibility to both the target points and the transmitter. These positions are indicated by green star symbols on the same figure.
 
@@ -417,7 +417,7 @@ The impact of RIS height is also more noticeable in the distance-based approach 
 \begin{figure}
 	\centering
 	\includegraphics[width=\linewidth]{Sim_Results/perf_metric_RIS_width_multiple_curves_-100dB.png}
-	\caption{Performance metric $\mathcal{M}$ as a function of RIS width for different RIS heights and phase profile approaches, with a minimum path gain threshold of $-100$ dB}
+	\caption{Performance metric $\mathcal{M}$ as a function of RIS width for different RIS heights and phase profile approaches, with the minimum path gain threshold of $-100$ dB}
 	\label{perf_metric_RIS_width_multiple_curves_-100dB}
 \end{figure}
 
@@ -430,7 +430,7 @@ Also, the number of target points are assigned less and less with increasing the
 \begin{figure}
 	\centering
 	\includegraphics[width=\linewidth]{Sim_Results/perf_metric_RIS_width_-100dB_gradient_height_1m.png}
-	\caption{Performance metric $\mathcal{M}$ vs. RIS width for the gradient-based approach, showing selected sub-optimal configurations for different performance improvement thresholds $\Delta \mathcal{M}_{\text{min}}$ with a RIS height of $1$ m and a minimum path gain threshold of $-100$ dB}
+	\caption{Performance metric $\mathcal{M}$ vs. RIS width for the gradient-based approach, showing selected sub-optimal configurations for different performance improvement thresholds $\Delta \mathcal{M}_{\text{min}}$ with a RIS height of $1$ m and the minimum path gain threshold of $-100$ dB}
 	\label{perf_metric_RIS_width_-100dB_gradient_height_1m}
 \end{figure}
 
@@ -439,14 +439,14 @@ In Fig. \ref{perf_metric_RIS_width_-100dB_distance_height_1m}, the distance-base
 \begin{figure}
 	\centering
 	\includegraphics[width=\linewidth]{Sim_Results/perf_metric_RIS_width_-100dB_distance_height_1m.png}
-	\caption{Performance metric $\mathcal{M}$ vs. RIS width for the distance-based approach, showing selected sub-optimal configurations for different performance improvement thresholds $\Delta \mathcal{M}_{\text{min}}$ with a RIS height of $1$ m and a minimum path gain threshold of $-100$ dB}
+	\caption{Performance metric $\mathcal{M}$ vs. RIS width for the distance-based approach, showing selected sub-optimal configurations for different performance improvement thresholds $\Delta \mathcal{M}_{\text{min}}$ with a RIS height of $1$ m and the minimum path gain threshold of $-100$ dB}
 	\label{perf_metric_RIS_width_-100dB_distance_height_1m}
 \end{figure}
 
 \subsubsection{EFFECT OF NUMBER OF TARGET POINTS ON THE PERFORMANCE}
 To directly analyze the influence of the number of target points $N$ on the performance, Figures \ref{performance_and_coverage_vs_N_Gradient} and \ref{performance_and_coverage_vs_N_Distance} show the variation in the performance metric $\mathcal{M}$ and coverage ratio for two fixed RIS widths $W_{\text{RIS}}$: $1$ m and $2$ m. These are plotted for the gradient-based and distance-based approaches, separately.
 
-Each plot includes solid lines for the performance metric and dashed lines for the coverage ratio. For each value of $N$, the RIS configuration with the highest performance metric (among all candidate positions) is selected. The corresponding RIS position is annotated at each point using 3D coordinates $(x, y, z)$. Fig. \ref{binary_poor_cov_map_N_1} shows the binary poor coverage map for the case of $N=1$, where the target point selected by the K-means clustering algorithm is marked with a green `$\times$'.
+Each plot includes solid lines for the performance metric and dashed lines for the coverage ratio. For each value of $N$, the RIS configuration with the highest performance metric (among all candidate positions) is selected. The corresponding RIS position is annotated at each point using 3D coordinates $(x, y, z)$. Fig. \ref{binary_poor_cov_map_N_1} shows the binary poor coverage map of the transmitter-only coverage map and the only target point for the case of $N=1$, where the target point selected by the K-means clustering algorithm is marked with a green `$\times$'.
 
 In the gradient-based case (Fig. \ref{performance_and_coverage_vs_N_Gradient}), the performance metric $\mathcal{M}$ increases significantly from $N = 0$ (no RIS) to $N = 2$, due to the fact that two distinct blind spot regions exist in the considered indoor scenario. However, further increases in the number of target points provide negligible performance gains, as most uncovered regions have already been served with $N = 2$. For RIS width $W_{\text{RIS}} = 1$ m, the optimal number of target points is $N = 3$, whereas for $W_{\text{RIS}} = 2$ m, $N = 2$ is sufficient. This is because a larger RIS width allows energy to reach a wider area with fewer number of target points. The coverage ratio, on the other hand, continues to improve with increasing $N$, since more target points distribute energy more broadly, which allows more low-power cells to benefit from the RIS contribution.
 
@@ -455,7 +455,7 @@ In the distance-based case (Fig. \ref{performance_and_coverage_vs_N_Distance}), 
 These results demonstrate that the number of RIS target points should be selected based on the width of the RIS and the geometry of blind-spot regions. Selecting too few targets can leave areas unserved, while selecting too many reduces the gain directed toward each.
 
 \begin{figure}
-	\centering \includegraphics[width=.7\linewidth]{Sim_Results/Binary_Cov_Map_N_1_-100dB.png}
+	\centering \includegraphics[width=\linewidth]{Sim_Results/Binary_Cov_Map_N_1_-100dB.png}
 	\caption{Binary poor coverage map with $N = 1$ for the minimum path gain threshold of $-100$ dB}
 	\label{binary_poor_cov_map_N_1}
 \end{figure}
@@ -463,19 +463,19 @@ These results demonstrate that the number of RIS target points should be selecte
 \begin{figure}
 	\centering
 	\includegraphics[width=\linewidth]{Sim_Results/performance_and_coverage_vs_N_Gradient.png}
-	\caption{Performance metric $\mathcal{M}$ vs. number of target points ($N$) for the gradient-based approach, with a RIS height of $1$ m and a minimum path gain threshold of $-100$ dB where each point is annotated with the corresponding optimal RIS position in the form $(x, y, z)$}
+	\caption{Performance metric $\mathcal{M}$ vs. number of target points ($N$) for the gradient-based approach, with a RIS height of $1$ m and the minimum path gain threshold of $-100$ dB where each point is annotated with the corresponding optimal RIS position in the form $(x, y, z)$}
 	\label{performance_and_coverage_vs_N_Gradient}
 \end{figure}
 
 \begin{figure}
 	\centering
 	\includegraphics[width=\linewidth]{Sim_Results/performance_and_coverage_vs_N_Distance.png}
-	\caption{Performance metric $\mathcal{M}$ vs. number of target points ($N$) for the distance-based approach, with a RIS height of $1$ m and a minimum path gain threshold of $-100$ dB where each point is annotated with the corresponding optimal RIS position in the form $(x, y, z)$}
+	\caption{Performance metric $\mathcal{M}$ vs. number of target points ($N$) for the distance-based approach, with a RIS height of $1$ m and the minimum path gain threshold of $-100$ dB where each point is annotated with the corresponding optimal RIS position in the form $(x, y, z)$}
 	\label{performance_and_coverage_vs_N_Distance}
 \end{figure}
 
 \subsubsection{CUMULATIVE DISTRIBUTION FUNCTION (CDF) ANALYSIS}
-To evaluate the impact of RIS placement on overall path gain distribution, we analyze the CDF of path gain levels across the entire scene for different phase profile approaches and RIS sizes, as shown in Fig. \ref{CDF_-100dB}. The RIS is positioned at its sub-optimal location for each size, as identified in Figs. \ref{perf_metric_RIS_width_-100dB_gradient_height_1m} and \ref{perf_metric_RIS_width_-100dB_distance_height_1m}. In the figure labels, the RIS size is denoted in the format `height × width'.
+To evaluate the impact of RIS placement on overall path gain distribution, we analyze the CDF of path gain levels across the entire scene for different phase profile approaches and RIS sizes, as shown in Fig. \ref{CDF_-100dB}. The RIS is positioned at its sub-optimal location for each size, as identified in Figures \ref{perf_metric_RIS_width_-100dB_gradient_height_1m} and \ref{perf_metric_RIS_width_-100dB_distance_height_1m}. In the figure labels, the RIS size is denoted in the format `height × width'.
 
 The results indicate that the lowest path gain levels in the scene are significantly improved by both the distance-based and gradient-based approaches compared to the baseline case without RIS. This is because the RIS primarily targets low-power cells in blind spots, where signal coverage is weakest. The key difference between the two approaches is observed in the moderate path gain range. While the gradient-based approach enhances path gain in these cells considerably, the distance-based approach exhibits a more localized effect, focusing primarily on the designated target points. Nevertheless, even the distance-based approach provides noticeable enhancement compared to the no RIS scenario in the case of $-100$ dB minimum path gain threshold.
 
@@ -485,14 +485,14 @@ As expected, high path gain cells remain unaffected by the RIS placement since t
 
 \begin{figure}
 	\centering \includegraphics[width=\linewidth]{Sim_Results/CDF_-100dB.png}
-	\caption{Cumulative distribution functions (CDFs) of path gain levels for different phase profile approaches and RIS sizes, with a minimum path gain threshold of $-100$ dB}
+	\caption{Cumulative distribution functions (CDFs) of path gain levels for different phase profile approaches and RIS sizes, with the minimum path gain threshold of $-100$ dB}
 	\label{CDF_-100dB}
 \end{figure}
 
 \subsubsection{COMBINED COVERAGE ANALYSIS WITH RIS}
-To further evaluate the impact of RIS placement, we analyze the combined coverage maps of the transmitter and the RIS for a specific configuration. Fig.s \ref{comb_cov_gradient} and \ref{comb_cov_distance} illustrate the results for the gradient-based and distance-based approaches, respectively.
+To further evaluate the impact of RIS placement, we analyze the combined coverage maps of the transmitter and the RIS for a specific configuration. Figures \ref{comb_cov_gradient} and \ref{comb_cov_distance} illustrate the results for the gradient-based and distance-based approaches, respectively.
 
-Fig. \ref{comb_cov_gradient} presents the results for the gradient-based approach, where the RIS is configured with a size of $1 \times 2$ m$^2$ and positioned at its sub-optimal location, as identified in Fig. \ref{perf_metric_RIS_width_-100dB_gradient_height_1m}. The RIS serves two target points, marked by red `$\times$' signs, while its placement is indicated by a star symbol. The combined coverage map in Fig. \ref{comb_cov_gradient}-a demonstrates that the RIS successfully enhances the power levels at the target points while also improving signal strength along the beam paths. To better quantify this enhancement, the RIS coverage gain in Fig. \ref{comb_cov_gradient}-b highlights significant power level improvements, particularly at the far edge of the lower hallway and within the internal room where the target points are located. Finally, Fig. \ref{comb_cov_gradient}-c shows the updated binary poor coverage map, demonstrating that nearly all cells achieve sufficient power coverage, with a coverage ratio of $99.58\%$ and an increased average power of low-power cells reaching $-76.05$ dB compared to a coverage ratio of $81.54\%$ and an average power of low-power cells of $-112.58$ dB in the transmitter-only coverage map. Figs. \ref{comb_cov_gradient}-d and \ref{comb_cov_gradient}-e illustrate the per-tile phase profiles generated by the gradient-based method for each target point in this RIS configuration. As seen, the method produces a linear phase ramp across the RIS surface to steer the reflected beams toward the assigned target directions. In this scenario, RX-1 refers to the receiver point inside the internal room, while RX-2 is located in the lower corridor region.
+Fig. \ref{comb_cov_gradient} presents the results for the gradient-based approach, where the RIS is configured with a size of $1 \times 2$ m$^2$ and positioned at its sub-optimal location, as identified in Fig. \ref{perf_metric_RIS_width_-100dB_gradient_height_1m}. The RIS serves two target points, marked by red `$\times$' signs, while its placement is indicated by a star symbol. The combined coverage map in Fig. \ref{comb_cov_gradient}-a demonstrates that the RIS successfully enhances the path gain levels at the target points while also improving signal strength along the beam paths. To better quantify this enhancement, the RIS coverage gain in Fig. \ref{comb_cov_gradient}-b highlights significant path gain improvements, particularly at the far edge of the lower hallway and within the internal room where the target points are located. Finally, Fig. \ref{comb_cov_gradient}-c shows the updated binary poor coverage map, demonstrating that nearly all cells achieve sufficient coverage, with a coverage ratio of $99.58\%$ and an increased average path gain of low-power cells reaching $-76.05$ dB compared to a coverage ratio of $81.54\%$ and an average path gain of low-power cells of $-112.58$ dB in the transmitter-only coverage map. Figures \ref{comb_cov_gradient}-d and \ref{comb_cov_gradient}-e illustrate the per-tile phase profiles generated by the gradient-based method for each target point in this RIS configuration. As seen, the method produces a linear phase ramp across the RIS surface to steer the reflected beams toward the assigned target directions. In this scenario, RX-1 refers to the receiver point inside the internal room, while RX-2 is located in the lower corridor region.
 
 \begin{figure}
 	\centering
@@ -511,13 +511,13 @@ Fig. \ref{comb_cov_gradient} presents the results for the gradient-based approac
 	\includegraphics[width=0.48\linewidth]{Sim_Results/pp_-100dB_gradient_RX2.png}
 	
 	\hspace{10pt} d) Phase profile for RX-1 \hspace{15pt} e) Phase profile for RX-2
-	\caption{Combined coverage analysis for a RIS of size $1 \times 2$ m$^2$ using the gradient-based approach, with a minimum path gain threshold of $-100$ dB}
+	\caption{Combined coverage analysis for a RIS of size $1 \times 2$ m$^2$ using the gradient-based approach, with the minimum path gain threshold of $-100$ dB}
 	\label{comb_cov_gradient}
 \end{figure}
 
-A similar analysis is conducted for the distance-based approach, as illustrated in Fig. \ref{comb_cov_distance}. The RIS configuration follows the sub-optimal parameters obtained from the optimization algorithm. As shown in Fig. \ref{comb_cov_distance}, the distance-based approach directs energy to narrow regions around the target points. Unlike the gradient-based approach, this method does not significantly enhance power levels outside the focused target point areas. Consequently, some low-power cells, particularly in the large blind spot of the lower hallway, remain uncovered despite the RIS placement. This outcome is specific to the given scenario, where a large blind spot region exists, however, in cases with smaller blind spot areas, the distance-based approach could also yield superior results. Nevertheless, the binary poor coverage map in Fig. \ref{comb_cov_distance}-c indicates that the average power of low-power cells increases to $-89.6$ dB, with a gain of nearly $23$ dB, while the coverage ratio of the scene reaches $96.31\%$. Figs. \ref{comb_cov_distance}-d, \ref{comb_cov_distance}-e, and \ref{comb_cov_distance}-f show the per-tile phase profiles generated by the distance-based method for each of the three optimally selected target points in this configuration. Unlike the gradient-based method, the distance-based method produces nonuniform and focused phase distributions that precisely align the total TX–RIS–target path lengths. This results in energy being concentrated narrowly around each target point, making the method particularly effective for small or well-isolated blind-spot regions.
+A similar analysis is conducted for the distance-based approach, as illustrated in Fig. \ref{comb_cov_distance}. The RIS configuration follows the sub-optimal parameters obtained from the optimization algorithm. As shown in Fig. \ref{comb_cov_distance}, the distance-based approach directs energy to narrow regions around the target points. Unlike the gradient-based approach, this method does not significantly enhance path gain levels outside the focused target point areas. Consequently, some low-power cells, particularly in the large blind spot of the lower hallway, remain uncovered despite the RIS placement. This outcome is specific to the given scenario, where a large blind spot region exists, however, in cases with smaller blind spot areas, the distance-based approach could also yield superior results. Nevertheless, the binary poor coverage map in Fig. \ref{comb_cov_distance}-c indicates that the average path gain of low-power cells increases to $-89.6$ dB, with a gain of nearly $23$ dB, while the coverage ratio of the scene reaches $96.31\%$. Figures \ref{comb_cov_distance}-d, \ref{comb_cov_distance}-e, and \ref{comb_cov_distance}-f show the per-tile phase profiles generated by the distance-based method for each of the three optimally selected target points in this configuration. Unlike the gradient-based method, the distance-based method produces nonuniform and focused phase distributions that precisely align the total TX–RIS–target path lengths. This results in energy being concentrated narrowly around each target point, making the method particularly effective for small or isolated blind-spot regions.
 
-This highlights the trade-offs between the two approaches. While the gradient-based approach provides a more distributed power enhancement, the distance-based approach focuses energy more precisely on the assigned target points. The performance of these methods may also depend on the scenario, as we will explore in the next subsection by lowering the minimum power threshold to $-110$ dB to focus on the weakest signal regions.
+This highlights the trade-offs between the two approaches. While the gradient-based approach provides a more distributed coverage enhancement, the distance-based approach focuses energy more precisely on the assigned target points. The performance of these methods may also depend on the scenario, as we will explore in the next subsection by lowering the minimum path gain threshold to $-110$ dB to focus on the weakest signal regions.
 
 \begin{figure}
 	\centering
@@ -540,12 +540,12 @@ This highlights the trade-offs between the two approaches. While the gradient-ba
 	
 	f) Phase profile for RX-3
 	
-	\caption{Combined coverage analysis for a RIS of size $1 \times 2$ m$^2$ using the distance-based approach, with a minimum power threshold of $-100$ dB}
+	\caption{Combined coverage analysis for a RIS of size $1 \times 2$ m$^2$ using the distance-based approach, with the minimum path gain threshold of $-100$ dB}
 	\label{comb_cov_distance}
 \end{figure}
 
 \subsubsection{EFFECT OF AMPLITUDE FLUCTUATIONS ON RIS PERFORMANCE}
-In this subsection, we analyze the impact of random amplitude fluctuations across RIS tiles on the coverage and system performance. To this end, we conducted a simulation by introducing random fluctuations in the amplitude profile of the RIS tiles. In this case only, each element’s amplitude for a given target point was independently assigned from a uniform distribution between $0.7$ and $1$. This setup approximates practical fluctuations observed in passive RIS implementations due to angular-dependent attenuation or fabrication variability.
+In this subsection, we analyze the impact of random amplitude fluctuations across RIS tiles on the coverage and system performance. To this end, we conducted a simulation by introducing random fluctuations in the amplitude profile of the RIS tiles. In this case only, each element’s amplitude for a given target point was independently assigned from a uniform distribution between $0.7$ and $1$. This setup approximates practical fluctuations observed in passive RIS implementations due to angular-dependent attenuation or fabrication defects.
 
 Figures \ref{amp_change_comb_cov_gradient} and \ref{amp_change_comb_cov_distance} present the resulting coverage maps and performance metrics using the gradient-based and distance-based approaches, respectively. These results are generated using the same RIS configurations as in Figures \ref{comb_cov_gradient} and \ref{comb_cov_distance}. The results reveal that both approaches are largely robust to moderate amplitude variations. Specifically, the average path gain of the low-power cells drops by only $1$–$1.5$ dB compared to the fixed-unit amplitude case. The coverage patterns also remain largely unchanged, with no significant degradation observed in the combined coverage or binary poor coverage maps. This indicates that the system performance is predominantly determined by the phase configuration rather than fine-grained amplitude tuning. As such, fixed amplitude assumptions are sufficient for capturing the dominant effects of RIS behavior in phase-driven optimization frameworks, particularly when the RIS operates passively and angular-dependent attenuation is weak. Nonetheless, future work could further explore this aspect by incorporating angle-dependent amplitude profiles, particularly in scenarios involving hardware-calibrated RIS models or where amplitude distortions are non-negligible.
 
@@ -560,7 +560,7 @@ Figures \ref{amp_change_comb_cov_gradient} and \ref{amp_change_comb_cov_distance
 	\includegraphics[width=0.48\linewidth]{Sim_Results/amp_change_New_Binary_Cov_Map_1x2_Gradient.png}
 	
 	\hspace{10pt} b) RIS coverage gain \hspace{30pt} c) Updated binary poor \\ \hspace{140pt} coverage map
-	\caption{Combined coverage analysis for a RIS of size $1 \times 2$ m$^2$ using the gradient-based approach with random amplitude fluctuations (uniformly distributed in [$0.7$, $1$]), under a minimum path gain threshold of $-100$ dB.}
+	\caption{Combined coverage analysis for a RIS of size $1 \times 2$ m$^2$ using the gradient-based approach with random amplitude fluctuations (uniformly distributed in [$0.7$, $1$]), under the minimum path gain threshold of $-100$ dB.}
 	\label{amp_change_comb_cov_gradient}
 \end{figure}
 
@@ -575,14 +575,14 @@ Figures \ref{amp_change_comb_cov_gradient} and \ref{amp_change_comb_cov_distance
 	\includegraphics[width=0.48\linewidth]{Sim_Results/amp_change_New_Binary_Cov_Map_1x2_Distance.png}
 	
 	\hspace{10pt} b) RIS coverage gain \hspace{30pt} c) Updated binary poor \\ \hspace{140pt} coverage map
-	\caption{Combined coverage analysis for a RIS of size $1 \times 2$ m$^2$ using the distance-based approach with random amplitude fluctuations (uniformly distributed in [$0.7$, $1$]), under a minimum path gain threshold of $-100$ dB.}
+	\caption{Combined coverage analysis for a RIS of size $1 \times 2$ m$^2$ using the distance-based approach with random amplitude fluctuations (uniformly distributed in [$0.7$, $1$]), under the minimum path gain threshold of $-100$ dB.}
 	\label{amp_change_comb_cov_distance}
 \end{figure}
 
-\subsection{RESULTS FOR MINIMUM POWER THRESHOLD OF $-110$ dB}
-In this subsection, we analyze the impact of reducing the minimum power threshold to $-110$ dB, focusing on the weakest signal regions and their blind spots. This analysis follows a similar methodology to the $-100$ dB case but reveals different outcomes due to the updated power threshold.
+\subsection{RESULTS FOR MINIMUM PATH GAIN THRESHOLD OF $-110$ dB}
+In this subsection, we analyze the impact of reducing the minimum path gain threshold to $-110$ dB, focusing on the weakest signal regions and their blind spots. This analysis follows a similar methodology to the $-100$ dB case but reveals different outcomes due to the updated threshold.
 
-Fig. \ref{binary_maps_-110dB} presents the binary poor coverage maps for different numbers of target configurations when the minimum power threshold is set at $-110$ dB. The low-power cells in this setting are primarily located at the far edge of the lower hallway, whereas the previously identified low-power cells within the internal room are no longer present. This is because the power levels in that region predominantly fall between $-100$ dB and $-110$ dB, making them non-critical under the new threshold. Consequently, the RIS optimization now focuses only on the far edge of the lower hallway with a smaller blind spot region. Considering only the transmitter's contribution, the average power of these newly identified low-power cells is calculated as $-121.87$ dB, with an initial coverage ratio of $90.40\%$.
+Fig. \ref{binary_maps_-110dB} presents the binary poor coverage maps for different numbers of target configurations when the minimum path gain threshold is set at $-110$ dB. The low-power cells in this setting are primarily located at the far edge of the lower hallway, whereas the previously identified low-power cells within the internal room are no longer present. This is because the path gain levels in that region predominantly fall between $-100$ dB and $-110$ dB, making them non-critical under the new threshold. Consequently, the RIS optimization now focuses only on the far edge of the lower hallway with a smaller blind spot region. Considering only the transmitter's contribution, the average path gain of these newly identified low-power cells is calculated as $-121.87$ dB, with an initial coverage ratio of $90.40\%$.
 
 \begin{figure}
 	\centering
@@ -597,27 +597,27 @@ Fig. \ref{binary_maps_-110dB} presents the binary poor coverage maps for differe
 	\includegraphics[width=0.49\linewidth]{Sim_Results/Binary_Cov_Map_N_5_-110dB.png}
 	
 	c) $N = 4$ \hspace{80pt} d) $N = 5$
-	\caption{Binary poor coverage maps for different number of target configurations for the minimum power threshold of $-110$ dB}
+	\caption{Binary poor coverage maps for different number of target configurations for the minimum path gain threshold of $-110$ dB}
 	\label{binary_maps_-110dB}
 \end{figure}
 
-Following the identification of new low-power cells and their corresponding target points, we execute RIS placement and performance evaluations across all feasible locations using the proposed optimization algorithm. Similar to the previous case, the results of the performance metric $\mathcal{M}$ as a function of RIS width are illustrated in Fig. \ref{perf_metric_RIS_width_-110dB_multiple_curves_height_1m}, comparing gradient-based and distance-based approaches. Given the fewer number of low-power cells, all located within the same blind spot, satisfactory coverage improvement is achieved even with a relatively small RIS width for both approaches. While the coverage ratio reaches nearly $100\%$ for most RIS configurations, the gradient-based approach still provides a higher average power level for the low-power cells compared to the distance-based approach.
+Following the identification of new low-power cells and their corresponding target points, we execute RIS placement and performance evaluations across all feasible locations using the proposed optimization algorithm. Similar to the previous case, the results of the performance metric $\mathcal{M}$ as a function of RIS width are illustrated in Fig. \ref{perf_metric_RIS_width_-110dB_multiple_curves_height_1m}, comparing gradient-based and distance-based approaches. Given the fewer number of low-power cells, all located within the same blind spot, satisfactory coverage improvement is achieved even with a relatively small RIS width for both approaches. While the coverage ratio reaches nearly $100\%$ for most RIS configurations, the gradient-based approach still provides a higher average path gain level for the low-power cells compared to the distance-based approach.
 
 \begin{figure}
 	\centering \includegraphics[width=\linewidth]{Sim_Results/perf_metric_RIS_width_-110dB_multiple_curves_height_1m.png}
-	\caption{Performance metric $\mathcal{M}$ vs. RIS width plot, showing selected sub-optimal configurations for different performance improvement thresholds $\Delta \mathcal{M}_{\text{min}}$ with a RIS height of $1$ m and a minimum power threshold of $-110$ dB}
+	\caption{Performance metric $\mathcal{M}$ vs. RIS width plot, showing selected sub-optimal configurations for different performance improvement thresholds $\Delta \mathcal{M}_{\text{min}}$ with a RIS height of $1$ m and the minimum path gain threshold of $-110$ dB}
 	\label{perf_metric_RIS_width_-110dB_multiple_curves_height_1m}
 \end{figure}
 
-The CDFs of power levels for different phase profile approaches and RIS sizes with a minimum power threshold of $-110$ dB are presented in Fig. \ref{CDF_-110dB}. The observed trends are consistent with the previous CDF analysis for the $-100$ dB case. The major distinction in this scenario is that the lowest-power cells are almost entirely served with the RIS placement such that almost no cells below the level of $-110$ dB appear. This occurs because the RIS optimization process prioritizes the weakest signal regions by setting a lower power threshold. These results emphasize that if the primary objective is to address severe signal quality issues, selecting a lower minimum power threshold is essential to accurately identify and enhance the most critical low-power regions.
+The CDFs of path gain levels for different phase profile approaches and RIS sizes with the minimum path gain threshold of $-110$ dB are presented in Fig. \ref{CDF_-110dB}. The observed trends are consistent with the previous CDF analysis for the $-100$ dB case. The major distinction in this scenario is that the lowest-power cells are almost entirely served with the RIS placement such that almost no cells below the level of $-110$ dB appear. This occurs because the RIS optimization process prioritizes the weakest signal regions by setting a lower path gain threshold. These results emphasize that if the primary objective is to address severe signal quality issues, selecting a lower minimum path gain threshold is essential to accurately identify and enhance the most critical low-coverage regions.
 
 \begin{figure}
-	\centering \includegraphics[width=.9\linewidth]{Sim_Results/CDF_-110dB.png}
-	\caption{Cumulative distribution functions (CDFs) of power levels for different phase profile approaches and RIS sizes, with a minimum power threshold of $-110$ dB}
+	\centering \includegraphics[width=\linewidth]{Sim_Results/CDF_-110dB.png}
+	\caption{Cumulative distribution functions (CDFs) of path gain levels for different phase profile approaches and RIS sizes, with the minimum path gain threshold of $-110$ dB}
 	\label{CDF_-110dB}
 \end{figure}
 
-The combined coverage maps for the gradient-based and distance-based approaches with a minimum power threshold of $-110$ dB are shown in Figs. \ref{comb_cov_gradient_-110dB} and \ref{comb_cov_distance_-110dB}, respectively. The similar conclusions can be made for the gradient-based approach, it continues to enhance power levels over a broader region. A significant difference is observed for the distance-based approach in Fig. \ref{comb_cov_distance_-110dB}, where full coverage is achieved by focusing on two target points. Compared to the previous case with a $-100$ dB threshold, this setting results in fewer low-power cells concentrated in a smaller blind spot. Consequently, the distance-based approach is particularly effective in scenarios where blind spots are small and all low-power cells are close to the selected target points of the RIS. Ultimately, the updated binary poor coverage maps confirm that full coverage is achieved across the scene.
+The combined coverage maps for the gradient-based and distance-based approaches with the minimum path gain threshold of $-110$ dB are shown in Figures \ref{comb_cov_gradient_-110dB} and \ref{comb_cov_distance_-110dB}, respectively. Similar conclusions can be drawn for the gradient-based approach, which continues to enhance path gain levels over a broader region. A significant difference is observed for the distance-based approach in Fig. \ref{comb_cov_distance_-110dB}, where full coverage is achieved by focusing on two target points. Compared to the previous case with a $-100$ dB threshold, this setting results in fewer low-power cells concentrated in a smaller blind spot. Consequently, the distance-based approach is particularly effective in scenarios where blind spots are small and all low-power cells are close to the selected target points of the RIS. Ultimately, the updated binary poor coverage maps confirm that full coverage is achieved across the scene.
 
 \begin{figure}
 	\centering
@@ -630,7 +630,7 @@ The combined coverage maps for the gradient-based and distance-based approaches 
 	\includegraphics[width=0.48\linewidth]{Sim_Results/New_Binary_Cov_Map_1x2_Gradient_-110dB.png}
 	
 	\hspace{10pt} b) RIS coverage gain \hspace{30pt} c) Updated binary poor \\ \hspace{140pt} coverage map
-	\caption{Combined coverage analysis for a RIS of size $1 \times 2$ m$^2$ using the gradient-based approach, with a minimum power threshold of $-110$ dB}
+	\caption{Combined coverage analysis for a RIS of size $1 \times 2$ m$^2$ using the gradient-based approach, with the minimum path gain threshold of $-110$ dB}
 	\label{comb_cov_gradient_-110dB}
 \end{figure}
 
@@ -645,12 +645,12 @@ The combined coverage maps for the gradient-based and distance-based approaches 
 	\includegraphics[width=0.48\linewidth]{Sim_Results/New_Binary_Cov_Map_1x2_Distance_-110dB.png}
 	
 	\hspace{10pt} b) RIS coverage gain \hspace{30pt} c) Updated binary poor \\ \hspace{140pt} coverage map
-	\caption{Combined coverage analysis for a RIS of size $1 \times 2$ m$^2$ using the distance-based approach, with a minimum power threshold of $-110$ dB}
+	\caption{Combined coverage analysis for a RIS of size $1 \times 2$ m$^2$ using the distance-based approach, with the minimum path gain threshold of $-110$ dB}
 	\label{comb_cov_distance_-110dB}
 \end{figure}
 
 \section{CONCLUSION} \label{sec:conclusion}
-This paper presents a novel ray-tracing-based joint optimization framework for RIS deployment in indoor wireless environments, simultaneously optimizing the RIS position, size, and beam-steering target points. Unlike prior studies that assume fixed RIS positions or arbitrary sizes, our approach systematically determines all key RIS parameters in a unified framework while considering both LoS and non-LoS paths. By integrating ray-tracing simulations with a clustering-based method for identifying target points and a performance-cost trade-off strategy for selecting a sub-optimal RIS size, the proposed method effectively improves coverage and signal quality, especially in blind spots. The simulation results demonstrate that a physically consistent, data-driven optimization approach can significantly enhance indoor communication performance. The findings highlight the importance of optimizing multiple RIS parameters jointly rather than considering them separately, providing a practical methodology for real-world RIS-aided wireless networks. Based on these results, we also propose a general guideline specific to the considered U-shaped indoor office scenario for RIS deployment: (1) the RIS should be mounted on walls with line-of-sight visibility to both the transmitter and all target points, with the optimal location chosen to maximize the performance metric; (2) the RIS size should be increased until the performance improvement drops below a selected performance improvement threshold, enabling size-efficiency trade-offs; and (3) the phase profile configuration method should be selected according to the geometry of the blind-spot region: use the gradient-based approach for broad, dispersed coverage areas where energy needs to be distributed more evenly, and use the distance-based approach for small, confined regions where focused signal enhancement is required. Future work may extend this framework to multi-RIS deployments, where multiple RISs collaboratively optimize coverage over larger indoor areas, further enhancing communication performance in complex propagation environments.
+This paper presents a novel ray-tracing-based joint optimization framework for RIS deployment in indoor wireless environments, simultaneously optimizing the RIS position, size, and beam-steering target points. Unlike prior studies that assume fixed RIS positions or arbitrary sizes, our approach systematically determines all key RIS parameters in a unified framework while considering both LoS and non-LoS paths. By integrating ray-tracing simulations with a clustering-based method for identifying target points and a performance-cost trade-off strategy for selecting a sub-optimal RIS size, the proposed method effectively improves coverage and signal quality, especially in blind spots. The simulation results demonstrate that a physically consistent, data-driven optimization approach can significantly enhance indoor communication performance. The findings highlight the importance of optimizing multiple RIS parameters jointly rather than considering them separately, providing a practical methodology for real-world RIS-aided wireless networks. Based on these results, we also propose a general guideline specific to the considered U-shaped indoor office scenario for RIS deployment: (1) the RIS should be mounted on walls with line-of-sight visibility to both the transmitter and all target points, with the optimal location chosen to maximize the performance metric, (2) the RIS size should be increased until the performance improvement drops below a selected performance improvement threshold, enabling size-efficiency trade-offs, and (3) the phase profile configuration method should be selected according to the geometry of the blind-spot region: use the gradient-based approach for broad, dispersed coverage areas where energy needs to be distributed more evenly, and use the distance-based approach for small, confined regions where focused signal enhancement is required. Future work may extend this framework to multi-RIS deployments, where multiple RISs collaboratively optimize coverage over larger indoor areas, further enhancing communication performance in complex propagation environments.
 
 \begin{thebibliography}{00}
 	\bibitem{wu_towards} Q. Wu and R. Zhang, “Towards smart and reconfigurable environment: Intelligent reflecting surface aided wireless network," \textit{IEEE Commun. Mag.}, vol. 58, no. 1, pp. 106-112, Jan. 2020.
