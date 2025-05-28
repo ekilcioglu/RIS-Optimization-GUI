@@ -4,7 +4,7 @@
 
 # GUI Libraries
 import tkinter as tk
-from tkinter import ttk, filedialog
+from tkinter import ttk, filedialog, messagebox
 #import pyautogui
 
 # Plotting and Visualization
@@ -46,25 +46,25 @@ gpu_num = 0  # Specify the GPU to use; leave as "" to use the CPU
 
 def to_db(x):
     """
-    Converts a power value from a linear scale to decibels (dB).
+    Converts a value from a linear scale to decibels (dB).
 
     :Input:
-        **x** (*float* or *tf.Tensor*): A numeric value or a TensorFlow tensor representing power in linear scale.
+        **x** (*float* or *tf.Tensor*): A numeric value or a TensorFlow tensor represented in linear scale.
 
     :Output:
-        **dB_power** (*tf.Tensor*): The power level in decibels.
+        **dB** (*tf.Tensor*): The value in decibels.
     """
     return 10 * tf.math.log(x) / tf.math.log(10.)
 
 def calculate_cdf(tensor):
     """
-    Calculates the cumulative distribution function (CDF) of power levels in a tensor.
+    Calculates the cumulative distribution function (CDF) of path gains in a tensor.
 
     :Input:
-        - **tensor** (*tf.Tensor*): A 2D TensorFlow tensor representing a coverage map with power values.
+        - **tensor** (*tf.Tensor*): A 2D TensorFlow tensor representing a coverage map with path gain values.
 
     :Output:
-        - **sorted_values_db** (*np.ndarray*): Sorted power values converted to dB.
+        - **sorted_values_db** (*np.ndarray*): Sorted path gain values converted to dB.
         - **cdf** (*np.ndarray*): The cumulative distribution function values.
     """
     # Flatten the tensor and filter out zero or negative values
@@ -110,20 +110,20 @@ def plot_multiple_cdfs(cdfs, labels):
             plt.plot(sorted_values_db, cdf, label=label, marker=marker_list[marker_count], markevery=100, markersize=7)
         marker_count = marker_count + 1
 
-    plt.xlabel('Power level (dB)')
-    plt.ylabel('CDF (%)')
-    #plt.title('CDF of Power Levels')
+    plt.xlabel('Path gain (dB)')
+    plt.ylabel('CDF')
+    #plt.title('CDF of Path Gains')
     plt.grid(True)
     plt.legend()
     plt.show()
 
 def calculate_coverage_ratio(tensor, threshold_db):
     """
-    Calculates the coverage ratio of the scenario from a coverage map tensor based on a minimum power threshold.
+    Calculates the coverage ratio of the scenario from a coverage map tensor based on a minimum path gain threshold.
 
     :Input:
-        - **tensor** (*tf.Tensor*): A 2D TensorFlow tensor representing the coverage map with power values.
-        - **threshold_db** (*float*): The minimum power threshold in dB.
+        - **tensor** (*tf.Tensor*): A 2D TensorFlow tensor representing the coverage map with path gain values.
+        - **threshold_db** (*float*): The minimum path gain threshold in dB.
 
     :Output:
         **coverage_ratio** (*float*): The coverage ratio as a percentage.
@@ -195,7 +195,7 @@ class RIS_GUI:
         - **self.master**: The main Tkinter window.
         - **self.label_title**: Label displaying the title of the GUI.
         - **self.entry_frame**: Frame containing entry widgets for scenario, frequency, transmitter position,
-        power threshold, and coverage map cell size.
+        minimum path gain threshold, and coverage map cell size.
         - **self.scenario_selection_labelframe**: LabelFrame for selecting the simulation scenario.
         - **self.scenario_options**: List of available scenarios.
         - **self.scenario_var**: Tkinter StringVar holding the currently selected scenario.
@@ -205,8 +205,8 @@ class RIS_GUI:
         - **self.entry_frequency**: Entry widget to input the frequency.
         - **self.tx_pos_labelframe**: LabelFrame for transmitter position input.
         - **self.entry_tx_x**, **self.entry_tx_y**, **self.entry_tx_z**: Entry widgets for TX x, y, z coordinates.
-        - **self.min_power_threshold_labelframe**: LabelFrame for minimum power threshold input.
-        - **self.entry_threshold**: Entry widget for the power threshold (dB).
+        - **self.min_path_gain_threshold_labelframe**: LabelFrame for minimum path gain threshold input.
+        - **self.entry_threshold**: Entry widget for the minimum path gain threshold (dB).
         - **self.cov_map_cell_size_labelframe**: LabelFrame for coverage map cell size input.
         - **self.cov_map_cell_size**: Entry widget for cell size.
         - **self.buttons_frame**: Frame containing buttons for preset values, clearing values, previewing the scenario,
@@ -256,11 +256,11 @@ class RIS_GUI:
         self.entry_tx_z.grid(row=0, column=2, padx=5)
         self.tx_pos_labelframe.grid(row=0, column=2, padx=5)
 
-        # Power threshold input
-        self.min_power_threshold_labelframe = tk.LabelFrame(self.entry_frame, text="Minimum power \n threshold (dB)", padx=6, pady=6)
-        self.entry_threshold = tk.Entry(self.min_power_threshold_labelframe, width=5)
+        # Minimum path gain threshold input
+        self.min_path_gain_threshold_labelframe = tk.LabelFrame(self.entry_frame, text="Minimum path gain \n threshold (dB)", padx=6, pady=6)
+        self.entry_threshold = tk.Entry(self.min_path_gain_threshold_labelframe, width=5)
         self.entry_threshold.pack(pady=5)              
-        self.min_power_threshold_labelframe.grid(row=0, column=3, padx=5)
+        self.min_path_gain_threshold_labelframe.grid(row=0, column=3, padx=5)
 
         # Coverage map cell size input
         self.cov_map_cell_size_labelframe = tk.LabelFrame(self.entry_frame, text="Coverage map\ncell size (m)", padx=6, pady=6)
@@ -300,16 +300,18 @@ class RIS_GUI:
         
         self.label_pp.grid(row=0, column=0, padx=5)
         self.pp_menu.grid(row=0, column=1, padx=5)
-        self.phase_profile_selection_frame.pack(pady=5)
 
         # Manual phase profile file selection (Initially hidden)
-        self.manual_pp_file_selection_labelframe = tk.LabelFrame(master, text="Select manual phase profile file (.json)", padx=6, pady=6)
+        self.manual_pp_file_selection_labelframe = tk.LabelFrame(self.phase_profile_selection_frame, text="Select manual phase profile file (.json)", padx=6, pady=6)
         self.manual_pp_file_selection_entry = tk.Entry(self.manual_pp_file_selection_labelframe, width=50)
         self.manual_pp_file_selection_entry.grid(row=0, column=0, padx=5)
         self.manual_pp_file_selection_button = tk.Button(self.manual_pp_file_selection_labelframe, text="Browse", command=self.manual_pp_file_selection)
         self.manual_pp_file_selection_button.grid(row=0, column=1, padx=5)
-        self.manual_pp_file_selection_labelframe.pack_forget()  # Initially hidden
-
+        self.manual_pp_file_selection_labelframe.grid(row=0, column=2, padx=5)
+        self.manual_pp_file_selection_labelframe.grid_remove()
+        
+        self.phase_profile_selection_frame.pack(pady=5)
+        
         # Manual and optimization frame
         self.manual_and_optimization_frame = tk.Frame(master)
 
@@ -340,9 +342,6 @@ class RIS_GUI:
         self.target_point_optimized_radio.grid(row=0, column=0, padx=5)
         self.target_point_manual_radio.grid(row=1, column=0, padx=5)
         self.ris_target_points_frame.pack(pady=5)        
-
-        self.target_positions_frame = tk.Frame(self.manual_trials_labelframe)
-        self.target_positions_frame.pack_forget()  # Initially hidden 
 
         # Compute potential RIS positions
         self.button_coverage = tk.Button(self.manual_trials_labelframe, text="Compute feasible RIS positions",
@@ -377,13 +376,36 @@ class RIS_GUI:
                                                   command=self.show_phase_profiles)
         self.button_show_phase_profile.pack(pady=5)
 
+        # Checkbox for enabling amplitude fluctuations
+        self.amp_fluc_checkbox_var = tk.BooleanVar()
+        self.amp_fluc_checkbox = tk.Checkbutton(
+            self.manual_trials_labelframe,
+            text="Enable uniform random RIS element\namplitude fluctuations (range: [0.0, 1.0])",
+            variable=self.amp_fluc_checkbox_var,
+            command=self.toggle_amp_fluc_entries
+        )
+        self.amp_fluc_checkbox.pack(pady=5)
+
+        # Interval entry fields (initially disabled)
+        self.amp_fluc_interval_labelframe = tk.LabelFrame(
+            self.manual_trials_labelframe,
+            text="Lower and upper bounds\nfor amplitude fluctuations",
+            padx=6, pady=6
+        )
+        self.amp_fluc_interval_labelframe.grid_columnconfigure((0, 1), weight=1)
+        self.entry_amp_fluc_lower = tk.Entry(self.amp_fluc_interval_labelframe, width=5, state="disabled")
+        self.entry_amp_fluc_upper = tk.Entry(self.amp_fluc_interval_labelframe, width=5, state="disabled")
+        self.entry_amp_fluc_lower.grid(row=0, column=0, padx=5)
+        self.entry_amp_fluc_upper.grid(row=0, column=1, padx=5)
+        self.amp_fluc_interval_labelframe.pack(pady=5)        
+        
         # Compute combined coverage map button
         self.button_combined_coverage = tk.Button(self.manual_trials_labelframe, text="Compute combined coverage map (TX + RIS)",
                                                   command=self.compute_combined_coverage)
         self.button_combined_coverage.pack(pady=5)
 
         # Sensitivity analysis
-        self.sensitivity_labelframe = tk.LabelFrame(self.manual_trials_labelframe, text="Sensitivity analysis", padx=6, pady=6)
+        self.sensitivity_labelframe = tk.LabelFrame(self.manual_trials_labelframe, text="Phase error sensitivity analysis", padx=6, pady=6)
 
         self.delta_labelframe = tk.LabelFrame(self.sensitivity_labelframe, text="Maximum magnitude of phase error (in degrees) \n (delta_lower, delta_upper, delta_step)", padx=6, pady=6)
         self.delta_labelframe.grid_columnconfigure((0, 1, 2), weight=1)
@@ -417,12 +439,17 @@ class RIS_GUI:
 
         self.sensitivity_checkbox_frame.pack(pady=5)
 
-        self.button_sensitivity = tk.Button(self.sensitivity_labelframe, text="Start sensitivity analysis", command=self.sensitivity_analysis)
+        self.button_sensitivity = tk.Button(self.sensitivity_labelframe, text="Start phase error sensitivity analysis", command=self.sensitivity_analysis)
         self.button_sensitivity.pack(pady=5)        
 
         self.sensitivity_labelframe.pack(pady=5)
         
         self.manual_trials_labelframe.grid(row=0, column=0, padx=5)
+
+        # Manual target point entries (Initially hidden)
+        self.target_positions_frame = tk.LabelFrame(self.manual_and_optimization_frame, text="Manual target point entries", padx=6, pady=6)
+        self.target_positions_frame.grid(row=0, column=1, padx=5)
+        self.target_positions_frame.grid_remove()
 
         # Optimization algorithm (right-side)
         self.optimization_labelframe = tk.LabelFrame(self.manual_and_optimization_frame, text="Optimization algorithm", padx=6, pady=6)
@@ -469,28 +496,55 @@ class RIS_GUI:
         self.button_compute_opt_par = tk.Button(self.optimization_labelframe, text="Compute performance metrics for all N, W_RIS, r_RIS", command=self.compute_opt_par)
         self.button_compute_opt_par.pack(pady=5)
         
-        # Data file selection
+        # Performance metric file selection
         self.data_file_selection_labelframe = tk.LabelFrame(self.optimization_labelframe,
-                                                           text="Select data file (.json)", padx=6, pady=6)
+                                                           text="Select performance metric file (.json)", padx=6, pady=6)
         self.data_file_selection_entry = tk.Entry(self.data_file_selection_labelframe, width=50)
         self.data_file_selection_entry.grid(row=0, column=0, padx=5)
         self.data_file_selection_button = tk.Button(self.data_file_selection_labelframe, text="Browse", command=self.data_file_selection)
         self.data_file_selection_button.grid(row=0, column=1, padx=5)
         self.data_file_selection_labelframe.pack(pady=5)
 
+        # Coverage ratio file selection
+        self.cov_ratio_selection_labelframe = tk.LabelFrame(self.optimization_labelframe,
+                                                           text="Select coverage ratio file (.json)", padx=6, pady=6)
+        self.cov_ratio_selection_entry = tk.Entry(self.cov_ratio_selection_labelframe, width=50)
+        self.cov_ratio_selection_entry.grid(row=0, column=0, padx=5)
+        self.cov_ratio_selection_button = tk.Button(self.cov_ratio_selection_labelframe, text="Browse", command=self.cov_ratio_selection)
+        self.cov_ratio_selection_button.grid(row=0, column=1, padx=5)
+        self.cov_ratio_selection_labelframe.pack(pady=5)
+
+        # Performance metric vs. RIS width
+        self.perf_metr_RIS_width_labelframe = tk.LabelFrame(self.optimization_labelframe,
+                                                           text="Performance metric vs. RIS width and determine sub-optimal RIS parameters\n(N^opt, W_RIS^opt, r^opt)", padx=6, pady=6)
         # Performance improvement threshold
-        self.perf_impr_thre_labelframe = tk.LabelFrame(self.optimization_labelframe,
+        self.perf_impr_thre_labelframe = tk.LabelFrame(self.perf_metr_RIS_width_labelframe,
                                                            text="Performance improvement threshold (dB)", padx=6, pady=6)
         self.perf_impr_thre = tk.Entry(self.perf_impr_thre_labelframe, width=5)
         self.perf_impr_thre.pack()
-        self.perf_impr_thre_labelframe.pack(pady=5)        
-        
+        self.perf_impr_thre_labelframe.pack(pady=5) 
         # Run button
-        self.run_opt_algorithm_button = tk.Button(self.optimization_labelframe, text="Show sub-optimal optimization parameters \n (N^opt, W_RIS^opt, r^opt)",
+        self.run_opt_algorithm_button = tk.Button(self.perf_metr_RIS_width_labelframe, text="Plot performance metric vs. RIS width and\ndetermine sub-optimal RIS parameters",
                                                   command=self.run_opt_algorithm)
         self.run_opt_algorithm_button.pack()
-        self.optimization_labelframe.grid(row=0, column=1, padx=5)
+        self.perf_metr_RIS_width_labelframe.pack(pady=5)
 
+        # Performance metric vs. RIS position
+        self.perf_metr_RIS_pos_labelframe = tk.LabelFrame(self.optimization_labelframe,
+                                                           text="Performance metric vs. RIS position", padx=6, pady=6)
+        # State RIS width
+        self.perf_metr_RIS_pos_width_labelframe = tk.LabelFrame(self.perf_metr_RIS_pos_labelframe,
+                                                           text="RIS width included in the JSON file (m)", padx=6, pady=6)
+        self.perf_metr_RIS_pos_width = tk.Entry(self.perf_metr_RIS_pos_width_labelframe, width=5)
+        self.perf_metr_RIS_pos_width.pack()
+        self.perf_metr_RIS_pos_width_labelframe.pack(pady=5) 
+        # Run button
+        self.perf_metr_RIS_pos_button = tk.Button(self.perf_metr_RIS_pos_labelframe, text="Plot performance metric vs. RIS position given the entered RIS width",
+                                                  command=self.perf_metr_RIS_pos_func)
+        self.perf_metr_RIS_pos_button.pack()
+        self.perf_metr_RIS_pos_labelframe.pack(pady=5)
+        
+        self.optimization_labelframe.grid(row=0, column=2, padx=5)
         # Information messages frame
         self.message_labelframe = tk.LabelFrame(self.manual_and_optimization_frame, text="Messages")
         self.info_label = tk.Label(self.message_labelframe, text="", font=("", 8, "bold"), fg="green")
@@ -519,13 +573,18 @@ class RIS_GUI:
         self.low_power_cell_coords = []
         self.low_power_cell_values = []
         self.low_power_cell_map_indices = []
-        self.avg_power_low_power_cells_no_ris = None    
+        self.avg_path_gain_low_power_cells_no_ris = None    
         self.outer_wall_thickness = 0.4 # outer_wall_thickness of indoor office scenario is 0.4 m
         self.zero_indices = []
         self.RIS_search_positions = []
         self.cdf_no_ris = None
     
     # Functions and Methods
+    def toggle_amp_fluc_entries(self):
+        state = "normal" if self.amp_fluc_checkbox_var.get() else "disabled"
+        self.entry_amp_fluc_lower.config(state=state)
+        self.entry_amp_fluc_upper.config(state=state)
+        
     def manual_pp_file_selection(self):
         """Opens file dialog to select a manual phase profile JSON file."""
         filename = filedialog.askopenfilename(filetypes=[("JSON Files", "*.json")])
@@ -536,9 +595,9 @@ class RIS_GUI:
     def toggle_manual_pp_entry(self, selected_option):
         """Shows the manual phase profile file selection when 'Manual entry' is chosen."""
         if selected_option == "Manual entry":
-            self.manual_pp_file_selection_labelframe.pack(pady=5)
+            self.manual_pp_file_selection_labelframe.grid(row=0, column=2, padx=5)
         else:
-            self.manual_pp_file_selection_labelframe.pack_forget()
+            self.manual_pp_file_selection_labelframe.grid_remove()
 
     def manual_pp_config(self):
         """Loads a manually provided phase profile from a JSON file and applies it to the RIS."""
@@ -641,7 +700,7 @@ class RIS_GUI:
         """
         Sets preset parameter values for the GUI entries.
 
-        This method resets and assigns default values to the frequency, minimum power threshold, 
+        This method resets and assigns default values to the frequency, minimum path gain threshold, 
         and coverage map cell size entry fields. Additionally, it sets the transmitter's 
         coordinates based on the currently selected scenario.
         """
@@ -679,7 +738,7 @@ class RIS_GUI:
     
     def clear_values(self):
         """
-        Clears the entry fields for the frequency, minimum power threshold, transmitter position (x, y, and z) and coverage map cell size.
+        Clears the entry fields for the frequency, minimum path gain threshold, transmitter position (x, y, and z) and coverage map cell size.
         """      
         self.entry_frequency.delete(0, tk.END)
         self.entry_threshold.delete(0, tk.END)
@@ -848,18 +907,18 @@ class RIS_GUI:
         modified_tensor = tensor * mask
         coverage_map.set_value(modified_tensor)
 
-    def draw_binary_poor_coverage_map(self, cm_no_ris_tensor, avg_power_low_power_cells, cov_ratio):
+    def draw_binary_poor_coverage_map(self, cm_no_ris_tensor, avg_path_gain_low_power_cells, cov_ratio):
         """
         Generates a binary poor coverage map highlighting low-power cells.
 
         This method visualizes areas with poor coverage in red and acceptable coverage in blue.
         Walls (zero-power cells) are overlaid in white. The method also annotates the plot with
-        the selected power threshold, the average power of low-power cells, and the coverage ratio.
+        the selected path gain threshold, the average path gain of low-power cells, and the coverage ratio.
         
         :Input:
             - **cm_no_ris_tensor** (*tf.Tensor*): A 2D tensor representing the coverage map path gain for each transmitter.
-            - **avg_power_low_power_cells** (*float*): The average power of low-power cells (in dB).
-            - **cov_ratio** (*float*): The percentage of area covered above the power threshold.
+            - **avg_path_gain_low_power_cells** (*float*): The average path gain of low-power cells (in dB).
+            - **cov_ratio** (*float*): The percentage of area covered above the minimum path gain threshold.
 
         :Output:
             **fig2** (*matplotlib.figure.Figure*): The generated figure.
@@ -899,8 +958,9 @@ class RIS_GUI:
                 interpolation='none', alpha=1.0)
         
         self.customize_axes(cm_no_ris_tensor, ax2)
-        ax2.set_title(f"Binary Poor Coverage Map")
-        
+        # ax2.set_title(f"Binary Poor Coverage Map")
+        ax2.set_title("")
+
         # Add colorbar with labels for only "Acceptable" and "Poor"
         cbar = fig2.colorbar(cax2, ax=ax2, boundaries=bounds, ticks=[0, 1])
         cbar.ax.set_yticklabels(['Acceptable', 'Poor'])
@@ -915,17 +975,17 @@ class RIS_GUI:
     
         # Add text to the bottom-right corner of the binary poor coverage map
         text_str = (
-            f"Selected power threshold: {float(self.entry_threshold.get()) - 1} dB\n"
-            #f"Selected power threshold: -110 dB\n"
-            f"Av. power of low-power cells: {avg_power_low_power_cells:.2f} dB\n"
+            f"Minimum path gain threshold: {float(self.entry_threshold.get()) - 1} dB\n"
+            f"Av. path gain of low-power cells: {avg_path_gain_low_power_cells:.2f} dB\n"
             f"Coverage ratio: {cov_ratio:.2f} %"
         )
         ax2.text(
-            0.97,  # x-coordinate (97% from the left)
+            0.983,  # x-coordinate (97% from the left)
             0.07,  # y-coordinate (7% from the bottom)
             text_str,
             transform=ax2.transAxes,  # Use axes coordinates
-            fontsize=8,
+            fontsize=9.2,
+            fontname='Arial',
             color="blue",
             ha="right",  # Align text to the right
             va="bottom",  # Align text to the bottom
@@ -944,15 +1004,15 @@ class RIS_GUI:
 
     def select_below_threshold(self, tensor, threshold_db):
         """
-        Selects coordinates and values from a 2D coverage map tensor that fall below a given minimum power threshold.
+        Selects coordinates and values from a 2D coverage map tensor that fall below a given minimum path gain threshold.
 
         :Input:
             - **tensor** (*tf.Tensor*): A 2D tensor representing the coverage map.
-            - **threshold_db** (*float*): The power threshold in dB to filter the tensor values.
+            - **threshold_db** (*float*): The minimum path gain threshold in dB to filter the tensor values.
 
         :Output:
-            - **coords_below_threshold** (*list[list[float]]*): Transformed coordinates (in meters) where power values are below the threshold.
-            - **value_list** (*list[float]*): The power values at those coordinates.
+            - **coords_below_threshold** (*list[list[float]]*): Transformed coordinates (in meters) where path gain values are below the threshold.
+            - **value_list** (*list[float]*): The path gain values at those coordinates.
             - **indices** (*np.ndarray*): The indices of the selected values in the original tensor.
         """
         # Convert threshold from dB to decimal
@@ -979,8 +1039,8 @@ class RIS_GUI:
 
         :Output:
             - **TX-only coverage map** (*visualization*): Displays the coverage map without RIS.
-            - **Coverage ratio** (*float*): Percentage of the area above the power threshold.
-            - **Low-power cell analysis** (*float*): Computes the average power of weak coverage areas.
+            - **Coverage ratio** (*float*): Percentage of the area above the minimum path gain threshold.
+            - **Low-power cell analysis** (*float*): Computes the average path gain of weak coverage areas.
             - **Binary poor coverage map** (*visualization*): Highlights regions with insufficient power.
         """
         try:
@@ -1016,10 +1076,10 @@ class RIS_GUI:
     
         # Plot the TX-only coverage map
         self.cm_no_ris.show(show_tx=False, show_rx=False, show_ris=False, vmin=-130, vmax=-40)
-        plt.title("TX-only Coverage Map")
-        # plt.title("")
+        # plt.title("TX-only Coverage Map")
+        plt.title("")
         self.customize_axes(self.cm_no_ris.path_gain[0], plt.gca())
-        plt.gcf().axes[0].get_images()[0].colorbar.set_label('Power level (dB)')
+        plt.gcf().axes[0].get_images()[0].colorbar.set_label('Path gain (dB)')
 
         # Visualize the transmitter
         plt.gca().scatter((self.tx_position[0]+self.outer_wall_thickness)/float(self.cov_map_cell_size.get()) - 0.5,
@@ -1031,7 +1091,7 @@ class RIS_GUI:
         self.cdfs.append(self.cdf_no_ris)
         self.cdf_labels.append("No RIS")
     
-        # Get the minimum power threshold from the GUI
+        # Get the minimum path gain threshold from the GUI
         try:
             threshold = float(self.entry_threshold.get())
         except ValueError:
@@ -1042,24 +1102,23 @@ class RIS_GUI:
         self.cov_ratio_no_ris = calculate_coverage_ratio(self.cm_no_ris.path_gain[0], threshold)
         self.info_label.config(text=self.info_label.cget("text") + f"\nCoverage ratio of the TX-only coverage map: {self.cov_ratio_no_ris:.2f} %")
     
-        # Identify low-power cells and calculate average power
+        # Identify low-power cells and calculate average path gain
         self.low_power_cell_coords, self.low_power_cell_values, self.low_power_cell_map_indices = self.select_below_threshold(
             self.cm_no_ris.path_gain[0], threshold
         )
         if self.low_power_cell_values:
-            #print(to_db(self.low_power_cell_values))
-            self.avg_power_low_power_cells_no_ris = float(sum(to_db(self.low_power_cell_values)) / len(self.low_power_cell_values))
+            self.avg_path_gain_low_power_cells_no_ris = float(sum(to_db(self.low_power_cell_values)) / len(self.low_power_cell_values))
             self.info_label.config(
                 text=self.info_label.cget("text")
-                + f"\nAverage power of the low-power cells of the TX-only coverage map: {self.avg_power_low_power_cells_no_ris:.2f} dB"
+                + f"\nAverage path gain of low-power cells in the TX-only coverage map: {self.avg_path_gain_low_power_cells_no_ris:.2f} dB"
             )
         else:
             self.info_label.config(
-                text=self.info_label.cget("text") + "\nNo low-power cells found below the threshold!"
+                text=self.info_label.cget("text") + "\nNo low-power cells found below the threshold! ❌"
             )
 
         # Binary poor coverage map
-        fig2 = self.draw_binary_poor_coverage_map(self.cm_no_ris.path_gain[0], self.avg_power_low_power_cells_no_ris, self.cov_ratio_no_ris)
+        fig2 = self.draw_binary_poor_coverage_map(self.cm_no_ris.path_gain[0], self.avg_path_gain_low_power_cells_no_ris, self.cov_ratio_no_ris)
         fig2.show()
         self.info_label.config(text=self.info_label.cget("text") + "\nTX-only coverage map and binary poor coverage map plotted successfully! ✅")
 
@@ -1076,7 +1135,7 @@ class RIS_GUI:
                 4. Displays the input fields for user entry.
         """  
         if self.target_point_manual_optimized.get() == "optimized":
-            self.target_positions_frame.pack_forget()
+            self.target_positions_frame.grid_remove()
         elif self.target_point_manual_optimized.get() == "manual":
             num_positions = int(self.entry_num_target.get())
             if self.target_point_manual_optimized.get() == "manual":
@@ -1088,9 +1147,9 @@ class RIS_GUI:
                 self.position_entries = []  # Store all position entries for later retrieval
                 for i in range(num_positions):
                     label = tk.Label(self.target_positions_frame, text=f"Point {i+1} (x, y, z):")
-                    entry_x = tk.Entry(self.target_positions_frame, width=10)
-                    entry_y = tk.Entry(self.target_positions_frame, width=10)
-                    entry_z = tk.Entry(self.target_positions_frame, width=10)
+                    entry_x = tk.Entry(self.target_positions_frame, width=5)
+                    entry_y = tk.Entry(self.target_positions_frame, width=5)
+                    entry_z = tk.Entry(self.target_positions_frame, width=5)
         
                     label.grid(row=i, column=0, padx=5)
                     entry_x.grid(row=i, column=1, padx=5)
@@ -1099,7 +1158,7 @@ class RIS_GUI:
         
                     # Store the entries in a list for later retrieval
                     self.position_entries.append((entry_x, entry_y, entry_z))
-                self.target_positions_frame.pack(pady=5)
+                self.target_positions_frame.grid(row=0, column=1, padx=5)
 
     def get_num_positions(self):
         """Retrieves and validates the number of target points."""
@@ -1156,7 +1215,7 @@ class RIS_GUI:
         :Output:
             **Binary poor coverage map with target points marked** (*visualization*): Displays the plot with the binary poor coverage map and selected target points.
         """
-        fig8 = self.draw_binary_poor_coverage_map(self.cm_no_ris.path_gain[0], self.avg_power_low_power_cells_no_ris, self.cov_ratio_no_ris)
+        fig8 = self.draw_binary_poor_coverage_map(self.cm_no_ris.path_gain[0], self.avg_path_gain_low_power_cells_no_ris, self.cov_ratio_no_ris)
         
         # Add target points to the plot
         plt.gca().scatter([(pos[0]+self.outer_wall_thickness)/float(self.cov_map_cell_size.get()) - 0.5 for pos in self.RX_coord_set],
@@ -1164,7 +1223,8 @@ class RIS_GUI:
                     color='#08ff00', marker='x', s=60, label="Target points")
 
         plt.legend(loc='upper right', handletextpad=0.5, borderpad=0.3)
-        plt.gca().set_title("Binary Poor Coverage Map with Selected Targets")
+        #plt.gca().set_title("Binary Poor Coverage Map with Selected Targets")
+        plt.gca().set_title("")
         plt.gca().set_xlabel("X-axis (m)")
         plt.gca().set_ylabel("Y-axis (m)")
         
@@ -1280,7 +1340,7 @@ class RIS_GUI:
         :Output:
             **visualization** (*matplotlib.figure.Figure*): A plot with the binary poor coverage map, selected target points, and feasible RIS positions marked.
         """
-        fig = self.draw_binary_poor_coverage_map(self.cm_no_ris.path_gain[0], self.avg_power_low_power_cells_no_ris, self.cov_ratio_no_ris)
+        fig = self.draw_binary_poor_coverage_map(self.cm_no_ris.path_gain[0], self.avg_path_gain_low_power_cells_no_ris, self.cov_ratio_no_ris)
     
         # Add feasible RIS positions to the plot
         plt.scatter([(pos[0]+self.outer_wall_thickness)/float(self.cov_map_cell_size.get()) - 0.5 for pos in potential_RIS_pos],
@@ -1358,7 +1418,7 @@ class RIS_GUI:
         # Get the dimensions of the 2D phase profile tensor
         N, M = overall_phase_profile.shape  # Assuming phase_profile is the 2D TensorFlow tensor
 
-        plt.figure(figsize=(8, 8))
+        plt.figure()
         plt.imshow(overall_phase_profile, cmap='hsv', extent=[0, M, 0, N], origin='lower', aspect='equal')
         plt.colorbar(label='Radians')
         plt.xlabel('Column index (m)')
@@ -1449,7 +1509,7 @@ class RIS_GUI:
 
         :Output:
             - **Figure** (*matplotlib.figure.Figure*): A series of figures showing the combined coverage map, RIS coverage gain, and binary poor coverage map, along with the corresponding performance metrics and coverage ratios.
-            - **Text updates** (*str*): Updates the GUI info label with coverage ratio and average power of low-power cells in the combined coverage map.
+            - **Text updates** (*str*): Updates the GUI info label with coverage ratio and average path gain of low-power cells in the combined coverage map.
             - **CDF plot** (*matplotlib.figure.Figure*): Updates and displays the CDF of the coverage gain with and without RIS.
         """
         if (num_positions := self.get_num_positions()) is None:
@@ -1464,6 +1524,16 @@ class RIS_GUI:
         
         # Configuring the RIS for the specified target points and selected phase profile approach
         self.configure_ris()
+
+        if self.amp_fluc_checkbox_var.get():
+            random_tensor = tf.random.uniform(
+                shape=[num_positions, int(float(self.entry_ris_height.get()) / (0.5 * self.scene.wavelength)), int(float(self.entry_ris_width.get()) / (0.5 * self.scene.wavelength))],
+                minval=float(self.entry_amp_fluc_lower.get()),
+                maxval=float(self.entry_amp_fluc_upper.get()),
+                dtype=tf.float32
+            )
+            self.ris.amplitude_profile.values = random_tensor
+            print(self.ris.amplitude_profile.values)
             
         # Compute coverage map with RIS
         cm_ris = self.scene.coverage_map(cm_cell_size=[float(self.cov_map_cell_size.get()),float(self.cov_map_cell_size.get())],
@@ -1479,9 +1549,10 @@ class RIS_GUI:
         
         # Plot the combined coverage map
         cm_ris.show(show_tx=False, show_rx=False, show_ris=False, vmin=-130, vmax=-40)
-        plt.title("Coverage with RIS")
-        #plt.title("")
+        # plt.title("Coverage with RIS")
+        plt.title("")
         self.customize_axes(cm_ris.path_gain[0], plt.gca())
+        plt.gcf().axes[0].get_images()[0].colorbar.set_label('Path gain (dB)')
 
         # Visualize the transmitter
         plt.gca().scatter((self.tx_position[0]+self.outer_wall_thickness)/float(self.cov_map_cell_size.get()) - 0.5,
@@ -1505,8 +1576,9 @@ class RIS_GUI:
         # Visualize the coverage improvements thanks to the RIS
         plt.figure()
         plt.imshow(RIS_coverage_gain, origin='lower', vmin=0, vmax=50)
-        plt.colorbar(label='Gain (dB)')
-        plt.title("RIS Coverage Gain")
+        plt.colorbar(label='RIS coverage gain (dB)')
+        # plt.title("RIS Coverage Gain")
+        plt.title("")
         self.customize_axes(RIS_coverage_gain, plt.gca())
 
         # Visualize the transmitter
@@ -1533,9 +1605,9 @@ class RIS_GUI:
         # Plot the combined CDFs
         plot_multiple_cdfs(self.cdfs, self.cdf_labels)
       
-        self.info_label.config(text= self.info_label.cget("text") + "\nCombined coverage is analyzed successfully! ✅")
+        self.info_label.config(text= self.info_label.cget("text") + "\nCombined coverage analyzed successfully! ✅")
 
-        # Get the minimum power threshold from the GUI
+        # Get the minimum path gain threshold from the GUI
         try:
             threshold = float(self.entry_threshold.get())
         except ValueError:
@@ -1546,15 +1618,15 @@ class RIS_GUI:
         cov_ratio_ris = calculate_coverage_ratio(cm_ris.path_gain[0], threshold)
         self.info_label.config(text=self.info_label.cget("text") + f"\nNew coverage ratio of the combined coverage map: {cov_ratio_ris:.2f} %")
 
-        # Calculate the new average power of the low-power cells
-        new_avg_power_low_power_cells = tf.reduce_mean(to_db(tf.gather_nd(cm_ris.path_gain[0], self.low_power_cell_map_indices)))
+        # Calculate the new average path gain of low-power cells
+        new_avg_path_gain_low_power_cells = tf.reduce_mean(to_db(tf.gather_nd(cm_ris.path_gain[0], self.low_power_cell_map_indices)))
         self.info_label.config(
             text=self.info_label.cget("text")
-            + f"\nNew average power of the low-power cells in the combined coverage map: {new_avg_power_low_power_cells:.2f} dB"
+            + f"\nNew average path gain of low-power cells in the combined coverage map: {new_avg_path_gain_low_power_cells:.2f} dB"
         )
 
 
-        fig11 = self.draw_binary_poor_coverage_map(cm_ris.path_gain[0], new_avg_power_low_power_cells, cov_ratio_ris)
+        fig11 = self.draw_binary_poor_coverage_map(cm_ris.path_gain[0], new_avg_path_gain_low_power_cells, cov_ratio_ris)
         #plt.gca().set_title("Combined Binary Poor Coverage Map (TX+RIS)")
 
         # Visualize the RIS
@@ -1675,15 +1747,15 @@ class RIS_GUI:
     
     def sensitivity_analysis(self):
         """
-        Performs sensitivity analysis on the RIS-assisted performance under phase noise.
+        Performs sensitivity analysis on the RIS-assisted performance under phase error.
 
-        Based on user selection, analyzes Gradient-based, Distance-based, and/or Manual Entry approaches.
-        Adds random uniform phase noise within a specified delta range and measures the average received power
-        over low-power zones across multiple realizations.
+        Based on user selection, analyzes gradient-based, distance-based, and/or manual entry approaches.
+        Adds random uniform phase error within a specified delta range and measures the performance metric which is the average path gain
+        of low-power cells across multiple realizations.
 
-        Plots the average performance versus phase error magnitude, including error bars for variability.
+        Plots the average of the performance metric versus phase error magnitude, including error bars for variability.
         Also compares with the no-RIS baseline performance.
-        """        
+        """
         def add_phase_error(phase_profile, delta):
             """
             Adds uniform random phase error in range [-delta, delta] to each element
@@ -1736,8 +1808,8 @@ class RIS_GUI:
         # Loop over selected methods
         for idx, method in enumerate(methods):
             deltas = []
-            avg_powers = []
-            std_powers = []
+            avg_pathgains = []
+            std_pathgains = []
 
             for delta in range(int(self.delta_lower.get()), int(self.delta_upper.get()), int(self.delta_step.get())):  # delta in degrees
                 delta_rad = np.deg2rad(delta)
@@ -1763,20 +1835,20 @@ class RIS_GUI:
                     # Optional post-processing
                     self.brush_cov_map(cm_ris, self.zero_indices)
 
-                    # Average received power in low-power zones
-                    avg_power = tf.reduce_mean(to_db(tf.gather_nd(cm_ris.path_gain[0], self.low_power_cell_map_indices)))
-                    realization_results.append(avg_power.numpy())
+                    # Average path gain of low-power cells
+                    avg_pathgain_sens = tf.reduce_mean(to_db(tf.gather_nd(cm_ris.path_gain[0], self.low_power_cell_map_indices)))
+                    realization_results.append(avg_pathgain_sens.numpy())
 
                 # After all realizations
                 deltas.append(delta)
-                avg_powers.append(np.mean(realization_results))
-                std_powers.append(np.std(realization_results))
+                avg_pathgains.append(np.mean(realization_results))
+                std_pathgains.append(np.std(realization_results))
 
             # Plot with error bars
             plt.errorbar(
                 deltas,
-                avg_powers,
-                yerr=std_powers,
+                avg_pathgains,
+                yerr=std_pathgains,
                 fmt='-o',
                 color=colors[idx],
                 capsize=5,
@@ -1785,7 +1857,7 @@ class RIS_GUI:
 
         # Add baseline line for no-RIS case
         plt.axhline(
-            y=self.avg_power_low_power_cells_no_ris,
+            y=self.avg_path_gain_low_power_cells_no_ris,
             color='red',
             linestyle='--',
             linewidth=1.5,
@@ -1794,7 +1866,7 @@ class RIS_GUI:
 
         # Final plot settings
         plt.xlabel('Maximum magnitude of phase error (degrees)')
-        plt.ylabel(r'$\mathcal{M}$ (dB)')
+        plt.ylabel('$\mathcal{M}$ (dB)')
         plt.title('Sensitivity of Performance to RIS Phase Error')
         plt.grid(True)
         plt.legend()
@@ -1803,19 +1875,18 @@ class RIS_GUI:
 
     def compute_opt_par(self):
         """
-        Computes performance metrics (average power of low-power cells and coverage ratio) after placing the RIS for all RIS parameter combinations.
+        Computes performance metrics (average path gain of low-power cells and coverage ratio) after placing the RIS for all RIS parameter combinations.
 
         **Workflow:** \n
         - Iterates through the number of targets and RIS width intervals \n
         - Tests all valid RIS positions for each configuration \n
         - Stores results in JSON files with metrics:
-            * Average low-power cell coverage
+            * Average path gain of low-power cells
             * Coverage ratio
         """       
         num_targets_interval = np.arange(int(self.N_lower.get()), int(self.N_upper.get())+int(self.N_step.get()), int(self.N_step.get()))
         print(num_targets_interval)
-        RIS_width_interval = np.arange(float(self.w_ris_lower.get()), float(self.w_ris_upper.get())+float(self.w_ris_step.get()),
-                                       float(self.w_ris_step.get()))
+        RIS_width_interval = np.arange(float(self.w_ris_lower.get()), float(self.w_ris_upper.get())+float(self.w_ris_step.get()), float(self.w_ris_step.get()))
         print(RIS_width_interval)
 
         for num_targets in num_targets_interval:
@@ -1839,7 +1910,7 @@ class RIS_GUI:
             print(f"Potential RIS positions: {potential_RIS_pos}")
 
             if self.metric_comp_tech.get() == "Using individual path computation":
-                # Define low-power cells as RXs to calculate the new power level
+                # Define low-power cells as RXs to calculate the new path gains
                 for low_power_cell_index, low_power_cell_coord in enumerate(self.low_power_cell_coords):
                     self.scene.remove(f"rx_trial-{low_power_cell_index+1}")
                     rx_trial = Receiver(name=f"rx_trial-{low_power_cell_index+1}", position=low_power_cell_coord)
@@ -1886,7 +1957,7 @@ class RIS_GUI:
                         # Compute average path gain across all receivers and convert to dB
                         average_path_gain_db = tf.reduce_mean(to_db(path_gain_per_receiver))
 
-                        # Compute new average power of the low-power cells (performance metric calculation)
+                        # Compute new average path gain of low-power cells (performance metric calculation)
                         self.metric[(num_targets, round(RIS_width, 1), tuple(RIS_pos_count))] = average_path_gain_db
                         print(self.metric[(num_targets, round(RIS_width, 1), tuple(RIS_pos_count))])                    
                         
@@ -1910,7 +1981,7 @@ class RIS_GUI:
                         # Coverage ratio calculation
                         self.metric_coverage_ratio[(num_targets, round(RIS_width, 1), tuple(RIS_pos_count))] = calculate_coverage_ratio(cm_ris_opt_algo.path_gain[0], float(self.entry_threshold.get()))
 
-                        # Calculate the new average power of the low-power cells
+                        # Calculate the new average path gain of low-power cells
                         self.metric[(num_targets, round(RIS_width, 1), tuple(RIS_pos_count))] = tf.reduce_mean(to_db(tf.gather_nd(cm_ris_opt_algo.path_gain[0], self.low_power_cell_map_indices)))
                         
             if self.metric_comp_tech.get() == "Using individual path computation":
@@ -1918,7 +1989,7 @@ class RIS_GUI:
                     self.scene.remove(f"rx_trial-{low_power_cell_index+1}")
 
         # Save the no RIS metric values to the dictionaries as well
-        self.metric["no_RIS_contribution"] = self.avg_power_low_power_cells_no_ris
+        self.metric["no_RIS_contribution"] = self.avg_path_gain_low_power_cells_no_ris
         self.metric_coverage_ratio["no_RIS_contribution"] = self.cov_ratio_no_ris
         
         # Saving the calculation results as JSON files
@@ -1933,12 +2004,21 @@ class RIS_GUI:
             
     def data_file_selection(self):
         """
-        Opens a file dialog for JSON data selection.
+        Opens a file dialog for JSON performance metric file selection.
         """        
         file_path = filedialog.askopenfilename(filetypes=[("JSON Files", "*.json")])
         if file_path:
             self.data_file_selection_entry.delete(0, tk.END)
             self.data_file_selection_entry.insert(0, file_path)
+
+    def cov_ratio_selection(self):
+        """
+        Opens a file dialog for JSON coverage ratio file selection.
+        """        
+        file_path = filedialog.askopenfilename(filetypes=[("JSON Files", "*.json")])
+        if file_path:
+            self.cov_ratio_selection_entry.delete(0, tk.END)
+            self.cov_ratio_selection_entry.insert(0, file_path)            
 
     def run_opt_algorithm(self):
         """
@@ -2075,15 +2155,20 @@ class RIS_GUI:
         widths = [0.0]
         performances = [no_ris_performance]
         annotations = ["No RIS"]
+
+        with open(self.cov_ratio_selection_entry.get(), 'r') as f_cov_ratio:
+            cov_ratio_data = json.load(f_cov_ratio)        
     
         # Sort and add entries from best_configs_per_width
         for width in sorted(best_configs_per_width.keys()):
             config_str, performance = best_configs_per_width[width]
             num_targets, _, position = self.parse_config(config_str)
+
+            cov_ratio_per_width = cov_ratio_data.get(f"({num_targets}, {width}, ({position[0]:.1f}, {position[1]:.1f}, {position[2]:.1f}))")
             
             widths.append(width)
             performances.append(performance)
-            annotations.append(f"N={num_targets}\n({position[0]:.1f}, {position[1]:.1f}, {position[2]:.1f})")
+            annotations.append(f"N={num_targets}\nRIS pos=({position[0]:.1f}, {position[1]:.1f}, {position[2]:.1f})\nCov. ratio={cov_ratio_per_width:.2f} \%")
         
         # Create figure and axis with appropriate size
         plt.figure(figsize=(12, 8))
@@ -2115,33 +2200,26 @@ class RIS_GUI:
             plt.plot(optimal_width, optimal_performance, 'r*', markersize=15, 
                      label='Optimal Configuration')
             plt.legend(loc="upper left")
+
+            cov_ratio_optimal = cov_ratio_data.get(f"({optimal_targets}, {optimal_width}, ({optimal_position[0]:.1f}, {optimal_position[1]:.1f}, {optimal_position[2]:.1f}))")
             
             optimal_text = (
                 r"$\bf{Optimal\ RIS\ Configuration:}$" + "\n" +
                 f"N: {optimal_targets}\n" +
                 f"RIS width: {optimal_width:.1f} m\n" +
-                f"RIS Position: ({optimal_position[0]:.1f}, {optimal_position[1]:.1f}, {optimal_position[2]:.1f}) m\n" +
+                f"RIS position: ({optimal_position[0]:.1f}, {optimal_position[1]:.1f}, {optimal_position[2]:.1f}) m\n" +
+                f"Coverage ratio: {cov_ratio_optimal:.2f} \%\n" +
                 f"$\mathcal{{M}}$: {optimal_performance:.2f} dB"
-            )
-            if optimal_performance > 0.0:
-                optimal_text = (
-                    r"$\bf{Optimal\ RIS\ Configuration:}$" + "\n" +
-                    f"N: {optimal_targets}\n" +
-                    f"RIS width: {optimal_width:.1f} m\n" +
-                    f"RIS Position: ({optimal_position[0]:.1f}, {optimal_position[1]:.1f}, {optimal_position[2]:.1f}) m\n" +
-                    f"Coverage ratio: {optimal_performance:.2f} \%"
-                )            
+            )     
             plt.text(0.98, 0.02, optimal_text,
                      transform=plt.gca().transAxes,
                      bbox=dict(facecolor='white', edgecolor='gray', alpha=0.8, boxstyle='round,pad=0.5'),
                      ha='right', va='bottom', fontsize=10)
         
         plt.grid(True, alpha=0.3)
-        plt.xlabel('RIS Width (m)', fontsize=12)
+        plt.xlabel('RIS width (m)', fontsize=12)
         plt.ylabel('$\mathcal{M}$ (dB)', fontsize=12)
-        if optimal_performance > 0.0:
-            plt.ylabel(r'Coverage ratio \%', fontsize=12)
-        plt.title('RIS Performance vs Width\nwith Number of Target Points (N) and Position (x, y, z)', fontsize=14, pad=20)
+        plt.title('Performance Metric vs RIS Width\nwith Number of Target Points (N) and RIS Position (x, y, z)', fontsize=14, pad=20)
         plt.grid(True, which='minor', alpha=0.1)
         plt.minorticks_on()
         plt.tight_layout()
@@ -2178,7 +2256,122 @@ class RIS_GUI:
         
         return results
 
+    def perf_metr_RIS_pos_func(self):
+        """
+        Plots the performance metric and coverage ratio as a function of RIS position for a specified width.
+        """
+        # Helper functions
+        def parse_config(config_str):
+            return ast.literal_eval(config_str)
+    
+        def group_metrics_by_ris_pos(perf_data, coverage_data):
+            grouped = defaultdict(lambda: defaultdict(dict))
+            for config_str, perf in perf_data.items():
+                if config_str == "no_RIS_contribution":
+                    continue
+                cov = coverage_data.get(config_str, 0.0)
+                N, W, ris_pos = parse_config(config_str)
+                current = grouped[W].get(ris_pos)
+                if current is None or perf > current["performance"]:
+                    grouped[W][ris_pos] = {
+                        "performance": perf,
+                        "coverage_ratio": cov,
+                        "N": N
+                    }
+            return grouped
+    
+        def plot_line_performance_and_coverage_by_RIS_pos(grouped_data, widths_to_plot):
+            all_ris_pos = sorted({pos for width in widths_to_plot for pos in grouped_data[width].keys()})
+            pos_labels = [f"({p[0]:.1f},{p[1]:.1f},{p[2]:.1f})" for p in all_ris_pos]
+            x = list(range(len(all_ris_pos)))  # numerical positions for plotting
+    
+            fig, ax1 = plt.subplots(figsize=(max(10, len(x) * 0.6), 6))
+            ax2 = ax1.twinx()
+    
+            colors = ['tab:blue', 'tab:orange', 'tab:green', 'tab:red']
+            markers = ['o', 's', '^', 'D']
+            all_lines = []
+            all_labels = []
+    
+            for i, width in enumerate(widths_to_plot):
+                performance = []
+                coverage = []
+                Ns = []
+                for pos in all_ris_pos:
+                    entry = grouped_data[width].get(pos)
+                    if entry:
+                        performance.append(entry["performance"])
+                        coverage.append(entry["coverage_ratio"])
+                        Ns.append(entry["N"])
+                    else:
+                        performance.append(None)
+                        coverage.append(None)
+                        Ns.append(None)
+    
+                # Plot lines
+                line1, = ax1.plot(x, performance, marker=markers[i], linestyle='-', linewidth=2,
+                                  color=colors[i], label=fr"$\mathcal{{M}}$ @ $W_{{\text{{RIS}}}}={width}$ m")
+                line2, = ax2.plot(x, coverage, marker=markers[i], linestyle='--', linewidth=2,
+                                  color=colors[i], label=fr"Coverage @ $W_{{\text{{RIS}}}}={width}$ m")
+    
+                all_lines.extend([line1, line2])
+                all_labels.extend([line1.get_label(), line2.get_label()])
+    
+                for xi, yi, N in zip(x, performance, Ns):
+                    if N is not None:
+                        ax1.annotate(f"N={N}",
+                                     xy=(xi, yi), xytext=(0, 8),
+                                     textcoords="offset points", fontsize=11,
+                                     ha='center', va='bottom', rotation=90,
+                                     bbox=dict(boxstyle="round,pad=0.2", fc="white", alpha=0.6),
+                                     arrowprops=dict(arrowstyle="->", lw=0.5))
+    
+            ax1.set_xlabel("RIS position (x, y, z)", fontsize=16)
+            ax1.set_ylabel("$\mathcal{M}$ (dB)", fontsize=16)
+            ax2.set_ylabel("Coverage ratio (%)", fontsize=16)
+    
+            ax1.set_xticks(x)
+            ax1.set_xticklabels(pos_labels, rotation=45, ha='right', fontsize=11)
+            ax1.grid(True, linestyle='--', linewidth=0.7, alpha=0.7)
+    
+            ax1.legend(all_lines, all_labels, loc='best', fontsize=11)
+            plt.tight_layout()
+            plt.savefig("performance_and_coverage_vs_RIS_position_lines.png", bbox_inches="tight")
+            plt.show()
+    
+        # === Begin processing ===
+        try:
+            perf_path = self.data_file_selection_entry.get()
+            cov_path = self.cov_ratio_selection_entry.get()
+            entered_width = float(self.perf_metr_RIS_pos_width.get())
+    
+            if not perf_path or not cov_path:
+                messagebox.showerror("Missing File", "Please select both the performance and coverage JSON files.")
+                return
+    
+            try:
+                width = float(entered_width)
+            except ValueError:
+                messagebox.showerror("Invalid Input", "RIS width must be a valid number.")
+                return
+    
+            with open(perf_path, 'r') as f_perf, open(cov_path, 'r') as f_cov:
+                perf_data = json.load(f_perf)
+                cov_data = json.load(f_cov)
+    
+            grouped_data = group_metrics_by_ris_pos(perf_data, cov_data)
+            if width not in grouped_data:
+                messagebox.showerror("Width Not Found", f"No data found for RIS width {width}.")
+                return
+    
+            plot_line_performance_and_coverage_by_RIS_pos(grouped_data, [width])
+    
+        except Exception as e:
+            messagebox.showerror("Error", f"An error occurred:\n{str(e)}")
+
+
 if __name__ == "__main__":
     root = tk.Tk()
+    root.state('zoomed')
     gui = RIS_GUI(root)
     root.mainloop()
