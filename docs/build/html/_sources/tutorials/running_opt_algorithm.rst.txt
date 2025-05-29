@@ -62,6 +62,7 @@ This tutorial explains how to run the RIS joint optimization algorithm and how t
    After computing all performance metrics in Step 3, proceed as follows:
 
    - Enter a RIS width value that is already present in the `.json` files.
+   
      - The performance metric vs. RIS position plot will be generated for this specific RIS width.
      - The goal is to identify the best-performing configuration given the specified RIS width for each feasible RIS position.
      - A sub-optimal number of target points value (that yields the highest performance metric at each position) will also be shown as annotations on the plot.
