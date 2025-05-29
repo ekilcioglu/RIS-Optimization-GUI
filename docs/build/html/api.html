@@ -72,6 +72,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#RIS_Opt.RIS_GUI.compute_potential_RIS_positions"><code class="docutils literal notranslate"><span class="pre">RIS_GUI.compute_potential_RIS_positions()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#RIS_Opt.RIS_GUI.compute_tx_coverage"><code class="docutils literal notranslate"><span class="pre">RIS_GUI.compute_tx_coverage()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#RIS_Opt.RIS_GUI.configure_ris"><code class="docutils literal notranslate"><span class="pre">RIS_GUI.configure_ris()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#RIS_Opt.RIS_GUI.cov_ratio_selection"><code class="docutils literal notranslate"><span class="pre">RIS_GUI.cov_ratio_selection()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#RIS_Opt.RIS_GUI.create_ris"><code class="docutils literal notranslate"><span class="pre">RIS_GUI.create_ris()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#RIS_Opt.RIS_GUI.customize_axes"><code class="docutils literal notranslate"><span class="pre">RIS_GUI.customize_axes()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#RIS_Opt.RIS_GUI.data_file_selection"><code class="docutils literal notranslate"><span class="pre">RIS_GUI.data_file_selection()</span></code></a></li>
@@ -86,15 +87,18 @@
 <li class="toctree-l3"><a class="reference internal" href="#RIS_Opt.RIS_GUI.manual_pp_config"><code class="docutils literal notranslate"><span class="pre">RIS_GUI.manual_pp_config()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#RIS_Opt.RIS_GUI.manual_pp_file_selection"><code class="docutils literal notranslate"><span class="pre">RIS_GUI.manual_pp_file_selection()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#RIS_Opt.RIS_GUI.parse_config"><code class="docutils literal notranslate"><span class="pre">RIS_GUI.parse_config()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#RIS_Opt.RIS_GUI.perf_metr_RIS_pos_func"><code class="docutils literal notranslate"><span class="pre">RIS_GUI.perf_metr_RIS_pos_func()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#RIS_Opt.RIS_GUI.plot_RIS_positions"><code class="docutils literal notranslate"><span class="pre">RIS_GUI.plot_RIS_positions()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#RIS_Opt.RIS_GUI.plot_selected_targets"><code class="docutils literal notranslate"><span class="pre">RIS_GUI.plot_selected_targets()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#RIS_Opt.RIS_GUI.preview_scenario"><code class="docutils literal notranslate"><span class="pre">RIS_GUI.preview_scenario()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#RIS_Opt.RIS_GUI.reset_scene_after_RIS_computation"><code class="docutils literal notranslate"><span class="pre">RIS_GUI.reset_scene_after_RIS_computation()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#RIS_Opt.RIS_GUI.run_opt_algorithm"><code class="docutils literal notranslate"><span class="pre">RIS_GUI.run_opt_algorithm()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#RIS_Opt.RIS_GUI.select_below_threshold"><code class="docutils literal notranslate"><span class="pre">RIS_GUI.select_below_threshold()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#RIS_Opt.RIS_GUI.sensitivity_analysis"><code class="docutils literal notranslate"><span class="pre">RIS_GUI.sensitivity_analysis()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#RIS_Opt.RIS_GUI.set_preset_values"><code class="docutils literal notranslate"><span class="pre">RIS_GUI.set_preset_values()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#RIS_Opt.RIS_GUI.set_target_points"><code class="docutils literal notranslate"><span class="pre">RIS_GUI.set_target_points()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#RIS_Opt.RIS_GUI.show_phase_profiles"><code class="docutils literal notranslate"><span class="pre">RIS_GUI.show_phase_profiles()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#RIS_Opt.RIS_GUI.toggle_amp_fluc_entries"><code class="docutils literal notranslate"><span class="pre">RIS_GUI.toggle_amp_fluc_entries()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#RIS_Opt.RIS_GUI.toggle_manual_pp_entry"><code class="docutils literal notranslate"><span class="pre">RIS_GUI.toggle_manual_pp_entry()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#RIS_Opt.RIS_GUI.toggle_target_point_input"><code class="docutils literal notranslate"><span class="pre">RIS_GUI.toggle_target_point_input()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#RIS_Opt.RIS_GUI.visualize_performance_vs_width"><code class="docutils literal notranslate"><span class="pre">RIS_GUI.visualize_performance_vs_width()</span></code></a></li>
@@ -213,7 +217,7 @@ This function requires an additional method <cite>set_value()</cite> to be added
 <dl class="py method">
 <dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.clear_values">
 <span class="sig-name descname"><span class="pre">clear_values</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.clear_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.clear_values" title="Link to this definition"></a></dt>
-<dd><p>Clears the entry fields for the frequency, minimum power threshold, transmitter position (x, y, and z) and coverage map cell size.</p>
+<dd><p>Clears the entry fields for the frequency, minimum path gain threshold, transmitter position (x, y, and z) and coverage map cell size.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -249,7 +253,7 @@ plotted on the binary poor coverage map.</p>
 <dt class="field-odd">Output<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>Figure</strong> (<em>matplotlib.figure.Figure</em>): A series of figures showing the combined coverage map, RIS coverage gain, and binary poor coverage map, along with the corresponding performance metrics and coverage ratios.</p></li>
-<li><p><strong>Text updates</strong> (<em>str</em>): Updates the GUI info label with coverage ratio and average power of low-power cells in the combined coverage map.</p></li>
+<li><p><strong>Text updates</strong> (<em>str</em>): Updates the GUI info label with coverage ratio and average path gain of low-power cells in the combined coverage map.</p></li>
 <li><p><strong>CDF plot</strong> (<em>matplotlib.figure.Figure</em>): Updates and displays the CDF of the coverage gain with and without RIS.</p></li>
 </ul>
 </dd>
@@ -259,14 +263,14 @@ plotted on the binary poor coverage map.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.compute_opt_par">
 <span class="sig-name descname"><span class="pre">compute_opt_par</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.compute_opt_par"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.compute_opt_par" title="Link to this definition"></a></dt>
-<dd><p>Computes performance metrics (average power of low-power cells and coverage ratio) after placing the RIS for all RIS parameter combinations.</p>
+<dd><p>Computes performance metrics (average path gain of low-power cells and coverage ratio) after placing the RIS for all RIS parameter combinations.</p>
 <p><strong>Workflow:</strong></p>
 <ul class="simple">
 <li><p>Iterates through the number of targets and RIS width intervals</p></li>
 <li><p>Tests all valid RIS positions for each configuration</p></li>
 <li><dl class="simple">
 <dt>Stores results in JSON files with metrics:</dt><dd><ul>
-<li><p>Average low-power cell coverage</p></li>
+<li><p>Average path gain of low-power cells</p></li>
 <li><p>Coverage ratio</p></li>
 </ul>
 </dd>
@@ -301,8 +305,8 @@ plotted on the binary poor coverage map.</p>
 <dt class="field-odd">Output<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>TX-only coverage map</strong> (<em>visualization</em>): Displays the coverage map without RIS.</p></li>
-<li><p><strong>Coverage ratio</strong> (<em>float</em>): Percentage of the area above the power threshold.</p></li>
-<li><p><strong>Low-power cell analysis</strong> (<em>float</em>): Computes the average power of weak coverage areas.</p></li>
+<li><p><strong>Coverage ratio</strong> (<em>float</em>): Percentage of the area above the minimum path gain threshold.</p></li>
+<li><p><strong>Low-power cell analysis</strong> (<em>float</em>): Computes the average path gain of weak coverage areas.</p></li>
 <li><p><strong>Binary poor coverage map</strong> (<em>visualization</em>): Highlights regions with insufficient power.</p></li>
 </ul>
 </dd>
@@ -313,6 +317,12 @@ plotted on the binary poor coverage map.</p>
 <dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.configure_ris">
 <span class="sig-name descname"><span class="pre">configure_ris</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.configure_ris"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.configure_ris" title="Link to this definition"></a></dt>
 <dd><p>Configures the RIS based on the selected phase profile approach.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.cov_ratio_selection">
+<span class="sig-name descname"><span class="pre">cov_ratio_selection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.cov_ratio_selection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.cov_ratio_selection" title="Link to this definition"></a></dt>
+<dd><p>Opens a file dialog for JSON coverage ratio file selection.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -341,22 +351,22 @@ place for clarity.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.data_file_selection">
 <span class="sig-name descname"><span class="pre">data_file_selection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.data_file_selection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.data_file_selection" title="Link to this definition"></a></dt>
-<dd><p>Opens a file dialog for JSON data selection.</p>
+<dd><p>Opens a file dialog for JSON performance metric file selection.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.draw_binary_poor_coverage_map">
-<span class="sig-name descname"><span class="pre">draw_binary_poor_coverage_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cm_no_ris_tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">avg_power_low_power_cells</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cov_ratio</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.draw_binary_poor_coverage_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.draw_binary_poor_coverage_map" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">draw_binary_poor_coverage_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cm_no_ris_tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">avg_path_gain_low_power_cells</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cov_ratio</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.draw_binary_poor_coverage_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.draw_binary_poor_coverage_map" title="Link to this definition"></a></dt>
 <dd><p>Generates a binary poor coverage map highlighting low-power cells.</p>
 <p>This method visualizes areas with poor coverage in red and acceptable coverage in blue.
 Walls (zero-power cells) are overlaid in white. The method also annotates the plot with
-the selected power threshold, the average power of low-power cells, and the coverage ratio.</p>
+the selected path gain threshold, the average path gain of low-power cells, and the coverage ratio.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Input<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>cm_no_ris_tensor</strong> (<em>tf.Tensor</em>): A 2D tensor representing the coverage map path gain for each transmitter.</p></li>
-<li><p><strong>avg_power_low_power_cells</strong> (<em>float</em>): The average power of low-power cells (in dB).</p></li>
-<li><p><strong>cov_ratio</strong> (<em>float</em>): The percentage of area covered above the power threshold.</p></li>
+<li><p><strong>avg_path_gain_low_power_cells</strong> (<em>float</em>): The average path gain of low-power cells (in dB).</p></li>
+<li><p><strong>cov_ratio</strong> (<em>float</em>): The percentage of area covered above the minimum path gain threshold.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Output<span class="colon">:</span></dt>
@@ -513,6 +523,12 @@ placement positions (<cite>self.RIS_search_positions</cite>).</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.perf_metr_RIS_pos_func">
+<span class="sig-name descname"><span class="pre">perf_metr_RIS_pos_func</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.perf_metr_RIS_pos_func"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.perf_metr_RIS_pos_func" title="Link to this definition"></a></dt>
+<dd><p>Plots the performance metric and coverage ratio as a function of RIS position for a specified width.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.plot_RIS_positions">
 <span class="sig-name descname"><span class="pre">plot_RIS_positions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">potential_RIS_pos</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.plot_RIS_positions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.plot_RIS_positions" title="Link to this definition"></a></dt>
 <dd><p>Visualizes feasible RIS positions on the binary coverage map.</p>
@@ -585,18 +601,18 @@ adds a RIS if dimensions are provided. The scene is then rendered from one or mo
 <dl class="py method">
 <dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.select_below_threshold">
 <span class="sig-name descname"><span class="pre">select_below_threshold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_db</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.select_below_threshold"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.select_below_threshold" title="Link to this definition"></a></dt>
-<dd><p>Selects coordinates and values from a 2D coverage map tensor that fall below a given minimum power threshold.</p>
+<dd><p>Selects coordinates and values from a 2D coverage map tensor that fall below a given minimum path gain threshold.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Input<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>tensor</strong> (<em>tf.Tensor</em>): A 2D tensor representing the coverage map.</p></li>
-<li><p><strong>threshold_db</strong> (<em>float</em>): The power threshold in dB to filter the tensor values.</p></li>
+<li><p><strong>threshold_db</strong> (<em>float</em>): The minimum path gain threshold in dB to filter the tensor values.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Output<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>coords_below_threshold</strong> (<em>list[list[float]]</em>): Transformed coordinates (in meters) where power values are below the threshold.</p></li>
-<li><p><strong>value_list</strong> (<em>list[float]</em>): The power values at those coordinates.</p></li>
+<li><p><strong>coords_below_threshold</strong> (<em>list[list[float]]</em>): Transformed coordinates (in meters) where path gain values are below the threshold.</p></li>
+<li><p><strong>value_list</strong> (<em>list[float]</em>): The path gain values at those coordinates.</p></li>
 <li><p><strong>indices</strong> (<em>np.ndarray</em>): The indices of the selected values in the original tensor.</p></li>
 </ul>
 </dd>
@@ -604,10 +620,21 @@ adds a RIS if dimensions are provided. The scene is then rendered from one or mo
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.sensitivity_analysis">
+<span class="sig-name descname"><span class="pre">sensitivity_analysis</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.sensitivity_analysis"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.sensitivity_analysis" title="Link to this definition"></a></dt>
+<dd><p>Performs sensitivity analysis on the RIS-assisted performance under phase error.</p>
+<p>Based on user selection, analyzes gradient-based, distance-based, and/or manual entry approaches.
+Adds random uniform phase error within a specified delta range and measures the performance metric which is the average path gain
+of low-power cells across multiple realizations.</p>
+<p>Plots the average of the performance metric versus phase error magnitude, including error bars for variability.
+Also compares with the no-RIS baseline performance.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.set_preset_values">
 <span class="sig-name descname"><span class="pre">set_preset_values</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.set_preset_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.set_preset_values" title="Link to this definition"></a></dt>
 <dd><p>Sets preset parameter values for the GUI entries.</p>
-<p>This method resets and assigns default values to the frequency, minimum power threshold,
+<p>This method resets and assigns default values to the frequency, minimum path gain threshold,
 and coverage map cell size entry fields. Additionally, it sets the transmitter’s
 coordinates based on the currently selected scenario.</p>
 </dd></dl>
@@ -628,6 +655,11 @@ coordinates based on the currently selected scenario.</p>
 </dd>
 </dl>
 </dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.toggle_amp_fluc_entries">
+<span class="sig-name descname"><span class="pre">toggle_amp_fluc_entries</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#RIS_GUI.toggle_amp_fluc_entries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.RIS_GUI.toggle_amp_fluc_entries" title="Link to this definition"></a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="RIS_Opt.RIS_GUI.toggle_manual_pp_entry">
@@ -685,16 +717,16 @@ configuration details and optional optimal RIS configuration highlights.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="RIS_Opt.calculate_cdf">
 <span class="sig-prename descclassname"><span class="pre">RIS_Opt.</span></span><span class="sig-name descname"><span class="pre">calculate_cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tensor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#calculate_cdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.calculate_cdf" title="Link to this definition"></a></dt>
-<dd><p>Calculates the cumulative distribution function (CDF) of power levels in a tensor.</p>
+<dd><p>Calculates the cumulative distribution function (CDF) of path gains in a tensor.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Input<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>tensor</strong> (<em>tf.Tensor</em>): A 2D TensorFlow tensor representing a coverage map with power values.</p></li>
+<li><p><strong>tensor</strong> (<em>tf.Tensor</em>): A 2D TensorFlow tensor representing a coverage map with path gain values.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Output<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>sorted_values_db</strong> (<em>np.ndarray</em>): Sorted power values converted to dB.</p></li>
+<li><p><strong>sorted_values_db</strong> (<em>np.ndarray</em>): Sorted path gain values converted to dB.</p></li>
 <li><p><strong>cdf</strong> (<em>np.ndarray</em>): The cumulative distribution function values.</p></li>
 </ul>
 </dd>
@@ -704,12 +736,12 @@ configuration details and optional optimal RIS configuration highlights.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="RIS_Opt.calculate_coverage_ratio">
 <span class="sig-prename descclassname"><span class="pre">RIS_Opt.</span></span><span class="sig-name descname"><span class="pre">calculate_coverage_ratio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_db</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#calculate_coverage_ratio"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.calculate_coverage_ratio" title="Link to this definition"></a></dt>
-<dd><p>Calculates the coverage ratio of the scenario from a coverage map tensor based on a minimum power threshold.</p>
+<dd><p>Calculates the coverage ratio of the scenario from a coverage map tensor based on a minimum path gain threshold.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Input<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>tensor</strong> (<em>tf.Tensor</em>): A 2D TensorFlow tensor representing the coverage map with power values.</p></li>
-<li><p><strong>threshold_db</strong> (<em>float</em>): The minimum power threshold in dB.</p></li>
+<li><p><strong>tensor</strong> (<em>tf.Tensor</em>): A 2D TensorFlow tensor representing the coverage map with path gain values.</p></li>
+<li><p><strong>threshold_db</strong> (<em>float</em>): The minimum path gain threshold in dB.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Output<span class="colon">:</span></dt>
@@ -757,13 +789,13 @@ K-means, and assigns the z-value of the first coordinate to all centroids.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="RIS_Opt.to_db">
 <span class="sig-prename descclassname"><span class="pre">RIS_Opt.</span></span><span class="sig-name descname"><span class="pre">to_db</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RIS_Opt.html#to_db"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RIS_Opt.to_db" title="Link to this definition"></a></dt>
-<dd><p>Converts a power value from a linear scale to decibels (dB).</p>
+<dd><p>Converts a value from a linear scale to decibels (dB).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Input<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>x</strong> (<em>float</em> or <em>tf.Tensor</em>): A numeric value or a TensorFlow tensor representing power in linear scale.</p>
+<dd class="field-odd"><p><strong>x</strong> (<em>float</em> or <em>tf.Tensor</em>): A numeric value or a TensorFlow tensor represented in linear scale.</p>
 </dd>
 <dt class="field-even">Output<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>dB_power</strong> (<em>tf.Tensor</em>): The power level in decibels.</p>
+<dd class="field-even"><p><strong>dB</strong> (<em>tf.Tensor</em>): The value in decibels.</p>
 </dd>
 </dl>
 </dd></dl>

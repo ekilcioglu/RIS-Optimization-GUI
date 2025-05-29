@@ -103,7 +103,7 @@ Please follow the <cite>Computing Transmitter-Only Coverage Map</cite> tutorial 
 <li><p>If <strong>“Manual entry”</strong> is selected:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>A new menu  appears at the bottom of the GUI under the labelframe <strong>“Select manual phase profile file (.json)”</strong>.</p></li>
+<li><p>A new menu appears near the menu with the labelframe <strong>“Select manual phase profile file (.json)”</strong>.</p></li>
 <li><p>Click the <strong>“Browse”</strong> button to select the phase profile <cite>.json</cite> file.</p></li>
 </ul>
 </div></blockquote>
@@ -119,7 +119,7 @@ Please follow the <cite>Computing Transmitter-Only Coverage Map</cite> tutorial 
 <blockquote>
 <div><ul class="simple">
 <li><p>If <strong>“Using coverage map”</strong> is chosen, the algorithm computes the full coverage map for each RIS configuration (more accurate but slower).</p></li>
-<li><p>If <strong>“Using individual path computation”</strong> is chosen, the algorithm only computes the power levels at previously identified low-power cells (faster).</p></li>
+<li><p>If <strong>“Using individual path computation”</strong> is chosen, the algorithm only computes the path gains at previously identified low-power cells (faster).</p></li>
 </ul>
 </div></blockquote>
 </li>
@@ -133,23 +133,42 @@ Please follow the <cite>Computing Transmitter-Only Coverage Map</cite> tutorial 
 Please do not close the program until the operation is completed or you see an error in the Python interpreter or under the labelframe <strong>“Messages”</strong>!</p>
 </div>
 </li>
-<li><p><strong>Draw Performance Evaluation Plots</strong></p>
-<p>At the end of Step 3, all performance metric results along with the corresponding RIS configurations will be automatically exported as a <cite>.json</cite> file in the root directory of the RIS optimization framework’s source code.</p>
+<li><p><strong>Draw Performance Metric vs. RIS Width and Show Sub-optimal RIS Parameters</strong></p>
+<p>At the end of Step 3, all performance metric and coverage ratio results along with the corresponding RIS configurations will be automatically exported as a dictionary in a <cite>.json</cite> file in the root directory of the RIS optimization framework’s source code.</p>
 <p>To visualize the best configuration considering a performance improvement threshold:</p>
 <ul class="simple">
-<li><p>Select the <cite>.json</cite> data file under the labelframe <strong>“Select data file (.json)”</strong> by clicking the <strong>“Browse”</strong> button.</p></li>
-<li><p>Enter a performance improvement threshold (dB) value under the labelframe <strong>“Performance improvement threshold (dB)”</strong>. This threshold defines the minimum performance gain required to justify increasing the RIS width.</p></li>
-<li><p>Click the button <strong>“Show sub-optimal optimization parameters (N^opt, W_RIS^opt, r^opt)”</strong> to visualize the results.</p></li>
+<li><p>Select the performance metric <cite>.json</cite> data file under the labelframe <strong>“Select performance metric file (.json)”</strong> by clicking the <strong>“Browse”</strong> button.</p></li>
+<li><p>Select the coverage ratio <cite>.json</cite> data file under the labelframe <strong>“Select coverage ratio file (.json)”</strong> by clicking the <strong>“Browse”</strong> button.</p></li>
+<li><p>Under the labelframe <strong>“Performance meric vs. RIS width and determine sub-optimal RIS parameters (N^opt, W_RIS^opt, r^opt)”</strong>, enter a performance improvement threshold (dB) value. This threshold defines the minimum performance gain required to justify increasing the RIS width.</p></li>
+<li><p>Click the button <strong>“Plot performance metric vs. RIS width and determine sub-optimal RIS parameters”</strong> to visualize the results.</p></li>
 </ul>
-</li>
-</ol>
 <p>An example of the resulting figure is shown below:</p>
 <figure class="align-center" id="running-opt-algorithm-fig1" style="width: 100%">
 <img alt="../_images/running_opt_algorithm_Fig1.png" src="../_images/running_opt_algorithm_Fig1.png" />
 <figcaption>
-<p><span class="caption-text"><strong>Fig. 1</strong>: Performance evaluation plot</span><a class="headerlink" href="#running-opt-algorithm-fig1" title="Link to this image"></a></p>
+<p><span class="caption-text"><strong>Fig. 1</strong>: Performance metric vs. RIS width and sub-optimal RIS parameters</span><a class="headerlink" href="#running-opt-algorithm-fig1" title="Link to this image"></a></p>
 </figcaption>
 </figure>
+</li>
+<li><p><strong>Draw Performance Metric vs. RIS Position</strong></p>
+<p>As an alternative to Step 4, you can visualize the effect of RIS position on the selected performance metric.</p>
+<p>After computing all performance metrics in Step 3, proceed as follows:</p>
+<ul class="simple">
+<li><p>Enter a RIS width value that is already present in the <cite>.json</cite> files.
+- The performance metric vs. RIS position plot will be generated for this specific RIS width.
+- The goal is to identify the best-performing configuration given the specified RIS width for each feasible RIS position.
+- A sub-optimal number of target points value (that yields the highest performance metric at each position) will also be shown as annotations on the plot.</p></li>
+<li><p>Click the button <strong>“Plot performance metric vs. RIS position given the entered RIS width”</strong> to generate and display the plot.</p></li>
+</ul>
+<p>An example plot is shown below:</p>
+<figure class="align-center" id="running-opt-algorithm-fig2" style="width: 100%">
+<img alt="tutorials/running_opt_algorithm_Fig2.png" src="tutorials/running_opt_algorithm_Fig2.png" />
+<figcaption>
+<p><span class="caption-text"><strong>Fig. 2</strong>: Performance metric vs. RIS position</span><a class="headerlink" href="#running-opt-algorithm-fig2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</li>
+</ol>
 </section>
 
 

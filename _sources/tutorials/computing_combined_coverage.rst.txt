@@ -26,7 +26,7 @@ This tutorial explains how to compute a combined coverage map, taking into accou
       - Go to the labelframe **"Manual trials"** on the left side of the GUI.
       - Enter the number of RIS target points in the field **"Number of target points"**
       - Select the checkbox **"Enter the target point(s) manually"**.
-      - A new input area will appear at the bottom of the same labelframe.
+      - A new input area will appear between the labelframe **"Manual trials"** and the labelframe **"Optimization algorithm"**.
       - Enter the x, y, z coordinates for each target point manually.
 
 2. **Enter RIS Parameters**
@@ -43,20 +43,25 @@ This tutorial explains how to compute a combined coverage map, taking into accou
    - Select the desired phase profile approach from the dropdown next to the textlabel **"Choose phase profile approach"**.
    - If **"Manual entry"** is selected:
 
-      - A new menu  appears at the bottom of the GUI under the labelframe **"Select manual phase profile file (.json)"**.
+      - A new menu appears near the menu with the labelframe **"Select manual phase profile file (.json)"**.
       - Click the **"Browse"** button to select the phase profile `.json` file.
 
-4. **Computing combined coverage map**
+4. **Enable Amplitude Fluctuations** (Optional)
+
+   - In order to see the effect of amplitude fluctuations in each RIS tile, we can define uniform random RIS tile amplitude fluctuations, ranging from 0 to 1. To do that, check the checkbox **"Enable uniform random RIS element amplitude fluctuations (range: [0.0, 1.0])"**.
+   - Enter the lower and upper bounds for amplitude fluctuations.
+
+5. **Computing combined coverage map**
 
    - Press the button **"Compute combined coverage map (TX + RIS)"**.
    - After execution:
 
       - **Combined coverage map** with the contributions of the transmitter and the RIS (Fig. 1).
-      - **RIS coverage gain map** showing the power improvement due to RIS (Fig. 2).
+      - **RIS coverage gain map** showing the path gain improvement by placing the RIS (Fig. 2).
       - **Cumulative distribution function (CDF)** plot comparing the no-RIS case and all previous combined coverage cases (Fig. 3).
       - **New binary poor coverage map** after placing the RIS (Fig. 4).
 
-   Additionally, the values for the new coverage ratio of the combined coverage map and the new average power of the low-power cells will be displayed under the labelframe **"Messages"**.  
+   Additionally, the values for the new coverage ratio of the combined coverage map and the new average path gain of the low-power cells will be displayed under the labelframe **"Messages"**.  
    If the operation ends without errors, the message **"Combined coverage is analyzed successfully!"** will appear.
 
 An example scenario consisting of two RIS target points is shown below:

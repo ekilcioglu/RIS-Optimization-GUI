@@ -5,7 +5,7 @@ In this tutorial, the transmitter-only coverage map is computed and visualized f
 
 - **Scene frequency**
 - **TX position**
-- **Minimum power threshold**
+- **Minimum path gain threshold**
 - **Coverage map cell size**
 
 However, before doing that, you need to load the predefined scenario under the labelframe **"Scenario selection"** by choosing the scenario from the list and pressing the **"Load"** button. If you wish to enter parameters manually, follow the instructions below:
@@ -20,8 +20,8 @@ However, before doing that, you need to load the predefined scenario under the l
 3. **Transmitter (TX) Position**:  
    The transmitter coordinates (in meters) are entered under the labelframe **"TX position (m) (x, y, z)"**, starting with the x-coordinate as stated in the label.
 
-4. **Minimum Power Threshold**:  
-   This threshold defines the acceptable signal power below which cells are considered low-power. You can type this value in dB under the labelframe **"Minimum power threshold (dB)"**.  
+4. **Minimum Path Gain Threshold**:  
+   This threshold defines the acceptable signal quality below which cells are considered low-power. You can type this value in dB under the labelframe **"Minimum path gain threshold (dB)"**.  
    Please refer to our journal paper for more details.
 
 5. **Coverage Map Cell Size**:  
@@ -35,7 +35,7 @@ Once all the parameters are entered, press the **"Compute TX-only coverage map"*
 - **Transmitter-only coverage map** (Fig. 1)
 - **Binary poor coverage map** (Fig. 2), which shows the low-power cells in red (for further details, see our journal paper).
 
-Additionally, the values for the coverage ratio of the TX-only coverage map and the average power of the low-power cells will be displayed under the labelframe **"Messages"**.  
+Additionally, the values for the coverage ratio of the TX-only coverage map and the average path gain of the low-power cells will be displayed under the labelframe **"Messages"**.  
 If the operation ends without errors, the message **"TX-only coverage map and binary poor coverage map plotted successfully!"** will appear.
 
 .. figure:: computing_tx_cov_map_Fig1.png

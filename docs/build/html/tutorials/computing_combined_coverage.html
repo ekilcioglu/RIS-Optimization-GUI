@@ -116,7 +116,7 @@ Refer to the <cite>Finding RIS Target Points via K-means Clustering</cite> tutor
 <li><p>Go to the labelframe <strong>“Manual trials”</strong> on the left side of the GUI.</p></li>
 <li><p>Enter the number of RIS target points in the field <strong>“Number of target points”</strong></p></li>
 <li><p>Select the checkbox <strong>“Enter the target point(s) manually”</strong>.</p></li>
-<li><p>A new input area will appear at the bottom of the same labelframe.</p></li>
+<li><p>A new input area will appear between the labelframe <strong>“Manual trials”</strong> and the labelframe <strong>“Optimization algorithm”</strong>.</p></li>
 <li><p>Enter the x, y, z coordinates for each target point manually.</p></li>
 </ul>
 </div></blockquote>
@@ -139,11 +139,17 @@ Refer to the <cite>Finding RIS Target Points via K-means Clustering</cite> tutor
 <li><p>If <strong>“Manual entry”</strong> is selected:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>A new menu  appears at the bottom of the GUI under the labelframe <strong>“Select manual phase profile file (.json)”</strong>.</p></li>
+<li><p>A new menu appears near the menu with the labelframe <strong>“Select manual phase profile file (.json)”</strong>.</p></li>
 <li><p>Click the <strong>“Browse”</strong> button to select the phase profile <cite>.json</cite> file.</p></li>
 </ul>
 </div></blockquote>
 </li>
+</ul>
+</li>
+<li><p><strong>Enable Amplitude Fluctuations</strong> (Optional)</p>
+<ul class="simple">
+<li><p>In order to see the effect of amplitude fluctuations in each RIS tile, we can define uniform random RIS tile amplitude fluctuations, ranging from 0 to 1. To do that, check the checkbox <strong>“Enable uniform random RIS element amplitude fluctuations (range: [0.0, 1.0])”</strong>.</p></li>
+<li><p>Enter the lower and upper bounds for amplitude fluctuations.</p></li>
 </ul>
 </li>
 <li><p><strong>Computing combined coverage map</strong></p>
@@ -153,14 +159,14 @@ Refer to the <cite>Finding RIS Target Points via K-means Clustering</cite> tutor
 <blockquote>
 <div><ul class="simple">
 <li><p><strong>Combined coverage map</strong> with the contributions of the transmitter and the RIS (Fig. 1).</p></li>
-<li><p><strong>RIS coverage gain map</strong> showing the power improvement due to RIS (Fig. 2).</p></li>
+<li><p><strong>RIS coverage gain map</strong> showing the path gain improvement by placing the RIS (Fig. 2).</p></li>
 <li><p><strong>Cumulative distribution function (CDF)</strong> plot comparing the no-RIS case and all previous combined coverage cases (Fig. 3).</p></li>
 <li><p><strong>New binary poor coverage map</strong> after placing the RIS (Fig. 4).</p></li>
 </ul>
 </div></blockquote>
 </li>
 </ul>
-<p>Additionally, the values for the new coverage ratio of the combined coverage map and the new average power of the low-power cells will be displayed under the labelframe <strong>“Messages”</strong>.
+<p>Additionally, the values for the new coverage ratio of the combined coverage map and the new average path gain of the low-power cells will be displayed under the labelframe <strong>“Messages”</strong>.
 If the operation ends without errors, the message <strong>“Combined coverage is analyzed successfully!”</strong> will appear.</p>
 </li>
 </ol>

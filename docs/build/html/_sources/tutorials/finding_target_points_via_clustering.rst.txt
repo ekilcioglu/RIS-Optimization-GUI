@@ -1,7 +1,7 @@
 Finding RIS Target Points via K-means Clustering
 ################################################
 
-This tutorial explains how to find a specific number of RIS target points by applying K-means clustering to the low-power cells in the transmitter-only coverage map.
+This tutorial explains how to find a specific number of RIS target points by applying K-means clustering algorithm to the low-power cells in the transmitter-only coverage map.
 
 .. note::
 

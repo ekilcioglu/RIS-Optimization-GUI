@@ -43,7 +43,7 @@ This tutorial explains how to visualize the assigned RIS phase profiles for each
    - Select the desired phase profile approach from the dropdown next to the textlabel **"Choose phase profile approach"**.
    - If **"Manual entry"** is selected:
 
-      - A new menu  appears at the bottom of the GUI under the labelframe **"Select manual phase profile file (.json)"**.
+      - A new menu appears near the menu with the labelframe **"Select manual phase profile file (.json)"**.
       - Click the **"Browse"** button to select the phase profile `.json` file.
 
 4. **Show and Export Phase Profiles**

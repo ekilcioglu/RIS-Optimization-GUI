@@ -115,7 +115,7 @@ A uniform random phase error is added independently to each RIS element. The err
 <li><p><strong>Coverage Map Computation</strong>:
 Using the phase profile with errors, the coverage map is computed via a ray-tracing simulation.</p></li>
 <li><p><strong>Performance Metric Evaluation</strong>:
-The performance metric is evaluated as the average received power over the predefined low-power cells.</p></li>
+The performance metric is evaluated as the average path gain of the predefined low-power cells.</p></li>
 <li><p><strong>Monte Carlo Averaging</strong>:
 Multiple realizations (random draws of phase errors) are performed for each delta value, and the average and standard deviation of the performance metric are computed across these realizations to obtain a statistically meaningful performance degradation curve.</p></li>
 <li><p><strong>Visualization</strong>:
@@ -149,7 +149,7 @@ Refer to the <cite>Finding RIS Target Points via K-means Clustering</cite> tutor
 <li><p>Go to the labelframe <strong>“Manual trials”</strong> on the left side of the GUI.</p></li>
 <li><p>Enter the number of RIS target points in the field <strong>“Number of target points”</strong></p></li>
 <li><p>Select the checkbox <strong>“Enter the target point(s) manually”</strong>.</p></li>
-<li><p>A new input area will appear at the bottom of the same labelframe.</p></li>
+<li><p>A new input area will appear between the labelframe <strong>“Manual trials”</strong> and the labelframe <strong>“Optimization algorithm”</strong>.</p></li>
 <li><p>Enter the x, y, z coordinates for each target point manually.</p></li>
 </ul>
 </div></blockquote>
@@ -172,20 +172,20 @@ Refer to the <cite>Finding RIS Target Points via K-means Clustering</cite> tutor
 <li><p>Specify the number of realizations to consider for each delta value. The final performance value is the average across all realizations.</p></li>
 <li><p>Select which phase profile approaches (Gradient-based, distance-based, or manual) will be analyzed.</p></li>
 <li><p>Press the button <strong>“Start sensitivity analysis”</strong> to initiate the procedure.</p></li>
-<li><p>After execution, a figure will be generated showing the average performance metric versus <span class="math notranslate nohighlight">\(\Delta\)</span> (in degrees) for each selected approach, including error bars indicating standard deviation across random realizations. Two example figures are shown below for two different minimum power threshold considerations.</p></li>
+<li><p>After execution, a figure will be generated showing the average performance metric versus <span class="math notranslate nohighlight">\(\Delta\)</span> (in degrees) for each selected approach, including error bars indicating standard deviation across random realizations. Two example figures are shown below for two different minimum path gain threshold considerations.</p></li>
 </ul>
 </li>
 </ol>
 <figure class="align-center" id="phase-error-performance-sensitivity-analysis-fig1" style="width: 80%">
 <img alt="../_images/phase_error_performance_sensitivity_analysis_Fig1.png" src="../_images/phase_error_performance_sensitivity_analysis_Fig1.png" />
 <figcaption>
-<p><span class="caption-text"><strong>Fig. 1</strong>: Changes in performance metric <span class="math notranslate nohighlight">\(\mathcal{M}\)</span> (dB) versus phase error magnitude <span class="math notranslate nohighlight">\(\Delta\)</span> (degrees) for different phase profile approaches with -100 dB minimum power threshold</span><a class="headerlink" href="#phase-error-performance-sensitivity-analysis-fig1" title="Link to this image"></a></p>
+<p><span class="caption-text"><strong>Fig. 1</strong>: Changes in performance metric <span class="math notranslate nohighlight">\(\mathcal{M}\)</span> (dB) vs. phase error magnitude <span class="math notranslate nohighlight">\(\Delta\)</span> (degrees) for different phase profile approaches with -100 dB minimum path gain threshold</span><a class="headerlink" href="#phase-error-performance-sensitivity-analysis-fig1" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <figure class="align-center" id="phase-error-performance-sensitivity-analysis-fig2" style="width: 80%">
 <img alt="../_images/phase_error_performance_sensitivity_analysis_Fig2.png" src="../_images/phase_error_performance_sensitivity_analysis_Fig2.png" />
 <figcaption>
-<p><span class="caption-text"><strong>Fig. 1</strong>: Changes in performance metric <span class="math notranslate nohighlight">\(\mathcal{M}\)</span> (dB) versus phase error magnitude <span class="math notranslate nohighlight">\(\Delta\)</span> (degrees) for different phase profile approaches with -110 dB minimum power threshold</span><a class="headerlink" href="#phase-error-performance-sensitivity-analysis-fig2" title="Link to this image"></a></p>
+<p><span class="caption-text"><strong>Fig. 1</strong>: Changes in performance metric <span class="math notranslate nohighlight">\(\mathcal{M}\)</span> (dB) vs. phase error magnitude <span class="math notranslate nohighlight">\(\Delta\)</span> (degrees) for different phase profile approaches with -110 dB minimum path gain threshold</span><a class="headerlink" href="#phase-error-performance-sensitivity-analysis-fig2" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>

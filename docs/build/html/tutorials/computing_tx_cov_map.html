@@ -94,7 +94,7 @@
 <ul class="simple">
 <li><p><strong>Scene frequency</strong></p></li>
 <li><p><strong>TX position</strong></p></li>
-<li><p><strong>Minimum power threshold</strong></p></li>
+<li><p><strong>Minimum path gain threshold</strong></p></li>
 <li><p><strong>Coverage map cell size</strong></p></li>
 </ul>
 <p>However, before doing that, you need to load the predefined scenario under the labelframe <strong>“Scenario selection”</strong> by choosing the scenario from the list and pressing the <strong>“Load”</strong> button. If you wish to enter parameters manually, follow the instructions below:</p>
@@ -106,8 +106,8 @@ If the scenario is successfully loaded, the message <strong>“Scene loaded succ
 The communication frequency of the scene is specified in Hz under the labelframe <strong>“Scene frequency (Hz)”</strong>. For example, you can specify <strong>5.8 GHz</strong> by typing <strong>“5.8e9”</strong>.</p></li>
 <li><p><strong>Transmitter (TX) Position</strong>:
 The transmitter coordinates (in meters) are entered under the labelframe <strong>“TX position (m) (x, y, z)”</strong>, starting with the x-coordinate as stated in the label.</p></li>
-<li><p><strong>Minimum Power Threshold</strong>:
-This threshold defines the acceptable signal power below which cells are considered low-power. You can type this value in dB under the labelframe <strong>“Minimum power threshold (dB)”</strong>.
+<li><p><strong>Minimum Path Gain Threshold</strong>:
+This threshold defines the acceptable signal quality below which cells are considered low-power. You can type this value in dB under the labelframe <strong>“Minimum path gain threshold (dB)”</strong>.
 Please refer to our journal paper for more details.</p></li>
 <li><p><strong>Coverage Map Cell Size</strong>:
 The resolution of the coverage map can be defined by specifying the coverage map cell size (in meters) under the labelframe <strong>“Coverage map cell size (m)”</strong>.
@@ -119,7 +119,7 @@ Be careful when defining this parameter since it depends on the predefined and l
 <li><p><strong>Transmitter-only coverage map</strong> (Fig. 1)</p></li>
 <li><p><strong>Binary poor coverage map</strong> (Fig. 2), which shows the low-power cells in red (for further details, see our journal paper).</p></li>
 </ul>
-<p>Additionally, the values for the coverage ratio of the TX-only coverage map and the average power of the low-power cells will be displayed under the labelframe <strong>“Messages”</strong>.
+<p>Additionally, the values for the coverage ratio of the TX-only coverage map and the average path gain of the low-power cells will be displayed under the labelframe <strong>“Messages”</strong>.
 If the operation ends without errors, the message <strong>“TX-only coverage map and binary poor coverage map plotted successfully!”</strong> will appear.</p>
 <figure class="align-center" id="computing-tx-cov-map-fig1" style="width: 80%">
 <img alt="../_images/computing_tx_cov_map_Fig1.png" src="../_images/computing_tx_cov_map_Fig1.png" />

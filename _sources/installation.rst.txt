@@ -51,4 +51,4 @@ Notes
 
      pip install tensorflow tensorflow-gpu
 
-Once the installation is complete, you should be able to run the GUI and simulations without any issues.
+Once the installation is complete, you should be able to run the GUI with the file "GUI.ipynb" using Jupyter Notebook.

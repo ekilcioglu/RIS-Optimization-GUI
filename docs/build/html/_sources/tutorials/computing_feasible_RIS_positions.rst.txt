@@ -22,9 +22,9 @@ There are two ways to define the RIS target points:
 2. **Manually Entering Target Point Coordinates:**
 
    - Go to the labelframe **"Manual trials"** on the left side of the GUI.
-   - In the field **"Number of target points"**, enter how many target points you want to specify.
+   - Enter the number of RIS target points in the field **"Number of target points"**
    - Select the checkbox **"Enter the target point(s) manually"**.
-   - A new input area will appear at the bottom of the same labelframe.
+   - A new input area will appear between the labelframe **"Manual trials"** and the labelframe **"Optimization algorithm"**.
    - Enter the x, y, z coordinates for each target point manually.
 
 Final Step: **Compute Feasible RIS Positions**

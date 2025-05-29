@@ -1,7 +1,9 @@
 Ray-Tracing Based RIS Optimization Tool for Coverage Enhancement Documentation
 ==============================================================================
 
-Welcome to the RAFINE project's RIS optimization tool documentation! This guide provides step-by-step tutorials and detailed API documentation for the GUI's source code.
+Welcome to the RAFINE project's RIS optimization tool documentation! This guide provides step-by-step tutorials and detailed API documentation for the GUI's source code. For more details, please refer to our journal paper, you can find the link below:
+
+[Link]
 
 .. toctree::
    :maxdepth: 2

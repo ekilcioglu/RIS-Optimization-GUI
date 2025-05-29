@@ -32,7 +32,7 @@ In this analysis, the following steps are followed:
    Using the phase profile with errors, the coverage map is computed via a ray-tracing simulation.
 
 4. **Performance Metric Evaluation**:  
-   The performance metric is evaluated as the average received power over the predefined low-power cells.
+   The performance metric is evaluated as the average path gain of the predefined low-power cells.
 
 5. **Monte Carlo Averaging**:  
    Multiple realizations (random draws of phase errors) are performed for each delta value, and the average and standard deviation of the performance metric are computed across these realizations to obtain a statistically meaningful performance degradation curve.
@@ -66,7 +66,7 @@ How to Perform Phase Error Sensitivity Analysis in the GUI
       - Go to the labelframe **"Manual trials"** on the left side of the GUI.
       - Enter the number of RIS target points in the field **"Number of target points"**
       - Select the checkbox **"Enter the target point(s) manually"**.
-      - A new input area will appear at the bottom of the same labelframe.
+      - A new input area will appear between the labelframe **"Manual trials"** and the labelframe **"Optimization algorithm"**.
       - Enter the x, y, z coordinates for each target point manually.
 
 2. **Enter RIS Parameters**
@@ -84,7 +84,7 @@ How to Perform Phase Error Sensitivity Analysis in the GUI
    - Specify the number of realizations to consider for each delta value. The final performance value is the average across all realizations.
    - Select which phase profile approaches (Gradient-based, distance-based, or manual) will be analyzed.
    - Press the button **"Start sensitivity analysis"** to initiate the procedure.
-   - After execution, a figure will be generated showing the average performance metric versus :math:`\Delta` (in degrees) for each selected approach, including error bars indicating standard deviation across random realizations. Two example figures are shown below for two different minimum power threshold considerations.
+   - After execution, a figure will be generated showing the average performance metric versus :math:`\Delta` (in degrees) for each selected approach, including error bars indicating standard deviation across random realizations. Two example figures are shown below for two different minimum path gain threshold considerations.
    
 
 .. figure:: phase_error_performance_sensitivity_analysis_Fig1.png
@@ -92,11 +92,11 @@ How to Perform Phase Error Sensitivity Analysis in the GUI
    :figwidth: 80%
    :name: phase_error_performance_sensitivity_analysis_Fig1
 
-   **Fig. 1**: Changes in performance metric :math:`\mathcal{M}` (dB) versus phase error magnitude :math:`\Delta` (degrees) for different phase profile approaches with -100 dB minimum power threshold
+   **Fig. 1**: Changes in performance metric :math:`\mathcal{M}` (dB) vs. phase error magnitude :math:`\Delta` (degrees) for different phase profile approaches with -100 dB minimum path gain threshold
 
 .. figure:: phase_error_performance_sensitivity_analysis_Fig2.png
    :align: center
    :figwidth: 80%
    :name: phase_error_performance_sensitivity_analysis_Fig2
 
-   **Fig. 1**: Changes in performance metric :math:`\mathcal{M}` (dB) versus phase error magnitude :math:`\Delta` (degrees) for different phase profile approaches with -110 dB minimum power threshold
+   **Fig. 1**: Changes in performance metric :math:`\mathcal{M}` (dB) vs. phase error magnitude :math:`\Delta` (degrees) for different phase profile approaches with -110 dB minimum path gain threshold
